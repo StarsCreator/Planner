@@ -9,190 +9,132 @@ using System.Text;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using Braincase.GanttChart;
+using WeekPlanner;
 
 namespace CamozziClient
 {
     public partial class Main : Form
     {
-        ProjectManager mManager = new ProjectManager();
-        ProjectManager mManager2 = new ProjectManager();
-        static string connString = "Data Source=localhost\\SQLEXPRESS;Integrated Security=SSPI; Connection Timeout=260";
+        static string connString = "Data Source=Camozzi\\SQLEXPRESS;User ID=CamozziClient;Password=1232; Connection Timeout=200";
         SqlConnection con = new SqlConnection(connString);
+
+        List<User> Users = new List<User>();
+        List<Project> Projects = new List<Project>();
+
+        DataTable Use = new DataTable();
+        DataTable Proj = new DataTable();
 
         public Main()
         {
             InitializeComponent();
+            Plan.CurrentDate = DateTime.Today;
+            Plan.Columns.Add("q1", "Сотрудник", 70);
         }
-
-        DataTable UserPass = new DataTable();
-        DataTable Projects = new DataTable();
 
         private void Main_Load(object sender, EventArgs e)
         {
             this.Hide();
+            ReCreate();
+            Login q = new Login(Use);
+            q.ShowDialog();
+            LoginUser _loginUser = new LoginUser();
+            _loginUser.Id = DataTrav.ID;
+            _loginUser.Name = DataTrav.username;
+            _loginUser.Password = DataTrav.pwd;
+            _loginUser.Access = DataTrav.AccTyp;
+            timer1.Start();
+        }      
+
+        void ReCreate()
+        {
             try
-            {               
-                string query = @"SELECT [UserId],[UserName],[Password],[AccessType]
-                            FROM [Camozzi].[dbo].[Users]";
+            {
+                Users.Clear();
+                Projects.Clear();
+                Plan.Rows.Clear();
+
+                con = new SqlConnection(connString);
+                string query = @"SELECT * FROM Camozzi.dbo.Users";
                 SqlCommand comm = new SqlCommand(query, con);
 
                 con.Open();
                 SqlDataAdapter da = new SqlDataAdapter(comm);
                 DataSet ds = new DataSet();
                 da.Fill(ds);
-                UserPass = ds.Tables[0];
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            Login q = new Login(UserPass);
-            q.ShowDialog();
-            GlobalInitialization();
-            UserInitialization(DataTrav.ID);
-            mChart.TaskMouseDoubleClick += new EventHandler<TaskMouseEventArgs>(mChart_TaskMouseDoubleClick);
-            mChart2.TaskMouseDoubleClick += new EventHandler<TaskMouseEventArgs>(mChart2_TaskMouseDoubleClick);
-            //timer1.Start();
-            //
-        }
+                Use = ds.Tables[0];
 
-        void mChart2_TaskMouseDoubleClick(object sender, TaskMouseEventArgs e)
-        {
-            if (DataTrav.AccTyp >= 1)
-            {
-                DateTime start = DateTime.Now;
-                DateTime end = DateTime.Now;
-                end = end.AddDays(e.Task.End);
-                start = start.AddDays(e.Task.Start);
-                ProjectEdit q = new ProjectEdit(e.Task.Name.ToString(), start, end);
-                q.ShowDialog();
-                if (DataTrav.ch)
+                for (int w = 0; w < Use.Rows.Count; w++)
                 {
-                    var str = (DataTrav.start - DateTime.Today);
-                    mManager.SetStart(e.Task, str.Days);
-                    mManager2.SetStart(e.Task, str.Days);
-                    var fns = (DataTrav.end - DateTime.Today);
-                    mManager.SetEnd(e.Task, fns.Days);
-                    mManager2.SetEnd(e.Task, fns.Days);
-                    e.Task.Name = DataTrav.ProjectName;
+                    User _user = new User();
+                    _user.Id = Convert.ToInt32(Use.Rows[w].ItemArray[0]);
+                    _user.Name = Use.Rows[w].ItemArray[1].ToString();
+                    _user.Access = Convert.ToInt32(Use.Rows[w].ItemArray[3]);
+                    Users.Add(_user);
+                    ///
+                    /// 
+                    /// 
+                    /// 
+                    ///
+                    var ColumnRows = new DataColumns(Plan.Calendar);
+                    ColumnRows["q1"].Data.Add(_user.Name);
+                    var PlannerRow = new WeekPlannerRow();
+                    PlannerRow.Columns = ColumnRows;
+                    PlannerRow.Name = "R"+w.ToString();
+                    _user.CalendarRow = PlannerRow;
+                    Plan.Rows.Add(PlannerRow);
                 }
-            }
-        }
 
-        void mChart_TaskMouseDoubleClick(object sender, TaskMouseEventArgs e)
-        {
-            if (DataTrav.AccTyp == 2)
-            {
-                DateTime start = DateTime.Now;
-                DateTime end = DateTime.Now;
-                end = end.AddDays(e.Task.End);
-                start = start.AddDays(e.Task.Start);
-                ProjectEdit q = new ProjectEdit(e.Task.Name.ToString(), start, end);
-                q.ShowDialog();
-                if (DataTrav.ch)
-                {
-                    var str = (DataTrav.start - DateTime.Today);
-                    mManager.SetStart(e.Task, str.Days);
-                    mManager2.SetStart(e.Task, str.Days);
-                    var fns = (DataTrav.end - DateTime.Today);
-                    mManager.SetEnd(e.Task, fns.Days);
-                    mManager2.SetEnd(e.Task, fns.Days);
-                    e.Task.Name = DataTrav.ProjectName;
-                }
-            }
-        }       
-
-        void GlobalInitialization()
-        {
-            try
-            {
-                string query = @"SELECT [ProjectId],[ProjectName],[CreatorID],[DateStart],[DateEnd],[Priority],[State],[Finished]
-                            FROM [Camozzi].[dbo].[Projects]";
-                SqlCommand comm = new SqlCommand(query, con);
-                SqlDataAdapter da = new SqlDataAdapter(comm);
-                DataSet ds = new DataSet();
+                query = @"SELECT * FROM [Camozzi].[dbo].[Projects]";
+                comm = new SqlCommand(query, con);
+                da = new SqlDataAdapter(comm);
+                ds = new DataSet();
                 
                 da.Fill(ds);
-                Projects = ds.Tables[0];
-                for (int q = 0; q < Projects.Rows.Count; q++)
-                {
-                    var Start = DateTime.Parse(Projects.Rows[q].ItemArray[3].ToString()) - DateTime.Today;
-                    var End = DateTime.Parse(Projects.Rows[q].ItemArray[4].ToString()) - DateTime.Today;
-                    var _task = new MyTask(mManager) { Name = Projects.Rows[q].ItemArray[1].ToString() };
-                    mManager.Add(_task);
-                    mManager.SetStart(_task, (int)Start.Days);
-                    mManager.SetEnd(_task, (int)End.Days);
-                    //mChart.SelectedTask.;
-                }
+                Proj = ds.Tables[0];
 
-                mChart.Init(mManager);
-                mChart.CreateTaskDelegate = delegate() { return new MyTask(mManager); };
-                mManager.TimeScale = TimeScale.Day;
-                var span = DateTime.Today - mManager.Start;
-                mManager.Now = (int)Math.Round(span.TotalDays); // set the "Now" marker at the correct date
-                mChart.TimeScaleDisplay = TimeScaleDisplay.DayOfWeek;
-                if (DataTrav.AccTyp < 1)
+                for (int q = 0; q < Proj.Rows.Count; q++)
                 {
-                    contextMenuStrip1.Enabled = false;
+                    Project _proj = new Project();
+                    DateTime temp;
+                    _proj.Id = Convert.ToInt32(Proj.Rows[q].ItemArray[0]);
+                    _proj.Name = Proj.Rows[q].ItemArray[1].ToString();
+                    DateTime.TryParse(Proj.Rows[q].ItemArray[2].ToString(), out temp);
+                    _proj.Start = temp;
+                    DateTime.TryParse(Proj.Rows[q].ItemArray[3].ToString(), out temp);
+                    _proj.Finish = temp;
+                    _proj.UserId = Convert.ToInt32(Proj.Rows[q].ItemArray[4]);
+                    _proj.Priority = Convert.ToInt32(Proj.Rows[q].ItemArray[5]);
+                    _proj.State = Convert.ToInt32(Proj.Rows[q].ItemArray[6]);
+                    _proj.Finished = Convert.ToBoolean(Proj.Rows[q].ItemArray[7]);
+                    _proj.Owner = findOwner(_proj);
+
+                    var Item = new WeekPlannerItem();
+                    Item.StartDate = _proj.Start;
+                    Item.EndDate = _proj.Finish;
+                    Item.Subject = _proj.Name;
+                    Item.Name = _proj.Name;
+                    _proj.Owner.CalendarRow.Items.Add(Item);
+
                 }
-                else mChart2.AllowTaskDragDrop = true;
-                if (DataTrav.AccTyp < 2)
-                {
-                    contextMenuStrip2.Enabled = false;
-                    dataGridView1.ReadOnly = true;
-                }
-                else mChart.AllowTaskDragDrop = true;
-                
-                
-                dataGridView1.DataSource = new BindingSource(mManager.Tasks, null);
-                dataGridView1.Columns[0].HeaderText = "Начало";
+                con.Dispose();
+                GC.Collect();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        void UserInitialization(int id)
+
+        User findOwner(Project Proj)
         {
-           
-            try
+            foreach (User Owner in Users)
             {
-                for (int q = 0; q < Projects.Rows.Count; q++)
+                if (Proj.UserId == Owner.Id)
                 {
-                    if (Projects.Rows[q].ItemArray[2].ToString() == id.ToString())
-                    {
-                        var Start = DateTime.Parse(Projects.Rows[q].ItemArray[3].ToString()) - DateTime.Today;
-                        var End = DateTime.Parse(Projects.Rows[q].ItemArray[4].ToString()) - DateTime.Today;
-                        var _task = new MyTask(mManager2) { Name = Projects.Rows[q].ItemArray[1].ToString() };
-                        mManager2.Add(_task);
-                        mManager2.SetStart(_task, (int)Start.Days);
-                        mManager2.SetEnd(_task, (int)End.Days);
-                    }
+                    return Owner; 
                 }
-
-                mChart2.Init(mManager2);
-                mChart2.CreateTaskDelegate = delegate() { return new MyTask(mManager2); };
-                mManager2.TimeScale = TimeScale.Day;
-                var span = DateTime.Today - mManager2.Start;
-                mManager2.Now = (int)Math.Round(span.TotalDays); // set the "Now" marker at the correct date
-                mChart2.TimeScaleDisplay = TimeScaleDisplay.DayOfWeek;
-                dataGridView2.DataSource = new BindingSource(mManager2.Tasks, null);
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
- 
-        }
-
-        private void mChart_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void mChart2_Load(object sender, EventArgs e)
-        {
-
+            return null;
         }
 
         private void добавитьToolStripMenuItem_Click(object sender, EventArgs e)
@@ -211,57 +153,24 @@ namespace CamozziClient
            ,[Finished])
      VALUES
            ('"+DataTrav.ProjectName+"',"+DataTrav.ID+",'"+DataTrav.Start+"','"+DataTrav.End+"', 1 ,0,0)";
-                SqlCommand comm = new SqlCommand(query, con);
-                comm.ExecuteNonQuery();
-
-                var _task = new MyTask(mManager2) { Name = DataTrav.ProjectName };
-                var str = (DataTrav.start - DateTime.Today);            
-                var fns = (DataTrav.end - DateTime.Today);
-                mManager2.Add(_task);
-                mManager.Add(_task);
-                mManager.SetStart(_task, str.Days);
-                mManager.SetEnd(_task, fns.Days);
-                mManager2.SetStart(_task, str.Days);
-                mManager2.SetEnd(_task, fns.Days);
-                mChart.Invalidate();
-                mChart2.Invalidate();
-                dataGridView1.Update();
-                dataGridView2.Update();
-
+                //SqlCommand comm = new SqlCommand(query, con);
+                //comm.ExecuteNonQuery();
             }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            GlobalInitialization();
-            UserInitialization(DataTrav.ID);
-        }
-
-        private void mnuViewDayOfMonth_Click(object sender, EventArgs e)
-        {
-            mChart.TimeScaleDisplay = TimeScaleDisplay.DayOfMonth;
-            mnuViewDayOfWeek.Checked = false;
-            mnuViewDayOfMonth.Checked = true;
-            mnuViewWeekOfYear.Checked = false;
-            mChart.Invalidate();
+            ReCreate();
+            GC.Collect();
         }
 
         private void mnuViewWeekOfYear_Click(object sender, EventArgs e)
         {
-            mChart.TimeScaleDisplay = TimeScaleDisplay.WeekOfYear;
-            mnuViewDayOfWeek.Checked = false;
-            mnuViewDayOfMonth.Checked = false;
-            mnuViewWeekOfYear.Checked = true;
-            mChart.Invalidate();
         }
 
         private void mnuViewDayOfWeek_Click(object sender, EventArgs e)
         {
-            mChart.TimeScaleDisplay = TimeScaleDisplay.DayOfWeek;
-            mnuViewDayOfWeek.Checked = true;
-            mnuViewDayOfMonth.Checked = false;
-            mnuViewWeekOfYear.Checked = false;
-            mChart.Invalidate();
+
         }
 
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
@@ -280,56 +189,60 @@ namespace CamozziClient
            ,[Finished])
      VALUES
            ('" + DataTrav.ProjectName + "'," + DataTrav.ID + ",'" + DataTrav.Start + "','" + DataTrav.End + "', 1 ,0,0)";
-                SqlCommand comm = new SqlCommand(query, con);
-                comm.ExecuteNonQuery();
+                //SqlCommand comm = new SqlCommand(query, con);
+                //comm.ExecuteNonQuery();
 
-                var _task = new MyTask(mManager2) { Name = DataTrav.ProjectName };
+     //           var _task = new MyTask(mManager2) { Name = DataTrav.ProjectName };
                 var str = (DataTrav.start - DateTime.Today);
                 var fns = (DataTrav.end - DateTime.Today);
-                mManager2.Add(_task);
-                mManager.Add(_task);
-                mManager.SetStart(_task, str.Days);
-                mManager.SetEnd(_task, fns.Days);
-                mManager2.SetStart(_task, str.Days);
-                mManager2.SetEnd(_task, fns.Days);
-                mChart.Invalidate();
-                mChart2.Invalidate();
-                dataGridView1.Update();
-                dataGridView2.Update();
+
+
             }
         }
 
         private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            mChart.Invalidate();
+            //mChart.Invalidate();
         }
 
         private void dataGridView2_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            mChart2.Invalidate();
+            //mChart2.Invalidate();
         }
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
-            if (dataGridView1.SelectedRows.Count > 0)
-            {
-                var task = dataGridView1.SelectedRows[0].DataBoundItem as Task;
-                mChart.ScrollTo(task);
-            }
+
         }
 
+        private void tabControl1_Selected(object sender, TabControlEventArgs e)
+        {
+            System.Text.StringBuilder messageBoxCS = new System.Text.StringBuilder();
+            messageBoxCS.AppendFormat("{0} = {1}", "TabPage", e.TabPage);
+            messageBoxCS.AppendLine();
+            messageBoxCS.AppendFormat("{0} = {1}", "TabPageIndex", e.TabPageIndex);
+            messageBoxCS.AppendLine();
+            messageBoxCS.AppendFormat("{0} = {1}", "Action", e.Action);
+            messageBoxCS.AppendLine();
+            MessageBox.Show(messageBoxCS.ToString(), "Selected Event");
+        }
 
 
     }
     public static class DataTrav
     {
+        //Login User
         public static int ID;
+        public static string username;
+        public static string pwd;
         public static int AccTyp;
+
+
         public static string Start;
         public static string End;
         public static string ProjectName;
         public static bool ch;
-        public static string username;
+
         public static DateTime start;
         public static DateTime end;
     }
@@ -350,4 +263,35 @@ namespace CamozziClient
         public new int Duration { get { return base.Duration; } set { Manager.SetDuration(this, value); } }
         public new float Complete { get { return base.Complete; } set { Manager.SetComplete(this, value); } }
     }
+}
+
+class User
+{
+    public int Id { get; set;}
+    public string Name { get; set;}
+    //public string Password { get; set; }
+    public int Access { get; set; }
+    public WeekPlannerRow CalendarRow { get; set; }
+}
+
+class LoginUser
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public string Password { get; set; }
+    public int Access { get; set; }
+}
+
+class Project
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public DateTime Start { get; set; }
+    public DateTime Finish { get; set; } 
+    public int UserId { get; set; }
+    public User Owner { get; set; }
+    public int Priority { get; set; }
+    public int State { get; set; }
+    public bool Finished { get; set; }
+
 }

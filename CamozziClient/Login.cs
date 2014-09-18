@@ -44,6 +44,7 @@ namespace CamozziClient
                 DataTrav.username = r;
                 int e = Convert.ToInt16(z.Rows[comboBox1.SelectedIndex].ItemArray[3]);
                 DataTrav.AccTyp = e;
+                DataTrav.pwd = k;
                 this.Close();
             }
             else

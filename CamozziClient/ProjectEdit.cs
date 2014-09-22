@@ -12,35 +12,113 @@ namespace CamozziClient
 {
     public partial class ProjectEdit : Form
     {
-        public ProjectEdit(string name, DateTime start, DateTime finish)
+        public ProjectEdit(Project _proj, int Access)
         {
             InitializeComponent();
-            textBox1.Text = name;
-            dateTimePicker1.Value = start;
-            dateTimePicker2.Value = finish;
+            switch (Access)
+            {
+                case 0:
+                    {
+                        txtName.ReadOnly = true;
+                        tpFinish.Enabled = false;
+                        tpStart.Enabled = false;
+                        rtbCom.Enabled = false;
+                        cbPriority.Enabled = false;
+                        cbState.Enabled = false;
+                        break;
+                    }
+                case 1:
+                    {
+                        break;
+                    }
+                case 2:
+                    {
+                        txtName.ReadOnly = false;
+                        tpFinish.Enabled = true;
+                        tpStart.Enabled = true;
+                        cbPriority.Enabled = true;
+                        cbState.Enabled = true;
+                        break;
+                    }
+            }
+            this.Text = _proj.Name;
+            txtNo.Text = _proj.Id.ToString();
+            txtName.Text = _proj.Name;
+            txtUser.Text = _proj.Owner.Name;
+            tpStart.Value = _proj.Start;
+            tpFinish.Value = _proj.Finish;
+            rtbCom.Text = _proj.Comment;
+            //приоритет
+            cbPriority.SelectedIndex = _proj.Priority;
+            //состояние
+            cbState.SelectedIndex = _proj.State;
             DataTrav.ch = false;
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
 
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            errorProvider1.Clear();
+            if (txtName.Text == "")
+            {
+                errorProvider1.SetError(txtName, "Имя проекта не может быть пустым!");
+                return;
+            }
             DataTrav.ch = true;
-            DataTrav.start = dateTimePicker1.Value;
-            DataTrav.Start = dateTimePicker1.Value.ToString("yyyyMMdd");
-            DataTrav.end = dateTimePicker2.Value;
-            DataTrav.End = dateTimePicker2.Value.ToString("yyyyMMdd");
-            DataTrav.ProjectName = textBox1.Text;
+            DataTrav.ProjectName = txtName.Text;
+            DataTrav.Comments = rtbCom.Text;
+            DataTrav.Priority = cbPriority.SelectedIndex;
+            DataTrav.State = cbState.SelectedIndex;
+            DataTrav.Start = tpStart.Value;
+            DataTrav.End = tpFinish.Value;
+            DataTrav.Comments = rtbCom.Text;
             this.Close();
         }
 
-        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        private void tpFinish_ValueChanged(object sender, EventArgs e)
+        {
+            errorProvider1.Clear();
+            if (tpFinish.Value < tpStart.Value)
+            {
+                tpFinish.Value = tpStart.Value;
+                errorProvider1.SetError(tpFinish, "Некорректная дата");
+            }
+        }
+
+        private void ProjectEdit_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void ProjectEdit_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (DataTrav.ch) e.Cancel = false;
+            else
+            {
+                DialogResult res = new DialogResult();
+                res = MessageBox.Show("Закрыть форму ввода без сохранения?", "Закрыть",
+                                                 MessageBoxButtons.YesNo,
+                                                 MessageBoxIcon.Warning);
+                if (res == DialogResult.Yes)
+                {
+                    e.Cancel = false;
+                }
+                else
+                    e.Cancel = true;
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void cbState_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbState.SelectedIndex == 2)
+            {
+                cbPriority.SelectedIndex = 0;
+            }
         }
     }
 }

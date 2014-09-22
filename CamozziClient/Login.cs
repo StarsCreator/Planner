@@ -21,6 +21,8 @@ namespace CamozziClient
             {
                 comboBox1.Items.Add(UserPass.Rows[q].ItemArray[1]);
             }
+            comboBox1.SelectedItem = comboBox1.Items[0];
+            DataTrav.quit = true;
         }
        
 
@@ -45,6 +47,7 @@ namespace CamozziClient
                 int e = Convert.ToInt16(z.Rows[comboBox1.SelectedIndex].ItemArray[3]);
                 DataTrav.AccTyp = e;
                 DataTrav.pwd = k;
+                DataTrav.quit = false;
                 this.Close();
             }
             else

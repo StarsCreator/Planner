@@ -51,14 +51,18 @@
             this.неделиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.дниToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.градиентToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.размерСтрокToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.меньшеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.большеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.button1 = new System.Windows.Forms.Button();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.btnBack = new System.Windows.Forms.Button();
             this.btnFrwd = new System.Windows.Forms.Button();
-            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -105,8 +109,9 @@
             this.Plan.DatesIntervalMode = WeekPlanner.WeekPlannerMode.Daily;
             this.Plan.DayCount = 10;
             this.Plan.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Plan.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Plan.GridBackgroundColor = System.Drawing.Color.WhiteSmoke;
-            this.Plan.GridCellHeight = 200;
+            this.Plan.GridCellHeight = 80;
             this.Plan.GridTextFont = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Plan.HeaderBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.Plan.HeaderColumnsFont = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -117,7 +122,7 @@
             this.Plan.IsAllowedDraggingBetweenRows = false;
             this.Plan.IsAllowedStretchAndDrag = false;
             this.Plan.IsAllowedTreeViewDrawing = false;
-            this.Plan.ItemHeight = 20;
+            this.Plan.ItemHeight = 40;
             this.Plan.ItemTextFont = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Bold);
             this.Plan.LeftMargin = 250;
             this.Plan.LeftMarginColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
@@ -267,7 +272,9 @@
             this.видToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.неделиToolStripMenuItem,
             this.дниToolStripMenuItem,
-            this.toolStripSeparator1});
+            this.toolStripSeparator1,
+            this.градиентToolStripMenuItem,
+            this.размерСтрокToolStripMenuItem});
             this.видToolStripMenuItem.Name = "видToolStripMenuItem";
             this.видToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
             this.видToolStripMenuItem.Text = "Вид";
@@ -275,7 +282,7 @@
             // неделиToolStripMenuItem
             // 
             this.неделиToolStripMenuItem.Name = "неделиToolStripMenuItem";
-            this.неделиToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+            this.неделиToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.неделиToolStripMenuItem.Text = "Недели";
             this.неделиToolStripMenuItem.Click += new System.EventHandler(this.неделиToolStripMenuItem_Click);
             // 
@@ -284,14 +291,46 @@
             this.дниToolStripMenuItem.Checked = true;
             this.дниToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.дниToolStripMenuItem.Name = "дниToolStripMenuItem";
-            this.дниToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+            this.дниToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.дниToolStripMenuItem.Text = "Дни";
             this.дниToolStripMenuItem.Click += new System.EventHandler(this.дниToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(112, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            // 
+            // градиентToolStripMenuItem
+            // 
+            this.градиентToolStripMenuItem.Checked = true;
+            this.градиентToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.градиентToolStripMenuItem.Name = "градиентToolStripMenuItem";
+            this.градиентToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.градиентToolStripMenuItem.Text = "Градиент";
+            this.градиентToolStripMenuItem.Click += new System.EventHandler(this.градиентToolStripMenuItem_Click);
+            // 
+            // размерСтрокToolStripMenuItem
+            // 
+            this.размерСтрокToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.меньшеToolStripMenuItem,
+            this.большеToolStripMenuItem});
+            this.размерСтрокToolStripMenuItem.Name = "размерСтрокToolStripMenuItem";
+            this.размерСтрокToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.размерСтрокToolStripMenuItem.Text = "Размер Строк";
+            // 
+            // меньшеToolStripMenuItem
+            // 
+            this.меньшеToolStripMenuItem.Name = "меньшеToolStripMenuItem";
+            this.меньшеToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.меньшеToolStripMenuItem.Text = "Меньше";
+            this.меньшеToolStripMenuItem.Click += new System.EventHandler(this.меньшеToolStripMenuItem_Click);
+            // 
+            // большеToolStripMenuItem
+            // 
+            this.большеToolStripMenuItem.Name = "большеToolStripMenuItem";
+            this.большеToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.большеToolStripMenuItem.Text = "Больше";
+            this.большеToolStripMenuItem.Click += new System.EventHandler(this.большеToolStripMenuItem_Click);
             // 
             // dateTimePicker1
             // 
@@ -335,6 +374,13 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // notifyIcon1
+            // 
+            this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
+            this.notifyIcon1.Text = "CamozziClient";
+            this.notifyIcon1.Visible = true;
+            this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
+            // 
             // btnBack
             // 
             this.btnBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -357,13 +403,6 @@
             this.btnFrwd.UseVisualStyleBackColor = true;
             this.btnFrwd.Click += new System.EventHandler(this.btnFrwd_Click);
             // 
-            // notifyIcon1
-            // 
-            this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
-            this.notifyIcon1.Text = "CamozziClient";
-            this.notifyIcon1.Visible = true;
-            this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -378,6 +417,7 @@
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.tabControl1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Main";
             this.ShowIcon = false;
@@ -430,6 +470,10 @@
         private System.Windows.Forms.Button btnFrwd;
         private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
+        private System.Windows.Forms.ToolStripMenuItem градиентToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem размерСтрокToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem меньшеToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem большеToolStripMenuItem;
 
     }
 }

@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-using Braincase.GanttChart;
 using WeekPlanner;
 
 namespace CamozziClient
@@ -17,10 +16,6 @@ namespace CamozziClient
     {
         static string connString = "Data Source=Camozzi\\SQLEXPRESS;User ID=CamozziClient;Password=1232; Connection Timeout=10";
         SqlConnection con = new SqlConnection(connString);
-        //string query;
-        //SqlCommand comm;
-        //SqlDataAdapter da;
-        //DataSet ds;
 
         List<User> Users = new List<User>();
         List<Project> Projects = new List<Project>();
@@ -48,26 +43,35 @@ namespace CamozziClient
             Plan.ItemDoubleClick += new CalendarPlanner.CalendarItemEventHandler(Plan_ItemDoubleClick);
             //UserPlan.IsAllowedStretchAndDrag = true;
             UserPlan.ItemDoubleClick += new CalendarPlanner.CalendarItemEventHandler(UserPlan_ItemDoubleClick);
+
+            notifyIcon1.Visible = false;
         }
         void Plan_ItemDoubleClick(object sender, WeekPlannerItemEventArgs e)
         {
             Project EditProj = Projects[e.Item.Tag];
             ProjectEdit q = new ProjectEdit(EditProj,_loginUser.Access);
-            timer1.Start();
+            timer1.Stop();
             q.ShowDialog();
             if (DataTrav.ch)
             {
+                string query;
+                con = new SqlConnection(connString);
                 if (_loginUser.Access == 2)
                 {
-                    con = new SqlConnection(connString);
-                    string query = @"UPDATE [Camozzi].[dbo].[Projects] Set Name='"+DataTrav.ProjectName+"'"+
-                          ",Start='"+DataTrav.Start.ToString("yyyyMMdd")+
-                          "',Finish='"+DataTrav.End.ToString("yyyyMMdd")+
-                          "',Priority="+DataTrav.Priority+
-                          ",State=" + DataTrav.State +
-                          ",Comment='"+DataTrav.Comments+"'"+
-                       "Where Id="+EditProj.Id+";";
-
+                          query = @"UPDATE [Camozzi].[dbo].[Projects] Set Name='"+DataTrav.ProjectName+"'"+
+                                    ",Start='"+DataTrav.Start.ToString("yyyyMMdd")+
+                                    "',Finish='"+DataTrav.End.ToString("yyyyMMdd")+
+                                    "',Priority="+DataTrav.Priority+
+                                    ",State=" + DataTrav.State +
+                                    ",Comment='"+DataTrav.Comments+"'"+
+                                    "Where Id="+EditProj.Id+";";
+                }                   
+                else
+                {
+                    query = @"UPDATE [Camozzi].[dbo].[Projects] Set "+ 
+                            "Comment='" + DataTrav.Comments + "'" +
+                            "Where Id=" + EditProj.Id + ";";
+                }
                     SqlCommand comm = new SqlCommand(query, con);
                     con.Open();
                     comm.ExecuteNonQuery();
@@ -75,10 +79,8 @@ namespace CamozziClient
                     //Thread bgd = new Thread(ReCreate);
                     //bgd.Start();
                     ReCreate();
- 
-                }
             }
-            timer1.Stop();
+            timer1.Start();
         }
         void UserPlan_ItemDoubleClick(object sender, WeekPlannerItemEventArgs e)
         {
@@ -475,9 +477,9 @@ namespace CamozziClient
             
             Plan.CurrentDate = dateTimePicker1.Value;
             UserPlan.CurrentDate = dateTimePicker1.Value;
-            TimeSpan Count = dateTimePicker2.Value - dateTimePicker1.Value;
-            Plan.DayCount = Convert.ToInt32(Count.TotalDays + 1);
-            UserPlan.DayCount = Convert.ToInt32(Count.TotalDays + 1);
+            TimeSpan Tmp = dateTimePicker2.Value - dateTimePicker1.Value;
+            Plan.DayCount = Tmp.Days + 1;
+            UserPlan.DayCount = Tmp.Days + 1;
         }
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -534,6 +536,40 @@ namespace CamozziClient
             this.WindowState = FormWindowState.Maximized;
             notifyIcon1.Visible = false;
 
+        }
+
+        private void градиентToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (градиентToolStripMenuItem.Checked)
+            {
+                Plan.HeaderStyleMode = HeaderStyle.Simple;
+                UserPlan.HeaderStyleMode = HeaderStyle.Simple;
+                градиентToolStripMenuItem.Checked = false;
+            }
+            else
+            {
+                Plan.HeaderStyleMode = HeaderStyle.Aqua;
+                UserPlan.HeaderStyleMode = HeaderStyle.Aqua;
+                градиентToolStripMenuItem.Checked = true;
+            }
+        }
+
+        private void меньшеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Plan.ItemHeight > 20)
+            {
+                Plan.ItemHeight = Plan.ItemHeight - 10;
+                UserPlan.ItemHeight = UserPlan.ItemHeight - 10;
+            }
+        }
+
+        private void большеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Plan.ItemHeight <100)
+            {
+                Plan.ItemHeight = Plan.ItemHeight + 10;
+                UserPlan.ItemHeight = UserPlan.ItemHeight + 10;
+            }
         }
 
     }

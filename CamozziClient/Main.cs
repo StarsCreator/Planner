@@ -56,7 +56,7 @@ namespace CamozziClient
             {
                 string query;
                 con = new SqlConnection(connString);
-                if (_loginUser.Access == 2)
+                if (_loginUser.Access >= 2)
                 {
                           query = @"UPDATE [Camozzi].[dbo].[Projects] Set Name='"+DataTrav.ProjectName+"'"+
                                     ",Start='"+DataTrav.Start.ToString("yyyyMMdd")+
@@ -236,7 +236,7 @@ namespace CamozziClient
                     /// 
                     /// 
                     ///
-                    if (_user.Access < 2)
+                    if (_user.Access < 3)
                     {
                         var ColumnRows = new DataColumns(Plan.Calendar);
                         ColumnRows["q1"].Data.Add(_user.Name);
@@ -249,7 +249,6 @@ namespace CamozziClient
                         Plan.Rows.Add(PlannerRow);
                     }
                 }
-
                 query = @"SELECT * FROM [Camozzi].[dbo].[Projects]";
                 comm = new SqlCommand(query, con);
                 con.Open();
@@ -277,12 +276,16 @@ namespace CamozziClient
                     Projects.Add(_proj);
                     _proj.Owner = findOwner(_proj);
 
+
+                    ToolTip tt = new ToolTip();
+
                     var Item = new WeekPlannerItem();
                     Item.StartDate = _proj.Start;
                     Item.EndDate = _proj.Finish;
                     Item.Subject = _proj.Name;
                     Item.Name = _proj.Name;
                     Item.Tag = Projects.IndexOf(_proj);
+                    //tt.SetToolTip(Item, _proj.Name);
                     switch (_proj.State)
                     {
                         case 0:
@@ -570,6 +573,11 @@ namespace CamozziClient
                 Plan.ItemHeight = Plan.ItemHeight + 10;
                 UserPlan.ItemHeight = UserPlan.ItemHeight + 10;
             }
+        }
+
+        private void Plan_ItemMouseHover(object sender, WeekPlannerItemEventArgs e)
+        {
+            DownLabel.Text = e.Item.Name;
         }
 
     }

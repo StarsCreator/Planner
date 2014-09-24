@@ -40,6 +40,15 @@ namespace CamozziClient
                         cbState.Enabled = true;
                         break;
                     }
+                case 3:
+                    {
+                        txtName.ReadOnly = false;
+                        tpFinish.Enabled = true;
+                        tpStart.Enabled = true;
+                        cbPriority.Enabled = true;
+                        cbState.Enabled = true;
+                        break;
+                    }
             }
             this.Text = _proj.Name;
             txtNo.Text = _proj.Id.ToString();

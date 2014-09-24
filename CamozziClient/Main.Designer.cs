@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            WeekPlanner.DataColumns dataColumns3 = new WeekPlanner.DataColumns();
             WeekPlanner.DataColumns dataColumns1 = new WeekPlanner.DataColumns();
-            WeekPlanner.DataColumns dataColumns2 = new WeekPlanner.DataColumns();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -63,6 +63,8 @@
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.btnBack = new System.Windows.Forms.Button();
             this.btnFrwd = new System.Windows.Forms.Button();
+            this.Status = new System.Windows.Forms.StatusStrip();
+            this.DownLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -73,6 +75,7 @@
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
+            this.Status.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -85,7 +88,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 53);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(930, 496);
+            this.tabControl1.Size = new System.Drawing.Size(930, 391);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -94,7 +97,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(922, 470);
+            this.tabPage1.Size = new System.Drawing.Size(922, 365);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Общая";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -103,7 +106,7 @@
             // 
             this.Plan.BorderColor = System.Drawing.Color.Black;
             this.Plan.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Plan.Columns = dataColumns1;
+            this.Plan.Columns = dataColumns3;
             this.Plan.ContextMenuStrip = this.contextMenuStrip1;
             this.Plan.CurrentDate = new System.DateTime(((long)(0)));
             this.Plan.DatesIntervalMode = WeekPlanner.WeekPlannerMode.Daily;
@@ -128,8 +131,9 @@
             this.Plan.LeftMarginColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.Plan.Location = new System.Drawing.Point(3, 3);
             this.Plan.Name = "Plan";
-            this.Plan.Size = new System.Drawing.Size(916, 464);
+            this.Plan.Size = new System.Drawing.Size(916, 359);
             this.Plan.TabIndex = 0;
+            this.Plan.ItemMouseHover += new WeekPlanner.CalendarPlanner.CalendarItemEventHandler(this.Plan_ItemMouseHover);
             // 
             // contextMenuStrip1
             // 
@@ -151,7 +155,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(922, 470);
+            this.tabPage2.Size = new System.Drawing.Size(922, 365);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Личная";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -170,8 +174,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.dataGridView1);
-            this.splitContainer1.Size = new System.Drawing.Size(916, 464);
-            this.splitContainer1.SplitterDistance = 231;
+            this.splitContainer1.Size = new System.Drawing.Size(916, 359);
+            this.splitContainer1.SplitterDistance = 178;
             this.splitContainer1.TabIndex = 3;
             // 
             // UserPlan
@@ -181,7 +185,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.UserPlan.BorderColor = System.Drawing.Color.Silver;
             this.UserPlan.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.UserPlan.Columns = dataColumns2;
+            this.UserPlan.Columns = dataColumns1;
             this.UserPlan.ContextMenuStrip = this.contextMenuStrip1;
             this.UserPlan.CurrentDate = new System.DateTime(((long)(0)));
             this.UserPlan.DatesIntervalMode = WeekPlanner.WeekPlannerMode.Daily;
@@ -204,7 +208,7 @@
             this.UserPlan.LeftMarginColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.UserPlan.Location = new System.Drawing.Point(0, 0);
             this.UserPlan.Name = "UserPlan";
-            this.UserPlan.Size = new System.Drawing.Size(916, 228);
+            this.UserPlan.Size = new System.Drawing.Size(916, 175);
             this.UserPlan.TabIndex = 2;
             // 
             // dataGridView1
@@ -223,7 +227,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(916, 229);
+            this.dataGridView1.Size = new System.Drawing.Size(916, 177);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             // 
@@ -282,7 +286,7 @@
             // неделиToolStripMenuItem
             // 
             this.неделиToolStripMenuItem.Name = "неделиToolStripMenuItem";
-            this.неделиToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.неделиToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.неделиToolStripMenuItem.Text = "Недели";
             this.неделиToolStripMenuItem.Click += new System.EventHandler(this.неделиToolStripMenuItem_Click);
             // 
@@ -291,21 +295,21 @@
             this.дниToolStripMenuItem.Checked = true;
             this.дниToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.дниToolStripMenuItem.Name = "дниToolStripMenuItem";
-            this.дниToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.дниToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.дниToolStripMenuItem.Text = "Дни";
             this.дниToolStripMenuItem.Click += new System.EventHandler(this.дниToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(147, 6);
             // 
             // градиентToolStripMenuItem
             // 
             this.градиентToolStripMenuItem.Checked = true;
             this.градиентToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.градиентToolStripMenuItem.Name = "градиентToolStripMenuItem";
-            this.градиентToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.градиентToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.градиентToolStripMenuItem.Text = "Градиент";
             this.градиентToolStripMenuItem.Click += new System.EventHandler(this.градиентToolStripMenuItem_Click);
             // 
@@ -315,20 +319,20 @@
             this.меньшеToolStripMenuItem,
             this.большеToolStripMenuItem});
             this.размерСтрокToolStripMenuItem.Name = "размерСтрокToolStripMenuItem";
-            this.размерСтрокToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.размерСтрокToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.размерСтрокToolStripMenuItem.Text = "Размер Строк";
             // 
             // меньшеToolStripMenuItem
             // 
             this.меньшеToolStripMenuItem.Name = "меньшеToolStripMenuItem";
-            this.меньшеToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.меньшеToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
             this.меньшеToolStripMenuItem.Text = "Меньше";
             this.меньшеToolStripMenuItem.Click += new System.EventHandler(this.меньшеToolStripMenuItem_Click);
             // 
             // большеToolStripMenuItem
             // 
             this.большеToolStripMenuItem.Name = "большеToolStripMenuItem";
-            this.большеToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.большеToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
             this.большеToolStripMenuItem.Text = "Больше";
             this.большеToolStripMenuItem.Click += new System.EventHandler(this.большеToolStripMenuItem_Click);
             // 
@@ -403,11 +407,27 @@
             this.btnFrwd.UseVisualStyleBackColor = true;
             this.btnFrwd.Click += new System.EventHandler(this.btnFrwd_Click);
             // 
+            // Status
+            // 
+            this.Status.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.DownLabel});
+            this.Status.Location = new System.Drawing.Point(0, 447);
+            this.Status.Name = "Status";
+            this.Status.Size = new System.Drawing.Size(954, 22);
+            this.Status.TabIndex = 10;
+            this.Status.Text = "statusStrip1";
+            // 
+            // DownLabel
+            // 
+            this.DownLabel.Name = "DownLabel";
+            this.DownLabel.Size = new System.Drawing.Size(0, 17);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(954, 561);
+            this.ClientSize = new System.Drawing.Size(954, 469);
+            this.Controls.Add(this.Status);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnFrwd);
             this.Controls.Add(this.button1);
@@ -436,6 +456,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.Status.ResumeLayout(false);
+            this.Status.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -474,6 +496,8 @@
         private System.Windows.Forms.ToolStripMenuItem размерСтрокToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem меньшеToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem большеToolStripMenuItem;
+        private System.Windows.Forms.StatusStrip Status;
+        private System.Windows.Forms.ToolStripStatusLabel DownLabel;
 
     }
 }

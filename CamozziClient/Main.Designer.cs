@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            WeekPlanner.DataColumns dataColumns3 = new WeekPlanner.DataColumns();
             WeekPlanner.DataColumns dataColumns1 = new WeekPlanner.DataColumns();
+            WeekPlanner.DataColumns dataColumns2 = new WeekPlanner.DataColumns();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -55,6 +55,8 @@
             this.размерСтрокToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.меньшеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.большеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.выходToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -106,15 +108,14 @@
             // 
             this.Plan.BorderColor = System.Drawing.Color.Black;
             this.Plan.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Plan.Columns = dataColumns3;
-            this.Plan.ContextMenuStrip = this.contextMenuStrip1;
+            this.Plan.Columns = dataColumns1;
             this.Plan.CurrentDate = new System.DateTime(((long)(0)));
             this.Plan.DatesIntervalMode = WeekPlanner.WeekPlannerMode.Daily;
             this.Plan.DayCount = 10;
             this.Plan.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Plan.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Plan.GridBackgroundColor = System.Drawing.Color.WhiteSmoke;
-            this.Plan.GridCellHeight = 80;
+            this.Plan.GridCellHeight = 40;
             this.Plan.GridTextFont = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Plan.HeaderBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.Plan.HeaderColumnsFont = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -185,7 +186,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.UserPlan.BorderColor = System.Drawing.Color.Silver;
             this.UserPlan.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.UserPlan.Columns = dataColumns1;
+            this.UserPlan.Columns = dataColumns2;
             this.UserPlan.ContextMenuStrip = this.contextMenuStrip1;
             this.UserPlan.CurrentDate = new System.DateTime(((long)(0)));
             this.UserPlan.DatesIntervalMode = WeekPlanner.WeekPlannerMode.Daily;
@@ -278,7 +279,9 @@
             this.дниToolStripMenuItem,
             this.toolStripSeparator1,
             this.градиентToolStripMenuItem,
-            this.размерСтрокToolStripMenuItem});
+            this.размерСтрокToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.выходToolStripMenuItem});
             this.видToolStripMenuItem.Name = "видToolStripMenuItem";
             this.видToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
             this.видToolStripMenuItem.Text = "Вид";
@@ -335,6 +338,18 @@
             this.большеToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
             this.большеToolStripMenuItem.Text = "Больше";
             this.большеToolStripMenuItem.Click += new System.EventHandler(this.большеToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(147, 6);
+            // 
+            // выходToolStripMenuItem
+            // 
+            this.выходToolStripMenuItem.Name = "выходToolStripMenuItem";
+            this.выходToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.выходToolStripMenuItem.Text = "Выход";
+            this.выходToolStripMenuItem.Click += new System.EventHandler(this.выходToolStripMenuItem_Click);
             // 
             // dateTimePicker1
             // 
@@ -443,6 +458,7 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CamozziClient";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
             this.Load += new System.EventHandler(this.Main_Load);
             this.Resize += new System.EventHandler(this.Main_Resize);
             this.tabControl1.ResumeLayout(false);
@@ -498,6 +514,8 @@
         private System.Windows.Forms.ToolStripMenuItem большеToolStripMenuItem;
         private System.Windows.Forms.StatusStrip Status;
         private System.Windows.Forms.ToolStripStatusLabel DownLabel;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem выходToolStripMenuItem;
 
     }
 }

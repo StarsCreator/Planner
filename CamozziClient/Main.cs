@@ -26,6 +26,8 @@ namespace CamozziClient
         User _loginUser = new User();
         String Password;
 
+        bool refresh = false;
+
         public Main()
         {
             InitializeComponent();
@@ -48,17 +50,32 @@ namespace CamozziClient
         }
         void Plan_ItemDoubleClick(object sender, WeekPlannerItemEventArgs e)
         {
-            Project EditProj = Projects[e.Item.Tag];
-            ProjectEdit q = new ProjectEdit(EditProj,_loginUser.Access);
             timer1.Stop();
+            int access = 0;
+            if (_loginUser.Access == 1) { access = 0; }
+            else access = _loginUser.Access;
+            Project EditProj = Projects[e.Item.Tag];
+            ProjectEdit q = new ProjectEdit(EditProj,access,Use);
+
             q.ShowDialog();
             if (DataTrav.ch)
             {
+                int UsID=0;
+                foreach (User tmp in Users)
+                {
+                    if (DataTrav.Name == tmp.Name)
+                    {
+                        UsID = tmp.Id;
+                        break;
+                    }
+
+                }
                 string query;
                 con = new SqlConnection(connString);
                 if (_loginUser.Access >= 2)
                 {
                           query = @"UPDATE [Camozzi].[dbo].[Projects] Set Name='"+DataTrav.ProjectName+"'"+
+                                    ",UserId="+UsID+
                                     ",Start='"+DataTrav.Start.ToString("yyyyMMdd")+
                                     "',Finish='"+DataTrav.End.ToString("yyyyMMdd")+
                                     "',Priority="+DataTrav.Priority+
@@ -84,9 +101,10 @@ namespace CamozziClient
         }
         void UserPlan_ItemDoubleClick(object sender, WeekPlannerItemEventArgs e)
         {
-            Project EditProj = Projects[e.Item.Tag];
-            ProjectEdit q = new ProjectEdit(EditProj, 2);
             timer1.Stop();
+            Project EditProj = Projects[e.Item.Tag];
+            ProjectEdit q = new ProjectEdit(EditProj, _loginUser.Access,Use);
+
             q.ShowDialog();
             if (DataTrav.ch)
             {
@@ -141,7 +159,7 @@ namespace CamozziClient
                     this.Close();
                 }
                 _loginUser.Id = DataTrav.ID;
-                _loginUser.Name = DataTrav.username;
+                _loginUser.Name = DataTrav.UserName;
                 Password = DataTrav.pwd;
                 _loginUser.Access = DataTrav.AccTyp;
                 UserInitialization();
@@ -175,6 +193,13 @@ namespace CamozziClient
                     }
                 case 2:
                     {
+                        Plan.ContextMenuStrip = contextMenuStrip1;
+                        Plan.IsAllowedStretchAndDrag = false;
+                        break;
+                    }
+                case 3:
+                    {
+                        Plan.ContextMenuStrip = contextMenuStrip1;
                         Plan.IsAllowedStretchAndDrag = false;
                         break;
                     }
@@ -205,6 +230,7 @@ namespace CamozziClient
         {
             try
             {
+                refresh = true;
                 Users.Clear();
                 Projects.Clear();
                 foreach (WeekPlannerRow _row in Plan.Rows)
@@ -310,10 +336,12 @@ namespace CamozziClient
                     {
                         UserReCreate(_loginUser);
                     }
+                    refresh = false;
                 }
             }
             catch (Exception ex)
             {
+                refresh = false;
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -416,6 +444,7 @@ namespace CamozziClient
 
         private void добавитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            timer1.Stop();
             Project _NewProj = new Project();
             _NewProj.Start = DateTime.Today;
             _NewProj.Finish = DateTime.Today;
@@ -423,11 +452,21 @@ namespace CamozziClient
             _NewProj.Priority = 0;
             _NewProj.State = 0;
             _NewProj.UserId = _loginUser.Id;
-            ProjectEdit q = new ProjectEdit(_NewProj, 2);
-            timer1.Stop();
+            ProjectEdit q = new ProjectEdit(_NewProj, _loginUser.Access,Use);
+
             q.ShowDialog();
             if (DataTrav.ch)
             {
+                int UsID = 0;
+                foreach (User tmp in Users)
+                {
+                    if (DataTrav.Name == tmp.Name)
+                    {
+                        UsID = tmp.Id;
+                        break;
+                    }
+
+                }
                 string query = @"INSERT INTO [Camozzi].[dbo].[Projects]
            ([Name]
            ,[Start]
@@ -437,7 +476,7 @@ namespace CamozziClient
            ,[State]
            ,[Comment])
      VALUES
-           ('" + DataTrav.ProjectName + "','" + DataTrav.Start.ToString("yyyMMdd") + "','" + DataTrav.End.ToString("yyyMMdd") + "'," + _loginUser.Id + "," + DataTrav.Priority + "," + DataTrav.State + ",'" + DataTrav.Comments + "')";
+           ('" + DataTrav.ProjectName + "','" + DataTrav.Start.ToString("yyyMMdd") + "','" + DataTrav.End.ToString("yyyMMdd") + "'," + UsID + "," + DataTrav.Priority + "," + DataTrav.State + ",'" + DataTrav.Comments + "')";
                 SqlCommand comm = new SqlCommand(query, con);
                 con.Open();
                 comm.ExecuteNonQuery();
@@ -449,7 +488,10 @@ namespace CamozziClient
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            ReCreate();
+            if (!refresh)
+            {
+                ReCreate();
+            }
             GC.Collect();
         }
 
@@ -487,9 +529,10 @@ namespace CamozziClient
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            Project EditProj = (Project)dataGridView1.CurrentRow.Tag;
-            ProjectEdit q = new ProjectEdit(EditProj, 2);
             timer1.Stop();
+            Project EditProj = (Project)dataGridView1.CurrentRow.Tag;
+            ProjectEdit q = new ProjectEdit(EditProj, _loginUser.Access,Use);
+
             q.ShowDialog();
             if (DataTrav.ch)
             {
@@ -580,6 +623,22 @@ namespace CamozziClient
             DownLabel.Text = e.Item.Name;
         }
 
+        private void выходToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Main_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (refresh)
+            {
+                while (!refresh)
+                {
+                    Thread.Sleep(10);
+                }
+            }
+        }
+
     }
     public static class DataTrav
     {
@@ -587,7 +646,7 @@ namespace CamozziClient
         public static bool ch;
         //Login User
         public static int ID;
-        public static string username;
+        public static string UserName;
         public static string pwd;
         public static int AccTyp;
 
@@ -597,6 +656,7 @@ namespace CamozziClient
         public static string Comments;
         public static int State;
         public static int Priority;
+        public static string Name;
 
         public static bool quit;
     }

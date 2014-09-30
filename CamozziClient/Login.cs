@@ -43,7 +43,7 @@ namespace CamozziClient
                 int w = Convert.ToInt32(z.Rows[comboBox1.SelectedIndex].ItemArray[0]);
                 DataTrav.ID = w;
                 string r = z.Rows[comboBox1.SelectedIndex].ItemArray[1].ToString();
-                DataTrav.username = r;
+                DataTrav.UserName = r;
                 int e = Convert.ToInt16(z.Rows[comboBox1.SelectedIndex].ItemArray[3]);
                 DataTrav.AccTyp = e;
                 DataTrav.pwd = k;

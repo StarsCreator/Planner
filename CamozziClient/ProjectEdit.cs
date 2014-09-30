@@ -12,7 +12,7 @@ namespace CamozziClient
 {
     public partial class ProjectEdit : Form
     {
-        public ProjectEdit(Project _proj, int Access)
+        public ProjectEdit(Project _proj, int Access, DataTable users)
         {
             InitializeComponent();
             switch (Access)
@@ -22,22 +22,31 @@ namespace CamozziClient
                         txtName.ReadOnly = true;
                         tpFinish.Enabled = false;
                         tpStart.Enabled = false;
-                        rtbCom.Enabled = false;
+                        //rtbCom.Enabled = false;
                         cbPriority.Enabled = false;
                         cbState.Enabled = false;
+                        cbUser.Enabled = false;
                         break;
                     }
                 case 1:
-                    {
-                        break;
-                    }
-                case 2:
                     {
                         txtName.ReadOnly = false;
                         tpFinish.Enabled = true;
                         tpStart.Enabled = true;
                         cbPriority.Enabled = true;
                         cbState.Enabled = true;
+                        cbUser.Enabled = false;
+                        break;
+                    }
+                case 2:
+                    {
+                        txtName.ReadOnly = true;
+                        tpFinish.Enabled = false;
+                        tpStart.Enabled = false;
+                        //rtbCom.Enabled = false;
+                        cbPriority.Enabled = false;
+                        cbState.Enabled = false;
+                        cbUser.Enabled = true;
                         break;
                     }
                 case 3:
@@ -47,16 +56,27 @@ namespace CamozziClient
                         tpStart.Enabled = true;
                         cbPriority.Enabled = true;
                         cbState.Enabled = true;
-                        break;
+                        cbUser.Enabled = true;
+                        break; 
                     }
             }
             this.Text = _proj.Name;
             txtNo.Text = _proj.Id.ToString();
             txtName.Text = _proj.Name;
-            txtUser.Text = _proj.Owner.Name;
             tpStart.Value = _proj.Start;
             tpFinish.Value = _proj.Finish;
             rtbCom.Text = _proj.Comment;
+            //Исполнитель
+            int ind=1;
+            for (int q = 1; q < users.Rows.Count; q++)
+            {
+                cbUser.Items.Add(users.Rows[q].ItemArray[1]);
+                if(users.Rows[q].ItemArray[1].ToString() == _proj.Owner.Name)
+                {
+                    ind = q;
+                }
+            }
+             cbUser.SelectedItem = cbUser.Items[ind-1];
             //приоритет
             cbPriority.SelectedIndex = _proj.Priority;
             //состояние
@@ -73,6 +93,11 @@ namespace CamozziClient
                 errorProvider1.SetError(txtName, "Имя проекта не может быть пустым!");
                 return;
             }
+            if (tpStart.Value > tpFinish.Value)
+            {
+                errorProvider1.SetError(tpStart, "Дата окончания раньше даты начала!");
+                return;
+            }
             DataTrav.ch = true;
             DataTrav.ProjectName = txtName.Text;
             DataTrav.Comments = rtbCom.Text;
@@ -81,6 +106,7 @@ namespace CamozziClient
             DataTrav.Start = tpStart.Value;
             DataTrav.End = tpFinish.Value;
             DataTrav.Comments = rtbCom.Text;
+            DataTrav.Name = cbUser.SelectedItem.ToString();
             this.Close();
         }
 

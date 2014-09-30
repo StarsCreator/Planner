@@ -28,7 +28,7 @@
     <TargetCulture>ru-RU</TargetCulture>
     <ProductName>CamozziClient</ProductName>
     <PublisherName>Camozzi</PublisherName>
-    <ApplicationRevision>10</ApplicationRevision>
+    <ApplicationRevision>15</ApplicationRevision>
     <ApplicationVersion>1.1.2.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>

@@ -14,14 +14,14 @@ namespace CamozziClient
 {
     public partial class Main : Form
     {
-        static string connString = "Data Source=Camozzi\\SQLEXPRESS;User ID=CamozziClient;Password=1232; Connection Timeout=10";
+        static string connString = "Data Source=CSRV\\SQLEXPRESS;User ID=CamozziClient;Password=1232; Connection Timeout=10";
         SqlConnection con = new SqlConnection(connString);
 
         List<User> Users = new List<User>();
         List<Project> Projects = new List<Project>();
 
-        DataTable Use = new DataTable();
-        DataTable Proj,Proj2 = new DataTable();
+        //DataTable Use;
+        //DataTable Proj;
 
         User _loginUser = new User();
         String Password;
@@ -43,7 +43,6 @@ namespace CamozziClient
             UserPlan.Columns.Add("q1", "Сотрудник", 60);
 
             Plan.ItemDoubleClick += new CalendarPlanner.CalendarItemEventHandler(Plan_ItemDoubleClick);
-            //UserPlan.IsAllowedStretchAndDrag = true;
             UserPlan.ItemDoubleClick += new CalendarPlanner.CalendarItemEventHandler(UserPlan_ItemDoubleClick);
 
             notifyIcon1.Visible = false;
@@ -55,7 +54,7 @@ namespace CamozziClient
             if (_loginUser.Access == 1) { access = 0; }
             else access = _loginUser.Access;
             Project EditProj = Projects[e.Item.Tag];
-            ProjectEdit q = new ProjectEdit(EditProj,access,Use);
+            ProjectEdit q = new ProjectEdit(EditProj,access,cds.Users);
 
             q.ShowDialog();
             if (DataTrav.ch)
@@ -70,32 +69,39 @@ namespace CamozziClient
                     }
 
                 }
-                string query;
-                con = new SqlConnection(connString);
+                //string query;
+                //con = new SqlConnection(connString);
                 if (_loginUser.Access >= 2)
                 {
-                          query = @"UPDATE [Camozzi].[dbo].[Projects] Set Name='"+DataTrav.ProjectName+"'"+
+                          /*query = @"UPDATE [Camozzi].[dbo].[Projects] Set Name='"+DataTrav.ProjectName+"'"+
                                     ",UserId="+UsID+
                                     ",Start='"+DataTrav.Start.ToString("yyyyMMdd")+
                                     "',Finish='"+DataTrav.End.ToString("yyyyMMdd")+
                                     "',Priority="+DataTrav.Priority+
                                     ",State=" + DataTrav.State +
                                     ",Comment='"+DataTrav.Comments+"'"+
-                                    "Where Id="+EditProj.Id+";";
+                                    "Where Id="+EditProj.Id+";";*/
+                    //EditProj.datarow.ItemArray[0] = 
+                    EditProj.datarow.BeginEdit();
+                    EditProj.datarow["Name"] = DataTrav.ProjectName;
+                    EditProj.datarow["Start"] = DataTrav.Start;
+                    EditProj.datarow["Finish"] = DataTrav.End;
+                    EditProj.datarow["UserID"] = UsID;
+                    EditProj.datarow["Priority"] = DataTrav.Priority;
+                    EditProj.datarow["State"] = DataTrav.State;
+                    EditProj.datarow["Comment"] = DataTrav.Comments;
+                    EditProj.datarow.EndEdit();
+                    //cds.Projects.AcceptChanges();
                 }                   
                 else
                 {
-                    query = @"UPDATE [Camozzi].[dbo].[Projects] Set "+ 
-                            "Comment='" + DataTrav.Comments + "'" +
-                            "Where Id=" + EditProj.Id + ";";
+                    EditProj.datarow.BeginEdit();
+                    EditProj.datarow["Comment"] = DataTrav.Comments;
+                    EditProj.datarow.EndEdit();
+                    //cds.Projects.AcceptChanges();
                 }
-                    SqlCommand comm = new SqlCommand(query, con);
-                    con.Open();
-                    comm.ExecuteNonQuery();
-                    con.Close();
-                    //Thread bgd = new Thread(ReCreate);
-                    //bgd.Start();
-                    ReCreate();
+                LocalSync();
+                ReCreate();
             }
             timer1.Start();
         }
@@ -103,13 +109,24 @@ namespace CamozziClient
         {
             timer1.Stop();
             Project EditProj = Projects[e.Item.Tag];
-            ProjectEdit q = new ProjectEdit(EditProj, _loginUser.Access,Use);
+            ProjectEdit q = new ProjectEdit(EditProj, _loginUser.Access,cds.Users);
 
             q.ShowDialog();
             if (DataTrav.ch)
             {
+                int UsID = 0;
+                foreach (User tmp in Users)
+                {
+                    if (DataTrav.Name == tmp.Name)
+                    {
+                        UsID = tmp.Id;
+                        break;
+                    }
+
+                }
                     con = new SqlConnection(connString);
                     string query = @"UPDATE [Camozzi].[dbo].[Projects] Set Name='" + DataTrav.ProjectName + "'" +
+                          ",UserId=" + UsID +
                           ",Start='" + DataTrav.Start.ToString("yyyyMMdd") +
                           "',Finish='" + DataTrav.End.ToString("yyyyMMdd") +
                           "',Priority=" + DataTrav.Priority +
@@ -143,46 +160,58 @@ namespace CamozziClient
             this.Hide();
             try
             {
-
-                string query = @"SELECT * FROM Camozzi.dbo.Users Order By Name";
+                // TODO: This line of code loads data into the 'cds.Users' table. You can move, or remove it, as needed.
+                this.usersTableAdapter.Fill(this.cds.Users);
+                /*string query = @"SELECT * FROM Camozzi.dbo.Users Order By Name";
                 SqlCommand comm = new SqlCommand(query, con);
 
                 con.Open();
-                con.Close();
+                con.Close();*/
 
-                ReCreate();
+                //ReCreate();
                 //UserReCreate(_loginUser);
-                Login q = new Login(Use);
+
+                Login q = new Login(cds.Users);
                 q.ShowDialog();
                 if (DataTrav.quit)
                 {
                     this.Close();
-                }
+                } 
+
                 _loginUser.Id = DataTrav.ID;
                 _loginUser.Name = DataTrav.UserName;
                 Password = DataTrav.pwd;
                 _loginUser.Access = DataTrav.AccTyp;
+                
+                // TODO: This line of code loads data into the 'cds.Projects' table. You can move, or remove it, as needed.
+                this.projectsTableAdapter.Fill(cds.Projects);
+
+                ReCreate();
                 UserInitialization();
                 notifyIcon1.Visible = false;
                 timer1.Start();
                 this.Show();
                 this.WindowState = FormWindowState.Maximized;
             }
+
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message +"\n\n Обратитесь к разработчику программы. \n\nПриложение будет закрыто!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.Close();
             }
+
         }
 
         void UserInitialization()
         {
             this.Text = _loginUser.Name;
             UserReCreate(_loginUser);
+            Plan.ItemDatesChanged += new CalendarPlanner.CalendarItemEventHandler(Plan_ItemDatesChanged);
             switch (_loginUser.Access)
             {
                 case 0:
                     {
+                        //Plan.
                         Plan.IsAllowedStretchAndDrag = false;
                         break;
                     }
@@ -194,16 +223,21 @@ namespace CamozziClient
                 case 2:
                     {
                         Plan.ContextMenuStrip = contextMenuStrip1;
-                        Plan.IsAllowedStretchAndDrag = false;
+                        Plan.IsAllowedStretchAndDrag = true;
                         break;
                     }
                 case 3:
                     {
                         Plan.ContextMenuStrip = contextMenuStrip1;
-                        Plan.IsAllowedStretchAndDrag = false;
+                        Plan.IsAllowedStretchAndDrag = true;
                         break;
                     }
             }
+        }
+
+        void Plan_ItemDatesChanged(object sender, WeekPlannerItemEventArgs e)
+        {
+            //throw new NotImplementedException();
         }
 
         void UserSync()
@@ -228,7 +262,7 @@ namespace CamozziClient
 
         void ReCreate()
         {
-            try
+            //try
             {
                 refresh = true;
                 Users.Clear();
@@ -239,29 +273,23 @@ namespace CamozziClient
                 }
                 Plan.Rows.Clear();
 
-                con = new SqlConnection(connString);
+                /*con = new SqlConnection(connString);
                 string query = @"SELECT * FROM Camozzi.dbo.Users Order By Name";
                 SqlCommand comm = new SqlCommand(query, con);
-
+                cds.Users
                 con.Open();
                 SqlDataAdapter da = new SqlDataAdapter(comm);
                 DataSet ds = new DataSet();
-                da.Fill(ds);
-                Use = ds.Tables[0];
-                con.Close();
-
-                for (int w = 0; w < Use.Rows.Count; w++)
+                da.Fill(ds);*/
+                for (int w = 0; w < cds.Users.Rows.Count; w++)
                 {
                     User _user = new User();
-                    _user.Id = Convert.ToInt32(Use.Rows[w].ItemArray[0]);
-                    _user.Name = Use.Rows[w].ItemArray[1].ToString();
-                    _user.Access = Convert.ToInt32(Use.Rows[w].ItemArray[3]);
+                    _user.Id = Convert.ToInt32(cds.Users.Rows[w].ItemArray[0]);
+                    _user.Name = cds.Users.Rows[w].ItemArray[1].ToString();
+                    _user.Access = Convert.ToInt32(cds.Users.Rows[w].ItemArray[3]);
                     Users.Add(_user);
                     ///
-                    /// 
-                    /// 
-                    /// 
-                    ///
+
                     if (_user.Access < 3)
                     {
                         var ColumnRows = new DataColumns(Plan.Calendar);
@@ -269,41 +297,42 @@ namespace CamozziClient
                         var PlannerRow = new WeekPlannerRow();
                         PlannerRow.Columns = ColumnRows;
                         PlannerRow.Name = "R" + w.ToString();
-                        PlannerRow.LeftMarginBackColor = Color.FromArgb(255, 255, 200, 200);
+                        PlannerRow.LeftMarginBackColor = Color.FromArgb(255, 225, 225, 255);
                         PlannerRow.LeftMarginOldBackColor = Color.WhiteSmoke;
                         _user.CalendarRow = PlannerRow;
                         Plan.Rows.Add(PlannerRow);
                     }
                 }
-                query = @"SELECT * FROM [Camozzi].[dbo].[Projects]";
+                /*query = @"SELECT * FROM [Camozzi].[dbo].[Projects]";
                 comm = new SqlCommand(query, con);
                 con.Open();
                 da = new SqlDataAdapter(comm);
                 ds = new DataSet();
                 
-                da.Fill(ds);
-                Proj = ds.Tables[0];
-                con.Close();
-                for (int q = 0; q < Proj.Rows.Count; q++)
+                da.Fill(ds);*/
+                //con.Close();
+                //Proj = cds.Projects;
+                for (int q = 0; q < cds.Projects.Rows.Count; q++)
                 {
                     Project _proj = new Project();
                     DateTime temp;
-                    _proj.Id = Convert.ToInt32(Proj.Rows[q].ItemArray[0]);
-                    _proj.Name = Proj.Rows[q].ItemArray[1].ToString();
+                    _proj.Id = Convert.ToInt32(cds.Projects.Rows[q].ItemArray[0]);
+                    _proj.Name = cds.Projects.Rows[q].ItemArray[1].ToString();
 
-                    DateTime.TryParse(Proj.Rows[q].ItemArray[2].ToString(), out temp);
+                    DateTime.TryParse(cds.Projects.Rows[q].ItemArray[2].ToString(), out temp);
                     _proj.Start = temp;
-                    DateTime.TryParse(Proj.Rows[q].ItemArray[3].ToString(), out temp);
+                    DateTime.TryParse(cds.Projects.Rows[q].ItemArray[3].ToString(), out temp);
                     _proj.Finish = temp;
-                    _proj.UserId = Convert.ToInt32(Proj.Rows[q].ItemArray[4]);
-                    _proj.Priority = Convert.ToInt32(Proj.Rows[q].ItemArray[5]);
-                    _proj.State = Convert.ToInt32(Proj.Rows[q].ItemArray[6]);
-                    _proj.Comment = Proj.Rows[q].ItemArray[7].ToString();
+                    _proj.UserId = Convert.ToInt32(cds.Projects.Rows[q].ItemArray[4]);
+                    _proj.Priority = Convert.ToInt32(cds.Projects.Rows[q].ItemArray[5]);
+                    _proj.State = Convert.ToInt32(cds.Projects.Rows[q].ItemArray[6]);
+                    _proj.Comment = cds.Projects.Rows[q].ItemArray[7].ToString();
                     Projects.Add(_proj);
                     _proj.Owner = findOwner(_proj);
+                    _proj.datarow = cds.Projects.Rows[q];
 
 
-                    ToolTip tt = new ToolTip();
+                    //ToolTip tt = new ToolTip();
 
                     var Item = new WeekPlannerItem();
                     Item.StartDate = _proj.Start;
@@ -326,12 +355,13 @@ namespace CamozziClient
                             }
                         case 2:
                             {
+                                Item.BackColor = Color.WhiteSmoke;
                                 break;
                             }
                     }
                     if (_proj.Priority == 1) Item.BackColor = Color.LightCoral;
                     _proj.Owner.CalendarRow.Items.Add(Item);
-
+                    if (_proj.State == 1) Item.BackColor = Color.LightGreen;
                     if (_loginUser.Name != "" && _loginUser.Name != null)
                     {
                         UserReCreate(_loginUser);
@@ -339,11 +369,11 @@ namespace CamozziClient
                     refresh = false;
                 }
             }
-            catch (Exception ex)
-            {
-                refresh = false;
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+           // catch (Exception ex)
+          //  {
+       //         refresh = false;
+       //         MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+      //      }
         }
 
         void UserReCreate(User _user)
@@ -364,7 +394,7 @@ namespace CamozziClient
             var PlannerRow = new WeekPlannerRow();
             PlannerRow.Columns = ColumnRows;
             PlannerRow.Name = "R";
-            PlannerRow.LeftMarginBackColor = Color.FromArgb(255, 255, 200, 200);
+            PlannerRow.LeftMarginBackColor = Color.FromArgb(255,225, 225, 255);
             PlannerRow.LeftMarginOldBackColor = Color.WhiteSmoke;
             _loginUser.CalendarRow = PlannerRow;
             UserPlan.Rows.Add(PlannerRow);
@@ -386,11 +416,6 @@ namespace CamozziClient
                                 Item.BackColor = Color.Yellow;
                                 break;
                             }
-                        case 1:
-                            {
-                                Item.BackColor = Color.LightGreen;
-                                break;
-                            }
                         case 2:
                             {
                                 Item.BackColor = Color.DarkGray;
@@ -403,11 +428,13 @@ namespace CamozziClient
                             }
                         default:
                             {
+                                Item.BackColor = Color.GhostWhite;
                                 break;
                             }
                     }
                     if (_proj.Priority == 1) Item.BackColor = Color.LightCoral;
                     UserPlan.Rows[0].Items.Add(Item);
+                    if (_proj.State == 1) Item.BackColor = Color.LightGreen;
 
                     DataGridViewRow newRow = new DataGridViewRow();
                     newRow.ContextMenuStrip = contextMenuStrip1;
@@ -452,7 +479,7 @@ namespace CamozziClient
             _NewProj.Priority = 0;
             _NewProj.State = 0;
             _NewProj.UserId = _loginUser.Id;
-            ProjectEdit q = new ProjectEdit(_NewProj, _loginUser.Access,Use);
+            ProjectEdit q = new ProjectEdit(_NewProj, _loginUser.Access,cds.Users);
 
             q.ShowDialog();
             if (DataTrav.ch)
@@ -467,7 +494,21 @@ namespace CamozziClient
                     }
 
                 }
-                string query = @"INSERT INTO [Camozzi].[dbo].[Projects]
+                //создание строки
+                DataRow n = cds.Projects.NewRow();
+                //заполнение
+                //n["Id"] = cds.Projects.Count;
+                n["Name"] = DataTrav.ProjectName;
+                n["Start"] = DataTrav.Start;//.ToString("yyyy-MM-dd");
+                n["Finish"] = DataTrav.End;//.ToString("yyyy-MM-dd");
+                n["UserID"] = UsID;
+                n["Priority"] = DataTrav.Priority;
+                n["State"] = DataTrav.State;
+                n["Comment"] = DataTrav.Comments;
+                //Добавление и обновление
+                cds.Projects.Rows.Add(n);
+                
+               /* string query = @"INSERT INTO [Camozzi].[dbo].[Projects]
            ([Name]
            ,[Start]
            ,[Finish]
@@ -480,7 +521,8 @@ namespace CamozziClient
                 SqlCommand comm = new SqlCommand(query, con);
                 con.Open();
                 comm.ExecuteNonQuery();
-                con.Close();
+                con.Close();*/
+                LocalSync();
                 ReCreate();
             }
             timer1.Start();
@@ -493,6 +535,26 @@ namespace CamozziClient
                 ReCreate();
             }
             GC.Collect();
+        }
+
+        private void LocalSync()
+        {
+            try
+            {
+                this.Validate();
+
+                this.usersBindingSource.EndEdit();
+                this.projectsBindingSource.EndEdit();
+
+                this.usersTableAdapter.Update(this.cds.Users);
+                this.projectsTableAdapter.Update(this.cds.Projects);
+
+                //MessageBox.Show("Update successful");
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show("Update failed: " + ex.Message);
+            }
         }
 
         private void дниToolStripMenuItem_Click(object sender, EventArgs e)
@@ -522,6 +584,10 @@ namespace CamozziClient
             
             Plan.CurrentDate = dateTimePicker1.Value;
             UserPlan.CurrentDate = dateTimePicker1.Value;
+            if (dateTimePicker1.Value > dateTimePicker2.Value)
+            {
+                dateTimePicker2.Value = dateTimePicker1.Value.AddDays(9);
+            }
             TimeSpan Tmp = dateTimePicker2.Value - dateTimePicker1.Value;
             Plan.DayCount = Tmp.Days + 1;
             UserPlan.DayCount = Tmp.Days + 1;
@@ -531,7 +597,7 @@ namespace CamozziClient
         {
             timer1.Stop();
             Project EditProj = (Project)dataGridView1.CurrentRow.Tag;
-            ProjectEdit q = new ProjectEdit(EditProj, _loginUser.Access,Use);
+            ProjectEdit q = new ProjectEdit(EditProj, _loginUser.Access,cds.Users);
 
             q.ShowDialog();
             if (DataTrav.ch)
@@ -639,6 +705,44 @@ namespace CamozziClient
             }
         }
 
+        private void tabControl1_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            e.Graphics.DrawString("x", e.Font, Brushes.Black, e.Bounds.Right - 15, e.Bounds.Top + 4);
+            e.Graphics.DrawString(this.tabControl1.TabPages[e.Index].Text, e.Font, Brushes.Black, e.Bounds.Left + 12, e.Bounds.Top + 4);
+            e.DrawFocusRectangle();
+        }
+
+        private void tabControl1_MouseDown(object sender, MouseEventArgs e)
+        {
+            for (int i = 0; i < this.tabControl1.TabPages.Count; i++)
+            {
+                Rectangle r = tabControl1.GetTabRect(i);
+                //Getting the position of the "x" mark.
+                Rectangle closeButton = new Rectangle(r.Right - 15, r.Top + 4, 9, 7);
+                if (closeButton.Contains(e.Location))
+                {
+                    if (MessageBox.Show("Would you like to Close this Tab?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        this.tabControl1.TabPages.RemoveAt(i);
+                        break;
+                    }
+                }
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ldcSyncAgent syncAgent = new ldcSyncAgent();
+                Microsoft.Synchronization.Data.SyncStatistics syncStats = syncAgent.Synchronize();
+                MessageBox.Show("Changes downloaded: " + syncStats.TotalChangesDownloaded.ToString() + Environment.NewLine + "Changes uploaded: " + syncStats.TotalChangesUploaded.ToString());
+            }
+            catch (System.Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message);
+            }
+        }
     }
     public static class DataTrav
     {
@@ -682,5 +786,6 @@ public class Project
     public int Priority { get; set; }
     public int State { get; set; }
     public string Comment { get; set; }
+    public DataRow datarow {get;set; }
 
 }

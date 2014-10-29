@@ -35,11 +35,11 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.Plan = new WeekPlanner.CalendarPlanner();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.добавитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.UserPlan = new WeekPlanner.CalendarPlanner();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.добавитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -67,17 +67,26 @@
             this.btnFrwd = new System.Windows.Forms.Button();
             this.Status = new System.Windows.Forms.StatusStrip();
             this.DownLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.cds = new CamozziClient.cds();
+            this.projectsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.projectsTableAdapter = new CamozziClient.cdsTableAdapters.ProjectsTableAdapter();
+            this.usersBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.usersTableAdapter = new CamozziClient.cdsTableAdapters.UsersTableAdapter();
+            this.button2 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.contextMenuStrip1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.Status.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cds)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.projectsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.usersBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -87,11 +96,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
             this.tabControl1.Location = new System.Drawing.Point(12, 53);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(930, 391);
+            this.tabControl1.Size = new System.Drawing.Size(942, 391);
             this.tabControl1.TabIndex = 0;
+            this.tabControl1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControl1_DrawItem);
+            this.tabControl1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tabControl1_MouseDown);
             // 
             // tabPage1
             // 
@@ -99,14 +111,14 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(922, 365);
+            this.tabPage1.Size = new System.Drawing.Size(934, 365);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Общая";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // Plan
             // 
-            this.Plan.BorderColor = System.Drawing.Color.Black;
+            this.Plan.BorderColor = System.Drawing.Color.Navy;
             this.Plan.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Plan.Columns = dataColumns1;
             this.Plan.CurrentDate = new System.DateTime(((long)(0)));
@@ -117,38 +129,24 @@
             this.Plan.GridBackgroundColor = System.Drawing.Color.WhiteSmoke;
             this.Plan.GridCellHeight = 40;
             this.Plan.GridTextFont = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.Plan.HeaderBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.Plan.HeaderBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(255)))));
             this.Plan.HeaderColumnsFont = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Plan.HeaderDatesFont = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.Plan.HeaderFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
-            this.Plan.HeaderFillLeftMarginColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
-            this.Plan.HeaderStyleMode = WeekPlanner.HeaderStyle.Aqua;
+            this.Plan.HeaderFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(217)))), ((int)(((byte)(255)))));
+            this.Plan.HeaderFillLeftMarginColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(217)))), ((int)(((byte)(255)))));
+            this.Plan.HeaderStyleMode = WeekPlanner.HeaderStyle.Simple;
             this.Plan.IsAllowedDraggingBetweenRows = false;
             this.Plan.IsAllowedStretchAndDrag = false;
             this.Plan.IsAllowedTreeViewDrawing = false;
             this.Plan.ItemHeight = 40;
-            this.Plan.ItemTextFont = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Bold);
+            this.Plan.ItemTextFont = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold);
             this.Plan.LeftMargin = 250;
-            this.Plan.LeftMarginColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.Plan.LeftMarginColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.Plan.Location = new System.Drawing.Point(3, 3);
             this.Plan.Name = "Plan";
-            this.Plan.Size = new System.Drawing.Size(916, 359);
+            this.Plan.Size = new System.Drawing.Size(928, 359);
             this.Plan.TabIndex = 0;
             this.Plan.ItemMouseHover += new WeekPlanner.CalendarPlanner.CalendarItemEventHandler(this.Plan_ItemMouseHover);
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.добавитьToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(127, 26);
-            // 
-            // добавитьToolStripMenuItem
-            // 
-            this.добавитьToolStripMenuItem.Name = "добавитьToolStripMenuItem";
-            this.добавитьToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
-            this.добавитьToolStripMenuItem.Text = "Добавить";
-            this.добавитьToolStripMenuItem.Click += new System.EventHandler(this.добавитьToolStripMenuItem_Click);
             // 
             // tabPage2
             // 
@@ -156,7 +154,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(922, 365);
+            this.tabPage2.Size = new System.Drawing.Size(934, 365);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Личная";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -175,7 +173,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.dataGridView1);
-            this.splitContainer1.Size = new System.Drawing.Size(916, 359);
+            this.splitContainer1.Size = new System.Drawing.Size(928, 359);
             this.splitContainer1.SplitterDistance = 178;
             this.splitContainer1.TabIndex = 3;
             // 
@@ -184,7 +182,7 @@
             this.UserPlan.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.UserPlan.BorderColor = System.Drawing.Color.Silver;
+            this.UserPlan.BorderColor = System.Drawing.Color.Navy;
             this.UserPlan.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.UserPlan.Columns = dataColumns2;
             this.UserPlan.ContextMenuStrip = this.contextMenuStrip1;
@@ -194,11 +192,11 @@
             this.UserPlan.GridBackgroundColor = System.Drawing.Color.WhiteSmoke;
             this.UserPlan.GridCellHeight = 200;
             this.UserPlan.GridTextFont = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.UserPlan.HeaderBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.UserPlan.HeaderBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(255)))));
             this.UserPlan.HeaderColumnsFont = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.UserPlan.HeaderDatesFont = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.UserPlan.HeaderFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
-            this.UserPlan.HeaderFillLeftMarginColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
+            this.UserPlan.HeaderFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(217)))), ((int)(((byte)(255)))));
+            this.UserPlan.HeaderFillLeftMarginColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(217)))), ((int)(((byte)(255)))));
             this.UserPlan.HeaderStyleMode = WeekPlanner.HeaderStyle.Aqua;
             this.UserPlan.IsAllowedDraggingBetweenRows = false;
             this.UserPlan.IsAllowedStretchAndDrag = false;
@@ -209,8 +207,22 @@
             this.UserPlan.LeftMarginColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.UserPlan.Location = new System.Drawing.Point(0, 0);
             this.UserPlan.Name = "UserPlan";
-            this.UserPlan.Size = new System.Drawing.Size(916, 175);
+            this.UserPlan.Size = new System.Drawing.Size(928, 175);
             this.UserPlan.TabIndex = 2;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.добавитьToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(127, 26);
+            // 
+            // добавитьToolStripMenuItem
+            // 
+            this.добавитьToolStripMenuItem.Name = "добавитьToolStripMenuItem";
+            this.добавитьToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.добавитьToolStripMenuItem.Text = "Добавить";
+            this.добавитьToolStripMenuItem.Click += new System.EventHandler(this.добавитьToolStripMenuItem_Click);
             // 
             // dataGridView1
             // 
@@ -228,7 +240,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(916, 177);
+            this.dataGridView1.Size = new System.Drawing.Size(928, 177);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             // 
@@ -259,7 +271,7 @@
             // 
             // timer1
             // 
-            this.timer1.Interval = 10000;
+            this.timer1.Interval = 15000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // menuStrip1
@@ -437,11 +449,45 @@
             this.DownLabel.Name = "DownLabel";
             this.DownLabel.Size = new System.Drawing.Size(0, 17);
             // 
+            // cds
+            // 
+            this.cds.DataSetName = "cds";
+            this.cds.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // projectsBindingSource
+            // 
+            this.projectsBindingSource.DataMember = "Projects";
+            this.projectsBindingSource.DataSource = this.cds;
+            // 
+            // projectsTableAdapter
+            // 
+            this.projectsTableAdapter.ClearBeforeFill = true;
+            // 
+            // usersBindingSource
+            // 
+            this.usersBindingSource.DataMember = "Users";
+            this.usersBindingSource.DataSource = this.cds;
+            // 
+            // usersTableAdapter
+            // 
+            this.usersTableAdapter.ClearBeforeFill = true;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(764, 27);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 11;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(954, 469);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.Status);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnFrwd);
@@ -463,17 +509,20 @@
             this.Resize += new System.EventHandler(this.Main_Resize);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            this.contextMenuStrip1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.Status.ResumeLayout(false);
             this.Status.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cds)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.projectsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.usersBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -516,6 +565,12 @@
         private System.Windows.Forms.ToolStripStatusLabel DownLabel;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem выходToolStripMenuItem;
+        private cds cds;
+        private System.Windows.Forms.BindingSource projectsBindingSource;
+        private cdsTableAdapters.ProjectsTableAdapter projectsTableAdapter;
+        private System.Windows.Forms.BindingSource usersBindingSource;
+        private cdsTableAdapters.UsersTableAdapter usersTableAdapter;
+        private System.Windows.Forms.Button button2;
 
     }
 }

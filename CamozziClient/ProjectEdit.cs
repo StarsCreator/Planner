@@ -40,14 +40,13 @@ namespace CamozziClient
                     }
                 case 2:
                     {
-                        txtName.ReadOnly = true;
-                        tpFinish.Enabled = false;
-                        tpStart.Enabled = false;
-                        //rtbCom.Enabled = false;
-                        cbPriority.Enabled = false;
-                        cbState.Enabled = false;
+                        txtName.ReadOnly = false;
+                        tpFinish.Enabled = true;
+                        tpStart.Enabled = true;
+                        cbPriority.Enabled = true;
+                        cbState.Enabled = true;
                         cbUser.Enabled = true;
-                        break;
+                        break; 
                     }
                 case 3:
                     {
@@ -68,7 +67,7 @@ namespace CamozziClient
             rtbCom.Text = _proj.Comment;
             //Исполнитель
             int ind=1;
-            for (int q = 1; q < users.Rows.Count; q++)
+            for (int q = 0; q < users.Rows.Count; q++)
             {
                 cbUser.Items.Add(users.Rows[q].ItemArray[1]);
                 if(users.Rows[q].ItemArray[1].ToString() == _proj.Owner.Name)
@@ -76,7 +75,7 @@ namespace CamozziClient
                     ind = q;
                 }
             }
-             cbUser.SelectedItem = cbUser.Items[ind-1];
+             cbUser.SelectedItem = cbUser.Items[ind];
             //приоритет
             cbPriority.SelectedIndex = _proj.Priority;
             //состояние

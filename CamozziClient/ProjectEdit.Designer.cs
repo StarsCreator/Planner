@@ -134,13 +134,17 @@
             // 
             // cbState
             // 
+            this.cbState.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbState.Enabled = false;
             this.cbState.FormattingEnabled = true;
             this.cbState.Items.AddRange(new object[] {
             "В очереди",
             "В работе",
             "Закончен",
-            "Отпуск"});
+            "Отпуск",
+            "На производстве",
+            "Приостановлен",
+            ""});
             this.cbState.Location = new System.Drawing.Point(88, 143);
             this.cbState.Name = "cbState";
             this.cbState.Size = new System.Drawing.Size(258, 21);
@@ -166,6 +170,7 @@
             // 
             // cbPriority
             // 
+            this.cbPriority.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbPriority.Enabled = false;
             this.cbPriority.FormattingEnabled = true;
             this.cbPriority.Items.AddRange(new object[] {

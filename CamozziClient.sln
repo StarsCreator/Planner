@@ -1,7 +1,9 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CamozziClient", "CamozziClient\CamozziClient.csproj", "{08826F23-123F-407A-899B-43A1C7315233}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeekPlanner", "..\..\..\Work\CalendarPlannerExample\WeekPlanner\WeekPlanner.csproj", "{0AF500EB-6DEB-4F00-A96B-91C2B1B8A012}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,6 +15,10 @@ Global
 		{08826F23-123F-407A-899B-43A1C7315233}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08826F23-123F-407A-899B-43A1C7315233}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{08826F23-123F-407A-899B-43A1C7315233}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AF500EB-6DEB-4F00-A96B-91C2B1B8A012}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AF500EB-6DEB-4F00-A96B-91C2B1B8A012}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AF500EB-6DEB-4F00-A96B-91C2B1B8A012}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AF500EB-6DEB-4F00-A96B-91C2B1B8A012}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

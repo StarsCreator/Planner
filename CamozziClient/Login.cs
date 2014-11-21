@@ -2,33 +2,38 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CamozziClient.Properties;
 
 namespace CamozziClient
 {
     public partial class Login : Form
     {
-        DataTable z;
-        public Login(DataTable UserPass)
+        //DbSet users;
+        public Login(List<User> users)
         {
             InitializeComponent();
-            z = UserPass;
-            for(int q=0;q<UserPass.Rows.Count;q++)
+
+            comboBox1.DataSource = users;
+            comboBox1.DisplayMember = "Name";
+            if (Settings.Default.LastUser == "" || Settings.Default.LastUser == null)
             {
-                comboBox1.Items.Add(UserPass.Rows[q].ItemArray[1]);
+                comboBox1.SelectedItem = comboBox1.Items[0];
             }
-            comboBox1.SelectedItem = comboBox1.Items[0];
+            else
+            {
+                comboBox1.SelectedItem = users.Find(delegate(User b)
+                {
+                    return b.Name == Settings.Default.LastUser;
+                });
+            }
+            textBox1.Select();
             DataTrav.quit = true;
-        }
-       
-
-        private void Login_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -37,23 +42,27 @@ namespace CamozziClient
         }
         void settlers()
         {
-            string k = z.Rows[comboBox1.SelectedIndex].ItemArray[2].ToString();
-            if (textBox1.Text == k)
+            User k = (User)comboBox1.SelectedItem;
+            if (textBox1.Text == k.Password)
             {
-                int w = Convert.ToInt32(z.Rows[comboBox1.SelectedIndex].ItemArray[0]);
-                DataTrav.ID = w;
-                string r = z.Rows[comboBox1.SelectedIndex].ItemArray[1].ToString();
-                DataTrav.UserName = r;
-                int e = Convert.ToInt16(z.Rows[comboBox1.SelectedIndex].ItemArray[3]);
-                DataTrav.AccTyp = e;
-                DataTrav.pwd = k;
+                DataTrav.user = k;
                 DataTrav.quit = false;
+                //MessageBox.Show("Luck!");
                 this.Close();
             }
             else
             {
+                errorProvider1.SetError(textBox1, "Неверный пароль!");
                 textBox1.Text = "";
             } 
+        }
+
+        private void textBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Return)
+            {
+                settlers();
+            }
         }
     }
 }

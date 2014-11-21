@@ -7,12 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.Entity;
 
 namespace CamozziClient
 {
     public partial class ProjectEdit : Form
     {
-        public ProjectEdit(Project _proj, int Access, DataTable users)
+        public ProjectEdit(Project _proj, int Access, List<User> users)
         {
             InitializeComponent();
             switch (Access)
@@ -65,17 +66,10 @@ namespace CamozziClient
             tpStart.Value = _proj.Start;
             tpFinish.Value = _proj.Finish;
             rtbCom.Text = _proj.Comment;
+            cbUser.DataSource = users;
+            cbUser.DisplayMember = "Name";
             //Исполнитель
-            int ind=1;
-            for (int q = 0; q < users.Rows.Count; q++)
-            {
-                cbUser.Items.Add(users.Rows[q].ItemArray[1]);
-                if(users.Rows[q].ItemArray[1].ToString() == _proj.Owner.Name)
-                {
-                    ind = q;
-                }
-            }
-             cbUser.SelectedItem = cbUser.Items[ind];
+            cbUser.SelectedItem = _proj.Users;
             //приоритет
             cbPriority.SelectedIndex = _proj.Priority;
             //состояние
@@ -97,15 +91,10 @@ namespace CamozziClient
                 errorProvider1.SetError(tpStart, "Дата окончания раньше даты начала!");
                 return;
             }
+            User owner = (User)cbUser.SelectedItem;
+            Project ret = new Project { Name = txtName.Text, Comment = rtbCom.Text, Priority = cbPriority.SelectedIndex, State = cbState.SelectedIndex, Start = tpStart.Value, Finish = tpFinish.Value, Users = owner,UserId=owner.Id };
+            DataTrav.proj = ret;
             DataTrav.ch = true;
-            DataTrav.ProjectName = txtName.Text;
-            DataTrav.Comments = rtbCom.Text;
-            DataTrav.Priority = cbPriority.SelectedIndex;
-            DataTrav.State = cbState.SelectedIndex;
-            DataTrav.Start = tpStart.Value;
-            DataTrav.End = tpFinish.Value;
-            DataTrav.Comments = rtbCom.Text;
-            DataTrav.Name = cbUser.SelectedItem.ToString();
             this.Close();
         }
 

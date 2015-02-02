@@ -18,15 +18,20 @@ namespace Camozzi.Presentation.Presenters
             Users = users;
             View.Ok += View_Ok;
 
-            var usr = Users.GetAll();
-            View.Users = usr;
+            View.Users = Users.GetAll(); ;
         }
 
         void View_Ok()
         {
-            var usr = View.UserName;
-            Controller.Run<MainPresenter>();
-            View.Close();
+            if (View.Password == ((User)View.UserName).Password)
+            {
+                Controller.Run<MainPresenter, User>((User)View.UserName);
+                View.Close();
+            }
+            else
+            {
+                View.ClearPswFld();
+            }
         }
     }
 }

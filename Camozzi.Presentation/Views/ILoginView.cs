@@ -11,8 +11,10 @@ namespace Camozzi.Presentation.Views
     {
         event Action Ok;
 
-        string UserName { get; }
+        object UserName { get; }
         string Password { get; }
         object Users { set; }
+
+        void ClearPswFld();
     }
 }

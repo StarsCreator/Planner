@@ -32,7 +32,7 @@
             this.IdTB = new MetroFramework.Controls.MetroTextBox();
             this.NameTb = new MetroFramework.Controls.MetroTextBox();
             this.StartMdt = new MetroFramework.Controls.MetroDateTime();
-            this.metroButton1 = new MetroFramework.Controls.MetroButton();
+            this.butOk = new MetroFramework.Controls.MetroButton();
             this.userCb = new MetroFramework.Controls.MetroComboBox();
             this.FinishMdt = new MetroFramework.Controls.MetroDateTime();
             this.StateCb = new MetroFramework.Controls.MetroComboBox();
@@ -43,11 +43,14 @@
             this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
             this.CommentTb = new MetroFramework.Controls.MetroTextBox();
-            this.metroButton2 = new MetroFramework.Controls.MetroButton();
+            this.butCancel = new MetroFramework.Controls.MetroButton();
             this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel7 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel8 = new MetroFramework.Controls.MetroLabel();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.metroComboBox1 = new MetroFramework.Controls.MetroComboBox();
+            this.metroLabel9 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel10 = new MetroFramework.Controls.MetroLabel();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -89,19 +92,19 @@
             this.StartMdt.Style = MetroFramework.MetroColorStyle.Red;
             this.StartMdt.TabIndex = 2;
             // 
-            // metroButton1
+            // butOk
             // 
-            this.metroButton1.Location = new System.Drawing.Point(222, 415);
-            this.metroButton1.Name = "metroButton1";
-            this.metroButton1.Size = new System.Drawing.Size(75, 23);
-            this.metroButton1.TabIndex = 3;
-            this.metroButton1.UseSelectable = true;
+            this.butOk.Location = new System.Drawing.Point(222, 455);
+            this.butOk.Name = "metroButton1";
+            this.butOk.TabIndex = 3;
+            this.butOk.Text = "Oк";
+            this.butOk.UseSelectable = true;
             // 
             // userCb
             // 
             this.userCb.FormattingEnabled = true;
             this.userCb.ItemHeight = 23;
-            this.userCb.Location = new System.Drawing.Point(145, 184);
+            this.userCb.Location = new System.Drawing.Point(145, 219);
             this.userCb.Name = "userCb";
             this.userCb.Size = new System.Drawing.Size(233, 29);
             this.userCb.Style = MetroFramework.MetroColorStyle.Red;
@@ -129,7 +132,7 @@
             "На производстве",
             "Приостановлен",
             "Командировка"});
-            this.StateCb.Location = new System.Drawing.Point(145, 219);
+            this.StateCb.Location = new System.Drawing.Point(145, 254);
             this.StateCb.Name = "StateCb";
             this.StateCb.Size = new System.Drawing.Size(233, 29);
             this.StateCb.Style = MetroFramework.MetroColorStyle.Red;
@@ -143,7 +146,7 @@
             this.PriorityCb.Items.AddRange(new object[] {
             "Обычный",
             "Высокий"});
-            this.PriorityCb.Location = new System.Drawing.Point(145, 254);
+            this.PriorityCb.Location = new System.Drawing.Point(145, 289);
             this.PriorityCb.Name = "PriorityCb";
             this.PriorityCb.Size = new System.Drawing.Size(233, 29);
             this.PriorityCb.Style = MetroFramework.MetroColorStyle.Red;
@@ -171,7 +174,7 @@
             // metroLabel3
             // 
             this.metroLabel3.AutoSize = true;
-            this.metroLabel3.Location = new System.Drawing.Point(48, 194);
+            this.metroLabel3.Location = new System.Drawing.Point(48, 234);
             this.metroLabel3.Name = "metroLabel3";
             this.metroLabel3.Size = new System.Drawing.Size(89, 19);
             this.metroLabel3.TabIndex = 10;
@@ -198,7 +201,7 @@
             // CommentTb
             // 
             this.CommentTb.Lines = new string[0];
-            this.CommentTb.Location = new System.Drawing.Point(145, 289);
+            this.CommentTb.Location = new System.Drawing.Point(145, 329);
             this.CommentTb.MaxLength = 32767;
             this.CommentTb.Multiline = true;
             this.CommentTb.Name = "CommentTb";
@@ -212,17 +215,16 @@
             // 
             // metroButton2
             // 
-            this.metroButton2.Location = new System.Drawing.Point(303, 415);
-            this.metroButton2.Name = "metroButton2";
-            this.metroButton2.Size = new System.Drawing.Size(75, 23);
-            this.metroButton2.TabIndex = 14;
-            this.metroButton2.Text = "Отмена";
-            this.metroButton2.UseSelectable = true;
+            this.butCancel.Location = new System.Drawing.Point(303, 455);
+            this.butCancel.Name = "metroButton2";
+            this.butCancel.TabIndex = 14;
+            this.butCancel.Text = "Отмена";
+            this.butCancel.UseSelectable = true;
             // 
             // metroLabel6
             // 
             this.metroLabel6.AutoSize = true;
-            this.metroLabel6.Location = new System.Drawing.Point(48, 229);
+            this.metroLabel6.Location = new System.Drawing.Point(48, 269);
             this.metroLabel6.Name = "metroLabel6";
             this.metroLabel6.Size = new System.Drawing.Size(75, 19);
             this.metroLabel6.TabIndex = 15;
@@ -231,7 +233,7 @@
             // metroLabel7
             // 
             this.metroLabel7.AutoSize = true;
-            this.metroLabel7.Location = new System.Drawing.Point(48, 264);
+            this.metroLabel7.Location = new System.Drawing.Point(48, 304);
             this.metroLabel7.Name = "metroLabel7";
             this.metroLabel7.Size = new System.Drawing.Size(75, 19);
             this.metroLabel7.TabIndex = 16;
@@ -240,7 +242,7 @@
             // metroLabel8
             // 
             this.metroLabel8.AutoSize = true;
-            this.metroLabel8.Location = new System.Drawing.Point(48, 289);
+            this.metroLabel8.Location = new System.Drawing.Point(48, 329);
             this.metroLabel8.Name = "metroLabel8";
             this.metroLabel8.Size = new System.Drawing.Size(93, 19);
             this.metroLabel8.TabIndex = 17;
@@ -250,15 +252,44 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // metroComboBox1
+            // 
+            this.metroComboBox1.FormattingEnabled = true;
+            this.metroComboBox1.ItemHeight = 23;
+            this.metroComboBox1.Location = new System.Drawing.Point(145, 184);
+            this.metroComboBox1.Name = "metroComboBox1";
+            this.metroComboBox1.Size = new System.Drawing.Size(233, 29);
+            this.metroComboBox1.Style = MetroFramework.MetroColorStyle.Red;
+            this.metroComboBox1.TabIndex = 18;
+            this.metroComboBox1.UseSelectable = true;
+            // 
+            // metroLabel9
+            // 
+            this.metroLabel9.AutoSize = true;
+            this.metroLabel9.Location = new System.Drawing.Point(0, 0);
+            this.metroLabel9.Name = "metroLabel9";
+            this.metroLabel9.Size = new System.Drawing.Size(100, 23);
+            this.metroLabel9.TabIndex = 0;
+            // 
+            // metroLabel10
+            // 
+            this.metroLabel10.AutoSize = true;
+            this.metroLabel10.Location = new System.Drawing.Point(0, 0);
+            this.metroLabel10.Name = "metroLabel10";
+            this.metroLabel10.Size = new System.Drawing.Size(100, 23);
+            this.metroLabel10.TabIndex = 0;
+            this.metroLabel10.Text = "Менеджер";
+            // 
             // ProjectDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(415, 461);
+            this.ClientSize = new System.Drawing.Size(415, 491);
+            this.Controls.Add(this.metroComboBox1);
             this.Controls.Add(this.metroLabel8);
             this.Controls.Add(this.metroLabel7);
             this.Controls.Add(this.metroLabel6);
-            this.Controls.Add(this.metroButton2);
+            this.Controls.Add(this.butCancel);
             this.Controls.Add(this.CommentTb);
             this.Controls.Add(this.metroLabel5);
             this.Controls.Add(this.metroLabel4);
@@ -269,7 +300,7 @@
             this.Controls.Add(this.StateCb);
             this.Controls.Add(this.FinishMdt);
             this.Controls.Add(this.userCb);
-            this.Controls.Add(this.metroButton1);
+            this.Controls.Add(this.butOk);
             this.Controls.Add(this.StartMdt);
             this.Controls.Add(this.NameTb);
             this.Controls.Add(this.IdTB);
@@ -291,7 +322,7 @@
         private MetroFramework.Controls.MetroTextBox IdTB;
         private MetroFramework.Controls.MetroTextBox NameTb;
         private MetroFramework.Controls.MetroDateTime StartMdt;
-        private MetroFramework.Controls.MetroButton metroButton1;
+        private MetroFramework.Controls.MetroButton butOk;
         private MetroFramework.Controls.MetroComboBox userCb;
         private MetroFramework.Controls.MetroDateTime FinishMdt;
         private MetroFramework.Controls.MetroComboBox StateCb;
@@ -302,10 +333,13 @@
         private MetroFramework.Controls.MetroLabel metroLabel4;
         private MetroFramework.Controls.MetroLabel metroLabel5;
         private MetroFramework.Controls.MetroTextBox CommentTb;
-        private MetroFramework.Controls.MetroButton metroButton2;
+        private MetroFramework.Controls.MetroButton butCancel;
         private MetroFramework.Controls.MetroLabel metroLabel6;
         private MetroFramework.Controls.MetroLabel metroLabel7;
         private MetroFramework.Controls.MetroLabel metroLabel8;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private MetroFramework.Controls.MetroComboBox metroComboBox1;
+        private MetroFramework.Controls.MetroLabel metroLabel9;
+        private MetroFramework.Controls.MetroLabel metroLabel10;
     }
 }

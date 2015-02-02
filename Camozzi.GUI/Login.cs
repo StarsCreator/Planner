@@ -32,9 +32,9 @@ namespace Camozzi.GUI
         {
             if (action != null) action();
         }
+
         #region ILoginView
         public event Action Ok;
-
 
         public object Users
         {
@@ -43,11 +43,11 @@ namespace Camozzi.GUI
                 UsR.DataSource = value;
             }
         }
-        public string UserName 
+        public object UserName 
         {
             get
             {
-                return UsR.SelectedItem.ToString();
+                return UsR.SelectedItem;
             }
         }
         public string Password 
@@ -56,6 +56,11 @@ namespace Camozzi.GUI
             {
                 return Psw.Text;
             }
+        }
+
+        public void ClearPswFld()
+        {
+            Psw.Text = "";
         }
         #endregion
     }

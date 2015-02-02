@@ -4,7 +4,9 @@ using Camozzi.Presentation.Presenters;
 using Camozzi.Presentation.Views;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Camozzi.GUI
@@ -18,7 +20,7 @@ namespace Camozzi.GUI
         static void Main()
         {
             bool onlyInstance;
-            Mutex q = new Mutex(true,"CamozziClient", out onlyInstance);
+            Mutex q = new Mutex(true, "CamozziClient", out onlyInstance);
             if (onlyInstance)
             {
                 Application.EnableVisualStyles();
@@ -26,8 +28,8 @@ namespace Camozzi.GUI
 
 
                 var controller = new ApplicationController(new InjectAdapter())
-                .RegisterView<ILoginView,Login>()
-                .RegisterView<IMainView,Main>()
+                .RegisterView<ILoginView, Login>()
+                .RegisterView<IMainView, Main>()
                 .RegisterService<IUserRepository,UserRepository>()
                 .RegisterInstance(new ApplicationContext());
                 controller.Run<LoginPresenter>();

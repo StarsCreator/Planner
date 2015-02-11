@@ -24,9 +24,12 @@ namespace Camozzi.Model.Services
         public int State { get; set; }
         public int Priority { get; set; }
         public string Comment { get; set; }
+        public int DeptId { get; set; }
+        public System.DateTime CreationDate { get; set; }
     
         public virtual User Creator { get; set; }
         public virtual User Manager { get; set; }
         public virtual User User { get; set; }
+        public virtual Dept Dept { get; set; }
     }
 }

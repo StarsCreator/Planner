@@ -17,6 +17,7 @@ namespace Camozzi.Model.Services
         public Dept()
         {
             this.Users = new HashSet<User>();
+            this.Projects = new HashSet<Project>();
         }
     
         public int Id { get; set; }
@@ -24,5 +25,6 @@ namespace Camozzi.Model.Services
         public string Description { get; set; }
     
         public virtual ICollection<User> Users { get; set; }
+        public virtual ICollection<Project> Projects { get; set; }
     }
 }

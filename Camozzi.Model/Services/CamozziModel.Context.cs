@@ -15,6 +15,8 @@ namespace Camozzi.Model.Services
     
     public partial class CamozziEntities : DbContext
     {
+        private static CamozziEntities configManager;
+
         public CamozziEntities()
             : base("name=CamozziEntities")
         {
@@ -24,7 +26,23 @@ namespace Camozzi.Model.Services
         {
             throw new UnintentionalCodeFirstException();
         }
-    
+
+        public static CamozziEntities GetInstance()
+        {
+            // для исключения возможности создания двух объектов 
+            // при многопоточном приложении
+            if (configManager == null)
+            {
+                lock (typeof(CamozziEntities))
+                {
+                    if (configManager == null)
+                        configManager = new CamozziEntities();
+                }
+            }
+
+            return configManager;
+        }
+
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<Dept> Depts { get; set; }
         public virtual DbSet<Project> Projects { get; set; }

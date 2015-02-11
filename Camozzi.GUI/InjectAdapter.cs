@@ -18,6 +18,11 @@ namespace Camozzi.GUI
             _container.Register<TService, TImplementation>();
         }
 
+        public void RegisterSingletone<TService, TImplementation>() where TImplementation : TService
+        {
+            _container.Register<TService, TImplementation>(new PerContainerLifetime());
+        }
+
         public void Register<TService>()
         {
             _container.Register<TService>();

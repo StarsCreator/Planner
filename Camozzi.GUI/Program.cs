@@ -1,4 +1,5 @@
 ﻿using Camozzi.Model.Repository;
+using Camozzi.Model.Services;
 using Camozzi.Presentation.Injection;
 using Camozzi.Presentation.Presenters;
 using Camozzi.Presentation.Views;
@@ -30,7 +31,13 @@ namespace Camozzi.GUI
                 var controller = new ApplicationController(new InjectAdapter())
                 .RegisterView<ILoginView, Login>()
                 .RegisterView<IMainView, Main>()
+                .RegisterView<IProjectView,ProjectDetail>()
+                .RegisterView<IReclamationView,ReclamationDetail>()
+                .RegisterView<IUserView,UserDetail>()
+                .RegisterSingletoneService<ILog,LogService>()
+                .RegisterService<IReclamationRepository,ReclamationRepository>()
                 .RegisterService<IUserRepository,UserRepository>()
+                .RegisterService<IProjectRepository,ProjectRepository>()
                 .RegisterInstance(new ApplicationContext());
                 controller.Run<LoginPresenter>();
             }

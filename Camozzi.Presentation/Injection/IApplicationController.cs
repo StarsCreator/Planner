@@ -11,6 +11,9 @@ namespace Camozzi.Presentation.Injection
         IApplicationController RegisterService<TService, TImplementation>()
             where TImplementation : class, TService;
 
+        IApplicationController RegisterSingletoneService<TService, TImplementation>()
+            where TImplementation : class, TService;
+
         void Run<TPresenter>()
             where TPresenter : class, IPresenter;
 

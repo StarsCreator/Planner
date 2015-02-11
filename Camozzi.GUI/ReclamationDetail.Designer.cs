@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReclamationDetail));
             this.l14 = new MetroFramework.Controls.MetroLabel();
             this.l10 = new MetroFramework.Controls.MetroLabel();
             this.CancelBtn = new MetroFramework.Controls.MetroButton();
@@ -60,13 +61,17 @@
             this.SolutionCb = new MetroFramework.Controls.MetroCheckBox();
             this.l13 = new MetroFramework.Controls.MetroLabel();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
+            this.fieldId = new MetroFramework.Controls.MetroTextBox();
+            this.btnMng = new MetroFramework.Controls.MetroTile();
+            this.btnUsr = new MetroFramework.Controls.MetroTile();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // l14
             // 
             this.l14.AutoSize = true;
-            this.l14.Location = new System.Drawing.Point(429, 246);
+            this.l14.Location = new System.Drawing.Point(427, 246);
             this.l14.Name = "l14";
             this.l14.Size = new System.Drawing.Size(93, 19);
             this.l14.TabIndex = 35;
@@ -101,7 +106,7 @@
             this.CommentTb.PasswordChar = '\0';
             this.CommentTb.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.CommentTb.SelectedText = "";
-            this.CommentTb.Size = new System.Drawing.Size(250, 239);
+            this.CommentTb.Size = new System.Drawing.Size(250, 261);
             this.CommentTb.Style = MetroFramework.MetroColorStyle.Red;
             this.CommentTb.TabIndex = 31;
             this.CommentTb.UseSelectable = true;
@@ -182,7 +187,7 @@
             this.ManagerCb.ItemHeight = 23;
             this.ManagerCb.Location = new System.Drawing.Point(123, 255);
             this.ManagerCb.Name = "ManagerCb";
-            this.ManagerCb.Size = new System.Drawing.Size(250, 29);
+            this.ManagerCb.Size = new System.Drawing.Size(214, 29);
             this.ManagerCb.Style = MetroFramework.MetroColorStyle.Red;
             this.ManagerCb.TabIndex = 22;
             this.ManagerCb.UseSelectable = true;
@@ -215,7 +220,7 @@
             this.ProductionTb.PasswordChar = '\0';
             this.ProductionTb.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.ProductionTb.SelectedText = "";
-            this.ProductionTb.Size = new System.Drawing.Size(250, 100);
+            this.ProductionTb.Size = new System.Drawing.Size(250, 70);
             this.ProductionTb.Style = MetroFramework.MetroColorStyle.Red;
             this.ProductionTb.TabIndex = 19;
             this.ProductionTb.UseSelectable = true;
@@ -251,7 +256,7 @@
             this.UserCb.ItemHeight = 23;
             this.UserCb.Location = new System.Drawing.Point(526, 85);
             this.UserCb.Name = "UserCb";
-            this.UserCb.Size = new System.Drawing.Size(250, 29);
+            this.UserCb.Size = new System.Drawing.Size(214, 29);
             this.UserCb.Style = MetroFramework.MetroColorStyle.Red;
             this.UserCb.TabIndex = 36;
             this.UserCb.UseSelectable = true;
@@ -382,7 +387,7 @@
             // l13
             // 
             this.l13.AutoSize = true;
-            this.l13.Location = new System.Drawing.Point(429, 225);
+            this.l13.Location = new System.Drawing.Point(429, 221);
             this.l13.Name = "l13";
             this.l13.Size = new System.Drawing.Size(65, 19);
             this.l13.TabIndex = 50;
@@ -392,12 +397,66 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // metroLabel1
+            // 
+            this.metroLabel1.AutoSize = true;
+            this.metroLabel1.Location = new System.Drawing.Point(23, 165);
+            this.metroLabel1.Name = "metroLabel1";
+            this.metroLabel1.Size = new System.Drawing.Size(93, 19);
+            this.metroLabel1.TabIndex = 52;
+            this.metroLabel1.Text = "Номер в базе";
+            // 
+            // fieldId
+            // 
+            this.fieldId.Enabled = false;
+            this.fieldId.Lines = new string[0];
+            this.fieldId.Location = new System.Drawing.Point(123, 161);
+            this.fieldId.MaxLength = 32767;
+            this.fieldId.Name = "fieldId";
+            this.fieldId.PasswordChar = '\0';
+            this.fieldId.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.fieldId.SelectedText = "";
+            this.fieldId.Size = new System.Drawing.Size(250, 23);
+            this.fieldId.Style = MetroFramework.MetroColorStyle.Red;
+            this.fieldId.TabIndex = 51;
+            this.fieldId.UseSelectable = true;
+            // 
+            // btnMng
+            // 
+            this.btnMng.ActiveControl = null;
+            this.btnMng.Location = new System.Drawing.Point(343, 255);
+            this.btnMng.Name = "btnMng";
+            this.btnMng.Size = new System.Drawing.Size(30, 30);
+            this.btnMng.Style = MetroFramework.MetroColorStyle.Red;
+            this.btnMng.TabIndex = 54;
+            this.btnMng.TileImage = ((System.Drawing.Image)(resources.GetObject("btnMng.TileImage")));
+            this.btnMng.TileImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnMng.UseSelectable = true;
+            this.btnMng.UseTileImage = true;
+            // 
+            // btnUsr
+            // 
+            this.btnUsr.ActiveControl = null;
+            this.btnUsr.Location = new System.Drawing.Point(746, 85);
+            this.btnUsr.Name = "btnUsr";
+            this.btnUsr.Size = new System.Drawing.Size(30, 30);
+            this.btnUsr.Style = MetroFramework.MetroColorStyle.Red;
+            this.btnUsr.TabIndex = 53;
+            this.btnUsr.TileImage = ((System.Drawing.Image)(resources.GetObject("btnUsr.TileImage")));
+            this.btnUsr.TileImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnUsr.UseSelectable = true;
+            this.btnUsr.UseTileImage = true;
+            // 
             // ReclamationDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.CancelBtn;
             this.ClientSize = new System.Drawing.Size(805, 566);
+            this.Controls.Add(this.btnMng);
+            this.Controls.Add(this.btnUsr);
+            this.Controls.Add(this.metroLabel1);
+            this.Controls.Add(this.fieldId);
             this.Controls.Add(this.l13);
             this.Controls.Add(this.SolutionCb);
             this.Controls.Add(this.l7);
@@ -473,5 +532,9 @@
         private MetroFramework.Controls.MetroCheckBox SolutionCb;
         private MetroFramework.Controls.MetroLabel l13;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private MetroFramework.Controls.MetroLabel metroLabel1;
+        private MetroFramework.Controls.MetroTextBox fieldId;
+        private MetroFramework.Controls.MetroTile btnMng;
+        private MetroFramework.Controls.MetroTile btnUsr;
     }
 }

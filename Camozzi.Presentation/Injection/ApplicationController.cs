@@ -31,6 +31,13 @@
             return this;
         }
 
+        public IApplicationController RegisterSingletoneService<TModel, TImplementation>()
+        where TImplementation : class, TModel
+        {
+            _container.Register<TModel, TImplementation>();
+            return this;
+        }
+
         public void Run<TPresenter>() where TPresenter : class, IPresenter
         {
             if (!_container.IsRegistered<TPresenter>())

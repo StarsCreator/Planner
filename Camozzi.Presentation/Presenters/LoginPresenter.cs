@@ -23,15 +23,16 @@ namespace Camozzi.Presentation.Presenters
 
         void View_Ok()
         {
-            if (View.Password == ((User)View.UserName).Password)
-            {
+            //if (View.Password == ((User)View.UserName).Password)
+            //{
                 Controller.Run<MainPresenter, User>((User)View.UserName);
                 View.Close();
-            }
-            else
-            {
-                View.ClearPswFld();
-            }
+                //Users.Dispose();
+            //}
+           // else
+           // {
+            //    View.ClearPswFld();
+            //}
         }
     }
 }

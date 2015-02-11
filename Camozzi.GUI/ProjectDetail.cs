@@ -9,15 +9,19 @@ using System.Text;
 using System.Windows.Forms;
 using MetroFramework;
 using Camozzi.Presentation.Injection;
+using Camozzi.Presentation.Views;
 
 namespace Camozzi.GUI
 {
-    public partial class ProjectDetail : MetroForm,IView
+    public partial class ProjectDetail : MetroForm,IProjectView
     {
         public ProjectDetail()
         {
+            InitializeComponent();
             butOk.Click += (sender, args) => Invoke(Ok);
             butCancel.Click += (sender, args) => Invoke(Cancel);
+            btnMng.Click += (sender, args) => Invoke(Mgr);
+            btnUsr.Click += (sender, args) => Invoke(Usr);
         }
 
         public new void Show()
@@ -34,6 +38,8 @@ namespace Camozzi.GUI
 
         public event Action Ok;
         public event Action Cancel;
+        public event Action Mgr;
+        public event Action Usr;
 
         public void SetNameErr()
         {
@@ -60,6 +66,7 @@ namespace Camozzi.GUI
             set
             {
                 NameTb.Text = value;
+                this.Text = value;
             }
         }
         public DateTime Start 
@@ -84,8 +91,42 @@ namespace Camozzi.GUI
                 FinishMdt.Value = value;
             }
         }
-        public int UserId { get; set; }
-        int ManagerId { get; set; }
+        public object SelectedUser 
+        { 
+            get
+            {
+                return userCb.SelectedItem;
+            }
+            set
+            {
+                userCb.SelectedItem = value;
+            }
+        }
+        public object Users 
+        { 
+            set
+            {
+                userCb.DataSource = value;
+            }
+        }
+        public object SelectedManager 
+        { 
+            get
+            {
+                return managerCb.SelectedItem;
+            }
+            set
+            {
+                managerCb.SelectedItem = value;
+            }
+        }
+        public object Managers 
+        { 
+            set
+            {
+                managerCb.DataSource = value;
+            }
+        }
         public int State 
         {
             get

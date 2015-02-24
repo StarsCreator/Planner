@@ -34,7 +34,7 @@ namespace Camozzi.Presentation.Presenters
 
         void View_Cancel()
         {
-            _proj = null;
+            _proj = null;            
             View.Close();
         }
 
@@ -57,16 +57,24 @@ namespace Camozzi.Presentation.Presenters
         {
             _proj = argument;
             _senderUser = senderUser;
+            View.AllowUser = false;
+
             if (_senderUser == _proj.Creator || _senderUser == _proj.User || _senderUser.Account.AllowCreateAll)
             {
                 View.AllowComment = true;
                 View.AllowChange = true;
+                if (_senderUser.Account.AllowCreateAll)
+                {
+                    View.AllowUser = true;
+                }
             }
             else
             {
                 View.AllowComment = _senderUser.Account.AllowCommment;
                 View.AllowChange = false;
+
             }
+
             View.Id = _proj.Id;
             View.Priority = _proj.Priority;
             View.ProjectName = _proj.Name;

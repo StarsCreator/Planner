@@ -1,5 +1,6 @@
 ﻿using Camozzi.Model.Repository;
 using Camozzi.Model.Services;
+using Camozzi.Model.Args;
 using Camozzi.Presentation.Injection;
 using Camozzi.Presentation.Views;
 using System;
@@ -36,9 +37,58 @@ namespace Camozzi.Presentation.Presenters
             View.SelfReclamationsItemDoubleClick += View_SelfReclamationsItemDoubleClick;
             View.TableProjectClick += View_TableProjectClick;
             View.TableReclamationClick += View_TableReclamationClick;
+            View.CreateProject += View_CreateProject;
+            View.DeleteProject += View_DeleteProject;
         }
 
-        void View_TableReclamationClick(object sender, Model.Args.TableClickArgs e)
+        void View_DeleteProject(object sender, TableClickArgs e)
+        {
+            try
+            {
+                Projects.DeleteProject(Projects.FindById(e.Id));
+                View.TableProject = TableService.GetProjectTable(Projects.GetByUser(_mainUser.Id));
+            }
+            catch (Exception ex)
+            {
+                Log.Error("View_DeleteProject", ex.Message);
+            }
+        }
+
+        void View_CreateProject()
+        {
+            try
+            {
+                _updatedProject = new Project()
+
+                {
+                    Start = DateTime.Today,
+                    Finish = DateTime.Today.AddDays(3),
+                    User = _mainUser,
+                    UserId = _mainUser.Id,
+                    Manager = Users.FindByDept(3).First(),
+                    ManagerId = Users.FindByDept(3).First().Id,
+                    Creator = _mainUser,
+                    CreatorId = _mainUser.Id,
+                    CreationDate = DateTime.Today,
+                    Dept = _mainUser.Dept,
+                    DeptId = _mainUser.DeptId,
+                    Comment = "Тут может быть любая информация, касающаяся проекта/задачи/деятельности...",                   
+                    
+                };
+                Controller.Run<ProjectPresenter, Project, User>(_updatedProject, _mainUser);
+                if (_updatedProject.Name != null)
+                {
+                    Projects.CreateProject(_updatedProject);
+                    View.TableProject = TableService.GetProjectTable(Projects.GetByUser(_mainUser.Id));
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error("View_CreateProject", ex.Message);
+            }
+        }
+
+        void View_TableReclamationClick(object sender, TableClickArgs e)
         {
             try
             {
@@ -51,11 +101,11 @@ namespace Camozzi.Presentation.Presenters
             }
             catch (Exception ex)
             {
-                Log.Error("View_TableReclamationClick", ex);
+                Log.Error("View_TableReclamationClick", ex.Message);
             }
         }
 
-        void View_TableProjectClick(object sender, Model.Args.TableClickArgs e)
+        void View_TableProjectClick(object sender, TableClickArgs e)
         {
             try
             {
@@ -68,7 +118,7 @@ namespace Camozzi.Presentation.Presenters
             }
             catch (Exception ex)
             {
-                Log.Error("View_TableProjectClick", ex);
+                Log.Error("View_TableProjectClick", ex.Message);
             }
         }
 
@@ -86,7 +136,7 @@ namespace Camozzi.Presentation.Presenters
             }
             catch (Exception ex)
             {
-                Log.Error("View_AllReclamationsItemDoubleClick", ex);
+                Log.Error("View_SelfReclamationsItemDoubleClick", ex.Message);
             }
         }
 
@@ -103,7 +153,7 @@ namespace Camozzi.Presentation.Presenters
             }
             catch (Exception ex)
             {
-                Log.Error("View_AllProjectsItemDoubleClick", ex);
+                Log.Error("View_SelfProjectsItemDoubleClick", ex.Message);
             }
         }
 
@@ -120,7 +170,7 @@ namespace Camozzi.Presentation.Presenters
             }
             catch (Exception ex)
             {
-                Log.Error("View_AllReclamationsItemDoubleClick", ex);
+                Log.Error("View_AllReclamationsItemDoubleClick", ex.Message);
             }
 
         }
@@ -138,7 +188,7 @@ namespace Camozzi.Presentation.Presenters
             }
             catch(Exception ex)
             {
-                Log.Error("View_AllProjectsItemDoubleClick", ex);
+                Log.Error("View_AllProjectsItemDoubleClick", ex.Message);
             }
         }
 
@@ -186,7 +236,7 @@ namespace Camozzi.Presentation.Presenters
             }
             catch (Exception ex)
             {
-                Log.Error("RecreateProjects", ex);
+                Log.Error("RecreateProjects", ex.Message);
             }
         }
         void ReCreateProjects(DateTime start, DateTime finish)
@@ -225,7 +275,7 @@ namespace Camozzi.Presentation.Presenters
             }
             catch (Exception ex)
             {
-                Log.Error("RecreateProjects", ex);
+                Log.Error("RecreateProjects", ex.Message);
             }
         }
         void ReCreateReclamations(DateTime start, DateTime finish)
@@ -305,7 +355,7 @@ namespace Camozzi.Presentation.Presenters
             }
             catch (Exception ex)
             {
-                Log.Error("RecreateProjects", ex);
+                Log.Error("RecreateProjects", ex.Message);
             }
         }
     }

@@ -49,6 +49,8 @@ namespace Camozzi.Presentation.Views
         object TableReclamation { set; }
         event EventHandler<TableClickArgs> TableProjectClick;
         event EventHandler<TableClickArgs> TableReclamationClick;
+        event EventHandler<TableClickArgs> DeleteProject;
+        event EventHandler<TableClickArgs> DeleteReclamation;
 
         #endregion
 
@@ -66,8 +68,6 @@ namespace Camozzi.Presentation.Views
 
         event Action CreateProject;
         event Action CreateReclamation;
-        event Action DeleteProject;
-        event Action DeeteReclamation;
 
         #endregion
     }

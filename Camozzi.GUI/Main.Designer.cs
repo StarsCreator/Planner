@@ -86,15 +86,6 @@
             this.SelfProjectPlan = new WeekPlanner.CalendarPlanner();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.MetroTableProject = new MetroFramework.Controls.MetroGrid();
-            this.metroContextMenu1 = new MetroFramework.Controls.MetroContextMenu(this.components);
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripMenuItem();
             this.MetroChartProject = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.SelfReclamationTab = new NeoTabControlLibrary.NeoTabPage();
             this.MetroTableReclamation = new MetroFramework.Controls.MetroGrid();
@@ -106,6 +97,10 @@
             this.SelfReclamationEndSet = new MetroFramework.Controls.MetroDateTime();
             this.SelfReclamationPlan = new WeekPlanner.CalendarPlanner();
             this.ReportTab = new NeoTabControlLibrary.NeoTabPage();
+            this.ContextProj = new MetroFramework.Controls.MetroContextMenu(this.components);
+            this.AddProj = new System.Windows.Forms.ToolStripMenuItem();
+            this.EditProj = new System.Windows.Forms.ToolStripMenuItem();
+            this.DeleteProj = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.neoTabWindow1)).BeginInit();
             this.neoTabWindow1.SuspendLayout();
             this.FirstTab.SuspendLayout();
@@ -131,11 +126,11 @@
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MetroTableProject)).BeginInit();
-            this.metroContextMenu1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MetroChartProject)).BeginInit();
             this.SelfReclamationTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MetroTableReclamation)).BeginInit();
             this.metroPanel4.SuspendLayout();
+            this.ContextProj.SuspendLayout();
             this.SuspendLayout();
             // 
             // notifyIcon1
@@ -470,7 +465,7 @@
             this.neoTabWindow3.Location = new System.Drawing.Point(0, 0);
             this.neoTabWindow3.Name = "neoTabWindow3";
             this.neoTabWindow3.RendererName = null;
-            this.neoTabWindow3.SelectedIndex = 0;
+            this.neoTabWindow3.SelectedIndex = 1;
             this.neoTabWindow3.Size = new System.Drawing.Size(1163, 639);
             this.neoTabWindow3.TabIndex = 0;
             // 
@@ -626,6 +621,7 @@
             this.MetroTableProject.AllowUserToAddRows = false;
             this.MetroTableProject.AllowUserToDeleteRows = false;
             this.MetroTableProject.AllowUserToResizeRows = false;
+            this.MetroTableProject.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.MetroTableProject.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.MetroTableProject.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.MetroTableProject.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
@@ -670,68 +666,6 @@
             this.MetroTableProject.Size = new System.Drawing.Size(553, 316);
             this.MetroTableProject.TabIndex = 18;
             // 
-            // metroContextMenu1
-            // 
-            this.metroContextMenu1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1,
-            this.toolStripMenuItem2,
-            this.toolStripMenuItem3,
-            this.toolStripMenuItem4,
-            this.toolStripMenuItem5,
-            this.toolStripMenuItem6,
-            this.toolStripMenuItem7,
-            this.toolStripMenuItem8});
-            this.metroContextMenu1.Name = "metroContextMenu1";
-            this.metroContextMenu1.Size = new System.Drawing.Size(169, 180);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(168, 22);
-            this.toolStripMenuItem1.Text = "toolStripMenuItem1";
-            // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(168, 22);
-            this.toolStripMenuItem2.Text = "toolStripMenuItem2";
-            // 
-            // toolStripMenuItem3
-            // 
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(168, 22);
-            this.toolStripMenuItem3.Text = "toolStripMenuItem3";
-            // 
-            // toolStripMenuItem4
-            // 
-            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(168, 22);
-            this.toolStripMenuItem4.Text = "toolStripMenuItem4";
-            // 
-            // toolStripMenuItem5
-            // 
-            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(168, 22);
-            this.toolStripMenuItem5.Text = "toolStripMenuItem5";
-            // 
-            // toolStripMenuItem6
-            // 
-            this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-            this.toolStripMenuItem6.Size = new System.Drawing.Size(168, 22);
-            this.toolStripMenuItem6.Text = "toolStripMenuItem6";
-            // 
-            // toolStripMenuItem7
-            // 
-            this.toolStripMenuItem7.Name = "toolStripMenuItem7";
-            this.toolStripMenuItem7.Size = new System.Drawing.Size(168, 22);
-            this.toolStripMenuItem7.Text = "toolStripMenuItem7";
-            // 
-            // toolStripMenuItem8
-            // 
-            this.toolStripMenuItem8.Name = "toolStripMenuItem8";
-            this.toolStripMenuItem8.Size = new System.Drawing.Size(168, 22);
-            this.toolStripMenuItem8.Text = "toolStripMenuItem8";
-            // 
             // MetroChartProject
             // 
             chartArea2.Name = "ChartArea1";
@@ -742,9 +676,10 @@
             this.MetroChartProject.Location = new System.Drawing.Point(0, 0);
             this.MetroChartProject.Name = "MetroChartProject";
             series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
             series2.Legend = "Legend1";
             series2.Name = "Series1";
+            series2.YValuesPerPoint = 4;
             this.MetroChartProject.Series.Add(series2);
             this.MetroChartProject.Size = new System.Drawing.Size(520, 316);
             this.MetroChartProject.TabIndex = 19;
@@ -783,11 +718,11 @@
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.MetroTableReclamation.DefaultCellStyle = dataGridViewCellStyle5;
-            this.MetroTableReclamation.Dock = System.Windows.Forms.DockStyle.Right;
+            this.MetroTableReclamation.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MetroTableReclamation.EnableHeadersVisualStyles = false;
             this.MetroTableReclamation.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.MetroTableReclamation.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.MetroTableReclamation.Location = new System.Drawing.Point(325, 300);
+            this.MetroTableReclamation.Location = new System.Drawing.Point(0, 300);
             this.MetroTableReclamation.Name = "MetroTableReclamation";
             this.MetroTableReclamation.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -800,7 +735,7 @@
             this.MetroTableReclamation.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.MetroTableReclamation.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.MetroTableReclamation.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.MetroTableReclamation.Size = new System.Drawing.Size(752, 333);
+            this.MetroTableReclamation.Size = new System.Drawing.Size(1077, 333);
             this.MetroTableReclamation.TabIndex = 12;
             // 
             // metroPanel4
@@ -814,7 +749,7 @@
             this.metroPanel4.HorizontalScrollbarBarColor = true;
             this.metroPanel4.HorizontalScrollbarHighlightOnWheel = false;
             this.metroPanel4.HorizontalScrollbarSize = 10;
-            this.metroPanel4.Location = new System.Drawing.Point(3521, 90);
+            this.metroPanel4.Location = new System.Drawing.Point(1767, 90);
             this.metroPanel4.Name = "metroPanel4";
             this.metroPanel4.Size = new System.Drawing.Size(176, 148);
             this.metroPanel4.TabIndex = 10;
@@ -914,6 +849,36 @@
             this.ReportTab.Text = "Отчеты";
             this.ReportTab.ToolTipText = "neoTabPage1";
             // 
+            // ContextProj
+            // 
+            this.ContextProj.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.AddProj,
+            this.EditProj,
+            this.DeleteProj});
+            this.ContextProj.Name = "metroContextMenu1";
+            this.ContextProj.Size = new System.Drawing.Size(154, 70);
+            // 
+            // AddProj
+            // 
+            this.AddProj.Image = ((System.Drawing.Image)(resources.GetObject("AddProj.Image")));
+            this.AddProj.Name = "AddProj";
+            this.AddProj.Size = new System.Drawing.Size(153, 22);
+            this.AddProj.Text = "Добавить";
+            // 
+            // EditProj
+            // 
+            this.EditProj.Image = ((System.Drawing.Image)(resources.GetObject("EditProj.Image")));
+            this.EditProj.Name = "EditProj";
+            this.EditProj.Size = new System.Drawing.Size(153, 22);
+            this.EditProj.Text = "Редактировать";
+            // 
+            // DeleteProj
+            // 
+            this.DeleteProj.Image = ((System.Drawing.Image)(resources.GetObject("DeleteProj.Image")));
+            this.DeleteProj.Name = "DeleteProj";
+            this.DeleteProj.Size = new System.Drawing.Size(153, 22);
+            this.DeleteProj.Text = "Удалить";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -951,11 +916,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.MetroTableProject)).EndInit();
-            this.metroContextMenu1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.MetroChartProject)).EndInit();
             this.SelfReclamationTab.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.MetroTableReclamation)).EndInit();
             this.metroPanel4.ResumeLayout(false);
+            this.ContextProj.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1013,15 +978,10 @@
         private System.Windows.Forms.SplitContainer splitContainer2;
         private MetroFramework.Controls.MetroGrid MetroTableProject;
         private System.Windows.Forms.DataVisualization.Charting.Chart MetroChartProject;
-        private MetroFramework.Controls.MetroContextMenu metroContextMenu1;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem6;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem7;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem8;
+        private MetroFramework.Controls.MetroContextMenu ContextProj;
+        private System.Windows.Forms.ToolStripMenuItem AddProj;
+        private System.Windows.Forms.ToolStripMenuItem EditProj;
+        private System.Windows.Forms.ToolStripMenuItem DeleteProj;
 
     }
 }

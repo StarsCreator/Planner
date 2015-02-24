@@ -1,14 +1,5 @@
 ﻿using MetroFramework.Forms;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using MetroFramework;
-using Camozzi.Presentation.Injection;
 using Camozzi.Presentation.Views;
 
 namespace Camozzi.GUI
@@ -160,6 +151,10 @@ namespace Camozzi.GUI
             }
         }
 
+        public bool AllowUser
+        {
+            set { userCb.Enabled = value; }
+        }
         public bool AllowChange
         {
             set
@@ -168,7 +163,6 @@ namespace Camozzi.GUI
                 StartMdt.Enabled = value;
                 FinishMdt.Enabled = value;
                 managerCb.Enabled = value;
-                userCb.Enabled = value;
                 StateCb.Enabled = value;
                 PriorityCb.Enabled = value;
             }

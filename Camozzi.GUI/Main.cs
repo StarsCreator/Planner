@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.Remoting.Channels;
 using System.Windows.Forms;
 using Camozzi.Presentation.Views;
 using NeoTabControlLibrary;
@@ -19,6 +20,7 @@ namespace Camozzi.GUI
             neoTabWindow1.Renderer = AddInRendererManager.LoadRenderer("CamozziRenderer");
             neoTabWindow2.Renderer = AddInRendererManager.LoadRenderer("CCleanerRendererVS4");
             neoTabWindow3.Renderer = AddInRendererManager.LoadRenderer("CCleanerRendererVS4");
+
             //AllProjectPlan
             AllProjectPlan.Columns.Add("q1", "Сотрудник", 30);
             AllProjectPlan.CurrentDate = DateTime.Today;
@@ -26,6 +28,7 @@ namespace Camozzi.GUI
             AllProjectLeft.Click += AllProjectLeft_Click;
             AllProjectRight.Click += AllProjectRight_Click;
             AllProjectSetDate.Click += AllProjectSetDate_Click;
+
             //AllReclamationPlan
             AllReclamationPlan.Columns.Add("q1", "Сотрудник", 30);
             AllReclamationPlan.CurrentDate = DateTime.Today;
@@ -33,6 +36,7 @@ namespace Camozzi.GUI
             AllReclamationLeft.Click += AllReclamationLeft_Click;
             AllReclamationRight.Click += AllReclamationRight_Click;
             AllReclamationDateSet.Click += AllReclamationDateSet_Click;
+
             //SelfProjectPlan
             SelfProjectPlan.Columns.Add("q1", "Сотрудник", 30);
             SelfProjectPlan.CurrentDate = DateTime.Today;
@@ -40,6 +44,7 @@ namespace Camozzi.GUI
             SelfProjectRight.Click += SelfProjectRight_Click;
             SelfProjectLeft.Click += SelfProjectLeft_Click;
             SelfProjectSetDate.Click += SelfProjectSetDate_Click;
+
             //SelfReclamationPlan
             SelfReclamationPlan.Columns.Add("q1", "Сотрудник", 30);
             SelfReclamationPlan.CurrentDate = DateTime.Today;
@@ -47,18 +52,58 @@ namespace Camozzi.GUI
             SelfReclamationRight.Click += SelfReclamationRight_Click;
             SelfReclamationLeft.Click += SelfReclamationLeft_Click;
             SelfReclamationDateSet.Click += SelfReclamationDateSet_Click;
+
             //MetroTableProject
             MetroTableProject.CellDoubleClick += MetroTableProject_CellDoubleClick;
+            MetroTableProject.CellMouseDown += MetroTableProject_CellMouseDown;
             MetroTableProject.RowsAdded += MetroTableProject_RowsAdded;
+
             //MetroTableReclamation
             MetroTableReclamation.CellDoubleClick += MetroTableReclamation_CellDoubleClick;
 
+            //ContextProj
+            AddProj.Click += (sender, args) => Invoke(CreateProject);
+            EditProj.Click += EditProj_Click;
+            DeleteProj.Click += DeleteProj_Click;
 
+        }
+
+        void DeleteProj_Click(object sender, EventArgs e)
+        {
+            var c = new TableClickArgs()
+            {
+                Id = (int)MetroTableProject.SelectedRows[0].Cells[0].Value,
+                Name = (string)MetroTableProject.SelectedRows[0].Cells[1].Value
+            };
+            if (DeleteProject != null) DeleteProject(this, c);
+        }
+
+        void EditProj_Click(object sender, EventArgs e)
+        {
+            var c = new TableClickArgs()
+            {
+                Id = (int) MetroTableProject.SelectedRows[0].Cells[0].Value,
+                Name = (string)MetroTableProject.SelectedRows[0].Cells[1].Value
+            };
+            if (TableProjectClick != null) TableProjectClick(this, c);
+        }
+
+        void MetroTableProject_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                MetroTableProject.ClearSelection();
+                MetroTableProject.Rows[e.RowIndex].Selected = true;
+                MetroTableProject.CurrentCell = MetroTableProject[0, e.RowIndex];
+            }
         }
 
         void MetroTableProject_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
-            MetroTableProject.Rows[e.RowIndex].ContextMenuStrip = metroContextMenu1;
+            foreach (DataGridViewRow row in MetroTableProject.Rows)
+            {
+                row.ContextMenuStrip = ContextProj;
+            }
         }
 
         void MetroTableReclamation_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -331,6 +376,8 @@ namespace Camozzi.GUI
         }
         public event EventHandler<TableClickArgs> TableProjectClick;
         public event EventHandler<TableClickArgs> TableReclamationClick;
+        public event EventHandler<TableClickArgs> DeleteProject;
+        public event EventHandler<TableClickArgs> DeleteReclamation;
 
         public object ChartSelfProject
         {
@@ -357,8 +404,6 @@ namespace Camozzi.GUI
 
         public event Action CreateProject;
         public event Action CreateReclamation;
-        public event Action DeleteProject;
-        public event Action DeeteReclamation;
 
         #endregion
 

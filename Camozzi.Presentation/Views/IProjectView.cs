@@ -25,6 +25,7 @@ namespace Camozzi.Presentation.Views
         int Priority { get; set; }
         string Comment { get; set; }
 
+        bool AllowUser { set; }
         bool AllowChange { set; }
         bool AllowComment { set; }
     }

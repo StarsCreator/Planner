@@ -1,16 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using Camozzi.GUI.Properties;
-using MetroFramework.Forms;
-using MetroFramework;
 using Camozzi.Presentation.Views;
+using NeoTabControlLibrary;
 using WeekPlanner;
+using Camozzi.Model.Args;
 
 namespace Camozzi.GUI
 {
@@ -22,26 +15,162 @@ namespace Camozzi.GUI
             _context = context;
             InitializeComponent();
 
-            neoTabWindow1.Renderer = NeoTabControlLibrary.AddInRendererManager.LoadRenderer("CamozziRenderer");
-            neoTabWindow2.Renderer = NeoTabControlLibrary.AddInRendererManager.LoadRenderer("CCleanerRendererVS4");
-            neoTabWindow3.Renderer = NeoTabControlLibrary.AddInRendererManager.LoadRenderer("CCleanerRendererVS4");
+
+            neoTabWindow1.Renderer = AddInRendererManager.LoadRenderer("CamozziRenderer");
+            neoTabWindow2.Renderer = AddInRendererManager.LoadRenderer("CCleanerRendererVS4");
+            neoTabWindow3.Renderer = AddInRendererManager.LoadRenderer("CCleanerRendererVS4");
             //AllProjectPlan
             AllProjectPlan.Columns.Add("q1", "Сотрудник", 30);
             AllProjectPlan.CurrentDate = DateTime.Today;
             AllProjectPlan.ItemDoubleClick += AllProjectPlan_ItemDoubleClick;
+            AllProjectLeft.Click += AllProjectLeft_Click;
+            AllProjectRight.Click += AllProjectRight_Click;
+            AllProjectSetDate.Click += AllProjectSetDate_Click;
             //AllReclamationPlan
             AllReclamationPlan.Columns.Add("q1", "Сотрудник", 30);
             AllReclamationPlan.CurrentDate = DateTime.Today;
             AllReclamationPlan.ItemDoubleClick += AllReclamationPlan_ItemDoubleClick;
+            AllReclamationLeft.Click += AllReclamationLeft_Click;
+            AllReclamationRight.Click += AllReclamationRight_Click;
+            AllReclamationDateSet.Click += AllReclamationDateSet_Click;
             //SelfProjectPlan
             SelfProjectPlan.Columns.Add("q1", "Сотрудник", 30);
             SelfProjectPlan.CurrentDate = DateTime.Today;
             SelfProjectPlan.ItemDoubleClick += SelfProjectPlan_ItemDoubleClick;
+            SelfProjectRight.Click += SelfProjectRight_Click;
+            SelfProjectLeft.Click += SelfProjectLeft_Click;
+            SelfProjectSetDate.Click += SelfProjectSetDate_Click;
             //SelfReclamationPlan
             SelfReclamationPlan.Columns.Add("q1", "Сотрудник", 30);
             SelfReclamationPlan.CurrentDate = DateTime.Today;
             SelfReclamationPlan.ItemDoubleClick += SelfReclamationPlan_ItemDoubleClick;
+            SelfReclamationRight.Click += SelfReclamationRight_Click;
+            SelfReclamationLeft.Click += SelfReclamationLeft_Click;
+            SelfReclamationDateSet.Click += SelfReclamationDateSet_Click;
+            //MetroTableProject
+            MetroTableProject.CellDoubleClick += MetroTableProject_CellDoubleClick;
+            MetroTableProject.RowsAdded += MetroTableProject_RowsAdded;
+            //MetroTableReclamation
+            MetroTableReclamation.CellDoubleClick += MetroTableReclamation_CellDoubleClick;
 
+
+        }
+
+        void MetroTableProject_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            MetroTableProject.Rows[e.RowIndex].ContextMenuStrip = metroContextMenu1;
+        }
+
+        void MetroTableReclamation_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var c = new TableClickArgs()
+            {
+                Id = (int)MetroTableReclamation.Rows[e.RowIndex].Cells[0].Value,
+                Name = (string)MetroTableReclamation.Rows[e.RowIndex].Cells[1].Value
+            };
+            if (TableProjectClick != null) TableProjectClick(this, c);
+        }
+
+        void MetroTableProject_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var c = new TableClickArgs()
+            {
+                Id = (int) MetroTableProject.Rows[e.RowIndex].Cells[0].Value,
+                Name = (string) MetroTableProject.Rows[e.RowIndex].Cells[1].Value
+            };
+            if (TableProjectClick != null) TableProjectClick(this, c);
+        }
+
+        void SelfReclamationDateSet_Click(object sender, EventArgs e)
+        {
+            SelfReclamationsStart = SelfReclamationStartSet.Value;
+            if (SelfReclamationStartSet.Value > SelfReclamationEndSet.Value)
+            {
+                SelfReclamationEndSet.Value = SelfReclamationStartSet.Value.AddDays(9);
+            }
+            TimeSpan tmp = SelfReclamationEndSet.Value - SelfReclamationStartSet.Value;
+            SelfReclamationPlan.DayCount = tmp.Days + 1;
+        }
+
+        void SelfReclamationLeft_Click(object sender, EventArgs e)
+        {
+            SelfReclamationsStart = SelfReclamationsStart.AddDays(-7);
+            SelfReclamationEndSet.Value = SelfReclamationStartSet.Value.AddDays(SelfReclamationPlan.DayCount - 1);
+        }
+
+        void SelfReclamationRight_Click(object sender, EventArgs e)
+        {
+            SelfReclamationsStart = SelfReclamationsStart.AddDays(7);
+            SelfReclamationEndSet.Value = SelfReclamationStartSet.Value.AddDays(SelfReclamationPlan.DayCount - 1);
+        }
+
+        void SelfProjectSetDate_Click(object sender, EventArgs e)
+        {
+            SelfProjectsStart = SelfProjectStartSet.Value;
+            if (SelfProjectStartSet.Value > SelfProjectEndSet.Value)
+            {
+                SelfProjectEndSet.Value = SelfProjectStartSet.Value.AddDays(9);
+            }
+            TimeSpan tmp = SelfProjectEndSet.Value - SelfProjectStartSet.Value;
+            SelfProjectPlan.DayCount = tmp.Days + 1;
+        }
+
+        void SelfProjectLeft_Click(object sender, EventArgs e)
+        {
+            SelfProjectsStart = SelfProjectsStart.AddDays(-7);
+            SelfProjectEndSet.Value = SelfProjectStartSet.Value.AddDays(SelfProjectPlan.DayCount - 1);
+        }
+
+        void SelfProjectRight_Click(object sender, EventArgs e)
+        {
+            SelfProjectsStart = SelfProjectsStart.AddDays(7);
+            SelfProjectEndSet.Value = SelfProjectStartSet.Value.AddDays(SelfProjectPlan.DayCount - 1);
+        }
+
+        void AllReclamationDateSet_Click(object sender, EventArgs e)
+        {
+            AllReclamationsStart = AllReclamationStartSet.Value;
+            if (AllReclamationStartSet.Value > AllReclamationEndSet.Value)
+            {
+                AllReclamationEndSet.Value = AllReclamationStartSet.Value.AddDays(9);
+            }
+            TimeSpan tmp = AllReclamationEndSet.Value - AllReclamationStartSet.Value;
+            AllReclamationPlan.DayCount = tmp.Days + 1;
+        }
+
+        void AllReclamationRight_Click(object sender, EventArgs e)
+        {
+            AllReclamationsStart = AllReclamationsStart.AddDays(7);
+            AllReclamationEndSet.Value = AllReclamationStartSet.Value.AddDays(AllReclamationPlan.DayCount - 1);
+        }
+
+        void AllReclamationLeft_Click(object sender, EventArgs e)
+        {
+            AllReclamationsStart = AllReclamationsStart.AddDays(-7);
+            AllReclamationEndSet.Value = AllReclamationStartSet.Value.AddDays(AllReclamationPlan.DayCount - 1);
+        }
+
+        void AllProjectSetDate_Click(object sender, EventArgs e)
+        {
+            AllProjectsStart = AllProjectStartTimeSet.Value;
+            if (AllProjectStartTimeSet.Value > AllProjectsEndTimeSet.Value)
+            {
+                AllProjectsEndTimeSet.Value = AllProjectStartTimeSet.Value.AddDays(9);
+            }
+            TimeSpan tmp = AllProjectsEndTimeSet.Value - AllProjectStartTimeSet.Value;
+            AllProjectPlan.DayCount = tmp.Days + 1;
+        }
+
+        void AllProjectRight_Click(object sender, EventArgs e)
+        {
+            AllProjectsStart = AllProjectsStart.AddDays(7);
+            AllProjectsEndTimeSet.Value = AllProjectStartTimeSet.Value.AddDays(AllProjectPlan.DayCount - 1);
+        }
+
+        void AllProjectLeft_Click(object sender, EventArgs e)
+        {
+            AllProjectsStart = AllProjectsStart.AddDays(-7);
+            AllProjectsEndTimeSet.Value = AllProjectStartTimeSet.Value.AddDays(AllProjectPlan.DayCount - 1);
         }
 
         void AllReclamationPlan_ItemDoubleClick(object sender, WeekPlannerItemEventArgs e)
@@ -70,6 +199,10 @@ namespace Camozzi.GUI
             base.Show();
         }
 
+        private void Invoke(Action action)
+        {
+            if (action != null) action();
+        }
 
         #region IMainView
 
@@ -77,23 +210,22 @@ namespace Camozzi.GUI
         {
             DataColumns datacolumn = new DataColumns(AllProjectPlan.Calendar);
             datacolumn["q1"].Data.Add(Name);
-            WeekPlannerRow row = new WeekPlannerRow();
-            row.Columns = datacolumn;
+            WeekPlannerRow row = new WeekPlannerRow {Columns = datacolumn};
             return row;
         }
         public WeekPlannerRowCollection AllProjectsRows
         {
             get
-             {
-                 return AllProjectPlan.Rows;
-             }
+            {
+                return AllProjectPlan.Rows;
+            }
         }
         public event EventHandler<WeekPlannerItemEventArgs> AllProjectsItemDoubleClick;//вызов состояния
         public void ClearAllProjects()
         {
-            foreach (WeekPlannerRow _row in AllProjectPlan.Rows)
+            foreach (WeekPlannerRow row in AllProjectPlan.Rows)
             {
-                _row.Items.Clear();
+                row.Items.Clear();
             }
             AllProjectPlan.Rows.Clear();
         }//очистка всего планнера
@@ -114,7 +246,7 @@ namespace Camozzi.GUI
             }
         }//строки и элементы
         public event EventHandler<WeekPlannerItemEventArgs> AllReclamationsItemDoubleClick;//вызов состояния
-        public void ClearAllReclamations() 
+        public void ClearAllReclamations()
         {
             foreach (WeekPlannerRow _row in AllReclamationPlan.Rows)
             {
@@ -152,8 +284,7 @@ namespace Camozzi.GUI
         {
             DataColumns datacolumn = new DataColumns(SelfReclamationPlan.Calendar);
             datacolumn["q1"].Data.Add(Name);
-            WeekPlannerRow row = new WeekPlannerRow();
-            row.Columns = datacolumn;
+            WeekPlannerRow row = new WeekPlannerRow {Columns = datacolumn};
             return row;
         }
         public WeekPlannerRowCollection SelfReclamationsRows
@@ -164,40 +295,172 @@ namespace Camozzi.GUI
             }
         }//строки и элементы
         public event EventHandler<WeekPlannerItemEventArgs> SelfReclamationsItemDoubleClick;//вызов состояния
+
         public void ClearSelfReclamations()
         {
-            foreach (WeekPlannerRow _row in SelfReclamationPlan.Rows)
+            foreach (WeekPlannerRow row in SelfReclamationPlan.Rows)
             {
-                _row.Items.Clear();
+                row.Items.Clear();
             }
             SelfReclamationPlan.Rows.Clear();
         }
 
-        public bool AllowReclamation 
+        public bool AllowReclamation
         {
             set
             {
                 AllReclamationTab.IsSelectable = value;
                 SelfReclamationTab.IsSelectable = value;
 
-            } 
+            }
         }
 
-        public List<Object> TableProject 
+        public object TableProject
         {
             set
             {
-                //TableProjects.DataSource = value;
-            }        
+                MetroTableProject.DataSource = value;
+            }
         }
-        public List<Object> Tablereclamation 
+        public object TableReclamation
         {
             set
             {
-                //TableReclamation.DataSource = value;
-            } 
+                MetroTableReclamation.DataSource = value;
+            }
         }
+        public event EventHandler<TableClickArgs> TableProjectClick;
+        public event EventHandler<TableClickArgs> TableReclamationClick;
+
+        public object ChartSelfProject
+        {
+            set
+            {
+                //MetroChartProject.Series[0].YValueType = ChartValueType.Int32;
+                //MetroChartProject.Series[0].XValueType = ChartValueType.String; 
+                MetroChartProject.DataSource = value;
+                MetroChartProject.Series[0].AxisLabel = "Value";
+                MetroChartProject.Series[0].YValueMembers = "Value";
+                MetroChartProject.Series[0].XValueMember = "State";
+
+            }
+        }
+        public object ChartProject
+        {
+            set
+            {
+                ProjectStat.DataSource = value;
+                ProjectStat.Series[0].YValueMembers = "Value";
+                ProjectStat.Series[0].XValueMember = "State";
+            }
+        }
+
+        public event Action CreateProject;
+        public event Action CreateReclamation;
+        public event Action DeleteProject;
+        public event Action DeeteReclamation;
 
         #endregion
+
+        public DateTime AllProjectsStart
+        {
+            get
+            {
+                return AllProjectPlan.CurrentDate;
+            }
+            set
+            {
+                AllProjectPlan.CurrentDate = value;
+                AllProjectStartTimeSet.Value = value;
+                //AllProjectsEndTimeSet.Value = value.AddDays(AllProjectPlan.DayCount-1);
+            }
+        }
+        public DateTime AllProjectsEnd
+        {
+            get
+            {
+                return AllProjectPlan.CurrentDate.AddDays(AllProjectPlan.DayCount - 1);
+            }
+            set
+            {
+                AllProjectsEndTimeSet.Value = value;
+                AllProjectPlan.DayCount = (value - AllProjectPlan.CurrentDate).Days;
+            }
+        }
+        public DateTime AllReclamationsStart
+        {
+            get
+            {
+                return AllReclamationPlan.CurrentDate;
+            }
+            set
+            {
+                AllReclamationPlan.CurrentDate = value;
+                AllReclamationStartSet.Value = value;
+                //AllReclamationsEndTimeSet.Value = value.AddDays(AllReclamationPlan.DayCount-1);
+            }
+        }
+        public DateTime AllReclamationEnd
+        {
+            get
+            {
+                return AllReclamationPlan.CurrentDate.AddDays(AllReclamationPlan.DayCount - 1);
+            }
+            set
+            {
+                AllReclamationEndSet.Value = value;
+                AllReclamationPlan.DayCount = (value - AllReclamationPlan.CurrentDate).Days;
+            }
+        }
+        public DateTime SelfProjectsStart
+        {
+            get
+            {
+                return SelfProjectPlan.CurrentDate;
+            }
+            set
+            {
+                SelfProjectPlan.CurrentDate = value;
+                SelfProjectStartSet.Value = value;
+                //SelfProjectsEndTimeSet.Value = value.AddDays(SelfProjectPlan.DayCount-1);
+            }
+        }
+        public DateTime SelfProjectsEnd
+        {
+            get
+            {
+                return SelfProjectPlan.CurrentDate.AddDays(SelfProjectPlan.DayCount - 1);
+            }
+            set
+            {
+                SelfProjectEndSet.Value = value;
+                SelfProjectPlan.DayCount = (value - SelfProjectPlan.CurrentDate).Days;
+            }
+        }
+        public DateTime SelfReclamationsStart
+        {
+            get
+            {
+                return SelfReclamationPlan.CurrentDate;
+            }
+            set
+            {
+                SelfReclamationPlan.CurrentDate = value;
+                SelfReclamationStartSet.Value = value;
+                //SelfReclamationsEndTimeSet.Value = value.AddDays(SelfReclamationPlan.DayCount-1);
+            }
+        }
+        public DateTime SelfReclamationEnd
+        {
+            get
+            {
+                return SelfReclamationPlan.CurrentDate.AddDays(SelfReclamationPlan.DayCount - 1);
+            }
+            set
+            {
+                SelfReclamationEndSet.Value = value;
+                SelfReclamationPlan.DayCount = (value - SelfReclamationPlan.CurrentDate).Days;
+            }
+        }
     }
 }

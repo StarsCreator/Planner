@@ -13,7 +13,7 @@ using Camozzi.Presentation.Views;
 
 namespace Camozzi.GUI
 {
-    public partial class ProjectDetail : MetroForm,IProjectView
+    public partial class ProjectDetail : MetroForm, IProjectView
     {
         public ProjectDetail()
         {
@@ -48,18 +48,17 @@ namespace Camozzi.GUI
         public void SetDateErr()
         {
             errorProvider1.SetError(StartMdt, "Некоректная дата");
-        }
-
-        public int Id 
+        }   
+        public int Id
         {
             set
             {
                 IdTB.Text = value.ToString();
             }
         }
-        public string ProjectName 
+        public string ProjectName
         {
-            get 
+            get
             {
                 return NameTb.Text;
             }
@@ -69,7 +68,7 @@ namespace Camozzi.GUI
                 this.Text = value;
             }
         }
-        public DateTime Start 
+        public DateTime Start
         {
             get
             {
@@ -80,7 +79,7 @@ namespace Camozzi.GUI
                 StartMdt.Value = value;
             }
         }
-        public DateTime Finish 
+        public DateTime Finish
         {
             get
             {
@@ -91,8 +90,8 @@ namespace Camozzi.GUI
                 FinishMdt.Value = value;
             }
         }
-        public object SelectedUser 
-        { 
+        public object SelectedUser
+        {
             get
             {
                 return userCb.SelectedItem;
@@ -102,15 +101,15 @@ namespace Camozzi.GUI
                 userCb.SelectedItem = value;
             }
         }
-        public object Users 
-        { 
+        public object Users
+        {
             set
             {
                 userCb.DataSource = value;
             }
         }
-        public object SelectedManager 
-        { 
+        public object SelectedManager
+        {
             get
             {
                 return managerCb.SelectedItem;
@@ -120,14 +119,14 @@ namespace Camozzi.GUI
                 managerCb.SelectedItem = value;
             }
         }
-        public object Managers 
-        { 
+        public object Managers
+        {
             set
             {
                 managerCb.DataSource = value;
             }
         }
-        public int State 
+        public int State
         {
             get
             {
@@ -138,9 +137,9 @@ namespace Camozzi.GUI
                 StateCb.SelectedIndex = value;
             }
         }
-        public int Priority 
+        public int Priority
         {
-            get 
+            get
             {
                 return PriorityCb.SelectedIndex;
             }
@@ -149,7 +148,7 @@ namespace Camozzi.GUI
                 PriorityCb.SelectedIndex = value;
             }
         }
-        public string Comment 
+        public string Comment
         {
             get
             {
@@ -160,6 +159,28 @@ namespace Camozzi.GUI
                 CommentTb.Text = value;
             }
         }
+
+        public bool AllowChange
+        {
+            set
+            {
+                NameTb.Enabled = value;
+                StartMdt.Enabled = value;
+                FinishMdt.Enabled = value;
+                managerCb.Enabled = value;
+                userCb.Enabled = value;
+                StateCb.Enabled = value;
+                PriorityCb.Enabled = value;
+            }
+        }
+        public bool AllowComment 
+        {
+            set
+            {
+                CommentTb.Enabled = value;
+            } 
+        }
+         
         #endregion
     }
 }

@@ -1,9 +1,5 @@
 ﻿using Camozzi.Presentation.Injection;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Camozzi.Presentation.Views
 {
@@ -19,9 +15,9 @@ namespace Camozzi.Presentation.Views
         void SetFinErr();
 
         int Id { set; }
-        System.DateTime Start { get; set; }
-        System.DateTime Finish { get; set; }
-        System.DateTime Send { get; set; }
+        DateTime Start { get; set; }
+        DateTime Finish { get; set; }
+        DateTime Send { get; set; }
         string Production { get; set; }
         string Nomenclature { get; set; }
         object SelectedUser { get; set; }
@@ -35,5 +31,8 @@ namespace Camozzi.Presentation.Views
         bool Solution { get; set; }
         string Client { get; set; }
         string ReclamationAct { get; set; }
+
+        bool AllowChange { set; }
+        bool AllowComment { set; }
     }
 }

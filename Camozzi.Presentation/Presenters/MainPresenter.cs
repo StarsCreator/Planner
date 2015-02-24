@@ -3,28 +3,29 @@ using Camozzi.Model.Services;
 using Camozzi.Presentation.Injection;
 using Camozzi.Presentation.Views;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WeekPlanner;
 
 namespace Camozzi.Presentation.Presenters
 {
     public class MainPresenter: BasePresenter<IMainView,User>
     {
-        User MainUser;  //пользователь
-        Project UpdatedProject;
-        Reclamation UpdatedReclamation;
+        User _mainUser;  //пользователь
+        Project _updatedProject;
+        Reclamation _updatedReclamation;
 
+        protected readonly IChartService ChartService;
+        protected readonly ITableService TableService;
         protected readonly IReclamationRepository Reclamations;
         protected readonly IProjectRepository Projects;
         protected readonly IUserRepository Users;
         protected readonly ILog Log;
 
-        public MainPresenter(IApplicationController controller, IMainView view,ILog log,IProjectRepository projects,IUserRepository users,IReclamationRepository reclamations):base(controller,view)
+        public MainPresenter(IApplicationController controller, IMainView view,ILog log,IProjectRepository projects,IUserRepository users,IReclamationRepository reclamations, ITableService tableService, IChartService chartService):base(controller,view)
         {
             Reclamations = reclamations;
+            TableService = tableService;
+            ChartService = chartService;
             Projects = projects;
             Users = users;
             Log = log;
@@ -33,17 +34,53 @@ namespace Camozzi.Presentation.Presenters
             View.AllReclamationsItemDoubleClick += View_AllReclamationsItemDoubleClick;
             View.SelfProjectsItemDoubleClick += View_SelfProjectsItemDoubleClick;
             View.SelfReclamationsItemDoubleClick += View_SelfReclamationsItemDoubleClick;
+            View.TableProjectClick += View_TableProjectClick;
+            View.TableReclamationClick += View_TableReclamationClick;
+        }
+
+        void View_TableReclamationClick(object sender, Model.Args.TableClickArgs e)
+        {
+            try
+            {
+                _updatedReclamation = Reclamations.FindById(e.Id);
+                if (_updatedReclamation.Nomenclature != "null")
+                {
+                    Reclamations.Update(_updatedReclamation);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error("View_TableReclamationClick", ex);
+            }
+        }
+
+        void View_TableProjectClick(object sender, Model.Args.TableClickArgs e)
+        {
+            try
+            {
+                _updatedProject = Projects.FindById(e.Id);
+                Controller.Run<ProjectPresenter, Project, User>(_updatedProject, _mainUser);
+                if (_updatedProject.Name != "null")
+                {
+                    Projects.Update(_updatedProject);
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error("View_TableProjectClick", ex);
+            }
         }
 
         void View_SelfReclamationsItemDoubleClick(object sender, WeekPlannerItemEventArgs e)
         {
             try
             {
-                UpdatedReclamation = Reclamations.FindByName(e.Item.Subject);
-                Controller.Run<ReclamationPresenter, Reclamation>(UpdatedReclamation);
-                if (UpdatedReclamation.Nomenclature != "null")
+                _updatedReclamation = Reclamations.FindByName(e.Item.Subject);
+                Controller.Run<ReclamationPresenter, Reclamation,User>(_updatedReclamation,_mainUser);
+                if (_updatedReclamation.Nomenclature != "null")
                 {
-                    Reclamations.Update(UpdatedReclamation);
+                    Reclamations.Update(_updatedReclamation);
 
                 }
             }
@@ -57,11 +94,11 @@ namespace Camozzi.Presentation.Presenters
         {
             try
             {
-                UpdatedProject = Projects.FindByName(e.Item.Subject);
-                Controller.Run<ProjectPresenter, Project>(UpdatedProject);
-                if (UpdatedProject.Name != "null")
+                _updatedProject = Projects.FindByName(e.Item.Subject);
+                Controller.Run<ProjectPresenter, Project, User>(_updatedProject,_mainUser);
+                if (_updatedProject.Name != "null")
                 {
-                    Projects.Update(UpdatedProject);
+                    Projects.Update(_updatedProject);
                 }
             }
             catch (Exception ex)
@@ -74,11 +111,10 @@ namespace Camozzi.Presentation.Presenters
         {
             try
             {
-                UpdatedReclamation = Reclamations.FindByName(e.Item.Subject);
-                Controller.Run<ReclamationPresenter,Reclamation>(UpdatedReclamation);
-                if (UpdatedReclamation.Nomenclature != "null")
+                _updatedReclamation = Reclamations.FindByName(e.Item.Subject);
+                if (_updatedReclamation.Nomenclature != "null")
                 {
-                    Reclamations.Update(UpdatedReclamation);
+                    Reclamations.Update(_updatedReclamation);
 
                 }
             }
@@ -93,11 +129,11 @@ namespace Camozzi.Presentation.Presenters
         {
             try
             {
-                UpdatedProject = Projects.FindByName(e.Item.Subject);
-                Controller.Run<ProjectPresenter, Project>(UpdatedProject);
-                if (UpdatedProject.Name != "null")
+                _updatedProject = Projects.FindByName(e.Item.Subject);
+                Controller.Run<ProjectPresenter, Project, User>(_updatedProject,_mainUser);
+                if (_updatedProject.Name != "null")
                 {
-                    Projects.Update(UpdatedProject);
+                    Projects.Update(_updatedProject);
                 }
             }
             catch(Exception ex)
@@ -108,92 +144,58 @@ namespace Camozzi.Presentation.Presenters
 
         public override void Run(User argument)
         {
-            MainUser = argument;
-            View.AllowReclamation = MainUser.Account.AllowReclamation;
+            _mainUser = argument;
+            View.AllowReclamation = _mainUser.Account.AllowReclamation;
             View.Show();
 
+            View.ChartProject = ChartService.GetTable(Projects.GetAll());
+            View.ChartSelfProject = ChartService.GetTable(Projects.GetByUser(_mainUser.Id),_mainUser);
+            View.TableProject = TableService.GetProjectTable(Projects.GetByUser(_mainUser.Id));
             ReCreateSelfProjects(DateTime.Today, DateTime.Today);
             ReCreateProjects(DateTime.Today, DateTime.Today.AddDays(10));
             ReCreateReclamations(DateTime.Today.AddDays(-50), DateTime.Today.AddDays(10));
         }
 
-
-        void ReCreateSelfProjects(DateTime Start,DateTime Finish)
+        void ReCreateSelfProjects(DateTime start,DateTime finish)
         {
             try
             {
                 View.ClearSelfProjects();
-                View.SelfProjectsRows.Add(View.GetNewRowAllProjects(MainUser.Name));
+                View.SelfProjectsRows.Add(View.GetNewRowAllProjects(_mainUser.Name));
 
-                var proj = Projects.GetByUser(MainUser.Id);///////!!!!!!!
+                var proj = Projects.GetByUser(_mainUser.Id);///////!!!!!!!
 
                 foreach (Project _proj in proj)
                 {
-                    WeekPlannerItem Item = new WeekPlannerItem();
-                    Item.StartDate = _proj.Start;
-                    Item.EndDate = _proj.Finish;
-                    Item.Subject = _proj.Name;
-                    Item.Name = _proj.Name;
-                    Item.Tag = _proj;
-                    Item.State = (States)_proj.State;
-                    /*/Item.Context = contextMenuStrip2;
-                    switch (_proj.State)
+                    WeekPlannerItem item = new WeekPlannerItem
                     {
-                        case 0:
-                            {
-                                Item.BackColor = Color.Yellow;
-                                break;
-                            }
-                        case 1:
-                            {
-                                Item.BackColor = Color.LightGreen;
-                                break;
-                            }
-                        case 2:
-                            {
-                                Item.BackColor = Color.DarkGray;
-                                break;
-                            }
-                        case 3:
-                            {
-                                Item.BackColor = Color.GhostWhite;
-                                break;
-                            }
-                        case 4:
-                            {
-                                Item.BackColor = Color.LightSkyBlue;
-                                break;
-                            }
-                        case 5:
-                            {
-                                Item.BackColor = Color.Violet;
-                                break;
-                            }
-                        default:
-                            {
-                                Item.BackColor = Color.GhostWhite;
-                                break;
-                            }
-                    }
-                    if (_proj.Priority == 1) Item.BackColor = Color.LightCoral;
-                    if (_proj.State == 1) Item.BackColor = Color.LightGreen;*/
-                    View.SelfProjectsRows.First().Items.Add(Item);
-                    //_proj.
+                        StartDate = _proj.Start,
+                        EndDate = _proj.Finish,
+                        Subject = _proj.Name,
+                        Name = _proj.Name,
+                        Tag = _proj,
+                        State = (States) _proj.State
+                    };
+
+                    View.SelfProjectsRows.First().Items.Add(item);
+
+
                 }
+
+
             }
             catch (Exception ex)
             {
                 Log.Error("RecreateProjects", ex);
             }
         }
-
-        void ReCreateProjects(DateTime Start, DateTime Finish)
+        void ReCreateProjects(DateTime start, DateTime finish)
         {
             try
             {
                 View.ClearAllProjects();
                 
-                var users = Users.FindByDept(MainUser.DeptId);                        //////!!!!!!!
+                var users = Users.FindByDept(_mainUser.DeptId);                        //////!!!!!!!
                 foreach (User _user in users)
                 {
 
@@ -204,7 +206,7 @@ namespace Camozzi.Presentation.Presenters
                     }
                 }
 
-                var proj = Projects.GetByDateAndDept(Start, Finish, MainUser.DeptId);///////!!!!!!!
+                var proj = Projects.GetByDateAndDept(start, finish, _mainUser.DeptId);///////!!!!!!!
                 
                 
 
@@ -216,51 +218,9 @@ namespace Camozzi.Presentation.Presenters
                     Item.Subject = _proj.Name;
                     Item.Name = _proj.Name;
                     Item.Tag = _proj;
-                    Item.State = (States)_proj.State;
-                    /*/Item.Context = contextMenuStrip2;
-                    switch (_proj.State)
-                    {
-                        case 0:
-                            {
-                                Item.BackColor = Color.Yellow;
-                                break;
-                            }
-                        case 1:
-                            {
-                                Item.BackColor = Color.LightGreen;
-                                break;
-                            }
-                        case 2:
-                            {
-                                Item.BackColor = Color.DarkGray;
-                                break;
-                            }
-                        case 3:
-                            {
-                                Item.BackColor = Color.GhostWhite;
-                                break;
-                            }
-                        case 4:
-                            {
-                                Item.BackColor = Color.LightSkyBlue;
-                                break;
-                            }
-                        case 5:
-                            {
-                                Item.BackColor = Color.Violet;
-                                break;
-                            }
-                        default:
-                            {
-                                Item.BackColor = Color.GhostWhite;
-                                break;
-                            }
-                    }
-                    if (_proj.Priority == 1) Item.BackColor = Color.LightCoral;
-                    if (_proj.State == 1) Item.BackColor = Color.LightGreen;*/
+                    Item.State = (States)_proj.State;                  
                     WeekPlannerRow row = (WeekPlannerRow)_proj.User.AllProjectsRow;
                     row.Items.Add(Item);
-                    //_proj.
                 }
             }
             catch (Exception ex)
@@ -268,7 +228,7 @@ namespace Camozzi.Presentation.Presenters
                 Log.Error("RecreateProjects", ex);
             }
         }
-        void ReCreateReclamations(DateTime Start, DateTime Finish)
+        void ReCreateReclamations(DateTime start, DateTime finish)
         {
             try
             {
@@ -285,7 +245,7 @@ namespace Camozzi.Presentation.Presenters
                     }
                 }
 
-                var proj = Reclamations.GetByDateAndDept(Start, Finish);///////!!!!!!!
+                var proj = Reclamations.GetByDateAndDept(start, finish);///////!!!!!!!
 
 
 
@@ -348,6 +308,5 @@ namespace Camozzi.Presentation.Presenters
                 Log.Error("RecreateProjects", ex);
             }
         }
-
     }
 }

@@ -15,4 +15,9 @@ namespace Camozzi.Presentation.Injection
     {
         void Run(TArg argument);
     }
+
+    public interface IPresenter<in TArg, in TArg2>
+    {
+        void Run(TArg argument, TArg2 argument2);
+    }
 }

@@ -19,5 +19,8 @@ namespace Camozzi.Presentation.Injection
 
         void Run<TPresenter, TArgumnent>(TArgumnent argumnent)
             where TPresenter : class, IPresenter<TArgumnent>;
+
+        void Run<TPresenter, TArgument, TArgument2>(TArgument argument1, TArgument2 argument2)
+            where TPresenter : class, IPresenter<TArgument, TArgument2>;
     }
 }

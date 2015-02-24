@@ -68,7 +68,7 @@
             this.IdTB.PasswordChar = '\0';
             this.IdTB.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.IdTB.SelectedText = "";
-            this.IdTB.Size = new System.Drawing.Size(235, 30);
+            this.IdTB.Size = new System.Drawing.Size(356, 30);
             this.IdTB.Style = MetroFramework.MetroColorStyle.Red;
             this.IdTB.TabIndex = 0;
             this.IdTB.UseSelectable = true;
@@ -82,7 +82,7 @@
             this.NameTb.PasswordChar = '\0';
             this.NameTb.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.NameTb.SelectedText = "";
-            this.NameTb.Size = new System.Drawing.Size(235, 30);
+            this.NameTb.Size = new System.Drawing.Size(356, 30);
             this.NameTb.Style = MetroFramework.MetroColorStyle.Red;
             this.NameTb.TabIndex = 1;
             this.NameTb.UseSelectable = true;
@@ -92,13 +92,13 @@
             this.StartMdt.Location = new System.Drawing.Point(145, 128);
             this.StartMdt.MinimumSize = new System.Drawing.Size(0, 29);
             this.StartMdt.Name = "StartMdt";
-            this.StartMdt.Size = new System.Drawing.Size(235, 29);
+            this.StartMdt.Size = new System.Drawing.Size(356, 29);
             this.StartMdt.Style = MetroFramework.MetroColorStyle.Red;
             this.StartMdt.TabIndex = 2;
             // 
             // butOk
             // 
-            this.butOk.Location = new System.Drawing.Point(224, 470);
+            this.butOk.Location = new System.Drawing.Point(345, 470);
             this.butOk.Name = "butOk";
             this.butOk.Size = new System.Drawing.Size(75, 23);
             this.butOk.TabIndex = 3;
@@ -111,7 +111,7 @@
             this.userCb.ItemHeight = 23;
             this.userCb.Location = new System.Drawing.Point(145, 233);
             this.userCb.Name = "userCb";
-            this.userCb.Size = new System.Drawing.Size(198, 29);
+            this.userCb.Size = new System.Drawing.Size(319, 29);
             this.userCb.Style = MetroFramework.MetroColorStyle.Red;
             this.userCb.TabIndex = 4;
             this.userCb.UseSelectable = true;
@@ -121,7 +121,7 @@
             this.FinishMdt.Location = new System.Drawing.Point(145, 163);
             this.FinishMdt.MinimumSize = new System.Drawing.Size(0, 29);
             this.FinishMdt.Name = "FinishMdt";
-            this.FinishMdt.Size = new System.Drawing.Size(235, 29);
+            this.FinishMdt.Size = new System.Drawing.Size(356, 29);
             this.FinishMdt.Style = MetroFramework.MetroColorStyle.Red;
             this.FinishMdt.TabIndex = 5;
             // 
@@ -139,7 +139,7 @@
             "Командировка"});
             this.StateCb.Location = new System.Drawing.Point(143, 269);
             this.StateCb.Name = "StateCb";
-            this.StateCb.Size = new System.Drawing.Size(237, 29);
+            this.StateCb.Size = new System.Drawing.Size(358, 29);
             this.StateCb.Style = MetroFramework.MetroColorStyle.Red;
             this.StateCb.TabIndex = 6;
             this.StateCb.UseSelectable = true;
@@ -153,7 +153,7 @@
             "Высокий"});
             this.PriorityCb.Location = new System.Drawing.Point(143, 304);
             this.PriorityCb.Name = "PriorityCb";
-            this.PriorityCb.Size = new System.Drawing.Size(237, 29);
+            this.PriorityCb.Size = new System.Drawing.Size(358, 29);
             this.PriorityCb.Style = MetroFramework.MetroColorStyle.Red;
             this.PriorityCb.TabIndex = 7;
             this.PriorityCb.UseSelectable = true;
@@ -213,14 +213,14 @@
             this.CommentTb.PasswordChar = '\0';
             this.CommentTb.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.CommentTb.SelectedText = "";
-            this.CommentTb.Size = new System.Drawing.Size(237, 120);
+            this.CommentTb.Size = new System.Drawing.Size(358, 120);
             this.CommentTb.Style = MetroFramework.MetroColorStyle.Red;
             this.CommentTb.TabIndex = 13;
             this.CommentTb.UseSelectable = true;
             // 
             // butCancel
             // 
-            this.butCancel.Location = new System.Drawing.Point(305, 470);
+            this.butCancel.Location = new System.Drawing.Point(426, 470);
             this.butCancel.Name = "butCancel";
             this.butCancel.Size = new System.Drawing.Size(75, 23);
             this.butCancel.TabIndex = 14;
@@ -264,7 +264,7 @@
             this.managerCb.ItemHeight = 23;
             this.managerCb.Location = new System.Drawing.Point(145, 198);
             this.managerCb.Name = "managerCb";
-            this.managerCb.Size = new System.Drawing.Size(198, 29);
+            this.managerCb.Size = new System.Drawing.Size(319, 29);
             this.managerCb.Style = MetroFramework.MetroColorStyle.Red;
             this.managerCb.TabIndex = 18;
             this.managerCb.UseSelectable = true;
@@ -298,7 +298,7 @@
             // btnUsr
             // 
             this.btnUsr.ActiveControl = null;
-            this.btnUsr.Location = new System.Drawing.Point(349, 233);
+            this.btnUsr.Location = new System.Drawing.Point(469, 233);
             this.btnUsr.Name = "btnUsr";
             this.btnUsr.Size = new System.Drawing.Size(30, 30);
             this.btnUsr.Style = MetroFramework.MetroColorStyle.Red;
@@ -311,7 +311,7 @@
             // btnMng
             // 
             this.btnMng.ActiveControl = null;
-            this.btnMng.Location = new System.Drawing.Point(350, 198);
+            this.btnMng.Location = new System.Drawing.Point(470, 198);
             this.btnMng.Name = "btnMng";
             this.btnMng.Size = new System.Drawing.Size(30, 30);
             this.btnMng.Style = MetroFramework.MetroColorStyle.Red;
@@ -325,7 +325,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(399, 504);
+            this.ClientSize = new System.Drawing.Size(510, 504);
             this.Controls.Add(this.btnMng);
             this.Controls.Add(this.btnUsr);
             this.Controls.Add(this.metroLabel11);

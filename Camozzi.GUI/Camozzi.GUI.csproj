@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Camozzi.GUI</RootNamespace>
-    <AssemblyName>Camozzi.GUI</AssemblyName>
+    <AssemblyName>CamozziClient</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <PublishUrl>publish\</PublishUrl>
@@ -46,6 +46,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>ProductIcon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.dll</HintPath>
@@ -68,7 +71,7 @@
       <HintPath>..\..\CamozziClientOTK\packages\MetroModernUI.1.3.0.0\lib\net\MetroFramework.Fonts.dll</HintPath>
     </Reference>
     <Reference Include="NeoTabControlLibrary">
-      <HintPath>..\packages\NeoTabControlLibrary\NeoTabControlLibrary.dll</HintPath>
+      <HintPath>..\..\..\..\..\Downloads\NeoTabControlLibrary_src\NeoTabControlLibrary\bin\Debug\NeoTabControlLibrary.dll</HintPath>
     </Reference>
     <Reference Include="NeoTabControlLibrary.CommonObjects">
       <HintPath>..\packages\NeoTabControlLibrary\NeoTabControlLibrary.CommonObjects.dll</HintPath>
@@ -208,6 +211,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ProductIcon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

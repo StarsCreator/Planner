@@ -4,10 +4,7 @@ using Camozzi.Presentation.Injection;
 using Camozzi.Presentation.Presenters;
 using Camozzi.Presentation.Views;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Camozzi.GUI
@@ -35,6 +32,8 @@ namespace Camozzi.GUI
                 .RegisterView<IReclamationView,ReclamationDetail>()
                 .RegisterView<IUserView,UserDetail>()
                 .RegisterSingletoneService<ILog,LogService>()
+                .RegisterService<ITableService,TableService>()
+                .RegisterService<IChartService,ChartService>()
                 .RegisterService<IReclamationRepository,ReclamationRepository>()
                 .RegisterService<IUserRepository,UserRepository>()
                 .RegisterService<IProjectRepository,ProjectRepository>()

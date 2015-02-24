@@ -231,6 +231,34 @@ namespace Camozzi.GUI
             }
         }
 
+        public bool AllowChange
+        {
+            set
+            {
+                ReclamationTb.Enabled = value;
+                StartMdt.Enabled = value;
+                CheckedMdt.Enabled = value;
+                SendMDt.Enabled = value;
+                NomenclatureTb.Enabled = value;
+                ProductionTb.Enabled = value;
+                fieldId.Enabled = value;
+                CountTb.Enabled = value;
+                ManagerCb.Enabled = value;
+                ClientTb.Enabled = value;
+                ActTb.Enabled = value;
+                UserCb.Enabled = value;
+                StatusCb.Enabled = value;
+                SolutionCb.Enabled = value;
+            }
+        }
+        public bool AllowComment
+        {
+            set
+            {
+                CommentTb.Enabled = value;
+            }
+        }
+
         #endregion
     }
 }

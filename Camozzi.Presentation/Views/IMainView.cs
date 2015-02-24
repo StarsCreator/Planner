@@ -1,10 +1,6 @@
-﻿using Camozzi.Model.Services;
-using Camozzi.Presentation.Injection;
+﻿using Camozzi.Presentation.Injection;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Camozzi.Model.Args;
 using WeekPlanner;
 
 namespace Camozzi.Presentation.Views
@@ -47,12 +43,31 @@ namespace Camozzi.Presentation.Views
 
         #endregion
 
-        bool AllowReclamation { set; }
-
         #region Tables
 
-        List<Object> TableProject { set; }
-        List<Object> Tablereclamation { set; }
+        object TableProject { set; }
+        object TableReclamation { set; }
+        event EventHandler<TableClickArgs> TableProjectClick;
+        event EventHandler<TableClickArgs> TableReclamationClick;
+
+        #endregion
+
+        #region Charts
+
+        object ChartProject { set; }
+        object ChartSelfProject { set; }
+
+
+        #endregion
+
+        #region Common
+
+        bool AllowReclamation { set; }
+
+        event Action CreateProject;
+        event Action CreateReclamation;
+        event Action DeleteProject;
+        event Action DeeteReclamation;
 
         #endregion
     }

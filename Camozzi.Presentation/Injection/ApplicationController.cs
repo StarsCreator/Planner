@@ -56,5 +56,14 @@
             presenter.Run(argumnent);
         }
 
+        public void Run<TPresenter, TArgument, TArgument2>(TArgument argument1, TArgument2 argument2) where TPresenter : class, IPresenter<TArgument, TArgument2>
+        {
+            if (!_container.IsRegistered<TPresenter>())
+                _container.Register<TPresenter>();
+
+            var presenter = _container.Resolve<TPresenter>();
+            presenter.Run(argument1,argument2);
+        }
+
     }
 }

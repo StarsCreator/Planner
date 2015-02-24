@@ -2,17 +2,13 @@
 using Camozzi.Model.Services;
 using Camozzi.Presentation.Injection;
 using Camozzi.Presentation.Views;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Camozzi.Presentation.Presenters
 {
-    public class ProjectPresenter : BasePresenter<IProjectView,Project>
+    public class ProjectPresenter : BasePresenter<IProjectView,Project,User>
     {
-        Project Proj;
+        Project _proj;
+        User _senderUser;
         protected readonly IUserRepository Users;
 
         public ProjectPresenter(IApplicationController controller, IProjectView view, IUserRepository users)
@@ -38,39 +34,50 @@ namespace Camozzi.Presentation.Presenters
 
         void View_Cancel()
         {
-            Proj = null;
+            _proj = null;
             View.Close();
         }
 
         void View_Ok()
         {
-            Proj.Name = View.ProjectName;
-            Proj.Priority = View.Priority;
-            Proj.Start = View.Start;
-            Proj.Finish = View.Finish;
-            Proj.Manager = (User)View.SelectedManager;
-            Proj.User = (User)View.SelectedUser;
-            Proj.UserId = Proj.User.Id;
-            Proj.ManagerId = Proj.Manager.Id;
-            Proj.State = View.State;
-            Proj.Comment = View.Comment;
+            _proj.Name = View.ProjectName;
+            _proj.Priority = View.Priority;
+            _proj.Start = View.Start;
+            _proj.Finish = View.Finish;
+            _proj.Manager = (User)View.SelectedManager;
+            _proj.User = (User)View.SelectedUser;
+            _proj.UserId = _proj.User.Id;
+            _proj.ManagerId = _proj.Manager.Id;
+            _proj.State = View.State;
+            _proj.Comment = View.Comment;
             View.Close();
         }
 
-        public override void Run(Project argument)
+        public override void Run(Project argument,User senderUser)
         {
-            Proj = argument;
-            View.Id = Proj.Id;
-            View.Priority = Proj.Priority;
-            View.ProjectName = Proj.Name;
-            View.Start = Proj.Start;
-            View.State = Proj.State;
-            View.Finish = Proj.Finish;
-            View.Comment = Proj.Comment;
-            View.Managers = Users.FindByDept(Proj.Manager.DeptId);
-            View.SelectedManager = Proj.Manager;
-            View.Users = Users.FindByDept(Proj.User.DeptId);
-            View.SelectedUser = Proj.User;
+            _proj = argument;
+            _senderUser = senderUser;
+            if (_senderUser == _proj.Creator || _senderUser == _proj.User || _senderUser.Account.AllowCreateAll)
+            {
+                View.AllowComment = true;
+                View.AllowChange = true;
+            }
+            else
+            {
+                View.AllowComment = _senderUser.Account.AllowCommment;
+                View.AllowChange = false;
+            }
+            View.Id = _proj.Id;
+            View.Priority = _proj.Priority;
+            View.ProjectName = _proj.Name;
+            View.Start = _proj.Start;
+            View.State = _proj.State;
+            View.Finish = _proj.Finish;
+            View.Comment = _proj.Comment;
+            View.Managers = Users.FindByDept(_proj.Manager.DeptId);
+            View.SelectedManager = _proj.Manager;
+            View.Users = Users.FindByDept(_proj.User.DeptId);
+            View.SelectedUser = _proj.User;
             View.Show();
         }
     }

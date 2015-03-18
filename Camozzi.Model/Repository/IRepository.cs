@@ -1,9 +1,5 @@
-﻿using Camozzi.Model.Services;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Camozzi.Model.Repository
 {
@@ -16,5 +12,7 @@ namespace Camozzi.Model.Repository
         void Add(T t);
         void Delete(T t);
         void Update(T t);
+        void UpdateContext();
+        void Dispose();
     }
 }

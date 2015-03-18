@@ -21,7 +21,7 @@ namespace Camozzi.Model.Services
             : base("name=CamozziEntities")
         {
         }
-    
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
@@ -43,6 +43,15 @@ namespace Camozzi.Model.Services
             return configManager;
         }
 
+        public static void UpdateInstance()
+        {
+            lock (typeof(CamozziEntities))
+            {
+                if (configManager != null)
+                    configManager = new CamozziEntities();
+            }
+        }
+    
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<Dept> Depts { get; set; }
         public virtual DbSet<Project> Projects { get; set; }

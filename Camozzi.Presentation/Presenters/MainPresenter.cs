@@ -47,6 +47,8 @@ namespace Camozzi.Presentation.Presenters
             {
                 Projects.DeleteProject(Projects.FindById(e.Id));
                 View.TableProject = TableService.GetProjectTable(Projects.GetByUser(_mainUser.Id));
+                ReCreateSelfProjects(DateTime.Today,DateTime.Today);
+                ReCreateProjects(DateTime.Today,DateTime.Today.AddDays(10));
             }
             catch (Exception ex)
             {
@@ -80,6 +82,8 @@ namespace Camozzi.Presentation.Presenters
                 {
                     Projects.CreateProject(_updatedProject);
                     View.TableProject = TableService.GetProjectTable(Projects.GetByUser(_mainUser.Id));
+                    ReCreateSelfProjects(DateTime.Today, DateTime.Today);
+                    ReCreateProjects(DateTime.Today, DateTime.Today.AddDays(10));
                 }
             }
             catch (Exception ex)
@@ -149,6 +153,8 @@ namespace Camozzi.Presentation.Presenters
                 if (_updatedProject.Name != "null")
                 {
                     Projects.Update(_updatedProject);
+                    ReCreateSelfProjects(DateTime.Today, DateTime.Today);
+                    ReCreateProjects(DateTime.Today, DateTime.Today.AddDays(10));
                 }
             }
             catch (Exception ex)
@@ -184,6 +190,8 @@ namespace Camozzi.Presentation.Presenters
                 if (_updatedProject.Name != "null")
                 {
                     Projects.Update(_updatedProject);
+                    ReCreateSelfProjects(DateTime.Today, DateTime.Today);
+                    ReCreateProjects(DateTime.Today, DateTime.Today.AddDays(10));
                 }
             }
             catch(Exception ex)
@@ -198,9 +206,10 @@ namespace Camozzi.Presentation.Presenters
             View.AllowReclamation = _mainUser.Account.AllowReclamation;
             View.Show();
 
-            View.ChartProject = ChartService.GetTable(Projects.GetAll());
+            View.ChartProject = ChartService.GetTable(Projects.GetAll().ToList());
             View.ChartSelfProject = ChartService.GetTable(Projects.GetByUser(_mainUser.Id),_mainUser);
             View.TableProject = TableService.GetProjectTable(Projects.GetByUser(_mainUser.Id));
+
             ReCreateSelfProjects(DateTime.Today, DateTime.Today);
             ReCreateProjects(DateTime.Today, DateTime.Today.AddDays(10));
             ReCreateReclamations(DateTime.Today.AddDays(-50), DateTime.Today.AddDays(10));
@@ -239,6 +248,7 @@ namespace Camozzi.Presentation.Presenters
                 Log.Error("RecreateProjects", ex.Message);
             }
         }
+
         void ReCreateProjects(DateTime start, DateTime finish)
         {
             try
@@ -246,13 +256,13 @@ namespace Camozzi.Presentation.Presenters
                 View.ClearAllProjects();
                 
                 var users = Users.FindByDept(_mainUser.DeptId);                        //////!!!!!!!
-                foreach (User _user in users)
+                foreach (User user in users)
                 {
 
-                    if (_user.Account.AllowRow)
+                    if (user.Account.AllowRow)
                     {
-                        _user.AllProjectsRow = View.GetNewRowAllProjects(_user.Name);
-                        View.AllProjectsRows.Add((WeekPlannerRow)_user.AllProjectsRow);
+                        user.AllProjectsRow = View.GetNewRowAllProjects(user.Name);
+                        View.AllProjectsRows.Add((WeekPlannerRow)user.AllProjectsRow);
                     }
                 }
 
@@ -262,15 +272,18 @@ namespace Camozzi.Presentation.Presenters
 
                 foreach (Project _proj in proj)
                 {
-                    WeekPlannerItem Item = new WeekPlannerItem();
-                    Item.StartDate = _proj.Start;
-                    Item.EndDate = _proj.Finish;
-                    Item.Subject = _proj.Name;
-                    Item.Name = _proj.Name;
-                    Item.Tag = _proj;
-                    Item.State = (States)_proj.State;                  
+                    WeekPlannerItem item = new WeekPlannerItem
+                    {
+                        StartDate = _proj.Start,
+                        EndDate = _proj.Finish,
+                        Subject = _proj.Name,
+                        Name = _proj.Name,
+                        Tag = _proj,
+                        State = (States) _proj.State
+                    };
+
                     WeekPlannerRow row = (WeekPlannerRow)_proj.User.AllProjectsRow;
-                    row.Items.Add(Item);
+                    row.Items.Add(item);
                 }
             }
             catch (Exception ex)
@@ -278,6 +291,7 @@ namespace Camozzi.Presentation.Presenters
                 Log.Error("RecreateProjects", ex.Message);
             }
         }
+
         void ReCreateReclamations(DateTime start, DateTime finish)
         {
             try
@@ -285,13 +299,13 @@ namespace Camozzi.Presentation.Presenters
                 View.ClearAllReclamations();
 
                 var users = Users.FindByDept(2);                        //////!!!!!!!
-                foreach (User _user in users)
+                foreach (User user in users)
                 {
 
-                    if (_user.Account.AllowRow)
+                    if (user.Account.AllowRow)
                     {
-                        _user.AllReclamationsRow = View.GetNewRowAllProjects(_user.Name);
-                        View.AllReclamationsRows.Add((WeekPlannerRow)_user.AllReclamationsRow);
+                        user.AllReclamationsRow = View.GetNewRowAllProjects(user.Name);
+                        View.AllReclamationsRows.Add((WeekPlannerRow)user.AllReclamationsRow);
                     }
                 }
 
@@ -307,48 +321,7 @@ namespace Camozzi.Presentation.Presenters
                     Item.Subject = _proj.Nomenclature;
                     Item.Name = _proj.Nomenclature;
                     Item.Tag = _proj;
-                    Item.State = (States)_proj.State;
-                    /*/Item.Context = contextMenuStrip2;
-                    switch (_proj.State)
-                    {
-                        case 0:
-                            {
-                                Item.BackColor = Color.Yellow;
-                                break;
-                            }
-                        case 1:
-                            {
-                                Item.BackColor = Color.LightGreen;
-                                break;
-                            }
-                        case 2:
-                            {
-                                Item.BackColor = Color.DarkGray;
-                                break;
-                            }
-                        case 3:
-                            {
-                                Item.BackColor = Color.GhostWhite;
-                                break;
-                            }
-                        case 4:
-                            {
-                                Item.BackColor = Color.LightSkyBlue;
-                                break;
-                            }
-                        case 5:
-                            {
-                                Item.BackColor = Color.Violet;
-                                break;
-                            }
-                        default:
-                            {
-                                Item.BackColor = Color.GhostWhite;
-                                break;
-                            }
-                    }
-                    if (_proj.Priority == 1) Item.BackColor = Color.LightCoral;
-                    if (_proj.State == 1) Item.BackColor = Color.LightGreen;*/
+                    Item.State = (States)_proj.State;                  
                     WeekPlannerRow row = (WeekPlannerRow)_proj.User.AllReclamationsRow;
                     row.Items.Add(Item);
                 }
@@ -358,5 +331,6 @@ namespace Camozzi.Presentation.Presenters
                 Log.Error("RecreateProjects", ex.Message);
             }
         }
+
     }
 }

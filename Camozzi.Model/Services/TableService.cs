@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using Camozzi.Model.DataService;
 
 namespace Camozzi.Model.Services
 {

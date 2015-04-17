@@ -1,6 +1,5 @@
 ﻿using Camozzi.Presentation.Injection;
 using System;
-using Camozzi.Model.Args;
 using WeekPlanner;
 
 namespace Camozzi.Presentation.Views
@@ -9,7 +8,7 @@ namespace Camozzi.Presentation.Views
     {
         #region AllProjectsPlan
 
-        WeekPlannerRow GetNewRowAllProjects (string Name);
+        WeekPlannerRow GetNewRowAllProjects (string name);
         WeekPlannerRowCollection AllProjectsRows { get; }//строки и элементы
         event EventHandler<WeekPlannerItemEventArgs> AllProjectsItemDoubleClick;//вызов состояния
         void ClearAllProjects();//очистка всего планнера
@@ -18,7 +17,7 @@ namespace Camozzi.Presentation.Views
 
         #region AllReclamationsPlan
 
-        WeekPlannerRow GetNewRowAllReclamations(string Name);
+        WeekPlannerRow GetNewRowAllReclamations(string name);
         WeekPlannerRowCollection AllReclamationsRows { get; }//строки и элементы
         event EventHandler<WeekPlannerItemEventArgs> AllReclamationsItemDoubleClick;//вызов состояния
         void ClearAllReclamations();//очистка всего планнера
@@ -27,7 +26,7 @@ namespace Camozzi.Presentation.Views
 
         #region SelfProjectsPlan
 
-        WeekPlannerRow GetNewRowSelfProjects(string Name);
+        WeekPlannerRow GetNewRowSelfProjects(string name);
         WeekPlannerRowCollection SelfProjectsRows { get; }//строки и элементы
         event EventHandler<WeekPlannerItemEventArgs> SelfProjectsItemDoubleClick;//вызов состояния
         void ClearSelfProjects();//очистка всего планнера
@@ -36,7 +35,7 @@ namespace Camozzi.Presentation.Views
 
         #region SelfReclamationsPlan
 
-        WeekPlannerRow GetNewRowSelfReclamations(string Name);
+        WeekPlannerRow GetNewRowSelfReclamations(string name);
         WeekPlannerRowCollection SelfReclamationsRows { get; }//строки и элементы
         event EventHandler<WeekPlannerItemEventArgs> SelfReclamationsItemDoubleClick;//вызов состояния
         void ClearSelfReclamations();//очистка всего планнера
@@ -47,10 +46,10 @@ namespace Camozzi.Presentation.Views
 
         object TableProject { set; }
         object TableReclamation { set; }
-        event EventHandler<TableClickArgs> TableProjectClick;
-        event EventHandler<TableClickArgs> TableReclamationClick;
-        event EventHandler<TableClickArgs> DeleteProject;
-        event EventHandler<TableClickArgs> DeleteReclamation;
+        event Action<int> TableProjectClick;
+        event Action<int> TableReclamationClick;
+        event Action<int> DeleteProject;
+        event Action<int> DeleteReclamation;
 
         #endregion
 

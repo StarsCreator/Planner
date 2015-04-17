@@ -18,7 +18,7 @@ namespace Camozzi.GUI
         static void Main()
         {
             bool onlyInstance;
-            Mutex q = new Mutex(true, "CamozziClient", out onlyInstance);
+            new Mutex(true, "CamozziClient", out onlyInstance);
             if (onlyInstance)
             {
                 Application.EnableVisualStyles();
@@ -34,18 +34,15 @@ namespace Camozzi.GUI
                 .RegisterSingletoneService<ILog,LogService>()
                 .RegisterService<ITableService,TableService>()
                 .RegisterService<IChartService,ChartService>()
-                .RegisterService<IReclamationRepository,ReclamationRepository>()
-                .RegisterService<IUserRepository,UserRepository>()
-                .RegisterService<IProjectRepository,ProjectRepository>()
+                .RegisterSingletoneService<IReclamationRepository, ReclamationRepository>()
+                .RegisterSingletoneService<IUserRepository, UserRepository>()
+                .RegisterSingletoneService<IProjectRepository, ProjectRepository>()
                 .RegisterInstance(new ApplicationContext());
                 controller.Run<LoginPresenter>();
             }
             else
             {
-                MessageBox.Show(
-                   "Приложение уже запущено",
-                   "CamozziClient",
-                   MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show(@"Приложение уже запущено",@"CamozziClient",MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
         }
     }

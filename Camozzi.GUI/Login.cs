@@ -1,13 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Camozzi.GUI.Properties;
 using MetroFramework.Forms;
 using Camozzi.Presentation.Views;
 
@@ -41,13 +33,14 @@ namespace Camozzi.GUI
             set
             {
                 UsR.DataSource = value;
+                //UsR.DisplayMember = 
             }
         }
-        public object UserName 
+        public string UserName 
         {
             get
             {
-                return UsR.SelectedItem;
+                return UsR.SelectedItem.ToString();
             }
         }
         public string Password 
@@ -60,7 +53,7 @@ namespace Camozzi.GUI
 
         public void ClearPswFld()
         {
-            Psw.Text = "";
+            Psw.Text = String.Empty;
         }
         #endregion
     }

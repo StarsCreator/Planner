@@ -1,4 +1,5 @@
-﻿using Camozzi.Model.Repository;
+﻿using Camozzi.Model.DataService;
+using Camozzi.Model.Repository;
 using Camozzi.Model.Services;
 using Camozzi.Presentation.Injection;
 using Camozzi.Presentation.Views;
@@ -46,8 +47,8 @@ namespace Camozzi.Presentation.Presenters
             _rec.Production = View.Production;
             _rec.Nomenclature = View.Nomenclature;
             _rec.Manager = (User)View.SelectedManager;
-            _rec.User = (User)View.SelectedUser;
-            _rec.UserId = _rec.User.Id;
+            _rec.Worker = (User)View.SelectedUser;
+            _rec.UserId = _rec.Worker.Id;
             _rec.ManagerId = _rec.Manager.Id;
             _rec.Act = View.Act;
             _rec.Count = View.Count;
@@ -63,7 +64,7 @@ namespace Camozzi.Presentation.Presenters
         {
             _rec = argument;
             _senderUser = senderUser;
-            if (_senderUser == _rec.Creator || _senderUser == _rec.User || _senderUser.Account.AllowCreateAll)
+            if (_senderUser == _rec.Creator || _senderUser == _rec.Worker || _senderUser.Account.AllowCreateAll)
             {
                 View.AllowComment = true;
                 View.AllowChange = true;
@@ -80,8 +81,8 @@ namespace Camozzi.Presentation.Presenters
             View.Nomenclature = _rec.Nomenclature;
             View.Managers = Users.FindByDept(_rec.Manager.DeptId);
             View.SelectedManager = _rec.Manager;
-            View.Users = Users.FindByDept(_rec.User.Id);
-            View.SelectedUser = _rec.User;
+            View.Users = Users.FindByDept(_rec.Worker.Id);
+            View.SelectedUser = _rec.Worker;
             View.Act = _rec.Act;
             View.Count = _rec.Count;
             View.State = _rec.State;

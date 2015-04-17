@@ -1,0 +1,346 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="CService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="NetTcpBinding_ICService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1">
+        </msb:BinaryEncoding>
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256>
+                </sp:Basic256>
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict>
+                </sp:Strict>
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing>
+        </wsaw:UsingAddressing>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/DataController.DTO_Model" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ICService_GetProjects_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetProjects" />
+  </wsdl:message>
+  <wsdl:message name="ICService_GetProjects_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetProjectsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICService_AddReclamation_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddReclamation" />
+  </wsdl:message>
+  <wsdl:message name="ICService_AddReclamation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddReclamationResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICService_DeleteReclamation_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteReclamation" />
+  </wsdl:message>
+  <wsdl:message name="ICService_DeleteReclamation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteReclamationResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICService_UpdateReclamation_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateReclamation" />
+  </wsdl:message>
+  <wsdl:message name="ICService_UpdateReclamation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateReclamationResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICService_GetByDateReclamation_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetByDateReclamation" />
+  </wsdl:message>
+  <wsdl:message name="ICService_GetByDateReclamation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetByDateReclamationResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICService_AddUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddUser" />
+  </wsdl:message>
+  <wsdl:message name="ICService_AddUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICService_DeleteUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteUser" />
+  </wsdl:message>
+  <wsdl:message name="ICService_DeleteUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICService_UpdateUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUser" />
+  </wsdl:message>
+  <wsdl:message name="ICService_UpdateUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICService_AddProject_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddProject" />
+  </wsdl:message>
+  <wsdl:message name="ICService_AddProject_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddProjectResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICService_DeleteProject_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteProject" />
+  </wsdl:message>
+  <wsdl:message name="ICService_DeleteProject_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteProjectResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICService_GetUsers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUsers" />
+  </wsdl:message>
+  <wsdl:message name="ICService_GetUsers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUsersResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICService_CheckPassword_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckPassword" />
+  </wsdl:message>
+  <wsdl:message name="ICService_CheckPassword_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckPasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICService_GetReclamations_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetReclamations" />
+  </wsdl:message>
+  <wsdl:message name="ICService_GetReclamations_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetReclamationsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICService_GetByDateAndDeptProject_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetByDateAndDeptProject" />
+  </wsdl:message>
+  <wsdl:message name="ICService_GetByDateAndDeptProject_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetByDateAndDeptProjectResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICService_UpdateProject_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateProject" />
+  </wsdl:message>
+  <wsdl:message name="ICService_UpdateProject_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateProjectResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ICService">
+    <wsdl:operation name="GetProjects">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICService/GetProjects" message="tns:ICService_GetProjects_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICService/GetProjectsResponse" message="tns:ICService_GetProjects_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddReclamation">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICService/AddReclamation" message="tns:ICService_AddReclamation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICService/AddReclamationResponse" message="tns:ICService_AddReclamation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteReclamation">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICService/DeleteReclamation" message="tns:ICService_DeleteReclamation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICService/DeleteReclamationResponse" message="tns:ICService_DeleteReclamation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateReclamation">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICService/UpdateReclamation" message="tns:ICService_UpdateReclamation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICService/UpdateReclamationResponse" message="tns:ICService_UpdateReclamation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetByDateReclamation">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICService/GetByDateReclamation" message="tns:ICService_GetByDateReclamation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICService/GetByDateReclamationResponse" message="tns:ICService_GetByDateReclamation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICService/AddUser" message="tns:ICService_AddUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICService/AddUserResponse" message="tns:ICService_AddUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICService/DeleteUser" message="tns:ICService_DeleteUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICService/DeleteUserResponse" message="tns:ICService_DeleteUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICService/UpdateUser" message="tns:ICService_UpdateUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICService/UpdateUserResponse" message="tns:ICService_UpdateUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddProject">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICService/AddProject" message="tns:ICService_AddProject_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICService/AddProjectResponse" message="tns:ICService_AddProject_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteProject">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICService/DeleteProject" message="tns:ICService_DeleteProject_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICService/DeleteProjectResponse" message="tns:ICService_DeleteProject_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUsers">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICService/GetUsers" message="tns:ICService_GetUsers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICService/GetUsersResponse" message="tns:ICService_GetUsers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckPassword">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICService/CheckPassword" message="tns:ICService_CheckPassword_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICService/CheckPasswordResponse" message="tns:ICService_CheckPassword_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReclamations">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICService/GetReclamations" message="tns:ICService_GetReclamations_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICService/GetReclamationsResponse" message="tns:ICService_GetReclamations_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetByDateAndDeptProject">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICService/GetByDateAndDeptProject" message="tns:ICService_GetByDateAndDeptProject_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICService/GetByDateAndDeptProjectResponse" message="tns:ICService_GetByDateAndDeptProject_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateProject">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICService/UpdateProject" message="tns:ICService_UpdateProject_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICService/UpdateProjectResponse" message="tns:ICService_UpdateProject_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="NetTcpBinding_ICService" type="tns:ICService">
+    <wsp:PolicyReference URI="#NetTcpBinding_ICService_policy">
+    </wsp:PolicyReference>
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="GetProjects">
+      <soap12:operation soapAction="http://tempuri.org/ICService/GetProjects" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddReclamation">
+      <soap12:operation soapAction="http://tempuri.org/ICService/AddReclamation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteReclamation">
+      <soap12:operation soapAction="http://tempuri.org/ICService/DeleteReclamation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateReclamation">
+      <soap12:operation soapAction="http://tempuri.org/ICService/UpdateReclamation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetByDateReclamation">
+      <soap12:operation soapAction="http://tempuri.org/ICService/GetByDateReclamation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUser">
+      <soap12:operation soapAction="http://tempuri.org/ICService/AddUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUser">
+      <soap12:operation soapAction="http://tempuri.org/ICService/DeleteUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUser">
+      <soap12:operation soapAction="http://tempuri.org/ICService/UpdateUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddProject">
+      <soap12:operation soapAction="http://tempuri.org/ICService/AddProject" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteProject">
+      <soap12:operation soapAction="http://tempuri.org/ICService/DeleteProject" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUsers">
+      <soap12:operation soapAction="http://tempuri.org/ICService/GetUsers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckPassword">
+      <soap12:operation soapAction="http://tempuri.org/ICService/CheckPassword" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReclamations">
+      <soap12:operation soapAction="http://tempuri.org/ICService/GetReclamations" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetByDateAndDeptProject">
+      <soap12:operation soapAction="http://tempuri.org/ICService/GetByDateAndDeptProject" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateProject">
+      <soap12:operation soapAction="http://tempuri.org/ICService/UpdateProject" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CService">
+    <wsdl:port name="NetTcpBinding_ICService" binding="tns:NetTcpBinding_ICService">
+      <soap12:address location="net.tcp://localhost:4533/CServer.CService" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:4533/CServer.CService</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Upn>ШаталовАА@CAMOZZI-CHSH.local</Upn>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

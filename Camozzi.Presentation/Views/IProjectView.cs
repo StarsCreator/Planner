@@ -1,5 +1,6 @@
 ﻿using Camozzi.Presentation.Injection;
 using System;
+using System.Collections.Generic;
 
 namespace Camozzi.Presentation.Views
 {
@@ -17,10 +18,10 @@ namespace Camozzi.Presentation.Views
         string ProjectName { get; set; }
         DateTime Start { get; set; }
         DateTime Finish { get; set; }
-        object SelectedUser { get; set; }
-        object Users { set; }
-        object SelectedManager { get; set; }
-        object Managers { set; }
+        string SelectedUser { get; set; }
+        List<string> Users { set; }
+        string SelectedManager { get; set; }
+        List<string> Managers { set; }
         int State { get; set; }
         int Priority { get; set; }
         string Comment { get; set; }

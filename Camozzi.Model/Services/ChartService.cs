@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using Camozzi.Model.DataService;
 
 namespace Camozzi.Model.Services
 {

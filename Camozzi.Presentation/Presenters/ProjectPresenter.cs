@@ -1,5 +1,6 @@
-﻿using Camozzi.Model.Repository;
-using Camozzi.Model.Services;
+﻿using System.Linq;
+using Camozzi.Model.DataService;
+using Camozzi.Model.Repository;
 using Camozzi.Presentation.Injection;
 using Camozzi.Presentation.Views;
 
@@ -9,12 +10,12 @@ namespace Camozzi.Presentation.Presenters
     {
         Project _proj;
         User _senderUser;
-        protected readonly IUserRepository Users;
+        private readonly IUserRepository _users;
 
         public ProjectPresenter(IApplicationController controller, IProjectView view, IUserRepository users)
             : base(controller, view)
         {
-             Users = users;
+             _users = users;
 
              View.Ok += View_Ok;
              View.Cancel += View_Cancel;
@@ -24,17 +25,17 @@ namespace Camozzi.Presentation.Presenters
 
         void View_Usr()
         {
-            Controller.Run<UserPresenter, User>((User)View.SelectedUser);
+            Controller.Run<UserPresenter, User>(_users.FindByName(View.SelectedUser));
         }
 
         void View_Mgr()
         {
-            Controller.Run<UserPresenter, User>((User)View.SelectedManager);
+            Controller.Run<UserPresenter, User>(_users.FindByName(View.SelectedManager));
         }
 
         void View_Cancel()
         {
-            _proj = null;            
+            _proj.AllowChanges = false;            
             View.Close();
         }
 
@@ -44,12 +45,13 @@ namespace Camozzi.Presentation.Presenters
             _proj.Priority = View.Priority;
             _proj.Start = View.Start;
             _proj.Finish = View.Finish;
-            _proj.Manager = (User)View.SelectedManager;
-            _proj.User = (User)View.SelectedUser;
-            _proj.UserId = _proj.User.Id;
+            _proj.Manager = _users.FindByName(View.SelectedManager);
+            _proj.Worker = _users.FindByName(View.SelectedUser);
+            _proj.UserId = _proj.Worker.Id;
             _proj.ManagerId = _proj.Manager.Id;
             _proj.State = View.State;
             _proj.Comment = View.Comment;
+            _proj.AllowChanges = true;
             View.Close();
         }
 
@@ -59,7 +61,7 @@ namespace Camozzi.Presentation.Presenters
             _senderUser = senderUser;
             View.AllowUser = false;
 
-            if (_senderUser == _proj.Creator || _senderUser == _proj.User || _senderUser.Account.AllowCreateAll)
+            if (_senderUser.Id == _proj.Creator.Id || _senderUser.Id == _proj.Worker.Id || _senderUser.Account.AllowCreateAll)
             {
                 View.AllowComment = true;
                 View.AllowChange = true;
@@ -82,10 +84,10 @@ namespace Camozzi.Presentation.Presenters
             View.State = _proj.State;
             View.Finish = _proj.Finish;
             View.Comment = _proj.Comment;
-            View.Managers = Users.FindByDept(_proj.Manager.DeptId);
-            View.SelectedManager = _proj.Manager;
-            View.Users = Users.FindByDept(_proj.User.DeptId);
-            View.SelectedUser = _proj.User;
+            View.Managers = _users.GetAll().Where(user=>user.DeptId == 3 ).Select(user => user.Name).ToList();
+            View.SelectedManager = _users.FindById(_proj.Manager.Id).Name;
+            View.Users = _users.GetAll().Where(user=>user.DeptId == _senderUser.DeptId ).Select(user => user.Name).ToList();
+            View.SelectedUser =_users.FindById(_proj.Worker.Id).Name;
             View.Show();
         }
     }

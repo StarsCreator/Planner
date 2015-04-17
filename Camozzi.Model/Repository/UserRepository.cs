@@ -1,35 +1,73 @@
-﻿using Camozzi.Model.Services;
-using System;
+﻿using System.ServiceModel;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Camozzi.Model.DataService;
 
 namespace Camozzi.Model.Repository
 {
-    public class UserRepository : RepositoryBase<User>, IUserRepository
+    public class UserRepository : IUserRepository
     {
-        public override User FindByName(string name)
+
+        public UserRepository()
         {
-            return _context.Users.First(x => x.Name.Contains(name));
+            UpdateUsers();
         }
 
-        public override void Update(User t)
+        private List<User> _users = new List<User>();
+
+        public List<User> GetAll()
         {
-            _context.Users.Attach(t);
-            var entry = _context.Entry(t);
-            entry.Property(e => e.Name).IsModified = true;
-            entry.Property(e => e.Password).IsModified = true;
-            entry.Property(e => e.Phone).IsModified = true;
-            entry.Property(e => e.Mail).IsModified = true;
-            entry.Property(e => e.Comment).IsModified = true;
-            _context.SaveChanges();
+            return _users;
         }
 
         public List<User> FindByDept(int id)
         {
-                IQueryable<User> users = (from us in _context.Users where us.DeptId == id select us);
-                return users.ToList();
+            return (from user in _users where user.DeptId == id select user).ToList();
+        }
+
+        public User FindById(int id)
+        {
+            return _users.Find(x => x.Id == id);
+        }
+
+        public User FindByName(string name)
+        {
+            return _users.Find(x => x.Name.Contains(name));
+        }
+
+        public void Add(User t)
+        {
+            using (var client = new CServiceClient("NetTcpBinding_ICService"))
+            {
+                client.AddUserAsync(t);
+                UpdateUsers();
+            }
+        }
+
+        public void Delete(User t)
+        {
+            using (var client = new CServiceClient("NetTcpBinding_ICService"))
+            {
+                client.DeleteUserAsync(t);
+                UpdateUsers();
+            }
+        }
+
+        public void Update(User t)
+        {
+            using (var client = new CServiceClient("NetTcpBinding_ICService"))
+            {
+                client.UpdateUserAsync(t);
+                UpdateUsers();
+            }
+        }
+
+        private void UpdateUsers()
+        {
+            using (var client = new CServiceClient("NetTcpBinding_ICService"))
+            {
+                _users = client.GetUsers().ToList();
+            }
         }
     }
 }

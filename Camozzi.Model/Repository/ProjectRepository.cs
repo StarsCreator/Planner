@@ -1,97 +1,114 @@
-﻿using Camozzi.Model.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Camozzi.Model.DataService;
 
 namespace Camozzi.Model.Repository
 {
-    public class ProjectRepository: RepositoryBase<Project>,IProjectRepository
+    public class ProjectRepository:IProjectRepository
     {
-        public override Project FindByName(string name)
+
+        public ProjectRepository()
         {
-            return _context.Projects.First(x => x.Name == name);
+            UpdateProjects();
         }
 
-        public List<Project> GetByDateAndDept(DateTime start, DateTime finish, int deptid)
+        private List<Project> _projects = new List<Project>(); 
+
+        public List<Project> GetAll()
         {
-            var proj = (from pr in _context.Projects 
+            return _projects;
+        }
+
+        public IEnumerable<Project> GetByDateAndDept(DateTime start, DateTime finish, int deptid)
+        {
+            //TODO: update query
+            return (from pr in _projects
                     //where pr.Start>Start 
-                       where pr.Finish<finish
-                       where pr.DeptId==deptid select pr).ToList();
-            return proj;
-        }
-
-        public List<Project> GetAllByName(string name)
-        {
-            var proj = (from pr in _context.Projects
-                        where pr.Name.Contains(name)
-                        select pr).ToList();
-            return proj;
+                    where pr.Finish < finish
+                    where pr.DeptId == deptid
+                    select pr).ToList();
         }
 
         public List<Project> GetByUser(int id)
         {
-            var proj = (from pr in _context.Projects
-                        where pr.UserId == id
-                        select pr).ToList();
-            return proj;
+            return (from pr in _projects
+                    where pr.UserId == id
+                    select pr).ToList();
         }
 
         public List<Project> GetByManager(int id)
         {
-            var proj = (from pr in _context.Projects
-                        where pr.ManagerId == id
-                        select pr).ToList();
-            return proj;
+            return (from pr in _projects
+                    where pr.ManagerId == id
+                    select pr).ToList();
         }
-        
-        public override void Update(Project t)
+
+        public List<Project> GetAllByName(string name)
         {
-            _context.Projects.Attach(t);
-            var entry = _context.Entry(t);
-            entry.Property(e => e.Name).IsModified = true;
-            entry.Property(e => e.Start).IsModified = true;
-            entry.Property(e => e.Finish).IsModified = true;
-            entry.Property(e => e.UserId).IsModified = true;
-            entry.Property(e => e.ManagerId).IsModified = true;
-            entry.Property(e => e.Comment).IsModified = true;
-            entry.Property(e => e.Priority).IsModified = true;
-            entry.Property(e => e.State).IsModified = true;
-            _context.SaveChanges();
+            return (from pr in _projects
+                    where pr.Name.Contains(name)
+                    select pr).ToList();
         }
 
         public int GetCountByState(int state)
         {
-            int proj = (from pr in _context.Projects
-                        where pr.State == state
-                        select pr).Count();
-            return proj;
+            return (from pr in _projects
+                    where pr.State == state
+                    select pr).Count();
         }
 
-        public int GetCountByStateAndUser(int state,int userId)
+        public int GetCountByStateAndUser(int state, int userId)
         {
-            int proj = (from pr in _context.Projects
-                        where pr.UserId == userId
-                        where pr.State == state
-                        select pr).Count();
-            return proj;
+            return (from pr in _projects
+                    where pr.UserId == userId
+                    where pr.State == state
+                    select pr).Count();
         }
 
-        public void CreateProject(Project project)
+        public Project FindById(int id)
         {
-            _context.Projects.Add(project);
-            _context.SaveChanges();
+            return _projects.Find(x => x.Id == id);
         }
 
-        public void DeleteProject(Project project)
+        public Project FindByName(string name)
         {
-            _context.Projects.Remove(project);
-            _context.SaveChanges();
+            return _projects.Find(x => x.Name == name);
         }
 
-        public override void UpdateContext()
+        public void Add(Project t)
         {
-            base.UpdateContext();
+            using (var client = new CServiceClient("NetTcpBinding_ICService"))
+            {
+                client.AddProject(t);
+                UpdateProjects();
+            }
+        }
+
+        public void Delete(Project t)
+        {
+            using (var client = new CServiceClient("NetTcpBinding_ICService"))
+            {
+                client.DeleteProject(t);
+                UpdateProjects();
+            }
+        }
+
+        public void Update(Project t)
+        {
+            using (var client = new CServiceClient("NetTcpBinding_ICService"))
+            {
+                client.UpdateProject(t);
+                UpdateProjects();
+            }
+        }
+
+        private void UpdateProjects()
+        {
+            using (var client = new CServiceClient("NetTcpBinding_ICService"))
+            {
+                _projects = client.GetProjects().ToList();
+            }
         }
     }
 }

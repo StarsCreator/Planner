@@ -6,10 +6,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Camozzi.Model.DataService;
 
 namespace Camozzi.Presentation.Presenters
 {
-    public class UserPresenter : BasePresenter<IUserView, User>
+    public class UserPresenter : BasePresenter<IUserView, User>, IPresenter<User>
     {
         User user;
         public UserPresenter(IApplicationController controller, IUserView view)

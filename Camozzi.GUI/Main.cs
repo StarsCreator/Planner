@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Runtime.Remoting.Channels;
 using System.Windows.Forms;
 using Camozzi.Presentation.Views;
 using NeoTabControlLibrary;
 using WeekPlanner;
-using Camozzi.Model.Args;
 
 namespace Camozzi.GUI
 {
@@ -63,6 +61,7 @@ namespace Camozzi.GUI
 
             //ContextProj
             AddProj.Click += (sender, args) => Invoke(CreateProject);
+            addNewProj.Click += (sender, args) => Invoke(CreateProject);
             EditProj.Click += EditProj_Click;
             DeleteProj.Click += DeleteProj_Click;
 
@@ -70,32 +69,21 @@ namespace Camozzi.GUI
 
         void DeleteProj_Click(object sender, EventArgs e)
         {
-            var c = new TableClickArgs()
-            {
-                Id = (int)MetroTableProject.SelectedRows[0].Cells[0].Value,
-                Name = (string)MetroTableProject.SelectedRows[0].Cells[1].Value
-            };
-            if (DeleteProject != null) DeleteProject(this, c);
+            if (DeleteProject != null) DeleteProject((int)MetroTableProject.SelectedRows[0].Cells[0].Value);
         }
 
         void EditProj_Click(object sender, EventArgs e)
         {
-            var c = new TableClickArgs()
-            {
-                Id = (int) MetroTableProject.SelectedRows[0].Cells[0].Value,
-                Name = (string)MetroTableProject.SelectedRows[0].Cells[1].Value
-            };
-            if (TableProjectClick != null) TableProjectClick(this, c);
+            if (TableProjectClick != null) TableProjectClick((int)MetroTableProject.SelectedRows[0].Cells[0].Value);
         }
 
         void MetroTableProject_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right)
-            {
-                MetroTableProject.ClearSelection();
-                MetroTableProject.Rows[e.RowIndex].Selected = true;
-                MetroTableProject.CurrentCell = MetroTableProject[0, e.RowIndex];
-            }
+            if (e.Button != MouseButtons.Right) return;
+            if (e.RowIndex == -1) return;
+            MetroTableProject.ClearSelection();
+            MetroTableProject.Rows[e.RowIndex].Selected = true;
+            MetroTableProject.CurrentCell = MetroTableProject[0, e.RowIndex];
         }
 
         void MetroTableProject_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
@@ -108,22 +96,14 @@ namespace Camozzi.GUI
 
         void MetroTableReclamation_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            var c = new TableClickArgs()
-            {
-                Id = (int)MetroTableReclamation.Rows[e.RowIndex].Cells[0].Value,
-                Name = (string)MetroTableReclamation.Rows[e.RowIndex].Cells[1].Value
-            };
-            if (TableProjectClick != null) TableProjectClick(this, c);
+            if (e.RowIndex == -1) return;
+            if (TableProjectClick != null) TableProjectClick((int)MetroTableProject.SelectedRows[0].Cells[0].Value);
         }
 
         void MetroTableProject_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            var c = new TableClickArgs()
-            {
-                Id = (int) MetroTableProject.Rows[e.RowIndex].Cells[0].Value,
-                Name = (string) MetroTableProject.Rows[e.RowIndex].Cells[1].Value
-            };
-            if (TableProjectClick != null) TableProjectClick(this, c);
+            if (e.RowIndex == -1) return;
+            if (TableProjectClick != null) TableProjectClick((int)MetroTableProject.SelectedRows[0].Cells[0].Value);
         }
 
         void SelfReclamationDateSet_Click(object sender, EventArgs e)
@@ -251,10 +231,10 @@ namespace Camozzi.GUI
 
         #region IMainView
 
-        public WeekPlannerRow GetNewRowAllProjects(string Name)
+        public WeekPlannerRow GetNewRowAllProjects(string name)
         {
             DataColumns datacolumn = new DataColumns(AllProjectPlan.Calendar);
-            datacolumn["q1"].Data.Add(Name);
+            datacolumn["q1"].Data.Add(name);
             WeekPlannerRow row = new WeekPlannerRow {Columns = datacolumn};
             return row;
         }
@@ -275,12 +255,11 @@ namespace Camozzi.GUI
             AllProjectPlan.Rows.Clear();
         }//очистка всего планнера
 
-        public WeekPlannerRow GetNewRowAllReclamations(string Name)
+        public WeekPlannerRow GetNewRowAllReclamations(string name)
         {
-            DataColumns datacolumn = new DataColumns(AllReclamationPlan.Calendar);
-            datacolumn["q1"].Data.Add(Name);
-            WeekPlannerRow row = new WeekPlannerRow();
-            row.Columns = datacolumn;
+            var datacolumn = new DataColumns(AllReclamationPlan.Calendar);
+            datacolumn["q1"].Data.Add(name);
+            var row = new WeekPlannerRow {Columns = datacolumn};
             return row;
         }
         public WeekPlannerRowCollection AllReclamationsRows
@@ -293,19 +272,18 @@ namespace Camozzi.GUI
         public event EventHandler<WeekPlannerItemEventArgs> AllReclamationsItemDoubleClick;//вызов состояния
         public void ClearAllReclamations()
         {
-            foreach (WeekPlannerRow _row in AllReclamationPlan.Rows)
+            foreach (var row in AllReclamationPlan.Rows)
             {
-                _row.Items.Clear();
+                row.Items.Clear();
             }
             AllReclamationPlan.Rows.Clear();
         }
 
-        public WeekPlannerRow GetNewRowSelfProjects(string Name)
+        public WeekPlannerRow GetNewRowSelfProjects(string name)
         {
-            DataColumns datacolumn = new DataColumns(SelfProjectPlan.Calendar);
-            datacolumn["q1"].Data.Add(Name);
-            WeekPlannerRow row = new WeekPlannerRow();
-            row.Columns = datacolumn;
+            var datacolumn = new DataColumns(SelfProjectPlan.Calendar);
+            datacolumn["q1"].Data.Add(name);
+            var row = new WeekPlannerRow {Columns = datacolumn};
             return row;
         }
         public WeekPlannerRowCollection SelfProjectsRows
@@ -318,17 +296,17 @@ namespace Camozzi.GUI
         public event EventHandler<WeekPlannerItemEventArgs> SelfProjectsItemDoubleClick;//вызов состояния
         public void ClearSelfProjects()
         {
-            foreach (WeekPlannerRow _row in SelfProjectPlan.Rows)
+            foreach (var row in SelfProjectPlan.Rows)
             {
-                _row.Items.Clear();
+                row.Items.Clear();
             }
             SelfProjectPlan.Rows.Clear();
         }//очистка всего планнера
 
-        public WeekPlannerRow GetNewRowSelfReclamations(string Name)
+        public WeekPlannerRow GetNewRowSelfReclamations(string name)
         {
             DataColumns datacolumn = new DataColumns(SelfReclamationPlan.Calendar);
-            datacolumn["q1"].Data.Add(Name);
+            datacolumn["q1"].Data.Add(name);
             WeekPlannerRow row = new WeekPlannerRow {Columns = datacolumn};
             return row;
         }
@@ -374,10 +352,11 @@ namespace Camozzi.GUI
                 MetroTableReclamation.DataSource = value;
             }
         }
-        public event EventHandler<TableClickArgs> TableProjectClick;
-        public event EventHandler<TableClickArgs> TableReclamationClick;
-        public event EventHandler<TableClickArgs> DeleteProject;
-        public event EventHandler<TableClickArgs> DeleteReclamation;
+
+        public event Action<int> TableProjectClick;
+        public event Action<int> TableReclamationClick;
+        public event Action<int> DeleteProject;
+        public event Action<int> DeleteReclamation;
 
         public object ChartSelfProject
         {
@@ -417,7 +396,6 @@ namespace Camozzi.GUI
             {
                 AllProjectPlan.CurrentDate = value;
                 AllProjectStartTimeSet.Value = value;
-                //AllProjectsEndTimeSet.Value = value.AddDays(AllProjectPlan.DayCount-1);
             }
         }
         public DateTime AllProjectsEnd

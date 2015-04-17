@@ -1,70 +1,98 @@
-﻿using Camozzi.Model.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Camozzi.Model.DataService;
 
 namespace Camozzi.Model.Repository
 {
-    public class ReclamationRepository : RepositoryBase<Reclamation>, IReclamationRepository
+    public class ReclamationRepository : IReclamationRepository
     {
-        public override Reclamation FindByName(string name)
+        private List<Reclamation> _reclamations = new List<Reclamation>();
+
+        public ReclamationRepository()
         {
-            return _context.Reclamations.Where(x => x.Nomenclature == name).First();
+            UpdateReclamations();
         }
 
-        public List<Reclamation> GetByDateAndDept(DateTime Start, DateTime Finish)
+        public List<Reclamation> GetAll()
         {
-            var proj = (from rec in _context.Reclamations
-                        where rec.Start>Start 
-                        where rec.Finish < Finish
-                        select rec).ToList();
-            return proj;
+            return _reclamations;
         }
 
-        public List<Reclamation> GetAllByName(string name)
+        public IEnumerable<Reclamation> GetByDateAndDept(DateTime start, DateTime finish)
         {
-            var proj = (from rec in _context.Reclamations
-                        where rec.Nomenclature.Contains(name)
-                        select rec).ToList();
-            return proj;
+            return (from rec in _reclamations
+                    where rec.Start > start
+                    where rec.Finish < finish
+                    select rec).ToList();
         }
 
         public List<Reclamation> GetByUser(int id)
         {
-            var proj = (from pr in _context.Reclamations
-                        where pr.UserId == id
-                        select pr).ToList();
-            return proj;
+            return (from pr in _reclamations
+                    where pr.UserId == id
+                    select pr).ToList();
         }
 
         public List<Reclamation> GetByManager(int id)
         {
-            var proj = (from pr in _context.Reclamations
-                        where pr.ManagerId == id
-                        select pr).ToList();
-            return proj;
+            return (from pr in _reclamations
+                    where pr.ManagerId == id
+                    select pr).ToList();
         }
 
-        public override void Update(Reclamation t)
+        public List<Reclamation> GetAllByName(string name)
         {
-            _context.Reclamations.Attach(t);
-            var entry = _context.Entry(t);
-            entry.Property(e => e.Act).IsModified = true;
-            entry.Property(e => e.Count).IsModified = true;
-            entry.Property(e => e.Nomenclature).IsModified = true;
-            entry.Property(e => e.ReclamationAct).IsModified = true;
-            entry.Property(e => e.Send).IsModified = true;
-            entry.Property(e => e.Start).IsModified = true;
-            entry.Property(e => e.Finish).IsModified = true;
-            entry.Property(e => e.Solution).IsModified = true;
-            entry.Property(e => e.UserId).IsModified = true;
-            entry.Property(e => e.ManagerId).IsModified = true;
-            entry.Property(e => e.Comment).IsModified = true;
-            entry.Property(e => e.Production).IsModified = true;
-            entry.Property(e => e.State).IsModified = true;
-            _context.SaveChanges();
+            return (from rec in _reclamations
+                    where rec.Nomenclature.Contains(name)
+                    select rec).ToList();
         }
+
+        public Reclamation FindById(int id)
+        {
+            return _reclamations.Find(x => x.Id == id);
+        }
+
+        public Reclamation FindByName(string name)
+        {
+            return _reclamations.Find(x => x.Nomenclature.Contains(name));
+        }
+
+        public void Add(Reclamation t)
+        {
+            using (var client = new CServiceClient("NetTcpBinding_ICService"))
+            {
+                client.AddReclamationAsync(t);
+                UpdateReclamations();
+            }
+        }
+
+        public void Delete(Reclamation t)
+        {
+            using (var client = new CServiceClient("NetTcpBinding_ICService"))
+            {
+                client.UpdateReclamationAsync(t);
+                UpdateReclamations();
+            }
+        }
+
+        public void Update(Reclamation t)
+        {
+            using (var client = new CServiceClient("NetTcpBinding_ICService"))
+            {
+                client.UpdateReclamationAsync(t);
+                UpdateReclamations();
+            }
+        }
+
+        private void UpdateReclamations()
+        {
+            using (var client = new CServiceClient("NetTcpBinding_ICService"))
+            {
+                _reclamations = client.GetReclamations().ToList();
+            }
+        }
+
     }
+
 }

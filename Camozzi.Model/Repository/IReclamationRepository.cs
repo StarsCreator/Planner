@@ -1,23 +1,14 @@
-﻿using Camozzi.Model.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Camozzi.Model.DataService;
 
 namespace Camozzi.Model.Repository
 {
-    public interface IReclamationRepository
+    public interface IReclamationRepository:IRepository<Reclamation>
     {
-        List<Reclamation> GetAll();
-        List<Reclamation> GetByDateAndDept(DateTime Start, DateTime Finish);
+        IEnumerable<Reclamation> GetByDateAndDept(DateTime start, DateTime finish);
         List<Reclamation> GetByUser(int id);
         List<Reclamation> GetByManager(int id);
         List<Reclamation> GetAllByName(string name);
-
-        Reclamation FindById(int id);
-        Reclamation FindByName(string name);
-
-        void Update(Reclamation t);
     }
 }

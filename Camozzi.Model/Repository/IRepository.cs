@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 
 namespace Camozzi.Model.Repository
 {
@@ -12,7 +11,5 @@ namespace Camozzi.Model.Repository
         void Add(T t);
         void Delete(T t);
         void Update(T t);
-        void UpdateContext();
-        void Dispose();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using MetroFramework.Forms;
 using System;
+using System.Collections.Generic;
 using Camozzi.Presentation.Views;
 
 namespace Camozzi.GUI
@@ -81,36 +82,36 @@ namespace Camozzi.GUI
                 FinishMdt.Value = value;
             }
         }
-        public object SelectedUser
+        public string SelectedUser
         {
             get
             {
-                return userCb.SelectedItem;
+                return userCb.SelectedItem.ToString();
             }
             set
             {
                 userCb.SelectedItem = value;
             }
         }
-        public object Users
+        public List<string> Users
         {
             set
             {
                 userCb.DataSource = value;
             }
         }
-        public object SelectedManager
+        public string SelectedManager
         {
             get
             {
-                return managerCb.SelectedItem;
+                return managerCb.SelectedItem.ToString();
             }
             set
             {
                 managerCb.SelectedItem = value;
             }
         }
-        public object Managers
+        public List<string> Managers
         {
             set
             {

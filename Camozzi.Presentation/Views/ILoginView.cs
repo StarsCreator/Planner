@@ -11,7 +11,7 @@ namespace Camozzi.Presentation.Views
     {
         event Action Ok;
 
-        object UserName { get; }
+        string UserName { get; }
         string Password { get; }
         object Users { set; }
 

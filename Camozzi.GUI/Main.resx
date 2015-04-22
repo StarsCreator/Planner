@@ -684,6 +684,19 @@
         XZ/6E3M2dSIMysxk8yHrfyOEOxLf4jDc4OMxAAAAAElFTkSuQmCC
 </value>
   </data>
+  <metadata name="ContextNewRec.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>667, 18</value>
+  </metadata>
+  <data name="addNewRec.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAD9SURBVEhL7ZbrEcFAFEa3BCUoQQeUoAQl6IASlKADLShBCTqgA+4JX7Lu7JJE1viRM3NmVu4r
+        Cbsj/JKFuSksM8LVvBX2YtYftoVU/2ZRiHFQb8ZBNWy++WPZik6DaH4wlSu5Vu36Nyi3WWSIN11Ojpkc
+        ynlJlhMTVqbi0u94SS5QS1y9FH9JxpMJFHBG+bjw18nVDdLDx8PS1F2i3vna9MlVwZNUjBqgR9yTGVmO
+        phrERSK+pjxqOhMP+sRgg+IfiuBJ/Bfea9DOVINYkYrFr7Y1UzPVTKRi1PQi9VT+dUlyv2Jv+qZecgaB
+        XZ/6E3M2dSIMysxk8yHrfyOEOxLf4jDc4OMxAAAAAElFTkSuQmCC
+</value>
+  </data>
   <metadata name="ContextProj.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>320, 17</value>
   </metadata>
@@ -708,6 +721,39 @@
 </value>
   </data>
   <data name="DeleteProj.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAD0SURBVEhL7ZbhDYJADIVvBEdwBDfQERzBEdxAR3AD3cAVHMER3EA30PdpCpVwwAFn/MFLvuSg
+        ry2Q64XwS63ELjP0CA/xzMxdFBf7TFj9cpFJU6PemhoVYviWn2UnJTWi+FmY1+Dee+obZN5yEZEfuhgc
+        MzGZ58tszATaCIu3gReRy8NZLYt/meEqEAmcUdV4DLz2gNSoxsNa+LPJvvlWVM1tkIOo4WvSI6qLsAIn
+        4RM9xMxHTrJ8o6adRWy0RkfhN4uH2KBGB2EFusKnTNZc1BVrgpxeSnkrvIPkd1UMPKOIqa/7ibkJOxFG
+        1UIwfMD63xTCCyU87yMHcSy+AAAAAElFTkSuQmCC
+</value>
+  </data>
+  <metadata name="ContextRec.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>559, 18</value>
+  </metadata>
+  <data name="addRec.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAD9SURBVEhL7ZbrEcFAFEa3BCUoQQeUoAQl6IASlKADLShBCTqgA+4JX7Lu7JJE1viRM3NmVu4r
+        Cbsj/JKFuSksM8LVvBX2YtYftoVU/2ZRiHFQb8ZBNWy++WPZik6DaH4wlSu5Vu36Nyi3WWSIN11Ojpkc
+        ynlJlhMTVqbi0u94SS5QS1y9FH9JxpMJFHBG+bjw18nVDdLDx8PS1F2i3vna9MlVwZNUjBqgR9yTGVmO
+        phrERSK+pjxqOhMP+sRgg+IfiuBJ/Bfea9DOVINYkYrFr7Y1UzPVTKRi1PQi9VT+dUlyv2Jv+qZecgaB
+        XZ/6E3M2dSIMysxk8yHrfyOEOxLf4jDc4OMxAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="editRec.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAENSURBVEhLxZYBDcIwFEQnAQlIQAIScAASkIAEHIADkDAH4AQcwD2SS5plY7/jL1xyGfxs95r2
+        t1uTqKV8ki/ymsIcWskP+VV4J6drId/lEpQKI+gmA5oNRvBTJmwMNnnNNjKhrE0EdpWrxVQ4GEVgZ7lK
+        huBy7r/BqNP6YfVBuDp4CEY9rCGIay0FqQur0hiE4HLUhvnekGog1MspC6sW4jqtH9ZUiO8N6W+Qo+xa
+        CoS57T7IjnYtBYLYCzy4//ybCUI7OhAd5HQIckB5ynK0p0KQp6kbkApBjJyQvlOWNUuBMGoH8RvYVuZr
+        xvWfIajcJ32mG6uOlSG5rW2mkTXz6zpNtDJvQq5e/GQ1zRsrr7bHdrByOgAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="delRec.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAD0SURBVEhL7ZbhDYJADIVvBEdwBDfQERzBEdxAR3AD3cAVHMER3EA30PdpCpVwwAFn/MFLvuSg

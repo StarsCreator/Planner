@@ -86,9 +86,13 @@
             this.SelfProjectPlan = new WeekPlanner.CalendarPlanner();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.MetroTableProject = new MetroFramework.Controls.MetroGrid();
+            this.ContextNewProj = new MetroFramework.Controls.MetroContextMenu(this.components);
+            this.addNewProj = new System.Windows.Forms.ToolStripMenuItem();
             this.MetroChartProject = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.SelfReclamationTab = new NeoTabControlLibrary.NeoTabPage();
             this.MetroTableReclamation = new MetroFramework.Controls.MetroGrid();
+            this.ContextNewRec = new MetroFramework.Controls.MetroContextMenu(this.components);
+            this.addNewRec = new System.Windows.Forms.ToolStripMenuItem();
             this.metroPanel4 = new MetroFramework.Controls.MetroPanel();
             this.SelfReclamationLeft = new MetroFramework.Controls.MetroTile();
             this.SelfReclamationRight = new MetroFramework.Controls.MetroTile();
@@ -101,8 +105,11 @@
             this.AddProj = new System.Windows.Forms.ToolStripMenuItem();
             this.EditProj = new System.Windows.Forms.ToolStripMenuItem();
             this.DeleteProj = new System.Windows.Forms.ToolStripMenuItem();
-            this.ContextNewProj = new MetroFramework.Controls.MetroContextMenu(this.components);
-            this.addNewProj = new System.Windows.Forms.ToolStripMenuItem();
+            this.ContextRec = new MetroFramework.Controls.MetroContextMenu(this.components);
+            this.addRec = new System.Windows.Forms.ToolStripMenuItem();
+            this.editRec = new System.Windows.Forms.ToolStripMenuItem();
+            this.delRec = new System.Windows.Forms.ToolStripMenuItem();
+            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             ((System.ComponentModel.ISupportInitialize)(this.neoTabWindow1)).BeginInit();
             this.neoTabWindow1.SuspendLayout();
             this.FirstTab.SuspendLayout();
@@ -128,12 +135,18 @@
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MetroTableProject)).BeginInit();
+            this.ContextNewProj.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MetroChartProject)).BeginInit();
             this.SelfReclamationTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MetroTableReclamation)).BeginInit();
+            this.ContextNewRec.SuspendLayout();
             this.metroPanel4.SuspendLayout();
             this.ContextProj.SuspendLayout();
-            this.ContextNewProj.SuspendLayout();
+            this.ContextRec.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
+            this.splitContainer3.Panel1.SuspendLayout();
+            this.splitContainer3.Panel2.SuspendLayout();
+            this.splitContainer3.SuspendLayout();
             this.SuspendLayout();
             // 
             // notifyIcon1
@@ -177,7 +190,7 @@
             this.neoTabWindow1.Margin = new System.Windows.Forms.Padding(0);
             this.neoTabWindow1.Name = "neoTabWindow1";
             this.neoTabWindow1.RendererName = "CamozziRenderer";
-            this.neoTabWindow1.SelectedIndex = 2;
+            this.neoTabWindow1.SelectedIndex = 0;
             this.neoTabWindow1.Size = new System.Drawing.Size(1256, 645);
             this.neoTabWindow1.TabIndex = 0;
             // 
@@ -189,6 +202,7 @@
             this.FirstTab.Name = "FirstTab";
             this.FirstTab.Text = "Главная";
             this.FirstTab.ToolTipText = "neoTabPage4";
+            this.FirstTab.Click += new System.EventHandler(this.FirstTab_Click);
             // 
             // ProjectStat
             // 
@@ -225,8 +239,8 @@
             this.neoTabWindow2.Location = new System.Drawing.Point(0, 0);
             this.neoTabWindow2.Name = "neoTabWindow2";
             this.neoTabWindow2.RendererName = "CCleanerRendererVS4";
-            this.neoTabWindow2.SelectedIndex = 0;
-            this.neoTabWindow2.Size = new System.Drawing.Size(1163, 639);
+            this.neoTabWindow2.SelectedIndex = 1;
+            this.neoTabWindow2.Size = new System.Drawing.Size(1256, 645);
             this.neoTabWindow2.TabIndex = 0;
             // 
             // AllProjectTab
@@ -248,7 +262,7 @@
             this.metroPanel1.HorizontalScrollbarBarColor = true;
             this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
             this.metroPanel1.HorizontalScrollbarSize = 10;
-            this.metroPanel1.Location = new System.Drawing.Point(1757, 90);
+            this.metroPanel1.Location = new System.Drawing.Point(880, 90);
             this.metroPanel1.Name = "metroPanel1";
             this.metroPanel1.Size = new System.Drawing.Size(176, 148);
             this.metroPanel1.TabIndex = 8;
@@ -340,7 +354,7 @@
             this.AllProjectPlan.Location = new System.Drawing.Point(0, 0);
             this.AllProjectPlan.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.AllProjectPlan.Name = "AllProjectPlan";
-            this.AllProjectPlan.Size = new System.Drawing.Size(1077, 633);
+            this.AllProjectPlan.Size = new System.Drawing.Size(1170, 639);
             this.AllProjectPlan.TabIndex = 0;
             // 
             // AllReclamationTab
@@ -362,7 +376,7 @@
             this.metroPanel2.HorizontalScrollbarBarColor = true;
             this.metroPanel2.HorizontalScrollbarHighlightOnWheel = false;
             this.metroPanel2.HorizontalScrollbarSize = 10;
-            this.metroPanel2.Location = new System.Drawing.Point(1757, 90);
+            this.metroPanel2.Location = new System.Drawing.Point(880, 90);
             this.metroPanel2.Name = "metroPanel2";
             this.metroPanel2.Size = new System.Drawing.Size(176, 148);
             this.metroPanel2.TabIndex = 9;
@@ -451,7 +465,7 @@
             this.AllReclamationPlan.Location = new System.Drawing.Point(0, 0);
             this.AllReclamationPlan.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.AllReclamationPlan.Name = "AllReclamationPlan";
-            this.AllReclamationPlan.Size = new System.Drawing.Size(1077, 633);
+            this.AllReclamationPlan.Size = new System.Drawing.Size(1170, 639);
             this.AllReclamationPlan.TabIndex = 0;
             // 
             // SelfTaskTab
@@ -672,10 +686,24 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.MetroTableProject.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.MetroTableProject.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.MetroTableProject.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             this.MetroTableProject.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.MetroTableProject.Size = new System.Drawing.Size(553, 316);
             this.MetroTableProject.TabIndex = 18;
+            // 
+            // ContextNewProj
+            // 
+            this.ContextNewProj.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addNewProj});
+            this.ContextNewProj.Name = "metroContextMenu1";
+            this.ContextNewProj.Size = new System.Drawing.Size(125, 26);
+            // 
+            // addNewProj
+            // 
+            this.addNewProj.Image = ((System.Drawing.Image)(resources.GetObject("addNewProj.Image")));
+            this.addNewProj.Name = "addNewProj";
+            this.addNewProj.Size = new System.Drawing.Size(124, 22);
+            this.addNewProj.Text = "Добавить";
             // 
             // MetroChartProject
             // 
@@ -698,16 +726,18 @@
             // 
             // SelfReclamationTab
             // 
-            this.SelfReclamationTab.Controls.Add(this.MetroTableReclamation);
+            this.SelfReclamationTab.Controls.Add(this.splitContainer3);
             this.SelfReclamationTab.Controls.Add(this.metroPanel4);
-            this.SelfReclamationTab.Controls.Add(this.SelfReclamationPlan);
             this.SelfReclamationTab.Name = "SelfReclamationTab";
             this.SelfReclamationTab.Text = "Рекламации";
             this.SelfReclamationTab.ToolTipText = "neoTabPage1";
             // 
             // MetroTableReclamation
             // 
+            this.MetroTableReclamation.AllowUserToAddRows = false;
+            this.MetroTableReclamation.AllowUserToDeleteRows = false;
             this.MetroTableReclamation.AllowUserToResizeRows = false;
+            this.MetroTableReclamation.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.MetroTableReclamation.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.MetroTableReclamation.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.MetroTableReclamation.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
@@ -721,6 +751,7 @@
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.MetroTableReclamation.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.MetroTableReclamation.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.MetroTableReclamation.ContextMenuStrip = this.ContextNewRec;
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
@@ -733,8 +764,10 @@
             this.MetroTableReclamation.EnableHeadersVisualStyles = false;
             this.MetroTableReclamation.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.MetroTableReclamation.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.MetroTableReclamation.Location = new System.Drawing.Point(0, 300);
+            this.MetroTableReclamation.Location = new System.Drawing.Point(0, 0);
+            this.MetroTableReclamation.MultiSelect = false;
             this.MetroTableReclamation.Name = "MetroTableReclamation";
+            this.MetroTableReclamation.ReadOnly = true;
             this.MetroTableReclamation.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
@@ -744,10 +777,24 @@
             dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
             dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.MetroTableReclamation.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
-            this.MetroTableReclamation.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.MetroTableReclamation.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.MetroTableReclamation.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.MetroTableReclamation.Size = new System.Drawing.Size(1077, 333);
+            this.MetroTableReclamation.Size = new System.Drawing.Size(1077, 313);
             this.MetroTableReclamation.TabIndex = 12;
+            // 
+            // ContextNewRec
+            // 
+            this.ContextNewRec.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addNewRec});
+            this.ContextNewRec.Name = "metroContextMenu1";
+            this.ContextNewRec.Size = new System.Drawing.Size(125, 26);
+            // 
+            // addNewRec
+            // 
+            this.addNewRec.Image = ((System.Drawing.Image)(resources.GetObject("addNewRec.Image")));
+            this.addNewRec.Name = "addNewRec";
+            this.addNewRec.Size = new System.Drawing.Size(124, 22);
+            this.addNewRec.Text = "Добавить";
             // 
             // metroPanel4
             // 
@@ -760,7 +807,7 @@
             this.metroPanel4.HorizontalScrollbarBarColor = true;
             this.metroPanel4.HorizontalScrollbarHighlightOnWheel = false;
             this.metroPanel4.HorizontalScrollbarSize = 10;
-            this.metroPanel4.Location = new System.Drawing.Point(1757, 90);
+            this.metroPanel4.Location = new System.Drawing.Point(880, 90);
             this.metroPanel4.Name = "metroPanel4";
             this.metroPanel4.Size = new System.Drawing.Size(176, 148);
             this.metroPanel4.TabIndex = 10;
@@ -829,7 +876,7 @@
             this.SelfReclamationPlan.CurrentDate = new System.DateTime(2015, 2, 11, 12, 4, 48, 804);
             this.SelfReclamationPlan.DatesIntervalMode = WeekPlanner.WeekPlannerMode.Daily;
             this.SelfReclamationPlan.DayCount = 7;
-            this.SelfReclamationPlan.Dock = System.Windows.Forms.DockStyle.Top;
+            this.SelfReclamationPlan.Dock = System.Windows.Forms.DockStyle.Fill;
             this.SelfReclamationPlan.GridBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(221)))), ((int)(((byte)(242)))));
             this.SelfReclamationPlan.GridCellHeight = 200;
             this.SelfReclamationPlan.GridTextFont = new System.Drawing.Font("Segoe UI", 9.75F);
@@ -847,9 +894,8 @@
             this.SelfReclamationPlan.LeftMargin = 250;
             this.SelfReclamationPlan.LeftMarginColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(231)))), ((int)(((byte)(245)))));
             this.SelfReclamationPlan.Location = new System.Drawing.Point(0, 0);
-            this.SelfReclamationPlan.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.SelfReclamationPlan.Name = "SelfReclamationPlan";
-            this.SelfReclamationPlan.Size = new System.Drawing.Size(1077, 300);
+            this.SelfReclamationPlan.Size = new System.Drawing.Size(1077, 316);
             this.SelfReclamationPlan.TabIndex = 0;
             // 
             // ReportTab
@@ -890,19 +936,53 @@
             this.DeleteProj.Size = new System.Drawing.Size(153, 22);
             this.DeleteProj.Text = "Удалить";
             // 
-            // ContextNewProj
+            // ContextRec
             // 
-            this.ContextNewProj.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addNewProj});
-            this.ContextNewProj.Name = "metroContextMenu1";
-            this.ContextNewProj.Size = new System.Drawing.Size(153, 48);
+            this.ContextRec.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addRec,
+            this.editRec,
+            this.delRec});
+            this.ContextRec.Name = "metroContextMenu1";
+            this.ContextRec.Size = new System.Drawing.Size(154, 70);
             // 
-            // addNewProj
+            // addRec
             // 
-            this.addNewProj.Image = ((System.Drawing.Image)(resources.GetObject("addNewProj.Image")));
-            this.addNewProj.Name = "addNewProj";
-            this.addNewProj.Size = new System.Drawing.Size(152, 22);
-            this.addNewProj.Text = "Добавить";
+            this.addRec.Image = ((System.Drawing.Image)(resources.GetObject("addRec.Image")));
+            this.addRec.Name = "addRec";
+            this.addRec.Size = new System.Drawing.Size(153, 22);
+            this.addRec.Text = "Добавить";
+            // 
+            // editRec
+            // 
+            this.editRec.Image = ((System.Drawing.Image)(resources.GetObject("editRec.Image")));
+            this.editRec.Name = "editRec";
+            this.editRec.Size = new System.Drawing.Size(153, 22);
+            this.editRec.Text = "Редактировать";
+            // 
+            // delRec
+            // 
+            this.delRec.Image = ((System.Drawing.Image)(resources.GetObject("delRec.Image")));
+            this.delRec.Name = "delRec";
+            this.delRec.Size = new System.Drawing.Size(153, 22);
+            this.delRec.Text = "Удалить";
+            // 
+            // splitContainer3
+            // 
+            this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer3.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer3.Name = "splitContainer3";
+            this.splitContainer3.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer3.Panel1
+            // 
+            this.splitContainer3.Panel1.Controls.Add(this.SelfReclamationPlan);
+            // 
+            // splitContainer3.Panel2
+            // 
+            this.splitContainer3.Panel2.Controls.Add(this.MetroTableReclamation);
+            this.splitContainer3.Size = new System.Drawing.Size(1077, 633);
+            this.splitContainer3.SplitterDistance = 316;
+            this.splitContainer3.TabIndex = 13;
             // 
             // Main
             // 
@@ -941,12 +1021,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.MetroTableProject)).EndInit();
+            this.ContextNewProj.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.MetroChartProject)).EndInit();
             this.SelfReclamationTab.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.MetroTableReclamation)).EndInit();
+            this.ContextNewRec.ResumeLayout(false);
             this.metroPanel4.ResumeLayout(false);
             this.ContextProj.ResumeLayout(false);
-            this.ContextNewProj.ResumeLayout(false);
+            this.ContextRec.ResumeLayout(false);
+            this.splitContainer3.Panel1.ResumeLayout(false);
+            this.splitContainer3.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
+            this.splitContainer3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1010,6 +1096,13 @@
         private System.Windows.Forms.ToolStripMenuItem DeleteProj;
         private MetroFramework.Controls.MetroContextMenu ContextNewProj;
         private System.Windows.Forms.ToolStripMenuItem addNewProj;
+        private MetroFramework.Controls.MetroContextMenu ContextRec;
+        private System.Windows.Forms.ToolStripMenuItem addRec;
+        private System.Windows.Forms.ToolStripMenuItem editRec;
+        private System.Windows.Forms.ToolStripMenuItem delRec;
+        private MetroFramework.Controls.MetroContextMenu ContextNewRec;
+        private System.Windows.Forms.ToolStripMenuItem addNewRec;
+        private System.Windows.Forms.SplitContainer splitContainer3;
 
     }
 }

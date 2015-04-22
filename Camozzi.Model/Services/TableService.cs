@@ -7,46 +7,46 @@ namespace Camozzi.Model.Services
 {
     public interface ITableService
     {
-        DataTable GetProjectTable(List<Project> projects);
-        DataTable GetReclamationTable(List<Reclamation> reclamations);
+        DataTable GetProjectTable(IEnumerable<Project> projects);
+        DataTable GetReclamationTable(IEnumerable<Reclamation> reclamations);
     }
 
     public class TableService:ITableService
     {
         private string _temp="Состояние не известно";
 
-        public DataTable GetProjectTable(List<Project> projects)
+        public DataTable GetProjectTable(IEnumerable<Project> projects)
         {
-            DataTable table = new DataTable();
-            DataColumn idColumn = new DataColumn
+            var table = new DataTable();
+            var idColumn = new DataColumn
                 {
                     DataType = Type.GetType("System.Int32"),
                     ColumnName = "Id",
                 };
                 table.Columns.Add(idColumn);
 
-                DataColumn nameColumn = new DataColumn
+                var nameColumn = new DataColumn
                 {
                     DataType = Type.GetType("System.String"),
                     ColumnName = "Название"
                 };
                 table.Columns.Add(nameColumn);
 
-                DataColumn startColumn = new DataColumn
+                var startColumn = new DataColumn
                 {
                     DataType = Type.GetType("System.DateTime"),
                     ColumnName = "Старт"
                 };
                 table.Columns.Add(startColumn);
 
-                DataColumn finishColumn = new DataColumn
+                var finishColumn = new DataColumn
                 {
                     DataType = Type.GetType("System.DateTime"),
                     ColumnName = "Окончание"
                 };
                 table.Columns.Add(finishColumn);
 
-                DataColumn stateColumn = new DataColumn()
+                var stateColumn = new DataColumn()
                 {
                     DataType = Type.GetType("System.String"),
                     ColumnName = "Состояние"
@@ -105,52 +105,52 @@ namespace Camozzi.Model.Services
             return table;
         }
 
-        public DataTable GetReclamationTable(List<Reclamation> reclamations)
+        public DataTable GetReclamationTable(IEnumerable<Reclamation> reclamations)
         {
-            DataTable table = new DataTable();
-            DataColumn idColumn = new DataColumn
+            var table = new DataTable();
+            var idColumn = new DataColumn
             {
                 DataType = Type.GetType("System.Int32"),
                 ColumnName = "Id",
             };
             table.Columns.Add(idColumn);
 
-            DataColumn nameColumn = new DataColumn
+            var nameColumn = new DataColumn
             {
                 DataType = Type.GetType("System.String"),
                 ColumnName = "Название"
             };
             table.Columns.Add(nameColumn);
 
-            DataColumn startColumn = new DataColumn
+            var startColumn = new DataColumn
             {
                 DataType = Type.GetType("System.DateTime"),
                 ColumnName = "Старт"
             };
             table.Columns.Add(startColumn);
 
-            DataColumn finishColumn = new DataColumn
+            var finishColumn = new DataColumn
             {
                 DataType = Type.GetType("System.DateTime"),
                 ColumnName = "Окончание"
             };
             table.Columns.Add(finishColumn);
 
-            DataColumn stateColumn = new DataColumn()
+            var stateColumn = new DataColumn()
             {
                 DataType = Type.GetType("System.String"),
                 ColumnName = "Состояние"
             };
             table.Columns.Add(stateColumn);
-            foreach (var proj in reclamations)
+
+            foreach (var rec in reclamations)
             {
                 var row = table.NewRow();
-
-                row["Id"] = proj.Id;
-                row["Название"] = proj.ReclamationAct;
-                row["Старт"] = proj.Start;
-                row["Окончание"] = proj.Finish;
-                switch (proj.State)
+                row["Id"] = rec.Id;
+                row["Название"] = rec.ReclamationAct;
+                row["Старт"] = rec.Start;
+                row["Окончание"] = rec.Finish;
+                switch (rec.State)
                 {
                     case 0:
                         {

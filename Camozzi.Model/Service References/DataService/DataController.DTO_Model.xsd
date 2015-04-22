@@ -69,6 +69,7 @@
   <xs:complexType name="Reclamation">
     <xs:sequence>
       <xs:element minOccurs="0" name="Act" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="AllowChanges" type="xs:boolean" />
       <xs:element minOccurs="0" name="Client" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Comment" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Count" type="xs:int" />

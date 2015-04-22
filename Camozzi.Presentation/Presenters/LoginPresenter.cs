@@ -33,11 +33,11 @@ namespace Camozzi.Presentation.Presenters
             }*/
             using (var client = new CServiceClient("NetTcpBinding_ICService"))
             {
-                if (!client.CheckPassword(View.Password, _users.FindByName(View.UserName).Id))
-                {
-                    View.ClearPswFld();
-                    return;
-                }
+                //if (!client.CheckPassword(View.Password, _users.FindByName(View.UserName).Id))
+                //{
+                //    View.ClearPswFld();
+                //    return;
+                //}
                 Controller.Run<MainPresenter, User>(_users.FindByName(View.UserName.ToString()));
                 View.Close();
 

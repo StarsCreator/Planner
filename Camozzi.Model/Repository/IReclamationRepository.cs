@@ -10,5 +10,7 @@ namespace Camozzi.Model.Repository
         List<Reclamation> GetByUser(int id);
         List<Reclamation> GetByManager(int id);
         List<Reclamation> GetAllByName(string name);
+
+        event Action ReclamationUpdated;
     }
 }

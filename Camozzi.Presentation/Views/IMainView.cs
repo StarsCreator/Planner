@@ -46,6 +46,7 @@ namespace Camozzi.Presentation.Views
 
         object TableProject { set; }
         object TableReclamation { set; }
+
         event Action<int> TableProjectClick;
         event Action<int> TableReclamationClick;
         event Action<int> DeleteProject;

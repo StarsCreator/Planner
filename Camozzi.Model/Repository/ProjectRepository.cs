@@ -7,7 +7,7 @@ namespace Camozzi.Model.Repository
 {
     public class ProjectRepository:IProjectRepository
     {
-
+        public event Action ProjectUpdated;
         public ProjectRepository()
         {
             UpdateProjects();
@@ -109,6 +109,7 @@ namespace Camozzi.Model.Repository
             {
                 _projects = client.GetProjects().ToList();
             }
+            if (ProjectUpdated != null) ProjectUpdated();
         }
     }
 }

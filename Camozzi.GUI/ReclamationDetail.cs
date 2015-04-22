@@ -117,11 +117,11 @@ namespace Camozzi.GUI
                 NomenclatureTb.Text = value;
             }
         }
-        public object SelectedUser 
+        public string SelectedUser 
         { 
             get
             {
-                return UserCb.SelectedItem;
+                return UserCb.SelectedItem.ToString();
             }
             set
             {
@@ -135,11 +135,11 @@ namespace Camozzi.GUI
                 UserCb.DataSource = value;
             }
         }
-        public object SelectedManager 
+        public string SelectedManager 
         { 
             get
             {
-                return ManagerCb.SelectedItem;
+                return ManagerCb.SelectedItem.ToString();
             }
             set
             {

@@ -789,6 +789,9 @@ namespace Camozzi.Model.DataService {
         private string ActField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool AllowChangesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string ClientField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -861,6 +864,19 @@ namespace Camozzi.Model.DataService {
                 if ((object.ReferenceEquals(this.ActField, value) != true)) {
                     this.ActField = value;
                     this.RaisePropertyChanged("Act");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool AllowChanges {
+            get {
+                return this.AllowChangesField;
+            }
+            set {
+                if ((this.AllowChangesField.Equals(value) != true)) {
+                    this.AllowChangesField = value;
+                    this.RaisePropertyChanged("AllowChanges");
                 }
             }
         }

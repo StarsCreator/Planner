@@ -48,6 +48,8 @@ namespace Camozzi.Model.Repository
                     select rec).ToList();
         }
 
+        public event Action ReclamationUpdated;
+
         public Reclamation FindById(int id)
         {
             return _reclamations.Find(x => x.Id == id);
@@ -62,7 +64,7 @@ namespace Camozzi.Model.Repository
         {
             using (var client = new CServiceClient("NetTcpBinding_ICService"))
             {
-                client.AddReclamationAsync(t);
+                client.AddReclamation(t);
                 UpdateReclamations();
             }
         }
@@ -71,7 +73,7 @@ namespace Camozzi.Model.Repository
         {
             using (var client = new CServiceClient("NetTcpBinding_ICService"))
             {
-                client.UpdateReclamationAsync(t);
+                client.DeleteReclamation(t);
                 UpdateReclamations();
             }
         }
@@ -80,7 +82,7 @@ namespace Camozzi.Model.Repository
         {
             using (var client = new CServiceClient("NetTcpBinding_ICService"))
             {
-                client.UpdateReclamationAsync(t);
+                client.UpdateReclamation(t);
                 UpdateReclamations();
             }
         }
@@ -91,6 +93,7 @@ namespace Camozzi.Model.Repository
             {
                 _reclamations = client.GetReclamations().ToList();
             }
+            if (ReclamationUpdated != null) ReclamationUpdated();
         }
 
     }

@@ -17,13 +17,13 @@ namespace Camozzi.Model.Services
         private int _temp;
         public DataTable GetTable(List<Project> projects,User user)
         {
-            DataTable table = new DataTable();
-            DataColumn stateColumn = new DataColumn
+            var table = new DataTable();
+            var stateColumn = new DataColumn
             {
                 DataType = Type.GetType("System.String"),
                 ColumnName = "State"
             };
-            DataColumn valueColumn = new DataColumn
+            var valueColumn = new DataColumn
             {
                 DataType = Type.GetType("System.Int32"),
                 ColumnName = "Value",
@@ -84,13 +84,13 @@ namespace Camozzi.Model.Services
         }
         public DataTable GetTable(List<Project> projects)
         {
-            DataTable table = new DataTable();
-            DataColumn stateColumn = new DataColumn
+            var table = new DataTable();
+            var stateColumn = new DataColumn
             {
                 DataType = Type.GetType("System.String"),
                 ColumnName = "State"
             };
-            DataColumn valueColumn = new DataColumn
+            var valueColumn = new DataColumn
             {
                 DataType = Type.GetType("System.Int32"),
                 ColumnName = "Value",

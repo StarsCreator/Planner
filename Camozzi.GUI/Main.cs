@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.Remoting.Channels;
 using System.Windows.Forms;
 using Camozzi.Presentation.Views;
 using NeoTabControlLibrary;
@@ -58,6 +59,8 @@ namespace Camozzi.GUI
 
             //MetroTableReclamation
             MetroTableReclamation.CellDoubleClick += MetroTableReclamation_CellDoubleClick;
+            MetroTableReclamation.CellMouseDown += MetroTableReclamation_CellMouseDown;
+            MetroTableReclamation.RowsAdded += MetroTableReclamation_RowsAdded;
 
             //ContextProj
             AddProj.Click += (sender, args) => Invoke(CreateProject);
@@ -65,16 +68,50 @@ namespace Camozzi.GUI
             EditProj.Click += EditProj_Click;
             DeleteProj.Click += DeleteProj_Click;
 
+            //ContextRec
+            addRec.Click += (sender, args) => Invoke(CreateReclamation);
+            addNewRec.Click += (sender, args) => Invoke(CreateReclamation);
+            editRec.Click += editRec_Click;
+            delRec.Click += delRec_Click;
+
+        }
+
+        void MetroTableReclamation_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            MetroTableReclamation.Rows[e.RowIndex].ContextMenuStrip = ContextRec;
+        }
+
+        void MetroTableReclamation_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Right) return;
+            if (e.RowIndex == -1) return;
+            MetroTableReclamation.ClearSelection();
+            MetroTableReclamation.Rows[e.RowIndex].Selected = true;
+            MetroTableReclamation.CurrentCell = MetroTableReclamation[0, e.RowIndex];
+        }
+
+        void delRec_Click(object sender, EventArgs e)
+        {
+            if (DeleteReclamation != null)
+                DeleteReclamation((int) MetroTableReclamation.SelectedRows[0].Cells[0].Value);
+        }
+
+        void editRec_Click(object sender, EventArgs e)
+        {
+            if (TableReclamationClick != null) 
+                TableReclamationClick((int)MetroTableReclamation.SelectedRows[0].Cells[0].Value);
         }
 
         void DeleteProj_Click(object sender, EventArgs e)
         {
-            if (DeleteProject != null) DeleteProject((int)MetroTableProject.SelectedRows[0].Cells[0].Value);
+            if (DeleteProject != null) 
+                DeleteProject((int)MetroTableProject.SelectedRows[0].Cells[0].Value);
         }
 
         void EditProj_Click(object sender, EventArgs e)
         {
-            if (TableProjectClick != null) TableProjectClick((int)MetroTableProject.SelectedRows[0].Cells[0].Value);
+            if (TableProjectClick != null) 
+                TableProjectClick((int)MetroTableProject.SelectedRows[0].Cells[0].Value);
         }
 
         void MetroTableProject_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
@@ -88,16 +125,14 @@ namespace Camozzi.GUI
 
         void MetroTableProject_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
-            foreach (DataGridViewRow row in MetroTableProject.Rows)
-            {
-                row.ContextMenuStrip = ContextProj;
-            }
+
+                MetroTableProject.Rows[e.RowIndex].ContextMenuStrip = ContextProj;
         }
 
         void MetroTableReclamation_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex == -1) return;
-            if (TableProjectClick != null) TableProjectClick((int)MetroTableProject.SelectedRows[0].Cells[0].Value);
+            if (TableReclamationClick != null) TableReclamationClick((int)MetroTableReclamation.SelectedRows[0].Cells[0].Value);
         }
 
         void MetroTableProject_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -224,7 +259,7 @@ namespace Camozzi.GUI
             base.Show();
         }
 
-        private void Invoke(Action action)
+        private static void Invoke(Action action)
         {
             if (action != null) action();
         }
@@ -484,6 +519,11 @@ namespace Camozzi.GUI
                 SelfReclamationEndSet.Value = value;
                 SelfReclamationPlan.DayCount = (value - SelfReclamationPlan.CurrentDate).Days;
             }
+        }
+
+        private void FirstTab_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

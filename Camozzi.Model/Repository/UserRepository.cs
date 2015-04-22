@@ -1,4 +1,5 @@
-﻿using System.ServiceModel;
+﻿using System;
+using System.ServiceModel;
 using System.Collections.Generic;
 using System.Linq;
 using Camozzi.Model.DataService;
@@ -24,6 +25,8 @@ namespace Camozzi.Model.Repository
         {
             return (from user in _users where user.DeptId == id select user).ToList();
         }
+
+        public event Action UserUpdated;
 
         public User FindById(int id)
         {
@@ -64,9 +67,17 @@ namespace Camozzi.Model.Repository
 
         private void UpdateUsers()
         {
-            using (var client = new CServiceClient("NetTcpBinding_ICService"))
+            try
             {
-                _users = client.GetUsers().ToList();
+                using (var client = new CServiceClient("NetTcpBinding_ICService"))
+                {
+                    _users = client.GetUsers().ToList();
+                }
+                if (UserUpdated != null) UserUpdated();
+            }
+            catch (Exception ex)
+            {
+                // ignored
             }
         }
     }

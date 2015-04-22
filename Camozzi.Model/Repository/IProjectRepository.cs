@@ -13,5 +13,7 @@ namespace Camozzi.Model.Repository
 
         int GetCountByState(int state);
         int GetCountByStateAndUser(int state, int userId);
+
+        event Action ProjectUpdated;
     }
 }

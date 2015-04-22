@@ -1,4 +1,5 @@
-﻿using Camozzi.Model.DataService;
+﻿using System.Linq;
+using Camozzi.Model.DataService;
 using Camozzi.Model.Repository;
 using Camozzi.Model.Services;
 using Camozzi.Presentation.Injection;
@@ -10,12 +11,12 @@ namespace Camozzi.Presentation.Presenters
     {
         Reclamation _rec;
         User _senderUser;
-        protected readonly IUserRepository Users;
+        private readonly IUserRepository _users;
 
         public ReclamationPresenter(IApplicationController controller, IReclamationView view, IUserRepository users)
             : base(controller, view)
         {
-            Users = users;
+            _users = users;
 
             View.Ok += View_Ok;
             View.Cancel += View_Cancel;
@@ -25,17 +26,17 @@ namespace Camozzi.Presentation.Presenters
 
         void View_Mgr()
         {
-            Controller.Run<UserPresenter, User>((User)View.SelectedManager);
+            Controller.Run<UserPresenter, User>(_users.FindByName(View.SelectedManager));
         }
 
         void View_Usr()
         {
-            Controller.Run<UserPresenter, User>((User)View.SelectedUser);
+            Controller.Run<UserPresenter, User>(_users.FindByName(View.SelectedUser));
         }
 
         void View_Cancel()
         {
-            _rec = null;
+            _rec.AllowChanges = false;
             View.Close();
         }
 
@@ -46,8 +47,8 @@ namespace Camozzi.Presentation.Presenters
             _rec.Send = View.Send;
             _rec.Production = View.Production;
             _rec.Nomenclature = View.Nomenclature;
-            _rec.Manager = (User)View.SelectedManager;
-            _rec.Worker = (User)View.SelectedUser;
+            _rec.Manager = _users.FindByName(View.SelectedManager);
+            _rec.Worker = _users.FindByName(View.SelectedUser);
             _rec.UserId = _rec.Worker.Id;
             _rec.ManagerId = _rec.Manager.Id;
             _rec.Act = View.Act;
@@ -57,6 +58,7 @@ namespace Camozzi.Presentation.Presenters
             _rec.Solution = View.Solution;
             _rec.Client = View.Client;
             _rec.ReclamationAct = View.ReclamationAct;
+            _rec.AllowChanges = true;
             View.Close();
         }
 
@@ -79,10 +81,10 @@ namespace Camozzi.Presentation.Presenters
             View.Send = _rec.Send;
             View.Production = _rec.Production;
             View.Nomenclature = _rec.Nomenclature;
-            View.Managers = Users.FindByDept(_rec.Manager.DeptId);
-            View.SelectedManager = _rec.Manager;
-            View.Users = Users.FindByDept(_rec.Worker.Id);
-            View.SelectedUser = _rec.Worker;
+            View.Managers = _users.GetAll().Where(user => user.DeptId == 3).Select(user => user.Name).ToList();
+            View.SelectedManager = _users.FindById(_rec.Manager.Id).Name;
+            View.Users = _users.GetAll().Where(user => user.DeptId == _senderUser.DeptId).Select(user => user.Name).ToList();
+            View.SelectedUser = _users.FindById(_rec.Worker.Id).Name;
             View.Act = _rec.Act;
             View.Count = _rec.Count;
             View.State = _rec.State;

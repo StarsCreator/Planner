@@ -55,13 +55,6 @@ namespace Camozzi.GUI
             errorProvider1.SetError(SendMDt, "Некоректная дата");
         }
 
-        public int Id 
-        { 
-            set
-            {
-                fieldId.Text = value.ToString();
-            }
-        }
         public System.DateTime Start 
         { 
             get
@@ -241,7 +234,6 @@ namespace Camozzi.GUI
                 SendMDt.Enabled = value;
                 NomenclatureTb.Enabled = value;
                 ProductionTb.Enabled = value;
-                fieldId.Enabled = value;
                 CountTb.Enabled = value;
                 ManagerCb.Enabled = value;
                 ClientTb.Enabled = value;

@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using Camozzi.Model.DataService;
+using WeekPlanner;
 
 namespace Camozzi.Model.Repository
 {
     public class ProjectRepository:IProjectRepository
     {
+
+
         public event Action ProjectUpdated;
         public ProjectRepository()
         {
@@ -51,19 +54,33 @@ namespace Camozzi.Model.Repository
                     select pr).ToList();
         }
 
-        public int GetCountByState(int state)
+        public int GetCountByState(States state)
         {
             return (from pr in _projects
-                    where pr.State == state
+                    where pr.State == (int)state
                     select pr).Count();
         }
 
-        public int GetCountByStateAndUser(int state, int userId)
+        public int GetCount()
+        {
+            return _projects.Count();
+        }
+
+        public int GetCountByStateAndUser(States state, int userId)
         {
             return (from pr in _projects
                     where pr.UserId == userId
-                    where pr.State == state
+                    where pr.State == (int)state
                     select pr).Count();
+        }
+
+        public int GetCountByStateAndMounth(States state, int mounth)
+        {
+            //TODO add creation Time
+            return (from pr in _projects
+                where pr.Start.Month == mounth
+                where pr.State == (int) state
+                select pr).Count();
         }
 
         public Project FindById(int id)

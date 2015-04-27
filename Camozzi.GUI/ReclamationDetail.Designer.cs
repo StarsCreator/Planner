@@ -61,10 +61,9 @@
             this.SolutionCb = new MetroFramework.Controls.MetroCheckBox();
             this.l13 = new MetroFramework.Controls.MetroLabel();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
-            this.fieldId = new MetroFramework.Controls.MetroTextBox();
             this.btnMng = new MetroFramework.Controls.MetroTile();
             this.btnUsr = new MetroFramework.Controls.MetroTile();
+            this.addMng = new MetroFramework.Controls.MetroTile();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -114,7 +113,7 @@
             // l4
             // 
             this.l4.AutoSize = true;
-            this.l4.Location = new System.Drawing.Point(23, 230);
+            this.l4.Location = new System.Drawing.Point(23, 200);
             this.l4.Name = "l4";
             this.l4.Size = new System.Drawing.Size(66, 19);
             this.l4.TabIndex = 30;
@@ -185,9 +184,9 @@
             this.ManagerCb.Enabled = false;
             this.ManagerCb.FormattingEnabled = true;
             this.ManagerCb.ItemHeight = 23;
-            this.ManagerCb.Location = new System.Drawing.Point(123, 255);
+            this.ManagerCb.Location = new System.Drawing.Point(123, 225);
             this.ManagerCb.Name = "ManagerCb";
-            this.ManagerCb.Size = new System.Drawing.Size(214, 29);
+            this.ManagerCb.Size = new System.Drawing.Size(178, 29);
             this.ManagerCb.Style = MetroFramework.MetroColorStyle.Red;
             this.ManagerCb.TabIndex = 22;
             this.ManagerCb.UseSelectable = true;
@@ -203,7 +202,7 @@
             // 
             // StartMdt
             // 
-            this.StartMdt.Location = new System.Drawing.Point(123, 220);
+            this.StartMdt.Location = new System.Drawing.Point(123, 190);
             this.StartMdt.MinimumSize = new System.Drawing.Size(0, 29);
             this.StartMdt.Name = "StartMdt";
             this.StartMdt.Size = new System.Drawing.Size(250, 29);
@@ -243,7 +242,7 @@
             // 
             this.l5.AutoSize = true;
             this.l5.Enabled = false;
-            this.l5.Location = new System.Drawing.Point(23, 265);
+            this.l5.Location = new System.Drawing.Point(23, 235);
             this.l5.Name = "l5";
             this.l5.Size = new System.Drawing.Size(74, 19);
             this.l5.TabIndex = 37;
@@ -282,7 +281,7 @@
             // l6
             // 
             this.l6.AutoSize = true;
-            this.l6.Location = new System.Drawing.Point(23, 290);
+            this.l6.Location = new System.Drawing.Point(23, 261);
             this.l6.Name = "l6";
             this.l6.Size = new System.Drawing.Size(83, 19);
             this.l6.TabIndex = 41;
@@ -291,7 +290,7 @@
             // ReclamationTb
             // 
             this.ReclamationTb.Lines = new string[0];
-            this.ReclamationTb.Location = new System.Drawing.Point(123, 290);
+            this.ReclamationTb.Location = new System.Drawing.Point(123, 261);
             this.ReclamationTb.MaxLength = 32767;
             this.ReclamationTb.Multiline = true;
             this.ReclamationTb.Name = "ReclamationTb";
@@ -306,7 +305,7 @@
             // l3
             // 
             this.l3.AutoSize = true;
-            this.l3.Location = new System.Drawing.Point(23, 195);
+            this.l3.Location = new System.Drawing.Point(23, 165);
             this.l3.Name = "l3";
             this.l3.Size = new System.Drawing.Size(79, 19);
             this.l3.TabIndex = 43;
@@ -315,7 +314,7 @@
             // CountTb
             // 
             this.CountTb.Lines = new string[0];
-            this.CountTb.Location = new System.Drawing.Point(123, 191);
+            this.CountTb.Location = new System.Drawing.Point(123, 161);
             this.CountTb.MaxLength = 32767;
             this.CountTb.Name = "CountTb";
             this.CountTb.PasswordChar = '\0';
@@ -352,7 +351,7 @@
             // l7
             // 
             this.l7.AutoSize = true;
-            this.l7.Location = new System.Drawing.Point(23, 416);
+            this.l7.Location = new System.Drawing.Point(23, 387);
             this.l7.Name = "l7";
             this.l7.Size = new System.Drawing.Size(51, 19);
             this.l7.TabIndex = 47;
@@ -361,7 +360,7 @@
             // ClientTb
             // 
             this.ClientTb.Lines = new string[0];
-            this.ClientTb.Location = new System.Drawing.Point(123, 416);
+            this.ClientTb.Location = new System.Drawing.Point(123, 387);
             this.ClientTb.MaxLength = 32767;
             this.ClientTb.Multiline = true;
             this.ClientTb.Name = "ClientTb";
@@ -397,34 +396,10 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // metroLabel1
-            // 
-            this.metroLabel1.AutoSize = true;
-            this.metroLabel1.Location = new System.Drawing.Point(23, 165);
-            this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(93, 19);
-            this.metroLabel1.TabIndex = 52;
-            this.metroLabel1.Text = "Номер в базе";
-            // 
-            // fieldId
-            // 
-            this.fieldId.Enabled = false;
-            this.fieldId.Lines = new string[0];
-            this.fieldId.Location = new System.Drawing.Point(123, 161);
-            this.fieldId.MaxLength = 32767;
-            this.fieldId.Name = "fieldId";
-            this.fieldId.PasswordChar = '\0';
-            this.fieldId.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.fieldId.SelectedText = "";
-            this.fieldId.Size = new System.Drawing.Size(250, 23);
-            this.fieldId.Style = MetroFramework.MetroColorStyle.Red;
-            this.fieldId.TabIndex = 51;
-            this.fieldId.UseSelectable = true;
-            // 
             // btnMng
             // 
             this.btnMng.ActiveControl = null;
-            this.btnMng.Location = new System.Drawing.Point(343, 255);
+            this.btnMng.Location = new System.Drawing.Point(307, 224);
             this.btnMng.Name = "btnMng";
             this.btnMng.Size = new System.Drawing.Size(30, 30);
             this.btnMng.Style = MetroFramework.MetroColorStyle.Red;
@@ -447,16 +422,28 @@
             this.btnUsr.UseSelectable = true;
             this.btnUsr.UseTileImage = true;
             // 
+            // addMng
+            // 
+            this.addMng.ActiveControl = null;
+            this.addMng.Location = new System.Drawing.Point(343, 225);
+            this.addMng.Name = "addMng";
+            this.addMng.Size = new System.Drawing.Size(30, 30);
+            this.addMng.Style = MetroFramework.MetroColorStyle.Red;
+            this.addMng.TabIndex = 55;
+            this.addMng.TileImage = ((System.Drawing.Image)(resources.GetObject("addMng.TileImage")));
+            this.addMng.TileImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.addMng.UseSelectable = true;
+            this.addMng.UseTileImage = true;
+            // 
             // ReclamationDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.CancelBtn;
             this.ClientSize = new System.Drawing.Size(805, 566);
+            this.Controls.Add(this.addMng);
             this.Controls.Add(this.btnMng);
             this.Controls.Add(this.btnUsr);
-            this.Controls.Add(this.metroLabel1);
-            this.Controls.Add(this.fieldId);
             this.Controls.Add(this.l13);
             this.Controls.Add(this.SolutionCb);
             this.Controls.Add(this.l7);
@@ -532,9 +519,8 @@
         private MetroFramework.Controls.MetroCheckBox SolutionCb;
         private MetroFramework.Controls.MetroLabel l13;
         private System.Windows.Forms.ErrorProvider errorProvider1;
-        private MetroFramework.Controls.MetroLabel metroLabel1;
-        private MetroFramework.Controls.MetroTextBox fieldId;
         private MetroFramework.Controls.MetroTile btnMng;
         private MetroFramework.Controls.MetroTile btnUsr;
+        private MetroFramework.Controls.MetroTile addMng;
     }
 }

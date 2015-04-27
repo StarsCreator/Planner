@@ -1,9 +1,11 @@
 ﻿using System;
-using System.Runtime.Remoting.Channels;
+using System.Drawing;
 using System.Windows.Forms;
+using Camozzi.GUI.Properties;
 using Camozzi.Presentation.Views;
-using NeoTabControlLibrary;
 using WeekPlanner;
+using Brush = System.Drawing.Brush;
+using Color = System.Drawing.Color;
 
 namespace Camozzi.GUI
 {
@@ -15,10 +17,7 @@ namespace Camozzi.GUI
             _context = context;
             InitializeComponent();
 
-
-            neoTabWindow1.Renderer = AddInRendererManager.LoadRenderer("CamozziRenderer");
-            neoTabWindow2.Renderer = AddInRendererManager.LoadRenderer("CCleanerRendererVS4");
-            neoTabWindow3.Renderer = AddInRendererManager.LoadRenderer("CCleanerRendererVS4");
+            tabControl1.DrawItem += tabControl1_DrawItem;
 
             //AllProjectPlan
             AllProjectPlan.Columns.Add("q1", "Сотрудник", 30);
@@ -73,6 +72,74 @@ namespace Camozzi.GUI
             addNewRec.Click += (sender, args) => Invoke(CreateReclamation);
             editRec.Click += editRec_Click;
             delRec.Click += delRec_Click;
+
+            //mainChart
+            mainProjChart.Series[0].Points.AddXY("Январь", 10);
+            mainProjChart.Series[0].Points.AddXY("Февраль", 15);
+            mainProjChart.Series[1].Points.AddXY("Jan", 15);
+            mainProjChart.Series[1].Points.AddXY("Feb", 40);
+
+        }
+
+        void tabControl1_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            var g = e.Graphics;
+
+            var tabPage = tabControl1.TabPages[e.Index];
+            var tabBounds = tabControl1.GetTabRect(e.Index);
+
+            var newBounds = new Rectangle()
+            {
+                X = tabBounds.X + 16,
+                Y = tabBounds.Y + 7,
+                Height = 32,
+                Width = 32
+            };
+
+            Bitmap img;
+
+            switch (e.Index)
+            {
+                case 0:
+                {
+                    img = new Bitmap(Resources.main);
+                    break;
+                }
+
+                case 1:
+                {
+                    img = new Bitmap(Resources.allChart);
+                    break;
+                }
+                case 2:
+                {
+                    img = new Bitmap(Resources.selfChart);
+                    break;
+                }
+                case 3:
+                {
+                    img = new Bitmap(Resources.report);
+                    break;
+                }
+                default:
+                {
+                    img=new Bitmap(Resources.main);
+                    break;
+                }
+            }
+
+            g.DrawImage(img, newBounds);
+
+            Brush textBrush = e.State == DrawItemState.Selected ? new SolidBrush(Color.Black) : new SolidBrush(Color.Gray);
+
+            // Use our own font.
+            var tabFont = new Font("Segoe UI", 9.75F);
+            var stringFlags = new StringFormat
+            {
+                Alignment = StringAlignment.Center,
+                LineAlignment = StringAlignment.Far
+            };
+            g.DrawString(tabPage.Text, tabFont, textBrush, tabBounds, new StringFormat(stringFlags));
 
         }
 
@@ -194,7 +261,7 @@ namespace Camozzi.GUI
             {
                 AllReclamationEndSet.Value = AllReclamationStartSet.Value.AddDays(9);
             }
-            TimeSpan tmp = AllReclamationEndSet.Value - AllReclamationStartSet.Value;
+            var tmp = AllReclamationEndSet.Value - AllReclamationStartSet.Value;
             AllReclamationPlan.DayCount = tmp.Days + 1;
         }
 
@@ -367,8 +434,8 @@ namespace Camozzi.GUI
         {
             set
             {
-                AllReclamationTab.IsSelectable = value;
-                SelfReclamationTab.IsSelectable = value;
+                AllReclamationTab.Enabled = value;
+                SelfReclamationTab.Enabled = value;
 
             }
         }
@@ -393,6 +460,27 @@ namespace Camozzi.GUI
         public event Action<int> DeleteProject;
         public event Action<int> DeleteReclamation;
 
+        public int waitProj
+        {
+            set { lblWaitProj.Text = value.ToString(); }
+        }
+        public int allProj
+        {
+            set { lblAllProj.Text = value.ToString(); }
+        }
+        public int comProj
+        {
+            set { lblCompProj.Text = value.ToString(); }
+        }
+        public int workProj
+        {
+            set { lblWorkProj.Text = value.ToString(); }
+        }
+        public int stopProj
+        {
+            set { lblStopProj.Text = value.ToString(); }
+        }
+
         public object ChartSelfProject
         {
             set
@@ -410,9 +498,9 @@ namespace Camozzi.GUI
         {
             set
             {
-                ProjectStat.DataSource = value;
-                ProjectStat.Series[0].YValueMembers = "Value";
-                ProjectStat.Series[0].XValueMember = "State";
+                //ProjectStat.DataSource = value;
+                //ProjectStat.Series[0].YValueMembers = "Value";
+                //ProjectStat.Series[0].XValueMember = "State";
             }
         }
 
@@ -519,11 +607,6 @@ namespace Camozzi.GUI
                 SelfReclamationEndSet.Value = value;
                 SelfReclamationPlan.DayCount = (value - SelfReclamationPlan.CurrentDate).Days;
             }
-        }
-
-        private void FirstTab_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

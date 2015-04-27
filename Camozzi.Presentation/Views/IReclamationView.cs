@@ -14,7 +14,6 @@ namespace Camozzi.Presentation.Views
         void SetDateErr();
         void SetFinErr();
 
-        int Id { set; }
         DateTime Start { get; set; }
         DateTime Finish { get; set; }
         DateTime Send { get; set; }

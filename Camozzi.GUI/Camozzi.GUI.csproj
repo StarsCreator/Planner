@@ -85,12 +85,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\CamozziClientOTK\packages\MetroModernUI.1.3.0.0\lib\net\MetroFramework.Fonts.dll</HintPath>
     </Reference>
-    <Reference Include="NeoTabControlLibrary">
-      <HintPath>..\..\..\..\..\Downloads\NeoTabControlLibrary_src\NeoTabControlLibrary\bin\Debug\NeoTabControlLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="NeoTabControlLibrary.CommonObjects">
-      <HintPath>..\packages\NeoTabControlLibrary\NeoTabControlLibrary.CommonObjects.dll</HintPath>
-    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -151,6 +145,9 @@
     <Compile Include="ReclamationDetail.Designer.cs">
       <DependentUpon>ReclamationDetail.cs</DependentUpon>
     </Compile>
+    <Compile Include="TabStrip.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="UserDetail.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -177,6 +174,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="ReclamationDetail.resx">
       <DependentUpon>ReclamationDetail.cs</DependentUpon>
@@ -210,7 +208,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Service References\" />
+    <WCFMetadata Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
@@ -231,6 +229,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ProductIcon.ico" />
+    <None Include="Resources\document188.png" />
+    <None Include="Resources\chart34.png" />
+    <None Include="Resources\chart23.png" />
+    <None Include="Resources\chart1.png" />
+    <None Include="Resources\Crystal Ball-50.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -50,15 +50,21 @@ namespace Camozzi.Presentation.Presenters
 
         private void _reclamations_ReclamationUpdated()
         {
-            ReCreateReclamations(DateTime.Today.AddDays(-50), DateTime.Today.AddDays(10));
+            ReCreateReclamations(DateTime.Today, DateTime.Today.AddDays(10));
             ReCreateSelfReclamation(DateTime.Today, DateTime.Today);
             View.TableReclamation = _tableService.GetReclamationTable(_reclamations.GetByUser(_mainUser.Id));
+            
         }
         private void _projects_ProjectUpdated()
         {
-            ReCreateSelfProjects(DateTime.Today, DateTime.Today);
             ReCreateProjects(DateTime.Today, DateTime.Today.AddDays(10));
+            ReCreateSelfProjects(DateTime.Today, DateTime.Today);
             View.TableProject = _tableService.GetProjectTable(_projects.GetByUser(_mainUser.Id));
+            View.allProj = _projects.GetCount();
+            View.comProj = _projects.GetCountByState(States.Complete);
+            View.stopProj = _projects.GetCountByState(States.Suspended);
+            View.workProj = _projects.GetCountByState(States.Work);
+            View.waitProj = _projects.GetCountByState(States.Queue);
         }
 
         private void View_CreateReclamation()
@@ -178,7 +184,7 @@ namespace Camozzi.Presentation.Presenters
         {
             try
             {
-                _updatedReclamation = _reclamations.FindByName(e.Item.Subject);
+                _updatedReclamation = _reclamations.FindById(Int32.Parse(e.Item.Name));
                 Controller.Run<ReclamationPresenter, Reclamation, User>(_updatedReclamation, _mainUser);
                 if (!_updatedReclamation.AllowChanges) return;
                 _reclamations.Update(_updatedReclamation);
@@ -210,11 +216,10 @@ namespace Camozzi.Presentation.Presenters
         {
             try
             {
-                _updatedReclamation = _reclamations.FindByName(e.Item.Subject);
-                if (_updatedReclamation.Nomenclature != "null")
-                {
+                _updatedReclamation = _reclamations.FindById(Int32.Parse(e.Item.Name));
+                Controller.Run<ReclamationPresenter, Reclamation, User>(_updatedReclamation, _mainUser);
+                if (!_updatedReclamation.AllowChanges) return;
                     _reclamations.Update(_updatedReclamation);
-                }
             }
             catch (Exception ex)
             {
@@ -263,7 +268,7 @@ namespace Camozzi.Presentation.Presenters
             }
             catch (Exception ex)
             {
-                _log.Error("RecreateProjects", ex.Message);
+                _log.Error("RecreateSelfProjects", ex.Message);
             }
         }
         private void ReCreateSelfReclamation(DateTime start, DateTime finish)
@@ -290,7 +295,7 @@ namespace Camozzi.Presentation.Presenters
             }
             catch (Exception ex)
             {
-                _log.Error("RecreateProjects", ex.Message);
+                _log.Error("RecreateSelfReclamations", ex.Message);
             }
         }
 
@@ -355,18 +360,18 @@ namespace Camozzi.Presentation.Presenters
                         StartDate = reclamation.Start,
                         EndDate = reclamation.Finish,
                         Subject = reclamation.Nomenclature,
-                        Name = reclamation.Nomenclature,
+                        Name = reclamation.Id.ToString(),
                         Tag = reclamation,
                         State = (States) reclamation.State
                     };
 
-                    var row = (WeekPlannerRow) reclamation.Worker.AllReclamationRow;
+                    var row = (WeekPlannerRow)(_users.FindById(reclamation.Worker.Id)).AllReclamationRow;
                     row.Items.Add(item);
                 }
             }
             catch (Exception ex)
             {
-                _log.Error("RecreateProjects", ex.Message);
+                _log.Error("RecreateReclamations", ex.Message);
             }
         }
 
@@ -387,6 +392,12 @@ namespace Camozzi.Presentation.Presenters
             ReCreateProjects(DateTime.Today, DateTime.Today.AddDays(10));
             ReCreateSelfReclamation(DateTime.Today, DateTime.Today);
             ReCreateReclamations(DateTime.Today.AddDays(-50), DateTime.Today.AddDays(10));
+
+            View.allProj = _projects.GetCount();
+            View.comProj = _projects.GetCountByState(States.Complete);
+            View.stopProj = _projects.GetCountByState(States.Suspended);
+            View.workProj = _projects.GetCountByState(States.Work);
+            View.waitProj = _projects.GetCountByState(States.Queue);
         }
     }
 }

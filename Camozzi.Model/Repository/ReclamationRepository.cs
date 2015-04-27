@@ -22,7 +22,7 @@ namespace Camozzi.Model.Repository
         public IEnumerable<Reclamation> GetByDateAndDept(DateTime start, DateTime finish)
         {
             return (from rec in _reclamations
-                    where rec.Start > start
+                    //where rec.Start > start
                     where rec.Finish < finish
                     select rec).ToList();
         }

@@ -15,7 +15,7 @@ namespace Camozzi.Model.Services
     {
         private string _temp="Состояние не известно";
 
-        public DataTable GetProjectTable(IEnumerable<Project> projects)
+        public  DataTable GetProjectTable(IEnumerable<Project> projects)
         {
             var table = new DataTable();
             var idColumn = new DataColumn

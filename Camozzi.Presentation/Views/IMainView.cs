@@ -56,6 +56,12 @@ namespace Camozzi.Presentation.Views
 
         #region Charts
 
+        int waitProj { set; }
+        int allProj { set; }
+        int comProj { set; }
+        int workProj { set; }
+        int stopProj { set; }
+
         object ChartProject { set; }
         object ChartSelfProject { set; }
 

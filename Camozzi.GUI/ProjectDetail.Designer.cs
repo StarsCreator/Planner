@@ -55,6 +55,7 @@
             this.metroLabel11 = new MetroFramework.Controls.MetroLabel();
             this.btnUsr = new MetroFramework.Controls.MetroTile();
             this.btnMng = new MetroFramework.Controls.MetroTile();
+            this.addMng = new MetroFramework.Controls.MetroTile();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -264,7 +265,7 @@
             this.managerCb.ItemHeight = 23;
             this.managerCb.Location = new System.Drawing.Point(145, 198);
             this.managerCb.Name = "managerCb";
-            this.managerCb.Size = new System.Drawing.Size(319, 29);
+            this.managerCb.Size = new System.Drawing.Size(283, 29);
             this.managerCb.Style = MetroFramework.MetroColorStyle.Red;
             this.managerCb.TabIndex = 18;
             this.managerCb.UseSelectable = true;
@@ -311,7 +312,7 @@
             // btnMng
             // 
             this.btnMng.ActiveControl = null;
-            this.btnMng.Location = new System.Drawing.Point(470, 198);
+            this.btnMng.Location = new System.Drawing.Point(434, 198);
             this.btnMng.Name = "btnMng";
             this.btnMng.Size = new System.Drawing.Size(30, 30);
             this.btnMng.Style = MetroFramework.MetroColorStyle.Red;
@@ -321,11 +322,25 @@
             this.btnMng.UseSelectable = true;
             this.btnMng.UseTileImage = true;
             // 
+            // addMng
+            // 
+            this.addMng.ActiveControl = null;
+            this.addMng.Location = new System.Drawing.Point(469, 198);
+            this.addMng.Name = "addMng";
+            this.addMng.Size = new System.Drawing.Size(30, 30);
+            this.addMng.Style = MetroFramework.MetroColorStyle.Red;
+            this.addMng.TabIndex = 22;
+            this.addMng.TileImage = ((System.Drawing.Image)(resources.GetObject("addMng.TileImage")));
+            this.addMng.TileImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.addMng.UseSelectable = true;
+            this.addMng.UseTileImage = true;
+            // 
             // ProjectDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(510, 504);
+            this.Controls.Add(this.addMng);
             this.Controls.Add(this.btnMng);
             this.Controls.Add(this.btnUsr);
             this.Controls.Add(this.metroLabel11);
@@ -388,5 +403,6 @@
         private MetroFramework.Controls.MetroTile btnMng;
         private MetroFramework.Controls.MetroTile btnUsr;
         private MetroFramework.Controls.MetroLabel metroLabel11;
+        private MetroFramework.Controls.MetroTile addMng;
     }
 }

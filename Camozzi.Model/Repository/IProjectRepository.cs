@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Camozzi.Model.DataService;
+using WeekPlanner;
 
 namespace Camozzi.Model.Repository
 {
@@ -11,8 +12,10 @@ namespace Camozzi.Model.Repository
         List<Project> GetByManager(int id);
         List<Project> GetAllByName(string name);
 
-        int GetCountByState(int state);
-        int GetCountByStateAndUser(int state, int userId);
+        int GetCountByState(States state);
+        int GetCount();
+        int GetCountByStateAndUser(States state, int userId);
+        int GetCountByStateAndMounth(States state, int mounth);
 
         event Action ProjectUpdated;
     }

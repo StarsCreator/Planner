@@ -16,6 +16,7 @@ namespace Camozzi.Presentation.Presenters
         {
             View.Ok += View_Ok;
             _users = users;
+            //_users.UpdateContext();
             View.Users = _users.GetAll().Select(user => user.Name).ToList();
         }
 
@@ -31,14 +32,14 @@ namespace Camozzi.Presentation.Presenters
                     View.Close();
                 }
             }*/
-            using (var client = new CServiceClient("NetTcpBinding_ICService"))
-            {
+            //using (var client = new CServiceClient("BasicHttpBinding_ICService"))
+            //{
                 //if (!client.CheckPassword(View.Password, _users.FindByName(View.UserName).Id))
                 //{
                 //    View.ClearPswFld();
                 //    return;
                 //}
-                Controller.Run<MainPresenter, User>(_users.FindByName(View.UserName.ToString()));
+                Controller.Run<MainPresenter, UserDto>(_users.FindByName(View.UserName));
                 View.Close();
 
 
@@ -48,7 +49,7 @@ namespace Camozzi.Presentation.Presenters
                 // {
                 //    View.ClearPswFld();
                 //}
-            }
+            //}
 
             //static string GetMd5Hash(HashAlgorithm md5Hash, string input)
             //{

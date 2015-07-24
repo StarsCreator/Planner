@@ -9,14 +9,14 @@
   <xs:element name="GetProjectsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/DataController.DTO_Model" minOccurs="0" name="GetProjectsResult" nillable="true" type="q1:ArrayOfProject" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/DataController.DTO_Model" minOccurs="0" name="GetProjectsResult" nillable="true" type="q1:ArrayOfProjectDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="AddReclamation">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/DataController.DTO_Model" minOccurs="0" name="t" nillable="true" type="q2:Reclamation" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/DataController.DTO_Model" minOccurs="0" name="t" nillable="true" type="q2:ReclamationDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -28,7 +28,7 @@
   <xs:element name="DeleteReclamation">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/DataController.DTO_Model" minOccurs="0" name="t" nillable="true" type="q3:Reclamation" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/DataController.DTO_Model" minOccurs="0" name="t" nillable="true" type="q3:ReclamationDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -40,7 +40,7 @@
   <xs:element name="UpdateReclamation">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/DataController.DTO_Model" minOccurs="0" name="t" nillable="true" type="q4:Reclamation" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/DataController.DTO_Model" minOccurs="0" name="t" nillable="true" type="q4:ReclamationDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -60,14 +60,14 @@
   <xs:element name="GetByDateReclamationResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/DataController.DTO_Model" minOccurs="0" name="GetByDateReclamationResult" nillable="true" type="q5:ArrayOfReclamation" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/DataController.DTO_Model" minOccurs="0" name="GetByDateReclamationResult" nillable="true" type="q5:ArrayOfReclamationDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="AddUser">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/DataController.DTO_Model" minOccurs="0" name="t" nillable="true" type="q6:User" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/DataController.DTO_Model" minOccurs="0" name="t" nillable="true" type="q6:UserDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -79,7 +79,7 @@
   <xs:element name="DeleteUser">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/DataController.DTO_Model" minOccurs="0" name="t" nillable="true" type="q7:User" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/DataController.DTO_Model" minOccurs="0" name="t" nillable="true" type="q7:UserDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -91,7 +91,7 @@
   <xs:element name="UpdateUser">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/DataController.DTO_Model" minOccurs="0" name="t" nillable="true" type="q8:User" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/DataController.DTO_Model" minOccurs="0" name="t" nillable="true" type="q8:UserDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -103,7 +103,7 @@
   <xs:element name="AddProject">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/DataController.DTO_Model" minOccurs="0" name="t" nillable="true" type="q9:Project" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/DataController.DTO_Model" minOccurs="0" name="t" nillable="true" type="q9:ProjectDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -115,7 +115,7 @@
   <xs:element name="DeleteProject">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/DataController.DTO_Model" minOccurs="0" name="t" nillable="true" type="q10:Project" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/DataController.DTO_Model" minOccurs="0" name="t" nillable="true" type="q10:ProjectDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -132,7 +132,7 @@
   <xs:element name="GetUsersResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/DataController.DTO_Model" minOccurs="0" name="GetUsersResult" nillable="true" type="q11:ArrayOfUser" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/DataController.DTO_Model" minOccurs="0" name="GetUsersResult" nillable="true" type="q11:ArrayOfUserDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -159,7 +159,7 @@
   <xs:element name="GetReclamationsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/DataController.DTO_Model" minOccurs="0" name="GetReclamationsResult" nillable="true" type="q12:ArrayOfReclamation" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/DataController.DTO_Model" minOccurs="0" name="GetReclamationsResult" nillable="true" type="q12:ArrayOfReclamationDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -175,14 +175,14 @@
   <xs:element name="GetByDateAndDeptProjectResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/DataController.DTO_Model" minOccurs="0" name="GetByDateAndDeptProjectResult" nillable="true" type="q13:ArrayOfProject" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/DataController.DTO_Model" minOccurs="0" name="GetByDateAndDeptProjectResult" nillable="true" type="q13:ArrayOfProjectDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateProject">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/DataController.DTO_Model" minOccurs="0" name="t" nillable="true" type="q14:Project" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/DataController.DTO_Model" minOccurs="0" name="t" nillable="true" type="q14:ProjectDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

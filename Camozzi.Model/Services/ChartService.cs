@@ -8,14 +8,14 @@ namespace Camozzi.Model.Services
 {
     public interface IChartService
     {
-        DataTable GetTable(List<Project> projects, User user);
-        DataTable GetTable(List<Project> projects);
+        DataTable GetTable(List<ProjectDto> projects, UserDto user);
+        DataTable GetTable(List<ProjectDto> projects);
     }
 
     public class ChartService : IChartService
     {
         private int _temp;
-        public DataTable GetTable(List<Project> projects,User user)
+        public DataTable GetTable(List<ProjectDto> projects,UserDto user)
         {
             var table = new DataTable();
             var stateColumn = new DataColumn
@@ -82,7 +82,7 @@ namespace Camozzi.Model.Services
             return table;
 
         }
-        public DataTable GetTable(List<Project> projects)
+        public DataTable GetTable(List<ProjectDto> projects)
         {
             var table = new DataTable();
             var stateColumn = new DataColumn

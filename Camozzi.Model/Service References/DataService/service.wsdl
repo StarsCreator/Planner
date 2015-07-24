@@ -3,8 +3,7 @@
   <wsp:Policy wsu:Id="NetTcpBinding_ICService_policy">
     <wsp:ExactlyOne>
       <wsp:All>
-        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1">
-        </msb:BinaryEncoding>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
         <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
           <wsp:Policy>
             <sp:TransportToken>
@@ -16,20 +15,17 @@
             </sp:TransportToken>
             <sp:AlgorithmSuite>
               <wsp:Policy>
-                <sp:Basic256>
-                </sp:Basic256>
+                <sp:Basic256 />
               </wsp:Policy>
             </sp:AlgorithmSuite>
             <sp:Layout>
               <wsp:Policy>
-                <sp:Strict>
-                </sp:Strict>
+                <sp:Strict />
               </wsp:Policy>
             </sp:Layout>
           </wsp:Policy>
         </sp:TransportBinding>
-        <wsaw:UsingAddressing>
-        </wsaw:UsingAddressing>
+        <wsaw:UsingAddressing />
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
@@ -192,9 +188,146 @@
       <wsdl:output wsaw:Action="http://tempuri.org/ICService/UpdateProjectResponse" message="tns:ICService_UpdateProject_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_ICService" type="tns:ICService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetProjects">
+      <soap:operation soapAction="http://tempuri.org/ICService/GetProjects" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddReclamation">
+      <soap:operation soapAction="http://tempuri.org/ICService/AddReclamation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteReclamation">
+      <soap:operation soapAction="http://tempuri.org/ICService/DeleteReclamation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateReclamation">
+      <soap:operation soapAction="http://tempuri.org/ICService/UpdateReclamation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetByDateReclamation">
+      <soap:operation soapAction="http://tempuri.org/ICService/GetByDateReclamation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUser">
+      <soap:operation soapAction="http://tempuri.org/ICService/AddUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUser">
+      <soap:operation soapAction="http://tempuri.org/ICService/DeleteUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUser">
+      <soap:operation soapAction="http://tempuri.org/ICService/UpdateUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddProject">
+      <soap:operation soapAction="http://tempuri.org/ICService/AddProject" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteProject">
+      <soap:operation soapAction="http://tempuri.org/ICService/DeleteProject" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUsers">
+      <soap:operation soapAction="http://tempuri.org/ICService/GetUsers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckPassword">
+      <soap:operation soapAction="http://tempuri.org/ICService/CheckPassword" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReclamations">
+      <soap:operation soapAction="http://tempuri.org/ICService/GetReclamations" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetByDateAndDeptProject">
+      <soap:operation soapAction="http://tempuri.org/ICService/GetByDateAndDeptProject" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateProject">
+      <soap:operation soapAction="http://tempuri.org/ICService/UpdateProject" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
   <wsdl:binding name="NetTcpBinding_ICService" type="tns:ICService">
-    <wsp:PolicyReference URI="#NetTcpBinding_ICService_policy">
-    </wsp:PolicyReference>
+    <wsp:PolicyReference URI="#NetTcpBinding_ICService_policy" />
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
     <wsdl:operation name="GetProjects">
       <soap12:operation soapAction="http://tempuri.org/ICService/GetProjects" style="document" />
@@ -333,12 +466,15 @@
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="CService">
+    <wsdl:port name="BasicHttpBinding_ICService" binding="tns:BasicHttpBinding_ICService">
+      <soap:address location="http://localhost:4533/CServer.CService" />
+    </wsdl:port>
     <wsdl:port name="NetTcpBinding_ICService" binding="tns:NetTcpBinding_ICService">
-      <soap12:address location="net.tcp://localhost:4533/CServer.CService" />
+      <soap12:address location="net.tcp://localhost:4534/CServer.CService" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:4533/CServer.CService</wsa10:Address>
+        <wsa10:Address>net.tcp://localhost:4534/CServer.CService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>ШаталовАА@CAMOZZI-CHSH.local</Upn>
+          <Upn>CSRV\СолодухинПВ</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

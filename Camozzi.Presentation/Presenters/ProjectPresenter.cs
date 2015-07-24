@@ -6,10 +6,10 @@ using Camozzi.Presentation.Views;
 
 namespace Camozzi.Presentation.Presenters
 {
-    public class ProjectPresenter : BasePresenter<IProjectView,Project,User>
+    public class ProjectPresenter : BasePresenter<IProjectView,ProjectDto,UserDto>
     {
-        Project _proj;
-        User _senderUser;
+        ProjectDto _proj;
+        UserDto _senderUser;
         private readonly IUserRepository _users;
 
         public ProjectPresenter(IApplicationController controller, IProjectView view, IUserRepository users)
@@ -25,12 +25,12 @@ namespace Camozzi.Presentation.Presenters
 
         void View_Usr()
         {
-            Controller.Run<UserPresenter, User>(_users.FindByName(View.SelectedUser));
+            Controller.Run<UserPresenter, UserDto>(_users.FindByName(View.SelectedUser));
         }
 
         void View_Mgr()
         {
-            Controller.Run<UserPresenter, User>(_users.FindByName(View.SelectedManager));
+            Controller.Run<UserPresenter, UserDto>(_users.FindByName(View.SelectedManager));
         }
 
         void View_Cancel()
@@ -55,24 +55,24 @@ namespace Camozzi.Presentation.Presenters
             View.Close();
         }
 
-        public override void Run(Project argument,User senderUser)
+        public override void Run(ProjectDto argument,UserDto senderUser)
         {
             _proj = argument;
             _senderUser = senderUser;
             View.AllowUser = false;
 
-            if (_senderUser.Id == _proj.Creator.Id || _senderUser.Id == _proj.Worker.Id || _senderUser.Account.AllowCreateAll)
+            if (_senderUser.Id == _proj.Creator.Id || _senderUser.Id == _proj.Worker.Id || _senderUser.AccountDto.AllowCreateAll)
             {
                 View.AllowComment = true;
                 View.AllowChange = true;
-                if (_senderUser.Account.AllowCreateAll)
+                if (_senderUser.AccountDto.AllowCreateAll)
                 {
                     View.AllowUser = true;
                 }
             }
             else
             {
-                View.AllowComment = _senderUser.Account.AllowCommment;
+                View.AllowComment = _senderUser.AccountDto.AllowCommment;
                 View.AllowChange = false;
 
             }

@@ -2,98 +2,110 @@
 using System.Collections.Generic;
 using System.Linq;
 using Camozzi.Model.DataService;
+using Camozzi.Model.Services;
 
 namespace Camozzi.Model.Repository
 {
     public class ReclamationRepository : IReclamationRepository
     {
-        private List<Reclamation> _reclamations = new List<Reclamation>();
+        private List<ReclamationDto> _reclamation = new List<ReclamationDto>();
+        private readonly ILog _log;
 
-        public ReclamationRepository()
+        public ReclamationRepository(ILog log)
         {
-            UpdateReclamations();
+            UpdateContext();
+            _log = log;
         }
 
-        public List<Reclamation> GetAll()
+        public List<ReclamationDto> GetAll()
         {
-            return _reclamations;
+            return _reclamation;
         }
 
-        public IEnumerable<Reclamation> GetByDateAndDept(DateTime start, DateTime finish)
+        public IEnumerable<ReclamationDto> GetByDateAndDept(DateTime start, DateTime finish)
         {
-            return (from rec in _reclamations
+            return (from rec in _reclamation
                     //where rec.Start > start
                     where rec.Finish < finish
                     select rec).ToList();
         }
 
-        public List<Reclamation> GetByUser(int id)
+        public List<ReclamationDto> GetByUser(int id)
         {
-            return (from pr in _reclamations
+            return (from pr in _reclamation
                     where pr.UserId == id
                     select pr).ToList();
         }
 
-        public List<Reclamation> GetByManager(int id)
+        public List<ReclamationDto> GetByManager(int id)
         {
-            return (from pr in _reclamations
+            return (from pr in _reclamation
                     where pr.ManagerId == id
                     select pr).ToList();
         }
 
-        public List<Reclamation> GetAllByName(string name)
+        public List<ReclamationDto> GetAllByName(string name)
         {
-            return (from rec in _reclamations
+            return (from rec in _reclamation
                     where rec.Nomenclature.Contains(name)
                     select rec).ToList();
         }
 
         public event Action ReclamationUpdated;
 
-        public Reclamation FindById(int id)
+        public ReclamationDto FindById(int id)
         {
-            return _reclamations.Find(x => x.Id == id);
+            return _reclamation.Find(x => x.Id == id);
         }
 
-        public Reclamation FindByName(string name)
+        public ReclamationDto FindByName(string name)
         {
-            return _reclamations.Find(x => x.Nomenclature.Contains(name));
+            return _reclamation.Find(x => x.Nomenclature.Contains(name));
         }
 
-        public void Add(Reclamation t)
+        public void Add(ReclamationDto t)
         {
-            using (var client = new CServiceClient("NetTcpBinding_ICService"))
+            using (var client = new CServiceClient("BasicHttpBinding_ICService"))
             {
                 client.AddReclamation(t);
-                UpdateReclamations();
+                UpdateContext();
             }
         }
 
-        public void Delete(Reclamation t)
+        public void Delete(ReclamationDto t)
         {
-            using (var client = new CServiceClient("NetTcpBinding_ICService"))
+            using (var client = new CServiceClient("BasicHttpBinding_ICService"))
             {
                 client.DeleteReclamation(t);
-                UpdateReclamations();
+                UpdateContext();
             }
         }
 
-        public void Update(Reclamation t)
+        public void Update(ReclamationDto t)
         {
-            using (var client = new CServiceClient("NetTcpBinding_ICService"))
+            using (var client = new CServiceClient("BasicHttpBinding_ICService"))
             {
                 client.UpdateReclamation(t);
-                UpdateReclamations();
+                UpdateContext();
             }
         }
 
-        private void UpdateReclamations()
+        public void UpdateContext()
         {
-            using (var client = new CServiceClient("NetTcpBinding_ICService"))
+            try
             {
-                _reclamations = client.GetReclamations().ToList();
+                using (var client = new CServiceClient("BasicHttpBinding_ICService"))
+                {
+                    _reclamation = client.GetReclamations().ToList();
+                }
+                if (ReclamationUpdated != null) ReclamationUpdated();
             }
-            if (ReclamationUpdated != null) ReclamationUpdated();
+            catch (Exception ex)
+            {
+                _log.Error("ReclamatonUpdateContext",ex.InnerException.ToString());
+                
+            }
+
         }
 
     }

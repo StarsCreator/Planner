@@ -10,9 +10,9 @@ using Camozzi.Model.DataService;
 
 namespace Camozzi.Presentation.Presenters
 {
-    public class UserPresenter : BasePresenter<IUserView, User>, IPresenter<User>
+    public class UserPresenter : BasePresenter<IUserView, UserDto>, IPresenter<UserDto>
     {
-        User user;
+        UserDto user;
         public UserPresenter(IApplicationController controller, IUserView view)
             : base(controller, view)
         {
@@ -24,11 +24,11 @@ namespace Camozzi.Presentation.Presenters
             View.Close();
         }
 
-        public override void Run(User argument)
+        public override void Run(UserDto argument)
         {
             user = argument;
             View.Comment = user.Comment;
-            View.Dept = user.Dept.Description;
+            View.Dept = user.DeptDto.Description;
             View.Mail = user.Mail;
             View.UserName = user.Name;
             View.Show();

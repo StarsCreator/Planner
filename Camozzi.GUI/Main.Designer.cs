@@ -32,27 +32,18 @@ namespace Camozzi.GUI
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
-            WeekPlanner.DataColumns dataColumns5 = new WeekPlanner.DataColumns();
-            WeekPlanner.DataColumns dataColumns6 = new WeekPlanner.DataColumns();
-            WeekPlanner.DataColumns dataColumns7 = new WeekPlanner.DataColumns();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            WeekPlanner.DataColumns dataColumns8 = new WeekPlanner.DataColumns();
+            WeekPlanner.DataColumns dataColumns1 = new WeekPlanner.DataColumns();
+            WeekPlanner.DataColumns dataColumns2 = new WeekPlanner.DataColumns();
+            WeekPlanner.DataColumns dataColumns3 = new WeekPlanner.DataColumns();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series10 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            WeekPlanner.DataColumns dataColumns4 = new WeekPlanner.DataColumns();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.themeBox = new MetroFramework.Controls.MetroComboBox();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -88,8 +79,21 @@ namespace Camozzi.GUI
             this.editRec = new System.Windows.Forms.ToolStripMenuItem();
             this.delRec = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.mainTab = new System.Windows.Forms.TabPage();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+            this.lblWaitProj = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.lblCompProj = new System.Windows.Forms.Label();
+            this.lblWorkProj = new System.Windows.Forms.Label();
+            this.lblStopProj = new System.Windows.Forms.Label();
+            this.lblAllProj = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.splitContainer4 = new System.Windows.Forms.SplitContainer();
+            this.allTab = new System.Windows.Forms.TabPage();
             this.AllRecAndProj = new System.Windows.Forms.TabControl();
             this.AllProjectTab = new System.Windows.Forms.TabPage();
             this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
@@ -105,8 +109,8 @@ namespace Camozzi.GUI
             this.AllReclamationStartSet = new MetroFramework.Controls.MetroDateTime();
             this.AllReclamationDateSet = new MetroFramework.Controls.MetroTile();
             this.AllReclamationEndSet = new MetroFramework.Controls.MetroDateTime();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.tabControl3 = new System.Windows.Forms.TabControl();
+            this.selfTab = new System.Windows.Forms.TabPage();
+            this.SelfRecAndProj = new System.Windows.Forms.TabControl();
             this.SelfProjectTab = new System.Windows.Forms.TabPage();
             this.SelfReclamationTab = new System.Windows.Forms.TabPage();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
@@ -115,22 +119,8 @@ namespace Camozzi.GUI
             this.SelfReclamationStartSet = new MetroFramework.Controls.MetroDateTime();
             this.SelfReclamationDateSet = new MetroFramework.Controls.MetroTile();
             this.SelfReclamationEndSet = new MetroFramework.Controls.MetroDateTime();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.mainProjChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
-            this.splitContainer4 = new System.Windows.Forms.SplitContainer();
-            this.mainRecChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.lblAllProj = new System.Windows.Forms.Label();
-            this.lblStopProj = new System.Windows.Forms.Label();
-            this.lblWorkProj = new System.Windows.Forms.Label();
-            this.lblCompProj = new System.Windows.Forms.Label();
-            this.lblWaitProj = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.reportTab = new System.Windows.Forms.TabPage();
+            this.settingsTab = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.proj)).BeginInit();
             this.proj.Panel1.SuspendLayout();
             this.proj.Panel2.SuspendLayout();
@@ -152,31 +142,27 @@ namespace Camozzi.GUI
             this.ContextProj.SuspendLayout();
             this.ContextRec.SuspendLayout();
             this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            this.AllRecAndProj.SuspendLayout();
-            this.AllProjectTab.SuspendLayout();
-            this.metroPanel2.SuspendLayout();
-            this.AllReclamationTab.SuspendLayout();
-            this.metroPanel4.SuspendLayout();
-            this.tabPage3.SuspendLayout();
-            this.tabControl3.SuspendLayout();
-            this.SelfProjectTab.SuspendLayout();
-            this.SelfReclamationTab.SuspendLayout();
-            this.metroPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.mainProjChart)).BeginInit();
+            this.mainTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel1.SuspendLayout();
-            this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
-            this.splitContainer4.Panel2.SuspendLayout();
             this.splitContainer4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.mainRecChart)).BeginInit();
+            this.allTab.SuspendLayout();
+            this.AllRecAndProj.SuspendLayout();
+            this.AllProjectTab.SuspendLayout();
+            this.metroPanel2.SuspendLayout();
+            this.AllReclamationTab.SuspendLayout();
+            this.metroPanel4.SuspendLayout();
+            this.selfTab.SuspendLayout();
+            this.SelfRecAndProj.SuspendLayout();
+            this.SelfProjectTab.SuspendLayout();
+            this.SelfReclamationTab.SuspendLayout();
+            this.metroPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // notifyIcon1
@@ -213,7 +199,7 @@ namespace Camozzi.GUI
             // 
             this.AllProjectPlan.AutoScroll = true;
             this.AllProjectPlan.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(98)))), ((int)(((byte)(128)))));
-            this.AllProjectPlan.Columns = dataColumns5;
+            this.AllProjectPlan.Columns = dataColumns1;
             this.AllProjectPlan.CurrentDate = new System.DateTime(2015, 2, 11, 12, 4, 7, 90);
             this.AllProjectPlan.DatesIntervalMode = WeekPlanner.WeekPlannerMode.Daily;
             this.AllProjectPlan.DayCount = 7;
@@ -242,7 +228,7 @@ namespace Camozzi.GUI
             // AllReclamationPlan
             // 
             this.AllReclamationPlan.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(98)))), ((int)(((byte)(128)))));
-            this.AllReclamationPlan.Columns = dataColumns6;
+            this.AllReclamationPlan.Columns = dataColumns2;
             this.AllReclamationPlan.CurrentDate = new System.DateTime(2015, 2, 11, 12, 4, 17, 811);
             this.AllReclamationPlan.DatesIntervalMode = WeekPlanner.WeekPlannerMode.Daily;
             this.AllReclamationPlan.DayCount = 7;
@@ -257,8 +243,8 @@ namespace Camozzi.GUI
             this.AllReclamationPlan.HeaderFillLeftMarginColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(221)))), ((int)(((byte)(252)))));
             this.AllReclamationPlan.HeaderStyleMode = WeekPlanner.HeaderStyle.Aqua;
             this.AllReclamationPlan.IsAllowedDraggingBetweenRows = false;
-            this.AllReclamationPlan.IsAllowedStretchAndDrag = true;
-            this.AllReclamationPlan.IsAllowedTreeViewDrawing = true;
+            this.AllReclamationPlan.IsAllowedStretchAndDrag = false;
+            this.AllReclamationPlan.IsAllowedTreeViewDrawing = false;
             this.AllReclamationPlan.ItemHeight = 30;
             this.AllReclamationPlan.ItemTextFont = new System.Drawing.Font("Segoe UI", 9.75F);
             this.AllReclamationPlan.LeftMargin = 250;
@@ -340,7 +326,7 @@ namespace Camozzi.GUI
             // 
             this.SelfProjectStartSet.Location = new System.Drawing.Point(10, 10);
             this.SelfProjectStartSet.Margin = new System.Windows.Forms.Padding(10);
-            this.SelfProjectStartSet.MinimumSize = new System.Drawing.Size(4, 29);
+            this.SelfProjectStartSet.MinimumSize = new System.Drawing.Size(0, 29);
             this.SelfProjectStartSet.Name = "SelfProjectStartSet";
             this.SelfProjectStartSet.Size = new System.Drawing.Size(155, 29);
             this.SelfProjectStartSet.TabIndex = 4;
@@ -362,7 +348,7 @@ namespace Camozzi.GUI
             // 
             this.SelfProjectEndSet.Location = new System.Drawing.Point(10, 45);
             this.SelfProjectEndSet.Margin = new System.Windows.Forms.Padding(10);
-            this.SelfProjectEndSet.MinimumSize = new System.Drawing.Size(4, 29);
+            this.SelfProjectEndSet.MinimumSize = new System.Drawing.Size(0, 29);
             this.SelfProjectEndSet.Name = "SelfProjectEndSet";
             this.SelfProjectEndSet.Size = new System.Drawing.Size(155, 29);
             this.SelfProjectEndSet.TabIndex = 3;
@@ -370,7 +356,7 @@ namespace Camozzi.GUI
             // SelfProjectPlan
             // 
             this.SelfProjectPlan.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(98)))), ((int)(((byte)(128)))));
-            this.SelfProjectPlan.Columns = dataColumns7;
+            this.SelfProjectPlan.Columns = dataColumns3;
             this.SelfProjectPlan.CurrentDate = new System.DateTime(2015, 2, 11, 12, 4, 32, 321);
             this.SelfProjectPlan.DatesIntervalMode = WeekPlanner.WeekPlannerMode.Daily;
             this.SelfProjectPlan.DayCount = 7;
@@ -384,9 +370,9 @@ namespace Camozzi.GUI
             this.SelfProjectPlan.HeaderFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(168)))), ((int)(((byte)(192)))), ((int)(((byte)(234)))));
             this.SelfProjectPlan.HeaderFillLeftMarginColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(221)))), ((int)(((byte)(252)))));
             this.SelfProjectPlan.HeaderStyleMode = WeekPlanner.HeaderStyle.Aqua;
-            this.SelfProjectPlan.IsAllowedDraggingBetweenRows = true;
-            this.SelfProjectPlan.IsAllowedStretchAndDrag = true;
-            this.SelfProjectPlan.IsAllowedTreeViewDrawing = true;
+            this.SelfProjectPlan.IsAllowedDraggingBetweenRows = false;
+            this.SelfProjectPlan.IsAllowedStretchAndDrag = false;
+            this.SelfProjectPlan.IsAllowedTreeViewDrawing = false;
             this.SelfProjectPlan.ItemHeight = 30;
             this.SelfProjectPlan.ItemTextFont = new System.Drawing.Font("Segoe UI", 9.75F);
             this.SelfProjectPlan.LeftMargin = 250;
@@ -426,24 +412,24 @@ namespace Camozzi.GUI
             this.MetroTableProject.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.MetroTableProject.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.MetroTableProject.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.MetroTableProject.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.MetroTableProject.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.MetroTableProject.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.MetroTableProject.ContextMenuStrip = this.ContextNewProj;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.MetroTableProject.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.MetroTableProject.DefaultCellStyle = dataGridViewCellStyle2;
             this.MetroTableProject.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MetroTableProject.EnableHeadersVisualStyles = false;
             this.MetroTableProject.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
@@ -454,14 +440,14 @@ namespace Camozzi.GUI
             this.MetroTableProject.Name = "MetroTableProject";
             this.MetroTableProject.ReadOnly = true;
             this.MetroTableProject.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.MetroTableProject.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.MetroTableProject.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.MetroTableProject.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.MetroTableProject.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.MetroTableProject.Size = new System.Drawing.Size(595, 295);
@@ -484,19 +470,16 @@ namespace Camozzi.GUI
             // 
             // MetroChartProject
             // 
-            chartArea4.Name = "ChartArea1";
-            this.MetroChartProject.ChartAreas.Add(chartArea4);
+            chartArea1.Name = "ChartArea1";
+            this.MetroChartProject.ChartAreas.Add(chartArea1);
             this.MetroChartProject.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend4.Name = "Legend1";
-            this.MetroChartProject.Legends.Add(legend4);
             this.MetroChartProject.Location = new System.Drawing.Point(0, 0);
             this.MetroChartProject.Name = "MetroChartProject";
-            series6.ChartArea = "ChartArea1";
-            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
-            series6.Legend = "Legend1";
-            series6.Name = "Series1";
-            series6.YValuesPerPoint = 4;
-            this.MetroChartProject.Series.Add(series6);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series1.Name = "Series1";
+            series1.YValuesPerPoint = 4;
+            this.MetroChartProject.Series.Add(series1);
             this.MetroChartProject.Size = new System.Drawing.Size(565, 295);
             this.MetroChartProject.TabIndex = 19;
             this.MetroChartProject.Text = "chart1";
@@ -524,7 +507,7 @@ namespace Camozzi.GUI
             // SelfReclamationPlan
             // 
             this.SelfReclamationPlan.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(98)))), ((int)(((byte)(128)))));
-            this.SelfReclamationPlan.Columns = dataColumns8;
+            this.SelfReclamationPlan.Columns = dataColumns4;
             this.SelfReclamationPlan.CurrentDate = new System.DateTime(2015, 2, 11, 12, 4, 48, 804);
             this.SelfReclamationPlan.DatesIntervalMode = WeekPlanner.WeekPlannerMode.Daily;
             this.SelfReclamationPlan.DayCount = 7;
@@ -538,9 +521,9 @@ namespace Camozzi.GUI
             this.SelfReclamationPlan.HeaderFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(168)))), ((int)(((byte)(192)))), ((int)(((byte)(234)))));
             this.SelfReclamationPlan.HeaderFillLeftMarginColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(221)))), ((int)(((byte)(252)))));
             this.SelfReclamationPlan.HeaderStyleMode = WeekPlanner.HeaderStyle.Aqua;
-            this.SelfReclamationPlan.IsAllowedDraggingBetweenRows = true;
-            this.SelfReclamationPlan.IsAllowedStretchAndDrag = true;
-            this.SelfReclamationPlan.IsAllowedTreeViewDrawing = true;
+            this.SelfReclamationPlan.IsAllowedDraggingBetweenRows = false;
+            this.SelfReclamationPlan.IsAllowedStretchAndDrag = false;
+            this.SelfReclamationPlan.IsAllowedTreeViewDrawing = false;
             this.SelfReclamationPlan.ItemHeight = 30;
             this.SelfReclamationPlan.ItemTextFont = new System.Drawing.Font("Segoe UI", 9.75F);
             this.SelfReclamationPlan.LeftMargin = 250;
@@ -560,24 +543,24 @@ namespace Camozzi.GUI
             this.MetroTableReclamation.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.MetroTableReclamation.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.MetroTableReclamation.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.MetroTableReclamation.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.MetroTableReclamation.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.MetroTableReclamation.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.MetroTableReclamation.ContextMenuStrip = this.ContextNewRec;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.MetroTableReclamation.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.MetroTableReclamation.DefaultCellStyle = dataGridViewCellStyle5;
             this.MetroTableReclamation.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MetroTableReclamation.EnableHeadersVisualStyles = false;
             this.MetroTableReclamation.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
@@ -587,14 +570,14 @@ namespace Camozzi.GUI
             this.MetroTableReclamation.Name = "MetroTableReclamation";
             this.MetroTableReclamation.ReadOnly = true;
             this.MetroTableReclamation.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.MetroTableReclamation.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.MetroTableReclamation.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.MetroTableReclamation.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.MetroTableReclamation.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.MetroTableReclamation.Size = new System.Drawing.Size(1164, 307);
@@ -678,10 +661,11 @@ namespace Camozzi.GUI
             // tabControl1
             // 
             this.tabControl1.Alignment = System.Windows.Forms.TabAlignment.Left;
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Controls.Add(this.mainTab);
+            this.tabControl1.Controls.Add(this.allTab);
+            this.tabControl1.Controls.Add(this.selfTab);
+            this.tabControl1.Controls.Add(this.reportTab);
+            this.tabControl1.Controls.Add(this.settingsTab);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
             this.tabControl1.ItemSize = new System.Drawing.Size(60, 64);
@@ -693,29 +677,183 @@ namespace Camozzi.GUI
             this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControl1.TabIndex = 4;
             // 
-            // tabPage1
+            // mainTab
             // 
-            this.tabPage1.Controls.Add(this.splitContainer1);
-            this.tabPage1.Location = new System.Drawing.Point(68, 4);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.tabPage1.Size = new System.Drawing.Size(1184, 637);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Главная";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.mainTab.Controls.Add(this.splitContainer1);
+            this.mainTab.Location = new System.Drawing.Point(68, 4);
+            this.mainTab.Name = "mainTab";
+            this.mainTab.Padding = new System.Windows.Forms.Padding(3);
+            this.mainTab.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.mainTab.Size = new System.Drawing.Size(1184, 637);
+            this.mainTab.TabIndex = 0;
+            this.mainTab.Text = "Главная";
+            this.mainTab.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
+            // splitContainer1
             // 
-            this.tabPage2.Controls.Add(this.AllRecAndProj);
-            this.tabPage2.Location = new System.Drawing.Point(68, 4);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.tabPage2.Size = new System.Drawing.Size(1184, 637);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "План";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(3, 3);
+            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.splitContainer3);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.splitContainer4);
+            this.splitContainer1.Size = new System.Drawing.Size(1178, 631);
+            this.splitContainer1.SplitterDistance = 315;
+            this.splitContainer1.TabIndex = 1;
+            // 
+            // splitContainer3
+            // 
+            this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer3.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer3.Name = "splitContainer3";
+            // 
+            // splitContainer3.Panel1
+            // 
+            this.splitContainer3.Panel1.Controls.Add(this.lblWaitProj);
+            this.splitContainer3.Panel1.Controls.Add(this.label6);
+            this.splitContainer3.Panel1.Controls.Add(this.lblCompProj);
+            this.splitContainer3.Panel1.Controls.Add(this.lblWorkProj);
+            this.splitContainer3.Panel1.Controls.Add(this.lblStopProj);
+            this.splitContainer3.Panel1.Controls.Add(this.lblAllProj);
+            this.splitContainer3.Panel1.Controls.Add(this.label4);
+            this.splitContainer3.Panel1.Controls.Add(this.label3);
+            this.splitContainer3.Panel1.Controls.Add(this.label2);
+            this.splitContainer3.Panel1.Controls.Add(this.label1);
+            this.splitContainer3.Size = new System.Drawing.Size(1178, 315);
+            this.splitContainer3.SplitterDistance = 392;
+            this.splitContainer3.TabIndex = 0;
+            // 
+            // lblWaitProj
+            // 
+            this.lblWaitProj.AutoSize = true;
+            this.lblWaitProj.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblWaitProj.Location = new System.Drawing.Point(267, 71);
+            this.lblWaitProj.Name = "lblWaitProj";
+            this.lblWaitProj.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.lblWaitProj.Size = new System.Drawing.Size(29, 17);
+            this.lblWaitProj.TabIndex = 9;
+            this.lblWaitProj.Text = "123";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label6.Location = new System.Drawing.Point(68, 71);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(84, 17);
+            this.label6.TabIndex = 8;
+            this.label6.Text = "в ожидании";
+            // 
+            // lblCompProj
+            // 
+            this.lblCompProj.AutoSize = true;
+            this.lblCompProj.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblCompProj.Location = new System.Drawing.Point(267, 37);
+            this.lblCompProj.Name = "lblCompProj";
+            this.lblCompProj.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.lblCompProj.Size = new System.Drawing.Size(29, 17);
+            this.lblCompProj.TabIndex = 7;
+            this.lblCompProj.Text = "123";
+            // 
+            // lblWorkProj
+            // 
+            this.lblWorkProj.AutoSize = true;
+            this.lblWorkProj.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblWorkProj.Location = new System.Drawing.Point(267, 54);
+            this.lblWorkProj.Name = "lblWorkProj";
+            this.lblWorkProj.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.lblWorkProj.Size = new System.Drawing.Size(29, 17);
+            this.lblWorkProj.TabIndex = 6;
+            this.lblWorkProj.Text = "123";
+            // 
+            // lblStopProj
+            // 
+            this.lblStopProj.AutoSize = true;
+            this.lblStopProj.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblStopProj.Location = new System.Drawing.Point(267, 88);
+            this.lblStopProj.Name = "lblStopProj";
+            this.lblStopProj.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.lblStopProj.Size = new System.Drawing.Size(29, 17);
+            this.lblStopProj.TabIndex = 5;
+            this.lblStopProj.Text = "123";
+            // 
+            // lblAllProj
+            // 
+            this.lblAllProj.AutoSize = true;
+            this.lblAllProj.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblAllProj.Location = new System.Drawing.Point(267, 20);
+            this.lblAllProj.Name = "lblAllProj";
+            this.lblAllProj.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.lblAllProj.Size = new System.Drawing.Size(29, 17);
+            this.lblAllProj.TabIndex = 4;
+            this.lblAllProj.Text = "123";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label4.Location = new System.Drawing.Point(68, 88);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(114, 17);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "приостановлены";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label3.Location = new System.Drawing.Point(68, 54);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(63, 17);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "в работе";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.Location = new System.Drawing.Point(22, 37);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(122, 17);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "из них закончены";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Location = new System.Drawing.Point(22, 20);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(233, 17);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Общее количество проектов в базе";
+            // 
+            // splitContainer4
+            // 
+            this.splitContainer4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer4.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer4.Name = "splitContainer4";
+            this.splitContainer4.Size = new System.Drawing.Size(1178, 312);
+            this.splitContainer4.SplitterDistance = 392;
+            this.splitContainer4.TabIndex = 0;
+            // 
+            // allTab
+            // 
+            this.allTab.Controls.Add(this.AllRecAndProj);
+            this.allTab.Location = new System.Drawing.Point(68, 4);
+            this.allTab.Name = "allTab";
+            this.allTab.Padding = new System.Windows.Forms.Padding(3);
+            this.allTab.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.allTab.Size = new System.Drawing.Size(1184, 637);
+            this.allTab.TabIndex = 1;
+            this.allTab.Text = "План";
+            this.allTab.UseVisualStyleBackColor = true;
             // 
             // AllRecAndProj
             // 
@@ -790,7 +928,7 @@ namespace Camozzi.GUI
             // 
             this.AllProjectStartTimeSet.Location = new System.Drawing.Point(10, 10);
             this.AllProjectStartTimeSet.Margin = new System.Windows.Forms.Padding(10);
-            this.AllProjectStartTimeSet.MinimumSize = new System.Drawing.Size(4, 29);
+            this.AllProjectStartTimeSet.MinimumSize = new System.Drawing.Size(0, 29);
             this.AllProjectStartTimeSet.Name = "AllProjectStartTimeSet";
             this.AllProjectStartTimeSet.Size = new System.Drawing.Size(155, 29);
             this.AllProjectStartTimeSet.TabIndex = 4;
@@ -812,7 +950,7 @@ namespace Camozzi.GUI
             // 
             this.AllProjectsEndTimeSet.Location = new System.Drawing.Point(10, 45);
             this.AllProjectsEndTimeSet.Margin = new System.Windows.Forms.Padding(10);
-            this.AllProjectsEndTimeSet.MinimumSize = new System.Drawing.Size(4, 29);
+            this.AllProjectsEndTimeSet.MinimumSize = new System.Drawing.Size(0, 29);
             this.AllProjectsEndTimeSet.Name = "AllProjectsEndTimeSet";
             this.AllProjectsEndTimeSet.Size = new System.Drawing.Size(155, 29);
             this.AllProjectsEndTimeSet.TabIndex = 3;
@@ -907,28 +1045,28 @@ namespace Camozzi.GUI
             this.AllReclamationEndSet.Size = new System.Drawing.Size(155, 29);
             this.AllReclamationEndSet.TabIndex = 3;
             // 
-            // tabPage3
+            // selfTab
             // 
-            this.tabPage3.Controls.Add(this.tabControl3);
-            this.tabPage3.Location = new System.Drawing.Point(68, 4);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.tabPage3.Size = new System.Drawing.Size(1184, 637);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Задачи";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.selfTab.Controls.Add(this.SelfRecAndProj);
+            this.selfTab.Location = new System.Drawing.Point(68, 4);
+            this.selfTab.Name = "selfTab";
+            this.selfTab.Padding = new System.Windows.Forms.Padding(3);
+            this.selfTab.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.selfTab.Size = new System.Drawing.Size(1184, 637);
+            this.selfTab.TabIndex = 2;
+            this.selfTab.Text = "Задачи";
+            this.selfTab.UseVisualStyleBackColor = true;
             // 
-            // tabControl3
+            // SelfRecAndProj
             // 
-            this.tabControl3.Controls.Add(this.SelfProjectTab);
-            this.tabControl3.Controls.Add(this.SelfReclamationTab);
-            this.tabControl3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl3.Location = new System.Drawing.Point(3, 3);
-            this.tabControl3.Name = "tabControl3";
-            this.tabControl3.SelectedIndex = 0;
-            this.tabControl3.Size = new System.Drawing.Size(1178, 631);
-            this.tabControl3.TabIndex = 0;
+            this.SelfRecAndProj.Controls.Add(this.SelfProjectTab);
+            this.SelfRecAndProj.Controls.Add(this.SelfReclamationTab);
+            this.SelfRecAndProj.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.SelfRecAndProj.Location = new System.Drawing.Point(3, 3);
+            this.SelfRecAndProj.Name = "SelfRecAndProj";
+            this.SelfRecAndProj.SelectedIndex = 0;
+            this.SelfRecAndProj.Size = new System.Drawing.Size(1178, 631);
+            this.SelfRecAndProj.TabIndex = 0;
             // 
             // SelfProjectTab
             // 
@@ -1003,7 +1141,7 @@ namespace Camozzi.GUI
             // 
             this.SelfReclamationStartSet.Location = new System.Drawing.Point(10, 10);
             this.SelfReclamationStartSet.Margin = new System.Windows.Forms.Padding(10);
-            this.SelfReclamationStartSet.MinimumSize = new System.Drawing.Size(4, 29);
+            this.SelfReclamationStartSet.MinimumSize = new System.Drawing.Size(0, 29);
             this.SelfReclamationStartSet.Name = "SelfReclamationStartSet";
             this.SelfReclamationStartSet.Size = new System.Drawing.Size(155, 29);
             this.SelfReclamationStartSet.TabIndex = 4;
@@ -1025,236 +1163,29 @@ namespace Camozzi.GUI
             // 
             this.SelfReclamationEndSet.Location = new System.Drawing.Point(10, 45);
             this.SelfReclamationEndSet.Margin = new System.Windows.Forms.Padding(10);
-            this.SelfReclamationEndSet.MinimumSize = new System.Drawing.Size(4, 29);
+            this.SelfReclamationEndSet.MinimumSize = new System.Drawing.Size(0, 29);
             this.SelfReclamationEndSet.Name = "SelfReclamationEndSet";
             this.SelfReclamationEndSet.Size = new System.Drawing.Size(155, 29);
             this.SelfReclamationEndSet.TabIndex = 3;
             // 
-            // tabPage4
+            // reportTab
             // 
-            this.tabPage4.Location = new System.Drawing.Point(68, 4);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(1184, 637);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "Отчеты";
-            this.tabPage4.UseVisualStyleBackColor = true;
+            this.reportTab.Location = new System.Drawing.Point(68, 4);
+            this.reportTab.Name = "reportTab";
+            this.reportTab.Padding = new System.Windows.Forms.Padding(3);
+            this.reportTab.Size = new System.Drawing.Size(1184, 637);
+            this.reportTab.TabIndex = 3;
+            this.reportTab.Text = "Отчеты";
+            this.reportTab.UseVisualStyleBackColor = true;
             // 
-            // mainProjChart
+            // settingsTab
             // 
-            chartArea5.Name = "ChartArea1";
-            this.mainProjChart.ChartAreas.Add(chartArea5);
-            this.mainProjChart.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend5.Name = "Legend1";
-            this.mainProjChart.Legends.Add(legend5);
-            this.mainProjChart.Location = new System.Drawing.Point(0, 0);
-            this.mainProjChart.Name = "mainProjChart";
-            series7.BorderWidth = 5;
-            series7.ChartArea = "ChartArea1";
-            series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series7.LabelBorderWidth = 3;
-            series7.Legend = "Legend1";
-            series7.MarkerBorderWidth = 3;
-            series7.Name = "Series1";
-            series8.BorderWidth = 5;
-            series8.ChartArea = "ChartArea1";
-            series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series8.Legend = "Legend1";
-            series8.Name = "Series2";
-            this.mainProjChart.Series.Add(series7);
-            this.mainProjChart.Series.Add(series8);
-            this.mainProjChart.Size = new System.Drawing.Size(782, 315);
-            this.mainProjChart.TabIndex = 0;
-            this.mainProjChart.Text = "chart1";
-            // 
-            // splitContainer1
-            // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(3, 3);
-            this.splitContainer1.Name = "splitContainer1";
-            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer1.Panel1.Controls.Add(this.splitContainer3);
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.splitContainer4);
-            this.splitContainer1.Size = new System.Drawing.Size(1178, 631);
-            this.splitContainer1.SplitterDistance = 315;
-            this.splitContainer1.TabIndex = 1;
-            // 
-            // splitContainer3
-            // 
-            this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer3.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer3.Name = "splitContainer3";
-            // 
-            // splitContainer3.Panel1
-            // 
-            this.splitContainer3.Panel1.Controls.Add(this.lblWaitProj);
-            this.splitContainer3.Panel1.Controls.Add(this.label6);
-            this.splitContainer3.Panel1.Controls.Add(this.lblCompProj);
-            this.splitContainer3.Panel1.Controls.Add(this.lblWorkProj);
-            this.splitContainer3.Panel1.Controls.Add(this.lblStopProj);
-            this.splitContainer3.Panel1.Controls.Add(this.lblAllProj);
-            this.splitContainer3.Panel1.Controls.Add(this.label4);
-            this.splitContainer3.Panel1.Controls.Add(this.label3);
-            this.splitContainer3.Panel1.Controls.Add(this.label2);
-            this.splitContainer3.Panel1.Controls.Add(this.label1);
-            // 
-            // splitContainer3.Panel2
-            // 
-            this.splitContainer3.Panel2.Controls.Add(this.mainProjChart);
-            this.splitContainer3.Size = new System.Drawing.Size(1178, 315);
-            this.splitContainer3.SplitterDistance = 392;
-            this.splitContainer3.TabIndex = 0;
-            // 
-            // splitContainer4
-            // 
-            this.splitContainer4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer4.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer4.Name = "splitContainer4";
-            // 
-            // splitContainer4.Panel2
-            // 
-            this.splitContainer4.Panel2.Controls.Add(this.mainRecChart);
-            this.splitContainer4.Size = new System.Drawing.Size(1178, 312);
-            this.splitContainer4.SplitterDistance = 392;
-            this.splitContainer4.TabIndex = 0;
-            // 
-            // mainRecChart
-            // 
-            chartArea6.Name = "ChartArea1";
-            this.mainRecChart.ChartAreas.Add(chartArea6);
-            this.mainRecChart.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend6.Name = "Legend1";
-            this.mainRecChart.Legends.Add(legend6);
-            this.mainRecChart.Location = new System.Drawing.Point(0, 0);
-            this.mainRecChart.Name = "mainRecChart";
-            series9.BorderWidth = 5;
-            series9.ChartArea = "ChartArea1";
-            series9.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series9.LabelBorderWidth = 3;
-            series9.Legend = "Legend1";
-            series9.MarkerBorderWidth = 3;
-            series9.Name = "Series1";
-            series10.BorderWidth = 5;
-            series10.ChartArea = "ChartArea1";
-            series10.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series10.Legend = "Legend1";
-            series10.Name = "Series2";
-            this.mainRecChart.Series.Add(series9);
-            this.mainRecChart.Series.Add(series10);
-            this.mainRecChart.Size = new System.Drawing.Size(782, 312);
-            this.mainRecChart.TabIndex = 1;
-            this.mainRecChart.Text = "chart1";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(22, 20);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(233, 17);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Общее количество проектов в базе";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(22, 37);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(122, 17);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "из них закончены";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(68, 54);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(63, 17);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "в работе";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(68, 88);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(114, 17);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "приостановлены";
-            // 
-            // lblAllProj
-            // 
-            this.lblAllProj.AutoSize = true;
-            this.lblAllProj.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblAllProj.Location = new System.Drawing.Point(267, 20);
-            this.lblAllProj.Name = "lblAllProj";
-            this.lblAllProj.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.lblAllProj.Size = new System.Drawing.Size(29, 17);
-            this.lblAllProj.TabIndex = 4;
-            this.lblAllProj.Text = "123";
-            // 
-            // lblStopProj
-            // 
-            this.lblStopProj.AutoSize = true;
-            this.lblStopProj.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblStopProj.Location = new System.Drawing.Point(267, 88);
-            this.lblStopProj.Name = "lblStopProj";
-            this.lblStopProj.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.lblStopProj.Size = new System.Drawing.Size(29, 17);
-            this.lblStopProj.TabIndex = 5;
-            this.lblStopProj.Text = "123";
-            // 
-            // lblWorkProj
-            // 
-            this.lblWorkProj.AutoSize = true;
-            this.lblWorkProj.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblWorkProj.Location = new System.Drawing.Point(267, 54);
-            this.lblWorkProj.Name = "lblWorkProj";
-            this.lblWorkProj.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.lblWorkProj.Size = new System.Drawing.Size(29, 17);
-            this.lblWorkProj.TabIndex = 6;
-            this.lblWorkProj.Text = "123";
-            // 
-            // lblCompProj
-            // 
-            this.lblCompProj.AutoSize = true;
-            this.lblCompProj.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblCompProj.Location = new System.Drawing.Point(267, 37);
-            this.lblCompProj.Name = "lblCompProj";
-            this.lblCompProj.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.lblCompProj.Size = new System.Drawing.Size(29, 17);
-            this.lblCompProj.TabIndex = 7;
-            this.lblCompProj.Text = "123";
-            // 
-            // lblWaitProj
-            // 
-            this.lblWaitProj.AutoSize = true;
-            this.lblWaitProj.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblWaitProj.Location = new System.Drawing.Point(267, 71);
-            this.lblWaitProj.Name = "lblWaitProj";
-            this.lblWaitProj.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.lblWaitProj.Size = new System.Drawing.Size(29, 17);
-            this.lblWaitProj.TabIndex = 9;
-            this.lblWaitProj.Text = "123";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label6.Location = new System.Drawing.Point(68, 71);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(84, 17);
-            this.label6.TabIndex = 8;
-            this.label6.Text = "в ожидании";
+            this.settingsTab.Location = new System.Drawing.Point(68, 4);
+            this.settingsTab.Name = "settingsTab";
+            this.settingsTab.Size = new System.Drawing.Size(1184, 637);
+            this.settingsTab.TabIndex = 4;
+            this.settingsTab.Text = "Опции";
+            this.settingsTab.UseVisualStyleBackColor = true;
             // 
             // Main
             // 
@@ -1289,32 +1220,28 @@ namespace Camozzi.GUI
             this.ContextProj.ResumeLayout(false);
             this.ContextRec.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
-            this.AllRecAndProj.ResumeLayout(false);
-            this.AllProjectTab.ResumeLayout(false);
-            this.metroPanel2.ResumeLayout(false);
-            this.AllReclamationTab.ResumeLayout(false);
-            this.metroPanel4.ResumeLayout(false);
-            this.tabPage3.ResumeLayout(false);
-            this.tabControl3.ResumeLayout(false);
-            this.SelfProjectTab.ResumeLayout(false);
-            this.SelfReclamationTab.ResumeLayout(false);
-            this.metroPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.mainProjChart)).EndInit();
+            this.mainTab.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.splitContainer3.Panel1.ResumeLayout(false);
             this.splitContainer3.Panel1.PerformLayout();
-            this.splitContainer3.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
-            this.splitContainer4.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
             this.splitContainer4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.mainRecChart)).EndInit();
+            this.allTab.ResumeLayout(false);
+            this.AllRecAndProj.ResumeLayout(false);
+            this.AllProjectTab.ResumeLayout(false);
+            this.metroPanel2.ResumeLayout(false);
+            this.AllReclamationTab.ResumeLayout(false);
+            this.metroPanel4.ResumeLayout(false);
+            this.selfTab.ResumeLayout(false);
+            this.SelfRecAndProj.ResumeLayout(false);
+            this.SelfProjectTab.ResumeLayout(false);
+            this.SelfReclamationTab.ResumeLayout(false);
+            this.metroPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1356,14 +1283,14 @@ namespace Camozzi.GUI
         private MetroFramework.Controls.MetroGrid MetroTableProject;
         private System.Windows.Forms.DataVisualization.Charting.Chart MetroChartProject;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.TabPage mainTab;
+        private System.Windows.Forms.TabPage allTab;
+        private System.Windows.Forms.TabPage selfTab;
+        private System.Windows.Forms.TabPage reportTab;
         private System.Windows.Forms.TabControl AllRecAndProj;
         private System.Windows.Forms.TabPage AllProjectTab;
         private System.Windows.Forms.TabPage AllReclamationTab;
-        private System.Windows.Forms.TabControl tabControl3;
+        private System.Windows.Forms.TabControl SelfRecAndProj;
         private System.Windows.Forms.TabPage SelfProjectTab;
         private System.Windows.Forms.TabPage SelfReclamationTab;
         private MetroFramework.Controls.MetroPanel metroPanel1;
@@ -1384,11 +1311,9 @@ namespace Camozzi.GUI
         private MetroFramework.Controls.MetroDateTime AllReclamationStartSet;
         private MetroFramework.Controls.MetroTile AllReclamationDateSet;
         private MetroFramework.Controls.MetroDateTime AllReclamationEndSet;
-        private System.Windows.Forms.DataVisualization.Charting.Chart mainProjChart;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.SplitContainer splitContainer3;
         private System.Windows.Forms.SplitContainer splitContainer4;
-        private System.Windows.Forms.DataVisualization.Charting.Chart mainRecChart;
         private System.Windows.Forms.Label lblCompProj;
         private System.Windows.Forms.Label lblWorkProj;
         private System.Windows.Forms.Label lblStopProj;
@@ -1399,6 +1324,7 @@ namespace Camozzi.GUI
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblWaitProj;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TabPage settingsTab;
 
     }
 }

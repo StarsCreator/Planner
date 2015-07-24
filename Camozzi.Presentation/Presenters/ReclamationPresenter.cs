@@ -7,10 +7,10 @@ using Camozzi.Presentation.Views;
 
 namespace Camozzi.Presentation.Presenters
 {
-    public class ReclamationPresenter : BasePresenter<IReclamationView, Reclamation,User>
+    public class ReclamationPresenter : BasePresenter<IReclamationView, ReclamationDto,UserDto>
     {
-        Reclamation _rec;
-        User _senderUser;
+        ReclamationDto _rec;
+        UserDto _senderUser;
         private readonly IUserRepository _users;
 
         public ReclamationPresenter(IApplicationController controller, IReclamationView view, IUserRepository users)
@@ -26,12 +26,12 @@ namespace Camozzi.Presentation.Presenters
 
         void View_Mgr()
         {
-            Controller.Run<UserPresenter, User>(_users.FindByName(View.SelectedManager));
+            Controller.Run<UserPresenter, UserDto>(_users.FindByName(View.SelectedManager));
         }
 
         void View_Usr()
         {
-            Controller.Run<UserPresenter, User>(_users.FindByName(View.SelectedUser));
+            Controller.Run<UserPresenter, UserDto>(_users.FindByName(View.SelectedUser));
         }
 
         void View_Cancel()
@@ -62,18 +62,18 @@ namespace Camozzi.Presentation.Presenters
             View.Close();
         }
 
-        public override void Run(Reclamation argument,User senderUser)
+        public override void Run(ReclamationDto argument,UserDto senderUser)
         {
             _rec = argument;
             _senderUser = senderUser;
-            if (_senderUser == _rec.Creator || _senderUser == _rec.Worker || _senderUser.Account.AllowCreateAll)
+            if (_senderUser == _rec.Creator || _senderUser == _rec.Worker || _senderUser.AccountDto.AllowCreateAll)
             {
                 View.AllowComment = true;
                 View.AllowChange = true;
             }
             else
             {
-                View.AllowComment = _senderUser.Account.AllowCommment;
+                View.AllowComment = _senderUser.AccountDto.AllowCommment;
                 View.AllowChange = false;
             }
             View.Start = _rec.Start;

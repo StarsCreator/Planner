@@ -4,16 +4,19 @@ using Camozzi.Presentation.Injection;
 using Camozzi.Presentation.Views;
 using System;
 using System.Linq;
+using System.Timers;
 using Camozzi.Model.DataService;
 using WeekPlanner;
 
 namespace Camozzi.Presentation.Presenters
 {
-    public class MainPresenter : BasePresenter<IMainView, User>
+    public class MainPresenter : BasePresenter<IMainView, UserDto>
     {
-        private User _mainUser; //пользователь
-        private Project _updatedProject;
-        private Reclamation _updatedReclamation;
+        private UserDto _mainUser; //пользователь
+        private ProjectDto _updatedProject;
+        private ReclamationDto _updatedReclamation;
+
+        private readonly Timer _timer = new Timer(10000);
 
         private readonly IChartService _chartService;
         private readonly ITableService _tableService;
@@ -46,17 +49,36 @@ namespace Camozzi.Presentation.Presenters
 
             _projects.ProjectUpdated += _projects_ProjectUpdated;
             _reclamations.ReclamationUpdated += _reclamations_ReclamationUpdated;
+
+            _timer.Elapsed += _timer_Elapsed;
+        }
+
+        private void _timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            _timer.Stop();
+            //_users.UpdateContext();
+            //_projects.UpdateContext();
+            //if (_mainUser.AccountDto.AllowReclamation)
+            //{
+            //    _reclamations.UpdateContext();
+            //}
+
+            GC.Collect();
+            _timer.Start();
         }
 
         private void _reclamations_ReclamationUpdated()
         {
+            _timer.Stop();
             ReCreateReclamations(DateTime.Today, DateTime.Today.AddDays(10));
             ReCreateSelfReclamation(DateTime.Today, DateTime.Today);
             View.TableReclamation = _tableService.GetReclamationTable(_reclamations.GetByUser(_mainUser.Id));
-            
+            _timer.Start();
         }
+
         private void _projects_ProjectUpdated()
         {
+            _timer.Stop();
             ReCreateProjects(DateTime.Today, DateTime.Today.AddDays(10));
             ReCreateSelfProjects(DateTime.Today, DateTime.Today);
             View.TableProject = _tableService.GetProjectTable(_projects.GetByUser(_mainUser.Id));
@@ -65,13 +87,15 @@ namespace Camozzi.Presentation.Presenters
             View.stopProj = _projects.GetCountByState(States.Suspended);
             View.workProj = _projects.GetCountByState(States.Work);
             View.waitProj = _projects.GetCountByState(States.Queue);
+            _timer.Start();
         }
 
         private void View_CreateReclamation()
         {
             try
             {
-                _updatedReclamation = new Reclamation()
+                _timer.Stop();
+                _updatedReclamation = new ReclamationDto()
                 {
                     Start = DateTime.Today,
                     Finish = DateTime.Today.AddDays(3),
@@ -85,20 +109,26 @@ namespace Camozzi.Presentation.Presenters
                     Client = "Тут может быть любая информация, касающаяся клиента...",
                     Comment = "Тут может быть любая информация, касающаяся рекламации/задачи/деятельности..."
                 };
-                Controller.Run<ReclamationPresenter, Reclamation, User>(_updatedReclamation, _mainUser);
+                Controller.Run<ReclamationPresenter, ReclamationDto, UserDto>(_updatedReclamation, _mainUser);
+                _timer.Start();
                 if (!_updatedReclamation.AllowChanges) return;
                 _reclamations.Add(_updatedReclamation);
             }
             catch (Exception ex)
             {
-                _log.Error("View_CreateReclamation", ex.Message);
+                lock (View)
+                {
+                    _log.Error("View_CreateReclamation", ex.Message);
+                }
             }
         }
+
         private void View_CreateProject()
         {
             try
             {
-                _updatedProject = new Project()
+                _timer.Stop();
+                _updatedProject = new ProjectDto()
 
                 {
                     Start = DateTime.Today,
@@ -110,17 +140,21 @@ namespace Camozzi.Presentation.Presenters
                     Creator = _mainUser,
                     CreatorId = _mainUser.Id,
                     CreationDate = DateTime.Today,
-                    Depts = _mainUser.Dept,
+                    DeptsDto = _mainUser.DeptDto,
                     DeptId = _mainUser.DeptId,
                     Comment = "Тут может быть любая информация, касающаяся проекта/задачи/деятельности...",
                 };
-                Controller.Run<ProjectPresenter, Project, User>(_updatedProject, _mainUser);
+                Controller.Run<ProjectPresenter, ProjectDto, UserDto>(_updatedProject, _mainUser);
+                _timer.Start();
                 if (!_updatedProject.AllowChanges) return;
                 _projects.Add(_updatedProject);
             }
             catch (Exception ex)
             {
-                _log.Error("View_CreateProject", ex.Message);
+                lock (View)
+                {
+                    _log.Error("View_CreateProject", ex.Message);
+                }
             }
         }
 
@@ -128,28 +162,39 @@ namespace Camozzi.Presentation.Presenters
         {
             try
             {
+                _timer.Stop();
                 _updatedProject = _projects.FindById(obj);
-                Controller.Run<ProjectPresenter, Project, User>(_updatedProject, _mainUser);
+                Controller.Run<ProjectPresenter, ProjectDto, UserDto>(_updatedProject, _mainUser);
+                _timer.Start();
                 if (!_updatedProject.AllowChanges) return;
                 _projects.Update(_updatedProject);
             }
             catch (Exception ex)
             {
-                _log.Error("View_TableProjectClick", ex.Message);
+                lock (View)
+                {
+                    _log.Error("View_TableProjectClick", ex.Message);
+                }
             }
         }
+
         private void View_TableReclamationClick(int obj)
         {
             try
             {
+                _timer.Stop();
                 _updatedReclamation = _reclamations.FindById(obj);
-                Controller.Run<ReclamationPresenter, Reclamation, User>(_updatedReclamation, _mainUser);
+                Controller.Run<ReclamationPresenter, ReclamationDto, UserDto>(_updatedReclamation, _mainUser);
+                _timer.Start();
                 if (!_updatedReclamation.AllowChanges) return;
                 _reclamations.Update(_updatedReclamation);
             }
             catch (Exception ex)
             {
-                _log.Error("View_TableReclamationClick", ex.Message);
+                lock (View)
+                {
+                    _log.Error("View_TableReclamationClick", ex.Message);
+                }
             }
         }
 
@@ -157,26 +202,37 @@ namespace Camozzi.Presentation.Presenters
         {
             try
             {
+                _timer.Stop();
                 _projects.Delete(_projects.FindById(obj));
                 View.TableProject = _tableService.GetProjectTable(_projects.GetByUser(_mainUser.Id));
-                ReCreateSelfProjects(DateTime.Today, DateTime.Today);
-                ReCreateProjects(DateTime.Today, DateTime.Today.AddDays(10));
+                //ReCreateSelfProjects(DateTime.Today, DateTime.Today);
+                //ReCreateProjects(DateTime.Today, DateTime.Today.AddDays(10));
+                _timer.Start();
             }
             catch (Exception ex)
             {
-                _log.Error("View_DeleteProject", ex.Message);
+                lock (View)
+                {
+                    _log.Error("View_DeleteProject", ex.Message);
+                }
             }
         }
+
         private void View_DeleteReclamation(int obj)
         {
             try
             {
+                _timer.Stop();
                 _reclamations.Delete(_reclamations.FindById(obj));
                 View.TableReclamation = _tableService.GetReclamationTable(_reclamations.GetByUser(_mainUser.Id));
+                _timer.Start();
             }
             catch (Exception ex)
             {
-                _log.Error("View_DeleteProject", ex.Message);
+                lock (View)
+                {
+                    _log.Error("View_DeleteProject", ex.Message);
+                }
             }
         }
 
@@ -184,31 +240,42 @@ namespace Camozzi.Presentation.Presenters
         {
             try
             {
+                _timer.Stop();
                 _updatedReclamation = _reclamations.FindById(Int32.Parse(e.Item.Name));
-                Controller.Run<ReclamationPresenter, Reclamation, User>(_updatedReclamation, _mainUser);
+                Controller.Run<ReclamationPresenter, ReclamationDto, UserDto>(_updatedReclamation, _mainUser);
+                _timer.Start();
                 if (!_updatedReclamation.AllowChanges) return;
                 _reclamations.Update(_updatedReclamation);
             }
             catch (Exception ex)
             {
-                _log.Error("View_SelfReclamationsItemDoubleClick", ex.Message);
+                lock (View)
+                {
+                    _log.Error("View_SelfReclamationsItemDoubleClick", ex.Message);
+                }
             }
         }
+
         private void View_SelfProjectsItemDoubleClick(object sender, WeekPlannerItemEventArgs e)
         {
             try
             {
+                _timer.Stop();
                 _updatedProject = _projects.FindById(Int32.Parse(e.Item.Name));
-                Controller.Run<ProjectPresenter, Project, User>(_updatedProject, _mainUser);
+                Controller.Run<ProjectPresenter, ProjectDto, UserDto>(_updatedProject, _mainUser);
+                _timer.Start();
                 if (!_updatedProject.AllowChanges) return;
                 _projects.Update(_updatedProject);
-                ReCreateSelfProjects(DateTime.Today, DateTime.Today);
+                //ReCreateSelfProjects(DateTime.Today, DateTime.Today);
                 //TODO: add date
-                ReCreateProjects(DateTime.Today, DateTime.Today.AddDays(10));
+                //ReCreateProjects(DateTime.Today, DateTime.Today.AddDays(10));
             }
             catch (Exception ex)
             {
-                _log.Error("View_SelfProjectsItemDoubleClick", ex.Message);
+                lock (View)
+                {
+                    _log.Error("View_SelfProjectsItemDoubleClick", ex.Message);
+                }
             }
         }
 
@@ -216,86 +283,106 @@ namespace Camozzi.Presentation.Presenters
         {
             try
             {
+                _timer.Stop();
                 _updatedReclamation = _reclamations.FindById(Int32.Parse(e.Item.Name));
-                Controller.Run<ReclamationPresenter, Reclamation, User>(_updatedReclamation, _mainUser);
+                Controller.Run<ReclamationPresenter, ReclamationDto, UserDto>(_updatedReclamation, _mainUser);
+                _timer.Start();
                 if (!_updatedReclamation.AllowChanges) return;
-                    _reclamations.Update(_updatedReclamation);
+                _reclamations.Update(_updatedReclamation);
             }
             catch (Exception ex)
             {
-                _log.Error("View_AllReclamationsItemDoubleClick", ex.Message);
+                lock (View)
+                {
+                    _log.Error("View_AllReclamationsItemDoubleClick", ex.Message);
+                }
             }
         }
+
         private void View_AllProjectsItemDoubleClick(object sender, WeekPlannerItemEventArgs e)
         {
             try
             {
+                _timer.Stop();
                 _updatedProject = _projects.FindById(Int32.Parse(e.Item.Name));
-                Controller.Run<ProjectPresenter, Project, User>(_updatedProject, _mainUser);
+                Controller.Run<ProjectPresenter, ProjectDto, UserDto>(_updatedProject, _mainUser);
+                _timer.Start();
                 if (!_updatedProject.AllowChanges) return;
                 _projects.Update(_updatedProject);
-                ReCreateSelfProjects(DateTime.Today, DateTime.Today);
+                //ReCreateSelfProjects(DateTime.Today, DateTime.Today);
                 //TODO: add date
-                ReCreateProjects(DateTime.Today, DateTime.Today.AddDays(10));
+                //ReCreateProjects(DateTime.Today, DateTime.Today.AddDays(10));
             }
             catch (Exception ex)
             {
-                _log.Error("View_AllProjectsItemDoubleClick", ex.Message);
+                lock (View)
+                {
+                    _log.Error("View_AllProjectsItemDoubleClick", ex.Message);
+                }
             }
         }
 
         private void ReCreateSelfProjects(DateTime start, DateTime finish)
         {
-            try
+            lock (View)
             {
-                View.ClearSelfProjects();
-                View.SelfProjectsRows.Add(View.GetNewRowAllProjects(_mainUser.Name));
-                //TODO something wrong
-                var proj = _projects.GetByUser(_mainUser.Id);
+                try
+                {
+                    View.ClearSelfProjects();
+                    View.SelfProjectsRows.Add(View.GetNewRowAllProjects(_mainUser.Name));
+                    //TODO something wrong
+                    var list = _projects.GetByUser(_mainUser.Id);
 
-                foreach (var item in proj.Select(_proj => new WeekPlannerItem
-                {
-                    StartDate = _proj.Start,
-                    EndDate = _proj.Finish,
-                    Subject = _proj.Name,
-                    Name = _proj.Id.ToString(),
-                    Tag = _proj,
-                    State = (States) _proj.State
-                }))
-                {
-                    View.SelfProjectsRows.First().Items.Add(item);
+                    foreach (var item in list.Select(proj => new WeekPlannerItem
+                    {
+                        StartDate = proj.Start,
+                        EndDate = proj.Finish,
+                        Subject = proj.Name,
+                        Name = proj.Id.ToString(),
+                        Tag = proj,
+                        State = (States) proj.State,
+                        Priority = Convert.ToBoolean(proj.Priority)
+                    }))
+                    {
+                        View.SelfProjectsRows.First().Items.Add(item);
+                    }
+                    View.ChartSelfProject = _chartService.GetTable(_projects.GetByUser(_mainUser.Id), _mainUser);
                 }
-            }
-            catch (Exception ex)
-            {
-                _log.Error("RecreateSelfProjects", ex.Message);
+                catch (Exception ex)
+                {
+                    _log.Error("RecreateSelfProjects", ex.Message);
+                }
             }
         }
+
         private void ReCreateSelfReclamation(DateTime start, DateTime finish)
         {
-            try
+            lock (View)
             {
-                View.ClearSelfReclamations();
-                View.SelfReclamationsRows.Add(View.GetNewRowAllReclamations(_mainUser.Name));
-                //TODO something wrong
-                var proj = _reclamations.GetByUser(_mainUser.Id);
+                try
+                {
+                    View.ClearSelfReclamations();
+                    View.SelfReclamationsRows.Add(View.GetNewRowAllReclamations(_mainUser.Name));
+                    //TODO something wrong
+                    var reclamationDtos = _reclamations.GetByUser(_mainUser.Id);
 
-                foreach (var item in proj.Select(_proj => new WeekPlannerItem
-                {
-                    StartDate = _proj.Start,
-                    EndDate = _proj.Finish,
-                    Subject = _proj.Nomenclature,
-                    Name = _proj.Id.ToString(),
-                    Tag = _proj,
-                    State = (States)_proj.State
-                }))
-                {
-                    View.SelfReclamationsRows.First().Items.Add(item);
+                    foreach (var item in reclamationDtos.Select(proj => new WeekPlannerItem
+                    {
+                        StartDate = proj.Start,
+                        EndDate = proj.Finish,
+                        Subject = proj.Nomenclature,
+                        Name = proj.Id.ToString(),
+                        Tag = proj,
+                        State = (States) proj.State
+                    }))
+                    {
+                        View.SelfReclamationsRows.First().Items.Add(item);
+                    }
                 }
-            }
-            catch (Exception ex)
-            {
-                _log.Error("RecreateSelfReclamations", ex.Message);
+                catch (Exception ex)
+                {
+                    _log.Error("RecreateSelfReclamations", ex.Message);
+                }
             }
         }
 
@@ -307,78 +394,97 @@ namespace Camozzi.Presentation.Presenters
 
                 var users = _users.FindByDept(_mainUser.DeptId); //////!!!!!!!
 
-                foreach (var user in users.Where(user => user.Account.AllowRow))
+                foreach (var user in users.Where(user => user.AccountDto.AllowRow))
                 {
                     user.AllProjectsRow = View.GetNewRowAllProjects(user.Name);
                     View.AllProjectsRows.Add((WeekPlannerRow) user.AllProjectsRow);
                 }
 
-                var proj = _projects.GetByDateAndDept(start, finish, _mainUser.DeptId); ///////!!!!!!!
+                var projs = _projects.GetByDateAndDept(start, finish, _mainUser.DeptId); ///////!!!!!!!
 
 
-                foreach (var _proj in proj)
+                foreach (var proj in projs)
                 {
-                    var item = new WeekPlannerItem
-                    {
-                        StartDate = _proj.Start,
-                        EndDate = _proj.Finish,
-                        Subject = _proj.Name,
-                        Name = _proj.Id.ToString(),
-                        Tag = _proj,
-                        State = (States) _proj.State
-                    };
 
-                    var row = (WeekPlannerRow) (_users.FindById(_proj.Worker.Id)).AllProjectsRow;
-                    row.Items.Add(item);
+                    {
+                        var item = new WeekPlannerItem
+                        {
+                            StartDate = proj.Start,
+                            EndDate = proj.Finish,
+                            Subject = proj.Name,
+                            Name = proj.Id.ToString(),
+                            Tag = proj,
+                            State = (States) proj.State,
+                            Priority = Convert.ToBoolean(proj.Priority)
+                        };
+                        try
+                        {
+                            var row = (WeekPlannerRow) (_users.FindById(proj.Worker.Id)).AllProjectsRow;
+                            row.Items.Add(item);
+                        }
+                        catch (Exception)
+                        {
+                            
+                            _projects.Delete(proj);
+                        }
+
+                    }
                 }
             }
             catch (Exception ex)
             {
-                _log.Error("RecreateProjects", ex.Message);
+                lock (View)
+                {
+                    _log.Error("RecreateProjects", ex.Message);
+                }
             }
         }
+
         private void ReCreateReclamations(DateTime start, DateTime finish)
         {
-            try
+            lock (View)
             {
-                View.ClearAllReclamations();
-
-                var users = _users.FindByDept(2); //////!!!!!!!
-                foreach (var user in users.Where(user => user.Account.AllowRow))
+                try
                 {
-                    user.AllReclamationRow = View.GetNewRowAllReclamations(user.Name);
-                    View.AllReclamationsRows.Add((WeekPlannerRow) user.AllReclamationRow);
-                }
+                    View.ClearAllReclamations();
 
-                var recs = _reclamations.GetByDateAndDept(start, finish); ///////!!!!!!!
-
-
-                foreach (var reclamation in recs)
-                {
-                    var item = new WeekPlannerItem
+                    var users = _users.FindByDept(2); //////!!!!!!!
+                    foreach (var user in users.Where(user => user.AccountDto.AllowRow))
                     {
-                        StartDate = reclamation.Start,
-                        EndDate = reclamation.Finish,
-                        Subject = reclamation.Nomenclature,
-                        Name = reclamation.Id.ToString(),
-                        Tag = reclamation,
-                        State = (States) reclamation.State
-                    };
+                        user.AllReclamationRow = View.GetNewRowAllReclamations(user.Name);
+                        View.AllReclamationsRows.Add((WeekPlannerRow) user.AllReclamationRow);
+                    }
 
-                    var row = (WeekPlannerRow)(_users.FindById(reclamation.Worker.Id)).AllReclamationRow;
-                    row.Items.Add(item);
+                    var recs = _reclamations.GetByDateAndDept(start, finish); ///////!!!!!!!
+
+
+                    foreach (var reclamation in recs)
+                    {
+                        var item = new WeekPlannerItem
+                        {
+                            StartDate = reclamation.Start,
+                            EndDate = reclamation.Finish,
+                            Subject = reclamation.Nomenclature,
+                            Name = reclamation.Id.ToString(),
+                            Tag = reclamation,
+                            State = (States) reclamation.State
+                        };
+
+                        var row = (WeekPlannerRow) (_users.FindById(reclamation.Worker.Id)).AllReclamationRow;
+                        row.Items.Add(item);
+                    }
                 }
-            }
-            catch (Exception ex)
-            {
-                _log.Error("RecreateReclamations", ex.Message);
+                catch (Exception ex)
+                {
+                    _log.Error("RecreateReclamations", ex.Message);
+                }
             }
         }
 
-        public override void Run(User argument)
+        public override void Run(UserDto argument)
         {
             _mainUser = argument;
-            View.AllowReclamation = _mainUser.Account.AllowReclamation;
+            View.AllowReclamation = _mainUser.AccountDto.AllowReclamation;
             View.Show();
 
             View.ChartProject = _chartService.GetTable(_projects.GetAll().ToList());
@@ -398,6 +504,8 @@ namespace Camozzi.Presentation.Presenters
             View.stopProj = _projects.GetCountByState(States.Suspended);
             View.workProj = _projects.GetCountByState(States.Work);
             View.waitProj = _projects.GetCountByState(States.Queue);
+
+            _timer.Start();
         }
     }
 }

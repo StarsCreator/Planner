@@ -7,15 +7,15 @@ namespace Camozzi.Model.Services
 {
     public interface ITableService
     {
-        DataTable GetProjectTable(IEnumerable<Project> projects);
-        DataTable GetReclamationTable(IEnumerable<Reclamation> reclamations);
+        DataTable GetProjectTable(IEnumerable<ProjectDto> projects);
+        DataTable GetReclamationTable(IEnumerable<ReclamationDto> reclamations);
     }
 
     public class TableService:ITableService
     {
         private string _temp="Состояние не известно";
 
-        public  DataTable GetProjectTable(IEnumerable<Project> projects)
+        public  DataTable GetProjectTable(IEnumerable<ProjectDto> projects)
         {
             var table = new DataTable();
             var idColumn = new DataColumn
@@ -105,7 +105,7 @@ namespace Camozzi.Model.Services
             return table;
         }
 
-        public DataTable GetReclamationTable(IEnumerable<Reclamation> reclamations)
+        public DataTable GetReclamationTable(IEnumerable<ReclamationDto> reclamations)
         {
             var table = new DataTable();
             var idColumn = new DataColumn

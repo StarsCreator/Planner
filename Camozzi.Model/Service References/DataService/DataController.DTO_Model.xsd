@@ -1,41 +1,41 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/DataController.DTO_Model" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/DataController.DTO_Model" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:complexType name="ArrayOfProject">
+  <xs:complexType name="ArrayOfProjectDto">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Project" nillable="true" type="tns:Project" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ProjectDto" nillable="true" type="tns:ProjectDto" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfProject" nillable="true" type="tns:ArrayOfProject" />
-  <xs:complexType name="Project">
+  <xs:element name="ArrayOfProjectDto" nillable="true" type="tns:ArrayOfProjectDto" />
+  <xs:complexType name="ProjectDto">
     <xs:sequence>
       <xs:element minOccurs="0" name="AllowChanges" type="xs:boolean" />
       <xs:element minOccurs="0" name="Comment" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="CreationDate" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="Creator" nillable="true" type="tns:User" />
+      <xs:element minOccurs="0" name="Creator" nillable="true" type="tns:UserDto" />
       <xs:element minOccurs="0" name="CreatorId" type="xs:int" />
       <xs:element minOccurs="0" name="DeptId" type="xs:int" />
-      <xs:element minOccurs="0" name="Depts" nillable="true" type="tns:Dept" />
+      <xs:element minOccurs="0" name="DeptsDto" nillable="true" type="tns:DeptDto" />
       <xs:element minOccurs="0" name="Finish" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
-      <xs:element minOccurs="0" name="Manager" nillable="true" type="tns:User" />
+      <xs:element minOccurs="0" name="Manager" nillable="true" type="tns:UserDto" />
       <xs:element minOccurs="0" name="ManagerId" type="xs:int" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Priority" type="xs:int" />
       <xs:element minOccurs="0" name="Start" type="xs:dateTime" />
       <xs:element minOccurs="0" name="State" type="xs:int" />
       <xs:element minOccurs="0" name="UserId" type="xs:int" />
-      <xs:element minOccurs="0" name="Worker" nillable="true" type="tns:User" />
+      <xs:element minOccurs="0" name="Worker" nillable="true" type="tns:UserDto" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="Project" nillable="true" type="tns:Project" />
-  <xs:complexType name="User">
+  <xs:element name="ProjectDto" nillable="true" type="tns:ProjectDto" />
+  <xs:complexType name="UserDto">
     <xs:sequence>
-      <xs:element minOccurs="0" name="Account" nillable="true" type="tns:Account" />
+      <xs:element minOccurs="0" name="AccountDto" nillable="true" type="tns:AccountDto" />
       <xs:element minOccurs="0" name="AccountId" type="xs:int" />
       <xs:element minOccurs="0" name="AllProjectsRow" nillable="true" type="xs:anyType" />
       <xs:element minOccurs="0" name="AllReclamationRow" nillable="true" type="xs:anyType" />
       <xs:element minOccurs="0" name="Comment" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Dept" nillable="true" type="tns:Dept" />
+      <xs:element minOccurs="0" name="DeptDto" nillable="true" type="tns:DeptDto" />
       <xs:element minOccurs="0" name="DeptId" type="xs:int" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="Mail" nillable="true" type="xs:string" />
@@ -45,8 +45,8 @@
       <xs:element minOccurs="0" name="SelfReclamationRow" nillable="true" type="xs:anyType" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="User" nillable="true" type="tns:User" />
-  <xs:complexType name="Account">
+  <xs:element name="UserDto" nillable="true" type="tns:UserDto" />
+  <xs:complexType name="AccountDto">
     <xs:sequence>
       <xs:element minOccurs="0" name="AllowCommment" type="xs:boolean" />
       <xs:element minOccurs="0" name="AllowCreateAll" type="xs:boolean" />
@@ -57,27 +57,27 @@
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="Account" nillable="true" type="tns:Account" />
-  <xs:complexType name="Dept">
+  <xs:element name="AccountDto" nillable="true" type="tns:AccountDto" />
+  <xs:complexType name="DeptDto">
     <xs:sequence>
       <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="Dept" nillable="true" type="tns:Dept" />
-  <xs:complexType name="Reclamation">
+  <xs:element name="DeptDto" nillable="true" type="tns:DeptDto" />
+  <xs:complexType name="ReclamationDto">
     <xs:sequence>
       <xs:element minOccurs="0" name="Act" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="AllowChanges" type="xs:boolean" />
       <xs:element minOccurs="0" name="Client" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Comment" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Count" type="xs:int" />
-      <xs:element minOccurs="0" name="Creator" nillable="true" type="tns:User" />
+      <xs:element minOccurs="0" name="Creator" nillable="true" type="tns:UserDto" />
       <xs:element minOccurs="0" name="CreatorId" type="xs:int" />
       <xs:element minOccurs="0" name="Finish" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
-      <xs:element minOccurs="0" name="Manager" nillable="true" type="tns:User" />
+      <xs:element minOccurs="0" name="Manager" nillable="true" type="tns:UserDto" />
       <xs:element minOccurs="0" name="ManagerId" type="xs:int" />
       <xs:element minOccurs="0" name="Nomenclature" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Production" nillable="true" type="xs:string" />
@@ -87,20 +87,20 @@
       <xs:element minOccurs="0" name="Start" type="xs:dateTime" />
       <xs:element minOccurs="0" name="State" type="xs:int" />
       <xs:element minOccurs="0" name="UserId" type="xs:int" />
-      <xs:element minOccurs="0" name="Worker" nillable="true" type="tns:User" />
+      <xs:element minOccurs="0" name="Worker" nillable="true" type="tns:UserDto" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="Reclamation" nillable="true" type="tns:Reclamation" />
-  <xs:complexType name="ArrayOfReclamation">
+  <xs:element name="ReclamationDto" nillable="true" type="tns:ReclamationDto" />
+  <xs:complexType name="ArrayOfReclamationDto">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Reclamation" nillable="true" type="tns:Reclamation" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ReclamationDto" nillable="true" type="tns:ReclamationDto" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfReclamation" nillable="true" type="tns:ArrayOfReclamation" />
-  <xs:complexType name="ArrayOfUser">
+  <xs:element name="ArrayOfReclamationDto" nillable="true" type="tns:ArrayOfReclamationDto" />
+  <xs:complexType name="ArrayOfUserDto">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="User" nillable="true" type="tns:User" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UserDto" nillable="true" type="tns:UserDto" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfUser" nillable="true" type="tns:ArrayOfUser" />
+  <xs:element name="ArrayOfUserDto" nillable="true" type="tns:ArrayOfUserDto" />
 </xs:schema>

@@ -12,6 +12,8 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <PublishUrl>\\ch-server-v4\teh_doc\5_SOFT\CamozziClient\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Unc</InstallFrom>
@@ -24,7 +26,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationRevision>2</ApplicationRevision>
     <ApplicationVersion>1.2.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -39,6 +41,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -48,6 +51,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>ProductIcon.ico</ApplicationIcon>
@@ -145,9 +149,6 @@
     <Compile Include="ReclamationDetail.Designer.cs">
       <DependentUpon>ReclamationDetail.cs</DependentUpon>
     </Compile>
-    <Compile Include="TabStrip.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="UserDetail.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -195,7 +196,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Camozzi.Model\Camozzi.Model.csproj">
@@ -229,6 +232,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ProductIcon.ico" />
+    <None Include="Resources\settings48.png" />
     <None Include="Resources\document188.png" />
     <None Include="Resources\chart34.png" />
     <None Include="Resources\chart23.png" />

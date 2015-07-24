@@ -4,12 +4,12 @@ using Camozzi.Model.DataService;
 
 namespace Camozzi.Model.Repository
 {
-    public interface IReclamationRepository:IRepository<Reclamation>
+    public interface IReclamationRepository:IRepository<ReclamationDto>
     {
-        IEnumerable<Reclamation> GetByDateAndDept(DateTime start, DateTime finish);
-        List<Reclamation> GetByUser(int id);
-        List<Reclamation> GetByManager(int id);
-        List<Reclamation> GetAllByName(string name);
+        IEnumerable<ReclamationDto> GetByDateAndDept(DateTime start, DateTime finish);
+        List<ReclamationDto> GetByUser(int id);
+        List<ReclamationDto> GetByManager(int id);
+        List<ReclamationDto> GetAllByName(string name);
 
         event Action ReclamationUpdated;
     }

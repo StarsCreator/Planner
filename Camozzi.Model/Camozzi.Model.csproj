@@ -70,13 +70,14 @@
     <Compile Include="Services\TableService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\DataService\Camozzi.Model.DataService.Project.datasource">
+    <None Include="app.config" />
+    <None Include="Service References\DataService\Camozzi.Model.DataService.ProjectDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\DataService\Camozzi.Model.DataService.Reclamation.datasource">
+    <None Include="Service References\DataService\Camozzi.Model.DataService.ReclamationDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\DataService\Camozzi.Model.DataService.User.datasource">
+    <None Include="Service References\DataService\Camozzi.Model.DataService.UserDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\DataService\Reference.svcmap">
@@ -85,11 +86,9 @@
     </None>
     <None Include="Service References\DataService\configuration.svcinfo" />
     <None Include="Service References\DataService\configuration91.svcinfo" />
-    <None Include="App.Config">
-      <SubType>Designer</SubType>
-    </None>
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>

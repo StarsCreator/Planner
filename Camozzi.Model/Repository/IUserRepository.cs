@@ -4,9 +4,9 @@ using Camozzi.Model.DataService;
 
 namespace Camozzi.Model.Repository
 {
-    public interface IUserRepository:IRepository<User>
+    public interface IUserRepository:IRepository<UserDto>
     {
-        List<User> FindByDept(int id);
+        List<UserDto> FindByDept(int id);
 
         event Action UserUpdated;
     }

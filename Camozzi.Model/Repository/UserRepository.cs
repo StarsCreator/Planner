@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ServiceModel;
 using System.Collections.Generic;
 using System.Linq;
 using Camozzi.Model.DataService;
@@ -11,65 +10,65 @@ namespace Camozzi.Model.Repository
 
         public UserRepository()
         {
-            UpdateUsers();
+            UpdateContext();
         }
 
-        private List<User> _users = new List<User>();
+        private List<UserDto> _users = new List<UserDto>();
 
-        public List<User> GetAll()
+        public List<UserDto> GetAll()
         {
             return _users;
         }
 
-        public List<User> FindByDept(int id)
+        public List<UserDto> FindByDept(int id)
         {
-            return (from user in _users where user.DeptId == id select user).ToList();
+            return (from userDto in _users where userDto.DeptId == id select userDto).ToList();
         }
 
         public event Action UserUpdated;
 
-        public User FindById(int id)
+        public UserDto FindById(int id)
         {
             return _users.Find(x => x.Id == id);
         }
 
-        public User FindByName(string name)
+        public UserDto FindByName(string name)
         {
             return _users.Find(x => x.Name.Contains(name));
         }
 
-        public void Add(User t)
+        public void Add(UserDto t)
         {
-            using (var client = new CServiceClient("NetTcpBinding_ICService"))
+            using (var client = new CServiceClient("BasicHttpBinding_ICService"))
             {
                 client.AddUserAsync(t);
-                UpdateUsers();
+                UpdateContext();
             }
         }
 
-        public void Delete(User t)
+        public void Delete(UserDto t)
         {
-            using (var client = new CServiceClient("NetTcpBinding_ICService"))
+            using (var client = new CServiceClient("BasicHttpBinding_ICService"))
             {
                 client.DeleteUserAsync(t);
-                UpdateUsers();
+                UpdateContext();
             }
         }
 
-        public void Update(User t)
+        public void Update(UserDto t)
         {
-            using (var client = new CServiceClient("NetTcpBinding_ICService"))
+            using (var client = new CServiceClient("BasicHttpBinding_ICService"))
             {
                 client.UpdateUserAsync(t);
-                UpdateUsers();
+                UpdateContext();
             }
         }
 
-        private void UpdateUsers()
+        public void UpdateContext()
         {
             try
             {
-                using (var client = new CServiceClient("NetTcpBinding_ICService"))
+                using (var client = new CServiceClient("BasicHttpBinding_ICService"))
                 {
                     _users = client.GetUsers().ToList();
                 }

@@ -12,12 +12,11 @@ namespace Camozzi.GUI
     public partial class Main : Form, IMainView
     {
         private readonly ApplicationContext _context;
+
         public Main(ApplicationContext context)
         {
             _context = context;
             InitializeComponent();
-
-            tabControl1.DrawItem += tabControl1_DrawItem;
 
             //AllProjectPlan
             AllProjectPlan.Columns.Add("q1", "Сотрудник", 30);
@@ -74,14 +73,16 @@ namespace Camozzi.GUI
             delRec.Click += delRec_Click;
 
             //mainChart
-            mainProjChart.Series[0].Points.AddXY("Январь", 10);
-            mainProjChart.Series[0].Points.AddXY("Февраль", 15);
-            mainProjChart.Series[1].Points.AddXY("Jan", 15);
-            mainProjChart.Series[1].Points.AddXY("Feb", 40);
+            //mainProjChart.Series[0].Points.AddXY("Январь", 10);
+            //mainProjChart.Series[0].Points.AddXY("Февраль", 15);
+            //mainProjChart.Series[1].Points.AddXY("Jan", 15);
+            //mainProjChart.Series[1].Points.AddXY("Feb", 40);
 
+            //tabs
+            tabControl1.DrawItem += tabControl1_DrawItem;
         }
 
-        void tabControl1_DrawItem(object sender, DrawItemEventArgs e)
+        private void tabControl1_DrawItem(object sender, DrawItemEventArgs e)
         {
             var g = e.Graphics;
 
@@ -121,16 +122,23 @@ namespace Camozzi.GUI
                     img = new Bitmap(Resources.report);
                     break;
                 }
+                case 4:
+                {
+                    img = new Bitmap(Resources.settings48);
+                    break;
+                }
                 default:
                 {
-                    img=new Bitmap(Resources.main);
+                    img = new Bitmap(Resources.main);
                     break;
                 }
             }
 
             g.DrawImage(img, newBounds);
 
-            Brush textBrush = e.State == DrawItemState.Selected ? new SolidBrush(Color.Black) : new SolidBrush(Color.Gray);
+            Brush textBrush = e.State == DrawItemState.Selected
+                ? new SolidBrush(Color.Black)
+                : new SolidBrush(Color.Gray);
 
             // Use our own font.
             var tabFont = new Font("Segoe UI", 9.75F);
@@ -140,15 +148,14 @@ namespace Camozzi.GUI
                 LineAlignment = StringAlignment.Far
             };
             g.DrawString(tabPage.Text, tabFont, textBrush, tabBounds, new StringFormat(stringFlags));
-
         }
 
-        void MetroTableReclamation_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        private void MetroTableReclamation_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
             MetroTableReclamation.Rows[e.RowIndex].ContextMenuStrip = ContextRec;
         }
 
-        void MetroTableReclamation_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        private void MetroTableReclamation_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (e.Button != MouseButtons.Right) return;
             if (e.RowIndex == -1) return;
@@ -157,31 +164,31 @@ namespace Camozzi.GUI
             MetroTableReclamation.CurrentCell = MetroTableReclamation[0, e.RowIndex];
         }
 
-        void delRec_Click(object sender, EventArgs e)
+        private void delRec_Click(object sender, EventArgs e)
         {
             if (DeleteReclamation != null)
                 DeleteReclamation((int) MetroTableReclamation.SelectedRows[0].Cells[0].Value);
         }
 
-        void editRec_Click(object sender, EventArgs e)
+        private void editRec_Click(object sender, EventArgs e)
         {
-            if (TableReclamationClick != null) 
-                TableReclamationClick((int)MetroTableReclamation.SelectedRows[0].Cells[0].Value);
+            if (TableReclamationClick != null)
+                TableReclamationClick((int) MetroTableReclamation.SelectedRows[0].Cells[0].Value);
         }
 
-        void DeleteProj_Click(object sender, EventArgs e)
+        private void DeleteProj_Click(object sender, EventArgs e)
         {
-            if (DeleteProject != null) 
-                DeleteProject((int)MetroTableProject.SelectedRows[0].Cells[0].Value);
+            if (DeleteProject != null)
+                DeleteProject((int) MetroTableProject.SelectedRows[0].Cells[0].Value);
         }
 
-        void EditProj_Click(object sender, EventArgs e)
+        private void EditProj_Click(object sender, EventArgs e)
         {
-            if (TableProjectClick != null) 
-                TableProjectClick((int)MetroTableProject.SelectedRows[0].Cells[0].Value);
+            if (TableProjectClick != null)
+                TableProjectClick((int) MetroTableProject.SelectedRows[0].Cells[0].Value);
         }
 
-        void MetroTableProject_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        private void MetroTableProject_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (e.Button != MouseButtons.Right) return;
             if (e.RowIndex == -1) return;
@@ -190,25 +197,25 @@ namespace Camozzi.GUI
             MetroTableProject.CurrentCell = MetroTableProject[0, e.RowIndex];
         }
 
-        void MetroTableProject_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        private void MetroTableProject_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
-
-                MetroTableProject.Rows[e.RowIndex].ContextMenuStrip = ContextProj;
+            MetroTableProject.Rows[e.RowIndex].ContextMenuStrip = ContextProj;
         }
 
-        void MetroTableReclamation_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex == -1) return;
-            if (TableReclamationClick != null) TableReclamationClick((int)MetroTableReclamation.SelectedRows[0].Cells[0].Value);
-        }
-
-        void MetroTableProject_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void MetroTableReclamation_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex == -1) return;
-            if (TableProjectClick != null) TableProjectClick((int)MetroTableProject.SelectedRows[0].Cells[0].Value);
+            if (TableReclamationClick != null)
+                TableReclamationClick((int) MetroTableReclamation.SelectedRows[0].Cells[0].Value);
         }
 
-        void SelfReclamationDateSet_Click(object sender, EventArgs e)
+        private void MetroTableProject_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == -1) return;
+            if (TableProjectClick != null) TableProjectClick((int) MetroTableProject.SelectedRows[0].Cells[0].Value);
+        }
+
+        private void SelfReclamationDateSet_Click(object sender, EventArgs e)
         {
             SelfReclamationsStart = SelfReclamationStartSet.Value;
             if (SelfReclamationStartSet.Value > SelfReclamationEndSet.Value)
@@ -219,19 +226,19 @@ namespace Camozzi.GUI
             SelfReclamationPlan.DayCount = tmp.Days + 1;
         }
 
-        void SelfReclamationLeft_Click(object sender, EventArgs e)
+        private void SelfReclamationLeft_Click(object sender, EventArgs e)
         {
             SelfReclamationsStart = SelfReclamationsStart.AddDays(-7);
             SelfReclamationEndSet.Value = SelfReclamationStartSet.Value.AddDays(SelfReclamationPlan.DayCount - 1);
         }
 
-        void SelfReclamationRight_Click(object sender, EventArgs e)
+        private void SelfReclamationRight_Click(object sender, EventArgs e)
         {
             SelfReclamationsStart = SelfReclamationsStart.AddDays(7);
             SelfReclamationEndSet.Value = SelfReclamationStartSet.Value.AddDays(SelfReclamationPlan.DayCount - 1);
         }
 
-        void SelfProjectSetDate_Click(object sender, EventArgs e)
+        private void SelfProjectSetDate_Click(object sender, EventArgs e)
         {
             SelfProjectsStart = SelfProjectStartSet.Value;
             if (SelfProjectStartSet.Value > SelfProjectEndSet.Value)
@@ -242,19 +249,19 @@ namespace Camozzi.GUI
             SelfProjectPlan.DayCount = tmp.Days + 1;
         }
 
-        void SelfProjectLeft_Click(object sender, EventArgs e)
+        private void SelfProjectLeft_Click(object sender, EventArgs e)
         {
             SelfProjectsStart = SelfProjectsStart.AddDays(-7);
             SelfProjectEndSet.Value = SelfProjectStartSet.Value.AddDays(SelfProjectPlan.DayCount - 1);
         }
 
-        void SelfProjectRight_Click(object sender, EventArgs e)
+        private void SelfProjectRight_Click(object sender, EventArgs e)
         {
             SelfProjectsStart = SelfProjectsStart.AddDays(7);
             SelfProjectEndSet.Value = SelfProjectStartSet.Value.AddDays(SelfProjectPlan.DayCount - 1);
         }
 
-        void AllReclamationDateSet_Click(object sender, EventArgs e)
+        private void AllReclamationDateSet_Click(object sender, EventArgs e)
         {
             AllReclamationsStart = AllReclamationStartSet.Value;
             if (AllReclamationStartSet.Value > AllReclamationEndSet.Value)
@@ -265,19 +272,19 @@ namespace Camozzi.GUI
             AllReclamationPlan.DayCount = tmp.Days + 1;
         }
 
-        void AllReclamationRight_Click(object sender, EventArgs e)
+        private void AllReclamationRight_Click(object sender, EventArgs e)
         {
             AllReclamationsStart = AllReclamationsStart.AddDays(7);
             AllReclamationEndSet.Value = AllReclamationStartSet.Value.AddDays(AllReclamationPlan.DayCount - 1);
         }
 
-        void AllReclamationLeft_Click(object sender, EventArgs e)
+        private void AllReclamationLeft_Click(object sender, EventArgs e)
         {
             AllReclamationsStart = AllReclamationsStart.AddDays(-7);
             AllReclamationEndSet.Value = AllReclamationStartSet.Value.AddDays(AllReclamationPlan.DayCount - 1);
         }
 
-        void AllProjectSetDate_Click(object sender, EventArgs e)
+        private void AllProjectSetDate_Click(object sender, EventArgs e)
         {
             AllProjectsStart = AllProjectStartTimeSet.Value;
             if (AllProjectStartTimeSet.Value > AllProjectsEndTimeSet.Value)
@@ -288,34 +295,34 @@ namespace Camozzi.GUI
             AllProjectPlan.DayCount = tmp.Days + 1;
         }
 
-        void AllProjectRight_Click(object sender, EventArgs e)
+        private void AllProjectRight_Click(object sender, EventArgs e)
         {
             AllProjectsStart = AllProjectsStart.AddDays(7);
             AllProjectsEndTimeSet.Value = AllProjectStartTimeSet.Value.AddDays(AllProjectPlan.DayCount - 1);
         }
 
-        void AllProjectLeft_Click(object sender, EventArgs e)
+        private void AllProjectLeft_Click(object sender, EventArgs e)
         {
             AllProjectsStart = AllProjectsStart.AddDays(-7);
             AllProjectsEndTimeSet.Value = AllProjectStartTimeSet.Value.AddDays(AllProjectPlan.DayCount - 1);
         }
 
-        void AllReclamationPlan_ItemDoubleClick(object sender, WeekPlannerItemEventArgs e)
+        private void AllReclamationPlan_ItemDoubleClick(object sender, WeekPlannerItemEventArgs e)
         {
             if (AllReclamationsItemDoubleClick != null) AllReclamationsItemDoubleClick(this, e);
         }
 
-        void AllProjectPlan_ItemDoubleClick(object sender, WeekPlannerItemEventArgs e)
+        private void AllProjectPlan_ItemDoubleClick(object sender, WeekPlannerItemEventArgs e)
         {
             if (AllProjectsItemDoubleClick != null) AllProjectsItemDoubleClick(this, e);
         }
 
-        void SelfReclamationPlan_ItemDoubleClick(object sender, WeekPlannerItemEventArgs e)
+        private void SelfReclamationPlan_ItemDoubleClick(object sender, WeekPlannerItemEventArgs e)
         {
             if (SelfReclamationsItemDoubleClick != null) SelfReclamationsItemDoubleClick(this, e);
         }
 
-        void SelfProjectPlan_ItemDoubleClick(object sender, WeekPlannerItemEventArgs e)
+        private void SelfProjectPlan_ItemDoubleClick(object sender, WeekPlannerItemEventArgs e)
         {
             if (SelfProjectsItemDoubleClick != null) SelfProjectsItemDoubleClick(this, e);
         }
@@ -340,22 +347,25 @@ namespace Camozzi.GUI
             WeekPlannerRow row = new WeekPlannerRow {Columns = datacolumn};
             return row;
         }
+
         public WeekPlannerRowCollection AllProjectsRows
         {
-            get
-            {
-                return AllProjectPlan.Rows;
-            }
+            get { return AllProjectPlan.Rows; }
         }
-        public event EventHandler<WeekPlannerItemEventArgs> AllProjectsItemDoubleClick;//вызов состояния
+
+        public event EventHandler<WeekPlannerItemEventArgs> AllProjectsItemDoubleClick; //вызов состояния
+
         public void ClearAllProjects()
         {
-            foreach (WeekPlannerRow row in AllProjectPlan.Rows)
+            foreach (var row in AllProjectPlan.Rows)
             {
                 row.Items.Clear();
             }
-            AllProjectPlan.Rows.Clear();
-        }//очистка всего планнера
+            lock (AllProjectPlan)
+            {
+                AllProjectPlan.Rows.Clear();
+            }
+        } //очистка всего планнера
 
         public WeekPlannerRow GetNewRowAllReclamations(string name)
         {
@@ -364,14 +374,13 @@ namespace Camozzi.GUI
             var row = new WeekPlannerRow {Columns = datacolumn};
             return row;
         }
+
         public WeekPlannerRowCollection AllReclamationsRows
         {
-            get
-            {
-                return AllReclamationPlan.Rows;
-            }
-        }//строки и элементы
-        public event EventHandler<WeekPlannerItemEventArgs> AllReclamationsItemDoubleClick;//вызов состояния
+            get { return AllReclamationPlan.Rows; }
+        } //строки и элементы
+        public event EventHandler<WeekPlannerItemEventArgs> AllReclamationsItemDoubleClick; //вызов состояния
+
         public void ClearAllReclamations()
         {
             foreach (var row in AllReclamationPlan.Rows)
@@ -388,14 +397,14 @@ namespace Camozzi.GUI
             var row = new WeekPlannerRow {Columns = datacolumn};
             return row;
         }
+
         public WeekPlannerRowCollection SelfProjectsRows
         {
-            get
-            {
-                return SelfProjectPlan.Rows;
-            }
+            get { return SelfProjectPlan.Rows; }
         }
-        public event EventHandler<WeekPlannerItemEventArgs> SelfProjectsItemDoubleClick;//вызов состояния
+
+        public event EventHandler<WeekPlannerItemEventArgs> SelfProjectsItemDoubleClick; //вызов состояния
+
         public void ClearSelfProjects()
         {
             foreach (var row in SelfProjectPlan.Rows)
@@ -403,7 +412,7 @@ namespace Camozzi.GUI
                 row.Items.Clear();
             }
             SelfProjectPlan.Rows.Clear();
-        }//очистка всего планнера
+        } //очистка всего планнера
 
         public WeekPlannerRow GetNewRowSelfReclamations(string name)
         {
@@ -412,14 +421,12 @@ namespace Camozzi.GUI
             WeekPlannerRow row = new WeekPlannerRow {Columns = datacolumn};
             return row;
         }
+
         public WeekPlannerRowCollection SelfReclamationsRows
         {
-            get
-            {
-                return SelfReclamationPlan.Rows;
-            }
-        }//строки и элементы
-        public event EventHandler<WeekPlannerItemEventArgs> SelfReclamationsItemDoubleClick;//вызов состояния
+            get { return SelfReclamationPlan.Rows; }
+        } //строки и элементы
+        public event EventHandler<WeekPlannerItemEventArgs> SelfReclamationsItemDoubleClick; //вызов состояния
 
         public void ClearSelfReclamations()
         {
@@ -434,9 +441,9 @@ namespace Camozzi.GUI
         {
             set
             {
-                AllReclamationTab.Enabled = value;
-                SelfReclamationTab.Enabled = value;
-
+                if (value) return;
+                AllRecAndProj.TabPages.Remove(AllReclamationTab);
+                SelfRecAndProj.TabPages.Remove(SelfReclamationTab);
             }
         }
 
@@ -444,15 +451,42 @@ namespace Camozzi.GUI
         {
             set
             {
-                MetroTableProject.DataSource = value;
+                if (MetroTableProject.InvokeRequired)
+                {
+                    Action<object> d = SetProjectTable;
+                    Invoke(d, value);
+                }
+                else
+                {
+                    MetroTableProject.DataSource = value;
+                }
             }
         }
+
+        private void SetProjectTable(object o)
+        {
+            MetroTableProject.DataSource = o;
+        }
+
         public object TableReclamation
         {
             set
             {
-                MetroTableReclamation.DataSource = value;
+                if (MetroTableProject.InvokeRequired)
+                {
+                    Action<object> d = SetReclamationTable;
+                    Invoke(d, value);
+                }
+                else
+                {
+                    MetroTableReclamation.DataSource = value;
+                }
             }
+        }
+
+        private void SetReclamationTable(object o)
+        {
+            MetroTableReclamation.DataSource = o;
         }
 
         public event Action<int> TableProjectClick;
@@ -464,18 +498,22 @@ namespace Camozzi.GUI
         {
             set { lblWaitProj.Text = value.ToString(); }
         }
+
         public int allProj
         {
             set { lblAllProj.Text = value.ToString(); }
         }
+
         public int comProj
         {
             set { lblCompProj.Text = value.ToString(); }
         }
+
         public int workProj
         {
             set { lblWorkProj.Text = value.ToString(); }
         }
+
         public int stopProj
         {
             set { lblStopProj.Text = value.ToString(); }
@@ -491,9 +529,9 @@ namespace Camozzi.GUI
                 MetroChartProject.Series[0].AxisLabel = "Value";
                 MetroChartProject.Series[0].YValueMembers = "Value";
                 MetroChartProject.Series[0].XValueMember = "State";
-
             }
         }
+
         public object ChartProject
         {
             set
@@ -511,34 +549,27 @@ namespace Camozzi.GUI
 
         public DateTime AllProjectsStart
         {
-            get
-            {
-                return AllProjectPlan.CurrentDate;
-            }
+            get { return AllProjectPlan.CurrentDate; }
             set
             {
                 AllProjectPlan.CurrentDate = value;
                 AllProjectStartTimeSet.Value = value;
             }
         }
+
         public DateTime AllProjectsEnd
         {
-            get
-            {
-                return AllProjectPlan.CurrentDate.AddDays(AllProjectPlan.DayCount - 1);
-            }
+            get { return AllProjectPlan.CurrentDate.AddDays(AllProjectPlan.DayCount - 1); }
             set
             {
                 AllProjectsEndTimeSet.Value = value;
                 AllProjectPlan.DayCount = (value - AllProjectPlan.CurrentDate).Days;
             }
         }
+
         public DateTime AllReclamationsStart
         {
-            get
-            {
-                return AllReclamationPlan.CurrentDate;
-            }
+            get { return AllReclamationPlan.CurrentDate; }
             set
             {
                 AllReclamationPlan.CurrentDate = value;
@@ -546,24 +577,20 @@ namespace Camozzi.GUI
                 //AllReclamationsEndTimeSet.Value = value.AddDays(AllReclamationPlan.DayCount-1);
             }
         }
+
         public DateTime AllReclamationEnd
         {
-            get
-            {
-                return AllReclamationPlan.CurrentDate.AddDays(AllReclamationPlan.DayCount - 1);
-            }
+            get { return AllReclamationPlan.CurrentDate.AddDays(AllReclamationPlan.DayCount - 1); }
             set
             {
                 AllReclamationEndSet.Value = value;
                 AllReclamationPlan.DayCount = (value - AllReclamationPlan.CurrentDate).Days;
             }
         }
+
         public DateTime SelfProjectsStart
         {
-            get
-            {
-                return SelfProjectPlan.CurrentDate;
-            }
+            get { return SelfProjectPlan.CurrentDate; }
             set
             {
                 SelfProjectPlan.CurrentDate = value;
@@ -571,24 +598,20 @@ namespace Camozzi.GUI
                 //SelfProjectsEndTimeSet.Value = value.AddDays(SelfProjectPlan.DayCount-1);
             }
         }
+
         public DateTime SelfProjectsEnd
         {
-            get
-            {
-                return SelfProjectPlan.CurrentDate.AddDays(SelfProjectPlan.DayCount - 1);
-            }
+            get { return SelfProjectPlan.CurrentDate.AddDays(SelfProjectPlan.DayCount - 1); }
             set
             {
                 SelfProjectEndSet.Value = value;
                 SelfProjectPlan.DayCount = (value - SelfProjectPlan.CurrentDate).Days;
             }
         }
+
         public DateTime SelfReclamationsStart
         {
-            get
-            {
-                return SelfReclamationPlan.CurrentDate;
-            }
+            get { return SelfReclamationPlan.CurrentDate; }
             set
             {
                 SelfReclamationPlan.CurrentDate = value;
@@ -596,12 +619,10 @@ namespace Camozzi.GUI
                 //SelfReclamationsEndTimeSet.Value = value.AddDays(SelfReclamationPlan.DayCount-1);
             }
         }
+
         public DateTime SelfReclamationEnd
         {
-            get
-            {
-                return SelfReclamationPlan.CurrentDate.AddDays(SelfReclamationPlan.DayCount - 1);
-            }
+            get { return SelfReclamationPlan.CurrentDate.AddDays(SelfReclamationPlan.DayCount - 1); }
             set
             {
                 SelfReclamationEndSet.Value = value;

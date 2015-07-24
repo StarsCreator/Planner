@@ -41,8 +41,7 @@
             // 
             // fieldPhone
             // 
-            this.fieldPhone.Lines = new string[] {
-        "metroTextBox1"};
+            this.fieldPhone.Lines = new string[0];
             this.fieldPhone.Location = new System.Drawing.Point(91, 56);
             this.fieldPhone.MaxLength = 32767;
             this.fieldPhone.Name = "fieldPhone";
@@ -51,7 +50,6 @@
             this.fieldPhone.SelectedText = "";
             this.fieldPhone.Size = new System.Drawing.Size(233, 30);
             this.fieldPhone.TabIndex = 0;
-            this.fieldPhone.Text = "metroTextBox1";
             this.fieldPhone.UseSelectable = true;
             // 
             // fieldMail

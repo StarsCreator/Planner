@@ -13,62 +13,56 @@ namespace Camozzi.Model.Repository
         public event Action ProjectUpdated;
         public ProjectRepository()
         {
-            UpdateProjects();
+            UpdateContext();
         }
 
-        private List<Project> _projects = new List<Project>(); 
+        private List<ProjectDto> _project = new List<ProjectDto>(); 
 
-        public List<Project> GetAll()
+        public List<ProjectDto> GetAll()
         {
-            return _projects;
+            return _project;
         }
 
-        public IEnumerable<Project> GetByDateAndDept(DateTime start, DateTime finish, int deptid)
+        public IEnumerable<ProjectDto> GetByDateAndDept(DateTime start, DateTime finish, int deptid)
         {
             //TODO: update query
-            return (from pr in _projects
-                    //where pr.Start>Start 
-                    where pr.Finish < finish
-                    where pr.DeptId == deptid
-                    select pr).ToList();
+            return GetAll();
         }
 
-        public List<Project> GetByUser(int id)
+        public List<ProjectDto> GetByUser(int id)
         {
-            return (from pr in _projects
-                    where pr.UserId == id
-                    select pr).ToList();
+            return _project.Where(x=>x.UserId==id).ToList();
         }
 
-        public List<Project> GetByManager(int id)
+        public List<ProjectDto> GetByManager(int id)
         {
-            return (from pr in _projects
+            return (from pr in _project
                     where pr.ManagerId == id
                     select pr).ToList();
         }
 
-        public List<Project> GetAllByName(string name)
+        public List<ProjectDto> GetAllByName(string name)
         {
-            return (from pr in _projects
+            return (from pr in _project
                     where pr.Name.Contains(name)
                     select pr).ToList();
         }
 
         public int GetCountByState(States state)
         {
-            return (from pr in _projects
+            return (from pr in _project
                     where pr.State == (int)state
                     select pr).Count();
         }
 
         public int GetCount()
         {
-            return _projects.Count();
+            return _project.Count();
         }
 
         public int GetCountByStateAndUser(States state, int userId)
         {
-            return (from pr in _projects
+            return (from pr in _project
                     where pr.UserId == userId
                     where pr.State == (int)state
                     select pr).Count();
@@ -77,54 +71,54 @@ namespace Camozzi.Model.Repository
         public int GetCountByStateAndMounth(States state, int mounth)
         {
             //TODO add creation Time
-            return (from pr in _projects
+            return (from pr in _project
                 where pr.Start.Month == mounth
                 where pr.State == (int) state
                 select pr).Count();
         }
 
-        public Project FindById(int id)
-        {
-            return _projects.Find(x => x.Id == id);
+        public ProjectDto FindById(int id)
+        {   
+            return _project.Find(x => x.Id == id);
         }
 
-        public Project FindByName(string name)
+        public ProjectDto FindByName(string name)
         {
-            return _projects.Find(x => x.Name == name);
+            return _project.Find(x => x.Name == name);
         }
 
-        public void Add(Project t)
+        public void Add(ProjectDto t)
         {
-            using (var client = new CServiceClient("NetTcpBinding_ICService"))
+            using (var client = new CServiceClient("BasicHttpBinding_ICService"))
             {
                 client.AddProject(t);
-                UpdateProjects();
-            }
+                UpdateContext();
+            }   
         }
 
-        public void Delete(Project t)
+        public void Delete(ProjectDto t)
         {
-            using (var client = new CServiceClient("NetTcpBinding_ICService"))
+            using (var client = new CServiceClient("BasicHttpBinding_ICService"))
             {
                 client.DeleteProject(t);
-                UpdateProjects();
+                UpdateContext();
             }
         }
 
-        public void Update(Project t)
+        public void Update(ProjectDto t)
         {
-            using (var client = new CServiceClient("NetTcpBinding_ICService"))
+            using (var client = new CServiceClient("BasicHttpBinding_ICService"))
             {
                 client.UpdateProject(t);
-                UpdateProjects();
+                UpdateContext();
             }
         }
 
-        private void UpdateProjects()
+        public void UpdateContext()     
         {
-            using (var client = new CServiceClient("NetTcpBinding_ICService"))
+            using (var client = new CServiceClient("BasicHttpBinding_ICService"))
             {
-                _projects = client.GetProjects().ToList();
+                _project = client.GetProjects().ToList();
             }
             if (ProjectUpdated != null) ProjectUpdated();
         }

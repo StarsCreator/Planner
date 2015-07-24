@@ -5,15 +5,15 @@ namespace Camozzi.Model.Services
 {
     public class LogService: ILog
     {
-        protected readonly Logger Log;
+        private readonly Logger _log;
         public LogService()
         {
-            Log = LogManager.GetCurrentClassLogger();
+            _log = LogManager.GetCurrentClassLogger();
         }
 
         public void Error(string text, string ex)
         {
-            Log.Error(text,ex);
+            _log.Error(text,ex);
         }
 
         public void Warning(string text)

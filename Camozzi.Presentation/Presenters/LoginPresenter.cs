@@ -4,20 +4,27 @@ using Camozzi.Model.Repository;
 using Camozzi.Presentation.Injection;
 using Camozzi.Presentation.Views;
 using Camozzi.Model.DataService;
+using Camozzi.Model.Services;
 
 namespace Camozzi.Presentation.Presenters
 {
     public class LoginPresenter : BasePresenter<ILoginView>
     {
         private readonly IUserRepository _users;
+        private readonly ISettings _settings;
 
-        public LoginPresenter(IApplicationController controller, ILoginView view, IUserRepository users)
+        public LoginPresenter(IApplicationController controller, ILoginView view, IUserRepository users,ISettings settings)
             : base(controller, view)
         {
             View.Ok += View_Ok;
             _users = users;
+            _settings = settings;
             //_users.UpdateContext();
-            View.Users = _users.GetAll().Select(user => user.Name).ToList();
+            View.Users = _users.GetAll().OrderBy(x=>x.DeptId).Select(user => user.Name).ToList();
+            if (!String.IsNullOrEmpty(_settings.LastUser))
+            {
+                View.UserName = _settings.LastUser;
+            }
         }
 
         private void View_Ok()
@@ -32,23 +39,24 @@ namespace Camozzi.Presentation.Presenters
                     View.Close();
                 }
             }*/
-            //using (var client = new CServiceClient("BasicHttpBinding_ICService"))
-            //{
-                //if (!client.CheckPassword(View.Password, _users.FindByName(View.UserName).Id))
-                //{
-                //    View.ClearPswFld();
-                //    return;
-                //}
-                Controller.Run<MainPresenter, UserDto>(_users.FindByName(View.UserName));
-                View.Close();
+            using (var client = new CServiceClient("BasicHttpBinding_ICService"))
+            {
+                if (!client.CheckPassword(View.Password, _users.FindByName(View.UserName).Id))
+                {
+                    View.ClearPswFld();
+                    return;
+                }
+            }
+            Controller.Run<MainPresenter, UserDto>(_users.FindByName(View.UserName));
+            View.Close();
 
 
-                //Users.Dispose();
-                //}
-                // else
-                // {
-                //    View.ClearPswFld();
-                //}
+            //Users.Dispose();
+            //}
+            // else
+            // {
+            //    View.ClearPswFld();
+            //}
             //}
 
             //static string GetMd5Hash(HashAlgorithm md5Hash, string input)
@@ -82,7 +90,6 @@ namespace Camozzi.Presentation.Presenters
 
             //    return 0 == comparer.Compare(hashOfInput, hash);
             //}
-
         }
     }
 }

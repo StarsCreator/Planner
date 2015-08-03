@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.Psw = new MetroFramework.Controls.MetroTextBox();
-            this.LogBtn = new MetroFramework.Controls.MetroButton();
             this.UsR = new MetroFramework.Controls.MetroComboBox();
+            this.LogBtn = new MetroFramework.Controls.MetroButton();
             this.SuspendLayout();
             // 
             // Psw
@@ -45,15 +45,7 @@
             this.Psw.Size = new System.Drawing.Size(311, 23);
             this.Psw.TabIndex = 0;
             this.Psw.UseSelectable = true;
-            // 
-            // LogBtn
-            // 
-            this.LogBtn.Location = new System.Drawing.Point(33, 127);
-            this.LogBtn.Name = "LogBtn";
-            this.LogBtn.Size = new System.Drawing.Size(311, 23);
-            this.LogBtn.TabIndex = 1;
-            this.LogBtn.Text = "Вход";
-            this.LogBtn.UseSelectable = true;
+            this.Psw.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Psw_KeyDown);
             // 
             // UsR
             // 
@@ -66,16 +58,27 @@
             this.UsR.TabIndex = 2;
             this.UsR.UseSelectable = true;
             // 
+            // LogBtn
+            // 
+            this.LogBtn.Location = new System.Drawing.Point(33, 127);
+            this.LogBtn.Name = "LogBtn";
+            this.LogBtn.Size = new System.Drawing.Size(311, 23);
+            this.LogBtn.TabIndex = 3;
+            this.LogBtn.Text = "Вход";
+            this.LogBtn.UseSelectable = true;
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackImage = global::Camozzi.GUI.Properties.Resources.allChart;
+            this.BackImagePadding = new System.Windows.Forms.Padding(10, 10, 0, 0);
             this.ClientSize = new System.Drawing.Size(367, 163);
-            this.Controls.Add(this.UsR);
             this.Controls.Add(this.LogBtn);
+            this.Controls.Add(this.UsR);
             this.Controls.Add(this.Psw);
-            this.MaximizeBox = false;
             this.MinimizeBox = false;
+            this.Name = "Login";
             this.Resizable = false;
             this.Style = MetroFramework.MetroColorStyle.Red;
             this.Text = "CamozziClient";
@@ -86,8 +89,8 @@
         #endregion
 
         private MetroFramework.Controls.MetroTextBox Psw;
-        private MetroFramework.Controls.MetroButton LogBtn;
         private MetroFramework.Controls.MetroComboBox UsR;
+        private MetroFramework.Controls.MetroButton LogBtn;
 
     }
 }

@@ -26,7 +26,7 @@ namespace Camozzi.Model.Repository
         public IEnumerable<ProjectDto> GetByDateAndDept(DateTime start, DateTime finish, int deptid)
         {
             //TODO: update query
-            return GetAll();
+            return _project.Where(x => x.DeptId == deptid);
         }
 
         public List<ProjectDto> GetByUser(int id)

@@ -29,14 +29,13 @@ namespace Camozzi.GUI
                 .RegisterView<ILoginView, Login>()
                 .RegisterView<IMainView, Main>()
                 .RegisterView<IProjectView,ProjectDetail>()
-                .RegisterView<IReclamationView,ReclamationDetail>()
                 .RegisterView<IUserView,UserDetail>()
                 .RegisterSingletoneService<ILog,LogService>()
                 .RegisterService<ITableService,TableService>()
                 .RegisterService<IChartService,ChartService>()
-                .RegisterSingletoneService<IReclamationRepository, ReclamationRepository>()
                 .RegisterSingletoneService<IUserRepository, UserRepository>()
                 .RegisterSingletoneService<IProjectRepository, ProjectRepository>()
+                .RegisterSingletoneService<ISettings,Settings>()
                 .RegisterInstance(new ApplicationContext());
                 controller.Run<LoginPresenter>();
             }

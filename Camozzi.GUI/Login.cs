@@ -18,9 +18,11 @@ namespace Camozzi.GUI
             _context = context;
             InitializeComponent();
             LogBtn.Click += (sender, args) => Invoke(Ok);
+            LogBtn.Focus();
+            Focus();
         }
 
-        void Invoke (Action action)
+        static void Invoke (Action action)
         {
             if (action != null) action();
         }
@@ -38,6 +40,7 @@ namespace Camozzi.GUI
         }
         public string UserName 
         {
+            set { UsR.SelectedItem = value; }
             get
             {
                 return UsR.SelectedItem.ToString();
@@ -56,5 +59,13 @@ namespace Camozzi.GUI
             Psw.Text = String.Empty;
         }
         #endregion
+
+        private void Psw_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode==Keys.Return)
+            {
+                Invoke(Ok);
+            }
+        }
     }
 }

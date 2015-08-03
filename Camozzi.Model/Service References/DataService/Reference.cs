@@ -364,6 +364,9 @@ namespace Camozzi.Model.DataService {
         private string PhoneField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int QueryIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private object SelfProjectsRowField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -518,6 +521,19 @@ namespace Camozzi.Model.DataService {
                 if ((object.ReferenceEquals(this.PhoneField, value) != true)) {
                     this.PhoneField = value;
                     this.RaisePropertyChanged("Phone");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int QueryId {
+            get {
+                return this.QueryIdField;
+            }
+            set {
+                if ((this.QueryIdField.Equals(value) != true)) {
+                    this.QueryIdField = value;
+                    this.RaisePropertyChanged("QueryId");
                 }
             }
         }
@@ -1132,92 +1148,47 @@ namespace Camozzi.Model.DataService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICService/GetProjects", ReplyAction="http://tempuri.org/ICService/GetProjectsResponse")]
         Camozzi.Model.DataService.ProjectDto[] GetProjects();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICService/GetProjects", ReplyAction="http://tempuri.org/ICService/GetProjectsResponse")]
-        System.Threading.Tasks.Task<Camozzi.Model.DataService.ProjectDto[]> GetProjectsAsync();
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICService/AddReclamation", ReplyAction="http://tempuri.org/ICService/AddReclamationResponse")]
         void AddReclamation(Camozzi.Model.DataService.ReclamationDto t);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICService/AddReclamation", ReplyAction="http://tempuri.org/ICService/AddReclamationResponse")]
-        System.Threading.Tasks.Task AddReclamationAsync(Camozzi.Model.DataService.ReclamationDto t);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICService/DeleteReclamation", ReplyAction="http://tempuri.org/ICService/DeleteReclamationResponse")]
         void DeleteReclamation(Camozzi.Model.DataService.ReclamationDto t);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICService/DeleteReclamation", ReplyAction="http://tempuri.org/ICService/DeleteReclamationResponse")]
-        System.Threading.Tasks.Task DeleteReclamationAsync(Camozzi.Model.DataService.ReclamationDto t);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICService/UpdateReclamation", ReplyAction="http://tempuri.org/ICService/UpdateReclamationResponse")]
         void UpdateReclamation(Camozzi.Model.DataService.ReclamationDto t);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICService/UpdateReclamation", ReplyAction="http://tempuri.org/ICService/UpdateReclamationResponse")]
-        System.Threading.Tasks.Task UpdateReclamationAsync(Camozzi.Model.DataService.ReclamationDto t);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICService/GetByDateReclamation", ReplyAction="http://tempuri.org/ICService/GetByDateReclamationResponse")]
         Camozzi.Model.DataService.ReclamationDto[] GetByDateReclamation(System.DateTime start, System.DateTime finish);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICService/GetByDateReclamation", ReplyAction="http://tempuri.org/ICService/GetByDateReclamationResponse")]
-        System.Threading.Tasks.Task<Camozzi.Model.DataService.ReclamationDto[]> GetByDateReclamationAsync(System.DateTime start, System.DateTime finish);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICService/AddUser", ReplyAction="http://tempuri.org/ICService/AddUserResponse")]
         void AddUser(Camozzi.Model.DataService.UserDto t);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICService/AddUser", ReplyAction="http://tempuri.org/ICService/AddUserResponse")]
-        System.Threading.Tasks.Task AddUserAsync(Camozzi.Model.DataService.UserDto t);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICService/DeleteUser", ReplyAction="http://tempuri.org/ICService/DeleteUserResponse")]
         void DeleteUser(Camozzi.Model.DataService.UserDto t);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICService/DeleteUser", ReplyAction="http://tempuri.org/ICService/DeleteUserResponse")]
-        System.Threading.Tasks.Task DeleteUserAsync(Camozzi.Model.DataService.UserDto t);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICService/UpdateUser", ReplyAction="http://tempuri.org/ICService/UpdateUserResponse")]
         void UpdateUser(Camozzi.Model.DataService.UserDto t);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICService/UpdateUser", ReplyAction="http://tempuri.org/ICService/UpdateUserResponse")]
-        System.Threading.Tasks.Task UpdateUserAsync(Camozzi.Model.DataService.UserDto t);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICService/AddProject", ReplyAction="http://tempuri.org/ICService/AddProjectResponse")]
         void AddProject(Camozzi.Model.DataService.ProjectDto t);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICService/AddProject", ReplyAction="http://tempuri.org/ICService/AddProjectResponse")]
-        System.Threading.Tasks.Task AddProjectAsync(Camozzi.Model.DataService.ProjectDto t);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICService/DeleteProject", ReplyAction="http://tempuri.org/ICService/DeleteProjectResponse")]
         void DeleteProject(Camozzi.Model.DataService.ProjectDto t);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICService/DeleteProject", ReplyAction="http://tempuri.org/ICService/DeleteProjectResponse")]
-        System.Threading.Tasks.Task DeleteProjectAsync(Camozzi.Model.DataService.ProjectDto t);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICService/GetUsers", ReplyAction="http://tempuri.org/ICService/GetUsersResponse")]
         Camozzi.Model.DataService.UserDto[] GetUsers();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICService/GetUsers", ReplyAction="http://tempuri.org/ICService/GetUsersResponse")]
-        System.Threading.Tasks.Task<Camozzi.Model.DataService.UserDto[]> GetUsersAsync();
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICService/CheckPassword", ReplyAction="http://tempuri.org/ICService/CheckPasswordResponse")]
         bool CheckPassword(string password, int id);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICService/CheckPassword", ReplyAction="http://tempuri.org/ICService/CheckPasswordResponse")]
-        System.Threading.Tasks.Task<bool> CheckPasswordAsync(string password, int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICService/GetReclamations", ReplyAction="http://tempuri.org/ICService/GetReclamationsResponse")]
         Camozzi.Model.DataService.ReclamationDto[] GetReclamations();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICService/GetReclamations", ReplyAction="http://tempuri.org/ICService/GetReclamationsResponse")]
-        System.Threading.Tasks.Task<Camozzi.Model.DataService.ReclamationDto[]> GetReclamationsAsync();
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICService/GetByDateAndDeptProject", ReplyAction="http://tempuri.org/ICService/GetByDateAndDeptProjectResponse")]
         Camozzi.Model.DataService.ProjectDto[] GetByDateAndDeptProject(System.DateTime start, System.DateTime finish, int deptid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICService/GetByDateAndDeptProject", ReplyAction="http://tempuri.org/ICService/GetByDateAndDeptProjectResponse")]
-        System.Threading.Tasks.Task<Camozzi.Model.DataService.ProjectDto[]> GetByDateAndDeptProjectAsync(System.DateTime start, System.DateTime finish, int deptid);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICService/UpdateProject", ReplyAction="http://tempuri.org/ICService/UpdateProjectResponse")]
         void UpdateProject(Camozzi.Model.DataService.ProjectDto t);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICService/UpdateProject", ReplyAction="http://tempuri.org/ICService/UpdateProjectResponse")]
-        System.Threading.Tasks.Task UpdateProjectAsync(Camozzi.Model.DataService.ProjectDto t);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1251,120 +1222,60 @@ namespace Camozzi.Model.DataService {
             return base.Channel.GetProjects();
         }
         
-        public System.Threading.Tasks.Task<Camozzi.Model.DataService.ProjectDto[]> GetProjectsAsync() {
-            return base.Channel.GetProjectsAsync();
-        }
-        
         public void AddReclamation(Camozzi.Model.DataService.ReclamationDto t) {
             base.Channel.AddReclamation(t);
-        }
-        
-        public System.Threading.Tasks.Task AddReclamationAsync(Camozzi.Model.DataService.ReclamationDto t) {
-            return base.Channel.AddReclamationAsync(t);
         }
         
         public void DeleteReclamation(Camozzi.Model.DataService.ReclamationDto t) {
             base.Channel.DeleteReclamation(t);
         }
         
-        public System.Threading.Tasks.Task DeleteReclamationAsync(Camozzi.Model.DataService.ReclamationDto t) {
-            return base.Channel.DeleteReclamationAsync(t);
-        }
-        
         public void UpdateReclamation(Camozzi.Model.DataService.ReclamationDto t) {
             base.Channel.UpdateReclamation(t);
-        }
-        
-        public System.Threading.Tasks.Task UpdateReclamationAsync(Camozzi.Model.DataService.ReclamationDto t) {
-            return base.Channel.UpdateReclamationAsync(t);
         }
         
         public Camozzi.Model.DataService.ReclamationDto[] GetByDateReclamation(System.DateTime start, System.DateTime finish) {
             return base.Channel.GetByDateReclamation(start, finish);
         }
         
-        public System.Threading.Tasks.Task<Camozzi.Model.DataService.ReclamationDto[]> GetByDateReclamationAsync(System.DateTime start, System.DateTime finish) {
-            return base.Channel.GetByDateReclamationAsync(start, finish);
-        }
-        
         public void AddUser(Camozzi.Model.DataService.UserDto t) {
             base.Channel.AddUser(t);
-        }
-        
-        public System.Threading.Tasks.Task AddUserAsync(Camozzi.Model.DataService.UserDto t) {
-            return base.Channel.AddUserAsync(t);
         }
         
         public void DeleteUser(Camozzi.Model.DataService.UserDto t) {
             base.Channel.DeleteUser(t);
         }
         
-        public System.Threading.Tasks.Task DeleteUserAsync(Camozzi.Model.DataService.UserDto t) {
-            return base.Channel.DeleteUserAsync(t);
-        }
-        
         public void UpdateUser(Camozzi.Model.DataService.UserDto t) {
             base.Channel.UpdateUser(t);
-        }
-        
-        public System.Threading.Tasks.Task UpdateUserAsync(Camozzi.Model.DataService.UserDto t) {
-            return base.Channel.UpdateUserAsync(t);
         }
         
         public void AddProject(Camozzi.Model.DataService.ProjectDto t) {
             base.Channel.AddProject(t);
         }
         
-        public System.Threading.Tasks.Task AddProjectAsync(Camozzi.Model.DataService.ProjectDto t) {
-            return base.Channel.AddProjectAsync(t);
-        }
-        
         public void DeleteProject(Camozzi.Model.DataService.ProjectDto t) {
             base.Channel.DeleteProject(t);
-        }
-        
-        public System.Threading.Tasks.Task DeleteProjectAsync(Camozzi.Model.DataService.ProjectDto t) {
-            return base.Channel.DeleteProjectAsync(t);
         }
         
         public Camozzi.Model.DataService.UserDto[] GetUsers() {
             return base.Channel.GetUsers();
         }
         
-        public System.Threading.Tasks.Task<Camozzi.Model.DataService.UserDto[]> GetUsersAsync() {
-            return base.Channel.GetUsersAsync();
-        }
-        
         public bool CheckPassword(string password, int id) {
             return base.Channel.CheckPassword(password, id);
-        }
-        
-        public System.Threading.Tasks.Task<bool> CheckPasswordAsync(string password, int id) {
-            return base.Channel.CheckPasswordAsync(password, id);
         }
         
         public Camozzi.Model.DataService.ReclamationDto[] GetReclamations() {
             return base.Channel.GetReclamations();
         }
         
-        public System.Threading.Tasks.Task<Camozzi.Model.DataService.ReclamationDto[]> GetReclamationsAsync() {
-            return base.Channel.GetReclamationsAsync();
-        }
-        
         public Camozzi.Model.DataService.ProjectDto[] GetByDateAndDeptProject(System.DateTime start, System.DateTime finish, int deptid) {
             return base.Channel.GetByDateAndDeptProject(start, finish, deptid);
         }
         
-        public System.Threading.Tasks.Task<Camozzi.Model.DataService.ProjectDto[]> GetByDateAndDeptProjectAsync(System.DateTime start, System.DateTime finish, int deptid) {
-            return base.Channel.GetByDateAndDeptProjectAsync(start, finish, deptid);
-        }
-        
         public void UpdateProject(Camozzi.Model.DataService.ProjectDto t) {
             base.Channel.UpdateProject(t);
-        }
-        
-        public System.Threading.Tasks.Task UpdateProjectAsync(Camozzi.Model.DataService.ProjectDto t) {
-            return base.Channel.UpdateProjectAsync(t);
         }
     }
 }

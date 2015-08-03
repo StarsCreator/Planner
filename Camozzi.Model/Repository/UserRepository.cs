@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms;
 using Camozzi.Model.DataService;
 
 namespace Camozzi.Model.Repository
@@ -41,7 +42,7 @@ namespace Camozzi.Model.Repository
         {
             using (var client = new CServiceClient("BasicHttpBinding_ICService"))
             {
-                client.AddUserAsync(t);
+                //client.AddUserAsync(t);
                 UpdateContext();
             }
         }
@@ -50,7 +51,7 @@ namespace Camozzi.Model.Repository
         {
             using (var client = new CServiceClient("BasicHttpBinding_ICService"))
             {
-                client.DeleteUserAsync(t);
+                //client.DeleteUserAsync(t);
                 UpdateContext();
             }
         }
@@ -59,7 +60,7 @@ namespace Camozzi.Model.Repository
         {
             using (var client = new CServiceClient("BasicHttpBinding_ICService"))
             {
-                client.UpdateUserAsync(t);
+                //client.UpdateUserAsync(t);
                 UpdateContext();
             }
         }
@@ -76,7 +77,7 @@ namespace Camozzi.Model.Repository
             }
             catch (Exception ex)
             {
-                // ignored
+                MessageBox.Show(ex.InnerException.Message);
             }
         }
     }

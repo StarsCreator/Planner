@@ -10,17 +10,10 @@ namespace Camozzi.Presentation.Views
 
         WeekPlannerRow GetNewRowAllProjects (string name);
         WeekPlannerRowCollection AllProjectsRows { get; }//строки и элементы
+        DateTime AllProjectStart { get; set; }
+        int AllProjectDuration { get; set; }
         event EventHandler<WeekPlannerItemEventArgs> AllProjectsItemDoubleClick;//вызов состояния
         void ClearAllProjects();//очистка всего планнера
-
-        #endregion
-
-        #region AllReclamationsPlan
-
-        WeekPlannerRow GetNewRowAllReclamations(string name);
-        WeekPlannerRowCollection AllReclamationsRows { get; }//строки и элементы
-        event EventHandler<WeekPlannerItemEventArgs> AllReclamationsItemDoubleClick;//вызов состояния
-        void ClearAllReclamations();//очистка всего планнера
 
         #endregion
 
@@ -28,29 +21,19 @@ namespace Camozzi.Presentation.Views
 
         WeekPlannerRow GetNewRowSelfProjects(string name);
         WeekPlannerRowCollection SelfProjectsRows { get; }//строки и элементы
+        DateTime SelfProjectStart { get; set; }
+        int SelfProjectDuration { get; set; }
         event EventHandler<WeekPlannerItemEventArgs> SelfProjectsItemDoubleClick;//вызов состояния
         void ClearSelfProjects();//очистка всего планнера
-
-        #endregion
-
-        #region SelfReclamationsPlan
-
-        WeekPlannerRow GetNewRowSelfReclamations(string name);
-        WeekPlannerRowCollection SelfReclamationsRows { get; }//строки и элементы
-        event EventHandler<WeekPlannerItemEventArgs> SelfReclamationsItemDoubleClick;//вызов состояния
-        void ClearSelfReclamations();//очистка всего планнера
 
         #endregion
 
         #region Tables
 
         object TableProject { set; }
-        object TableReclamation { set; }
 
         event Action<int> TableProjectClick;
-        event Action<int> TableReclamationClick;
         event Action<int> DeleteProject;
-        event Action<int> DeleteReclamation;
 
         #endregion
 
@@ -70,10 +53,11 @@ namespace Camozzi.Presentation.Views
 
         #region Common
 
-        bool AllowReclamation { set; }
-
         event Action CreateProject;
-        event Action CreateReclamation;
+        event Action FormClose;
+
+        bool HideEndProject { get; set; }
+        bool AddManagerName { get; set; }
 
         #endregion
     }

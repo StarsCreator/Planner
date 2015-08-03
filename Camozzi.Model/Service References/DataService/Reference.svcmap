@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="c75329b0-e166-4cf5-b189-3c80fed95631" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="0dbe4f8d-48df-4a43-b304-ee88f6e302a6" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
-    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
     <EnableDataBinding>true</EnableDataBinding>
     <ExcludedTypes />
     <ImportXmlTypes>false</ImportXmlTypes>
@@ -22,10 +21,10 @@
     <MetadataSource Address="http://csrv:4533/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="c09aef00-550c-45fb-a44d-485226e0dd1e" SourceId="1" SourceUrl="http://csrv:4533/mex" />
-    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="5f836781-4a43-4497-a485-b048529291d3" SourceId="1" SourceUrl="http://csrv:4533/mex" />
-    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="c6a0cc33-a8c8-4aed-a5b0-430ec4a2e1f5" SourceId="1" SourceUrl="http://csrv:4533/mex" />
-    <MetadataFile FileName="DataController.DTO_Model.xsd" MetadataType="Schema" ID="5e4ba524-d5e8-4d8c-af28-c3e9e700aa26" SourceId="1" SourceUrl="http://csrv:4533/mex" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="be21d57c-f530-4df8-ac34-83beb04bf8cb" SourceId="1" SourceUrl="http://csrv:4533/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="0090e3f0-cc7b-4213-af9a-1e38c12629d1" SourceId="1" SourceUrl="http://csrv:4533/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="16438435-544e-4cb8-81cc-4da9679e6307" SourceId="1" SourceUrl="http://csrv:4533/mex" />
+    <MetadataFile FileName="DataController.DTO_Model.xsd" MetadataType="Schema" ID="fd34d2dd-a1e3-43fe-bcec-3f17b8a6a357" SourceId="1" SourceUrl="http://csrv:4533/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

@@ -19,7 +19,7 @@ namespace Camozzi.Presentation.Presenters
             View.Ok += View_Ok;
             _users = users;
             _settings = settings;
-            //_users.UpdateContext();
+            _users.UpdateContext();
             View.Users = _users.GetAll().OrderBy(x=>x.DeptId).Select(user => user.Name).ToList();
             if (!String.IsNullOrEmpty(_settings.LastUser))
             {

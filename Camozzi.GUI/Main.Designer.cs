@@ -46,17 +46,11 @@ namespace Camozzi.GUI
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.proj = new System.Windows.Forms.SplitContainer();
-            this.metroPanel3 = new MetroFramework.Controls.MetroPanel();
-            this.SelfProjectLeft = new MetroFramework.Controls.MetroTile();
-            this.SelfProjectRight = new MetroFramework.Controls.MetroTile();
-            this.SelfProjectStartSet = new MetroFramework.Controls.MetroDateTime();
-            this.SelfProjectSetDate = new MetroFramework.Controls.MetroTile();
-            this.SelfProjectEndSet = new MetroFramework.Controls.MetroDateTime();
             this.SelfProjectPlan = new WeekPlanner.CalendarPlanner();
-            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.MetroTableProject = new MetroFramework.Controls.MetroGrid();
             this.ContextNewProj = new MetroFramework.Controls.MetroContextMenu(this.components);
             this.addNewProj = new System.Windows.Forms.ToolStripMenuItem();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.MetroTableProject = new MetroFramework.Controls.MetroGrid();
             this.MetroChartProject = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.ContextProj = new MetroFramework.Controls.MetroContextMenu(this.components);
             this.AddProj = new System.Windows.Forms.ToolStripMenuItem();
@@ -78,34 +72,39 @@ namespace Camozzi.GUI
             this.label1 = new System.Windows.Forms.Label();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.allTab = new System.Windows.Forms.TabPage();
+            this.AllRecAndProj = new System.Windows.Forms.TabControl();
+            this.AllProjectTab = new System.Windows.Forms.TabPage();
+            this.AllProjectPlan = new WeekPlanner.CalendarPlanner();
             this.selfTab = new System.Windows.Forms.TabPage();
             this.SelfRecAndProj = new System.Windows.Forms.TabControl();
             this.SelfProjectTab = new System.Windows.Forms.TabPage();
             this.reportTab = new System.Windows.Forms.TabPage();
             this.AddManagerNameCh = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.HideAllEndProjectCh = new System.Windows.Forms.CheckBox();
             this.AddManagerNameChx = new System.Windows.Forms.CheckBox();
-            this.AllProjectTab = new System.Windows.Forms.TabPage();
-            this.AllProjectPlan = new WeekPlanner.CalendarPlanner();
-            this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
-            this.AllProjectsEndTimeSet = new MetroFramework.Controls.MetroDateTime();
-            this.AllProjectSetDate = new MetroFramework.Controls.MetroTile();
-            this.AllProjectStartTimeSet = new MetroFramework.Controls.MetroDateTime();
-            this.AllProjectRight = new MetroFramework.Controls.MetroTile();
+            this.HideAllEndProjectCh = new System.Windows.Forms.CheckBox();
+            this.moveMetroPanel1 = new Camozzi.GUI.MoveMetroPanel();
             this.AllProjectLeft = new MetroFramework.Controls.MetroTile();
-            this.AllRecAndProj = new System.Windows.Forms.TabControl();
+            this.AllProjectSetDate = new MetroFramework.Controls.MetroTile();
+            this.AllProjectRight = new MetroFramework.Controls.MetroTile();
+            this.AllProjectsEndTimeSet = new MetroFramework.Controls.MetroDateTime();
+            this.AllProjectStartTimeSet = new MetroFramework.Controls.MetroDateTime();
+            this.moveMetroPanel2 = new Camozzi.GUI.MoveMetroPanel();
+            this.SelfProjectLeft = new MetroFramework.Controls.MetroTile();
+            this.SelfProjectSetDate = new MetroFramework.Controls.MetroTile();
+            this.SelfProjectRight = new MetroFramework.Controls.MetroTile();
+            this.SelfProjectEndSet = new MetroFramework.Controls.MetroDateTime();
+            this.SelfProjectStartSet = new MetroFramework.Controls.MetroDateTime();
             ((System.ComponentModel.ISupportInitialize)(this.proj)).BeginInit();
             this.proj.Panel1.SuspendLayout();
             this.proj.Panel2.SuspendLayout();
             this.proj.SuspendLayout();
-            this.metroPanel3.SuspendLayout();
+            this.ContextNewProj.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MetroTableProject)).BeginInit();
-            this.ContextNewProj.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MetroChartProject)).BeginInit();
             this.ContextProj.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -120,14 +119,15 @@ namespace Camozzi.GUI
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
             this.splitContainer4.SuspendLayout();
             this.allTab.SuspendLayout();
+            this.AllRecAndProj.SuspendLayout();
+            this.AllProjectTab.SuspendLayout();
             this.selfTab.SuspendLayout();
             this.SelfRecAndProj.SuspendLayout();
             this.SelfProjectTab.SuspendLayout();
             this.AddManagerNameCh.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.AllProjectTab.SuspendLayout();
-            this.metroPanel2.SuspendLayout();
-            this.AllRecAndProj.SuspendLayout();
+            this.moveMetroPanel1.SuspendLayout();
+            this.moveMetroPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // notifyIcon1
@@ -169,7 +169,7 @@ namespace Camozzi.GUI
             // 
             // proj.Panel1
             // 
-            this.proj.Panel1.Controls.Add(this.metroPanel3);
+            this.proj.Panel1.Controls.Add(this.moveMetroPanel2);
             this.proj.Panel1.Controls.Add(this.SelfProjectPlan);
             this.proj.Panel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.proj.Panel1MinSize = 300;
@@ -181,83 +181,6 @@ namespace Camozzi.GUI
             this.proj.Size = new System.Drawing.Size(1164, 599);
             this.proj.SplitterDistance = 300;
             this.proj.TabIndex = 0;
-            // 
-            // metroPanel3
-            // 
-            this.metroPanel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.metroPanel3.Controls.Add(this.SelfProjectLeft);
-            this.metroPanel3.Controls.Add(this.SelfProjectRight);
-            this.metroPanel3.Controls.Add(this.SelfProjectStartSet);
-            this.metroPanel3.Controls.Add(this.SelfProjectSetDate);
-            this.metroPanel3.Controls.Add(this.SelfProjectEndSet);
-            this.metroPanel3.HorizontalScrollbarBarColor = true;
-            this.metroPanel3.HorizontalScrollbarHighlightOnWheel = false;
-            this.metroPanel3.HorizontalScrollbarSize = 10;
-            this.metroPanel3.Location = new System.Drawing.Point(956, 90);
-            this.metroPanel3.Name = "metroPanel3";
-            this.metroPanel3.Size = new System.Drawing.Size(176, 148);
-            this.metroPanel3.Style = MetroFramework.MetroColorStyle.Black;
-            this.metroPanel3.TabIndex = 18;
-            this.metroPanel3.VerticalScrollbarBarColor = true;
-            this.metroPanel3.VerticalScrollbarHighlightOnWheel = false;
-            this.metroPanel3.VerticalScrollbarSize = 10;
-            // 
-            // SelfProjectLeft
-            // 
-            this.SelfProjectLeft.ActiveControl = null;
-            this.SelfProjectLeft.Location = new System.Drawing.Point(10, 111);
-            this.SelfProjectLeft.Margin = new System.Windows.Forms.Padding(10);
-            this.SelfProjectLeft.Name = "SelfProjectLeft";
-            this.SelfProjectLeft.Size = new System.Drawing.Size(74, 25);
-            this.SelfProjectLeft.Style = MetroFramework.MetroColorStyle.Silver;
-            this.SelfProjectLeft.TabIndex = 6;
-            this.SelfProjectLeft.Text = "Ранее";
-            this.SelfProjectLeft.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.SelfProjectLeft.UseSelectable = true;
-            // 
-            // SelfProjectRight
-            // 
-            this.SelfProjectRight.ActiveControl = null;
-            this.SelfProjectRight.Location = new System.Drawing.Point(91, 111);
-            this.SelfProjectRight.Margin = new System.Windows.Forms.Padding(10);
-            this.SelfProjectRight.Name = "SelfProjectRight";
-            this.SelfProjectRight.Size = new System.Drawing.Size(74, 25);
-            this.SelfProjectRight.Style = MetroFramework.MetroColorStyle.Silver;
-            this.SelfProjectRight.TabIndex = 7;
-            this.SelfProjectRight.Text = "Позднее";
-            this.SelfProjectRight.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.SelfProjectRight.UseSelectable = true;
-            // 
-            // SelfProjectStartSet
-            // 
-            this.SelfProjectStartSet.Location = new System.Drawing.Point(10, 10);
-            this.SelfProjectStartSet.Margin = new System.Windows.Forms.Padding(10);
-            this.SelfProjectStartSet.MinimumSize = new System.Drawing.Size(0, 29);
-            this.SelfProjectStartSet.Name = "SelfProjectStartSet";
-            this.SelfProjectStartSet.Size = new System.Drawing.Size(155, 29);
-            this.SelfProjectStartSet.TabIndex = 4;
-            // 
-            // SelfProjectSetDate
-            // 
-            this.SelfProjectSetDate.ActiveControl = null;
-            this.SelfProjectSetDate.Location = new System.Drawing.Point(10, 80);
-            this.SelfProjectSetDate.Margin = new System.Windows.Forms.Padding(10);
-            this.SelfProjectSetDate.Name = "SelfProjectSetDate";
-            this.SelfProjectSetDate.Size = new System.Drawing.Size(155, 25);
-            this.SelfProjectSetDate.Style = MetroFramework.MetroColorStyle.Silver;
-            this.SelfProjectSetDate.TabIndex = 5;
-            this.SelfProjectSetDate.Text = "Перейти";
-            this.SelfProjectSetDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.SelfProjectSetDate.UseSelectable = true;
-            // 
-            // SelfProjectEndSet
-            // 
-            this.SelfProjectEndSet.Location = new System.Drawing.Point(10, 45);
-            this.SelfProjectEndSet.Margin = new System.Windows.Forms.Padding(10);
-            this.SelfProjectEndSet.MinimumSize = new System.Drawing.Size(0, 29);
-            this.SelfProjectEndSet.Name = "SelfProjectEndSet";
-            this.SelfProjectEndSet.Size = new System.Drawing.Size(155, 29);
-            this.SelfProjectEndSet.TabIndex = 3;
             // 
             // SelfProjectPlan
             // 
@@ -289,6 +212,20 @@ namespace Camozzi.GUI
             this.SelfProjectPlan.Name = "SelfProjectPlan";
             this.SelfProjectPlan.Size = new System.Drawing.Size(1164, 300);
             this.SelfProjectPlan.TabIndex = 17;
+            // 
+            // ContextNewProj
+            // 
+            this.ContextNewProj.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addNewProj});
+            this.ContextNewProj.Name = "metroContextMenu1";
+            this.ContextNewProj.Size = new System.Drawing.Size(125, 26);
+            // 
+            // addNewProj
+            // 
+            this.addNewProj.Image = ((System.Drawing.Image)(resources.GetObject("addNewProj.Image")));
+            this.addNewProj.Name = "addNewProj";
+            this.addNewProj.Size = new System.Drawing.Size(124, 22);
+            this.addNewProj.Text = "Добавить";
             // 
             // splitContainer2
             // 
@@ -360,20 +297,6 @@ namespace Camozzi.GUI
             this.MetroTableProject.Size = new System.Drawing.Size(595, 295);
             this.MetroTableProject.Style = MetroFramework.MetroColorStyle.Silver;
             this.MetroTableProject.TabIndex = 18;
-            // 
-            // ContextNewProj
-            // 
-            this.ContextNewProj.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addNewProj});
-            this.ContextNewProj.Name = "metroContextMenu1";
-            this.ContextNewProj.Size = new System.Drawing.Size(125, 26);
-            // 
-            // addNewProj
-            // 
-            this.addNewProj.Image = ((System.Drawing.Image)(resources.GetObject("addNewProj.Image")));
-            this.addNewProj.Name = "addNewProj";
-            this.addNewProj.Size = new System.Drawing.Size(124, 22);
-            this.addNewProj.Text = "Добавить";
             // 
             // MetroChartProject
             // 
@@ -618,6 +541,59 @@ namespace Camozzi.GUI
             this.allTab.Text = "План";
             this.allTab.UseVisualStyleBackColor = true;
             // 
+            // AllRecAndProj
+            // 
+            this.AllRecAndProj.Controls.Add(this.AllProjectTab);
+            this.AllRecAndProj.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.AllRecAndProj.Location = new System.Drawing.Point(3, 3);
+            this.AllRecAndProj.Name = "AllRecAndProj";
+            this.AllRecAndProj.SelectedIndex = 0;
+            this.AllRecAndProj.Size = new System.Drawing.Size(1178, 631);
+            this.AllRecAndProj.TabIndex = 0;
+            // 
+            // AllProjectTab
+            // 
+            this.AllProjectTab.Controls.Add(this.moveMetroPanel1);
+            this.AllProjectTab.Controls.Add(this.AllProjectPlan);
+            this.AllProjectTab.Location = new System.Drawing.Point(4, 22);
+            this.AllProjectTab.Name = "AllProjectTab";
+            this.AllProjectTab.Padding = new System.Windows.Forms.Padding(3);
+            this.AllProjectTab.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.AllProjectTab.Size = new System.Drawing.Size(1170, 605);
+            this.AllProjectTab.TabIndex = 0;
+            this.AllProjectTab.Text = "Проекты";
+            // 
+            // AllProjectPlan
+            // 
+            this.AllProjectPlan.AutoScroll = true;
+            this.AllProjectPlan.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(98)))), ((int)(((byte)(128)))));
+            this.AllProjectPlan.Columns = dataColumns2;
+            this.AllProjectPlan.ContextMenuStrip = this.ContextNewProj;
+            this.AllProjectPlan.CurrentDate = new System.DateTime(2015, 2, 11, 12, 4, 7, 90);
+            this.AllProjectPlan.DatesIntervalMode = WeekPlanner.WeekPlannerMode.Daily;
+            this.AllProjectPlan.DayCount = 7;
+            this.AllProjectPlan.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.AllProjectPlan.GridBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(221)))), ((int)(((byte)(242)))));
+            this.AllProjectPlan.GridCellHeight = 200;
+            this.AllProjectPlan.GridTextFont = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.AllProjectPlan.HeaderBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(244)))), ((int)(((byte)(255)))));
+            this.AllProjectPlan.HeaderColumnsFont = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.AllProjectPlan.HeaderDatesFont = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.AllProjectPlan.HeaderFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(168)))), ((int)(((byte)(192)))), ((int)(((byte)(234)))));
+            this.AllProjectPlan.HeaderFillLeftMarginColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(221)))), ((int)(((byte)(252)))));
+            this.AllProjectPlan.HeaderStyleMode = WeekPlanner.HeaderStyle.Aqua;
+            this.AllProjectPlan.IsAllowedDraggingBetweenRows = false;
+            this.AllProjectPlan.IsAllowedStretchAndDrag = false;
+            this.AllProjectPlan.IsAllowedTreeViewDrawing = false;
+            this.AllProjectPlan.ItemHeight = 30;
+            this.AllProjectPlan.ItemTextFont = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.AllProjectPlan.LeftMargin = 250;
+            this.AllProjectPlan.LeftMarginColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(231)))), ((int)(((byte)(245)))));
+            this.AllProjectPlan.Location = new System.Drawing.Point(3, 3);
+            this.AllProjectPlan.Name = "AllProjectPlan";
+            this.AllProjectPlan.Size = new System.Drawing.Size(1164, 599);
+            this.AllProjectPlan.TabIndex = 0;
+            // 
             // selfTab
             // 
             this.selfTab.Controls.Add(this.SelfRecAndProj);
@@ -682,16 +658,6 @@ namespace Camozzi.GUI
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Отображение";
             // 
-            // HideAllEndProjectCh
-            // 
-            this.HideAllEndProjectCh.AutoSize = true;
-            this.HideAllEndProjectCh.Location = new System.Drawing.Point(7, 20);
-            this.HideAllEndProjectCh.Name = "HideAllEndProjectCh";
-            this.HideAllEndProjectCh.Size = new System.Drawing.Size(189, 17);
-            this.HideAllEndProjectCh.TabIndex = 0;
-            this.HideAllEndProjectCh.Text = "Скрывать выолненные проекты";
-            this.HideAllEndProjectCh.UseVisualStyleBackColor = true;
-            // 
             // AddManagerNameChx
             // 
             this.AddManagerNameChx.AutoSize = true;
@@ -702,117 +668,38 @@ namespace Camozzi.GUI
             this.AddManagerNameChx.Text = "Добавлять имя менеджера к названию проекта";
             this.AddManagerNameChx.UseVisualStyleBackColor = true;
             // 
-            // AllProjectTab
+            // HideAllEndProjectCh
             // 
-            this.AllProjectTab.Controls.Add(this.metroPanel2);
-            this.AllProjectTab.Controls.Add(this.AllProjectPlan);
-            this.AllProjectTab.Location = new System.Drawing.Point(4, 22);
-            this.AllProjectTab.Name = "AllProjectTab";
-            this.AllProjectTab.Padding = new System.Windows.Forms.Padding(3);
-            this.AllProjectTab.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.AllProjectTab.Size = new System.Drawing.Size(1170, 605);
-            this.AllProjectTab.TabIndex = 0;
-            this.AllProjectTab.Text = "Проекты";
+            this.HideAllEndProjectCh.AutoSize = true;
+            this.HideAllEndProjectCh.Location = new System.Drawing.Point(7, 20);
+            this.HideAllEndProjectCh.Name = "HideAllEndProjectCh";
+            this.HideAllEndProjectCh.Size = new System.Drawing.Size(189, 17);
+            this.HideAllEndProjectCh.TabIndex = 0;
+            this.HideAllEndProjectCh.Text = "Скрывать выолненные проекты";
+            this.HideAllEndProjectCh.UseVisualStyleBackColor = true;
             // 
-            // AllProjectPlan
+            // moveMetroPanel1
             // 
-            this.AllProjectPlan.AutoScroll = true;
-            this.AllProjectPlan.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(98)))), ((int)(((byte)(128)))));
-            this.AllProjectPlan.Columns = dataColumns2;
-            this.AllProjectPlan.ContextMenuStrip = this.ContextNewProj;
-            this.AllProjectPlan.CurrentDate = new System.DateTime(2015, 2, 11, 12, 4, 7, 90);
-            this.AllProjectPlan.DatesIntervalMode = WeekPlanner.WeekPlannerMode.Daily;
-            this.AllProjectPlan.DayCount = 7;
-            this.AllProjectPlan.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.AllProjectPlan.GridBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(221)))), ((int)(((byte)(242)))));
-            this.AllProjectPlan.GridCellHeight = 200;
-            this.AllProjectPlan.GridTextFont = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.AllProjectPlan.HeaderBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(244)))), ((int)(((byte)(255)))));
-            this.AllProjectPlan.HeaderColumnsFont = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.AllProjectPlan.HeaderDatesFont = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.AllProjectPlan.HeaderFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(168)))), ((int)(((byte)(192)))), ((int)(((byte)(234)))));
-            this.AllProjectPlan.HeaderFillLeftMarginColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(221)))), ((int)(((byte)(252)))));
-            this.AllProjectPlan.HeaderStyleMode = WeekPlanner.HeaderStyle.Aqua;
-            this.AllProjectPlan.IsAllowedDraggingBetweenRows = false;
-            this.AllProjectPlan.IsAllowedStretchAndDrag = false;
-            this.AllProjectPlan.IsAllowedTreeViewDrawing = false;
-            this.AllProjectPlan.ItemHeight = 30;
-            this.AllProjectPlan.ItemTextFont = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.AllProjectPlan.LeftMargin = 250;
-            this.AllProjectPlan.LeftMarginColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(231)))), ((int)(((byte)(245)))));
-            this.AllProjectPlan.Location = new System.Drawing.Point(3, 3);
-            this.AllProjectPlan.Name = "AllProjectPlan";
-            this.AllProjectPlan.Size = new System.Drawing.Size(1164, 599);
-            this.AllProjectPlan.TabIndex = 0;
-            // 
-            // metroPanel2
-            // 
-            this.metroPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.metroPanel2.Controls.Add(this.AllProjectLeft);
-            this.metroPanel2.Controls.Add(this.AllProjectRight);
-            this.metroPanel2.Controls.Add(this.AllProjectStartTimeSet);
-            this.metroPanel2.Controls.Add(this.AllProjectSetDate);
-            this.metroPanel2.Controls.Add(this.AllProjectsEndTimeSet);
-            this.metroPanel2.HorizontalScrollbarBarColor = true;
-            this.metroPanel2.HorizontalScrollbarHighlightOnWheel = false;
-            this.metroPanel2.HorizontalScrollbarSize = 10;
-            this.metroPanel2.Location = new System.Drawing.Point(956, 90);
-            this.metroPanel2.Name = "metroPanel2";
-            this.metroPanel2.Size = new System.Drawing.Size(176, 148);
-            this.metroPanel2.Style = MetroFramework.MetroColorStyle.Black;
-            this.metroPanel2.TabIndex = 20;
-            this.metroPanel2.VerticalScrollbarBarColor = true;
-            this.metroPanel2.VerticalScrollbarHighlightOnWheel = false;
-            this.metroPanel2.VerticalScrollbarSize = 10;
-            // 
-            // AllProjectsEndTimeSet
-            // 
-            this.AllProjectsEndTimeSet.Location = new System.Drawing.Point(10, 45);
-            this.AllProjectsEndTimeSet.Margin = new System.Windows.Forms.Padding(10);
-            this.AllProjectsEndTimeSet.MinimumSize = new System.Drawing.Size(0, 29);
-            this.AllProjectsEndTimeSet.Name = "AllProjectsEndTimeSet";
-            this.AllProjectsEndTimeSet.Size = new System.Drawing.Size(155, 29);
-            this.AllProjectsEndTimeSet.TabIndex = 3;
-            // 
-            // AllProjectSetDate
-            // 
-            this.AllProjectSetDate.ActiveControl = null;
-            this.AllProjectSetDate.Location = new System.Drawing.Point(10, 80);
-            this.AllProjectSetDate.Margin = new System.Windows.Forms.Padding(10);
-            this.AllProjectSetDate.Name = "AllProjectSetDate";
-            this.AllProjectSetDate.Size = new System.Drawing.Size(155, 25);
-            this.AllProjectSetDate.Style = MetroFramework.MetroColorStyle.Silver;
-            this.AllProjectSetDate.TabIndex = 5;
-            this.AllProjectSetDate.Text = "Перейти";
-            this.AllProjectSetDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.AllProjectSetDate.UseSelectable = true;
-            // 
-            // AllProjectStartTimeSet
-            // 
-            this.AllProjectStartTimeSet.Location = new System.Drawing.Point(10, 10);
-            this.AllProjectStartTimeSet.Margin = new System.Windows.Forms.Padding(10);
-            this.AllProjectStartTimeSet.MinimumSize = new System.Drawing.Size(0, 29);
-            this.AllProjectStartTimeSet.Name = "AllProjectStartTimeSet";
-            this.AllProjectStartTimeSet.Size = new System.Drawing.Size(155, 29);
-            this.AllProjectStartTimeSet.TabIndex = 4;
-            // 
-            // AllProjectRight
-            // 
-            this.AllProjectRight.ActiveControl = null;
-            this.AllProjectRight.Location = new System.Drawing.Point(91, 111);
-            this.AllProjectRight.Margin = new System.Windows.Forms.Padding(10);
-            this.AllProjectRight.Name = "AllProjectRight";
-            this.AllProjectRight.Size = new System.Drawing.Size(74, 25);
-            this.AllProjectRight.Style = MetroFramework.MetroColorStyle.Silver;
-            this.AllProjectRight.TabIndex = 7;
-            this.AllProjectRight.Text = "Позднее";
-            this.AllProjectRight.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.AllProjectRight.UseSelectable = true;
+            this.moveMetroPanel1.Controls.Add(this.AllProjectLeft);
+            this.moveMetroPanel1.Controls.Add(this.AllProjectSetDate);
+            this.moveMetroPanel1.Controls.Add(this.AllProjectRight);
+            this.moveMetroPanel1.Controls.Add(this.AllProjectsEndTimeSet);
+            this.moveMetroPanel1.Controls.Add(this.AllProjectStartTimeSet);
+            this.moveMetroPanel1.HorizontalScrollbarBarColor = true;
+            this.moveMetroPanel1.HorizontalScrollbarHighlightOnWheel = false;
+            this.moveMetroPanel1.HorizontalScrollbarSize = 10;
+            this.moveMetroPanel1.Location = new System.Drawing.Point(774, 99);
+            this.moveMetroPanel1.Name = "moveMetroPanel1";
+            this.moveMetroPanel1.Size = new System.Drawing.Size(176, 148);
+            this.moveMetroPanel1.TabIndex = 21;
+            this.moveMetroPanel1.VerticalScrollbarBarColor = true;
+            this.moveMetroPanel1.VerticalScrollbarHighlightOnWheel = false;
+            this.moveMetroPanel1.VerticalScrollbarSize = 10;
             // 
             // AllProjectLeft
             // 
             this.AllProjectLeft.ActiveControl = null;
-            this.AllProjectLeft.Location = new System.Drawing.Point(10, 111);
+            this.AllProjectLeft.Location = new System.Drawing.Point(11, 113);
             this.AllProjectLeft.Margin = new System.Windows.Forms.Padding(10);
             this.AllProjectLeft.Name = "AllProjectLeft";
             this.AllProjectLeft.Size = new System.Drawing.Size(74, 25);
@@ -822,15 +709,124 @@ namespace Camozzi.GUI
             this.AllProjectLeft.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.AllProjectLeft.UseSelectable = true;
             // 
-            // AllRecAndProj
+            // AllProjectSetDate
             // 
-            this.AllRecAndProj.Controls.Add(this.AllProjectTab);
-            this.AllRecAndProj.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.AllRecAndProj.Location = new System.Drawing.Point(3, 3);
-            this.AllRecAndProj.Name = "AllRecAndProj";
-            this.AllRecAndProj.SelectedIndex = 0;
-            this.AllRecAndProj.Size = new System.Drawing.Size(1178, 631);
-            this.AllRecAndProj.TabIndex = 0;
+            this.AllProjectSetDate.ActiveControl = null;
+            this.AllProjectSetDate.Location = new System.Drawing.Point(11, 82);
+            this.AllProjectSetDate.Margin = new System.Windows.Forms.Padding(10);
+            this.AllProjectSetDate.Name = "AllProjectSetDate";
+            this.AllProjectSetDate.Size = new System.Drawing.Size(155, 25);
+            this.AllProjectSetDate.Style = MetroFramework.MetroColorStyle.Silver;
+            this.AllProjectSetDate.TabIndex = 5;
+            this.AllProjectSetDate.Text = "Перейти";
+            this.AllProjectSetDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.AllProjectSetDate.UseSelectable = true;
+            // 
+            // AllProjectRight
+            // 
+            this.AllProjectRight.ActiveControl = null;
+            this.AllProjectRight.Location = new System.Drawing.Point(92, 113);
+            this.AllProjectRight.Margin = new System.Windows.Forms.Padding(10);
+            this.AllProjectRight.Name = "AllProjectRight";
+            this.AllProjectRight.Size = new System.Drawing.Size(74, 25);
+            this.AllProjectRight.Style = MetroFramework.MetroColorStyle.Silver;
+            this.AllProjectRight.TabIndex = 7;
+            this.AllProjectRight.Text = "Позднее";
+            this.AllProjectRight.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.AllProjectRight.UseSelectable = true;
+            // 
+            // AllProjectsEndTimeSet
+            // 
+            this.AllProjectsEndTimeSet.Location = new System.Drawing.Point(11, 47);
+            this.AllProjectsEndTimeSet.Margin = new System.Windows.Forms.Padding(10);
+            this.AllProjectsEndTimeSet.MinimumSize = new System.Drawing.Size(0, 29);
+            this.AllProjectsEndTimeSet.Name = "AllProjectsEndTimeSet";
+            this.AllProjectsEndTimeSet.Size = new System.Drawing.Size(155, 29);
+            this.AllProjectsEndTimeSet.TabIndex = 3;
+            // 
+            // AllProjectStartTimeSet
+            // 
+            this.AllProjectStartTimeSet.Location = new System.Drawing.Point(11, 12);
+            this.AllProjectStartTimeSet.Margin = new System.Windows.Forms.Padding(10);
+            this.AllProjectStartTimeSet.MinimumSize = new System.Drawing.Size(0, 29);
+            this.AllProjectStartTimeSet.Name = "AllProjectStartTimeSet";
+            this.AllProjectStartTimeSet.Size = new System.Drawing.Size(155, 29);
+            this.AllProjectStartTimeSet.TabIndex = 4;
+            // 
+            // moveMetroPanel2
+            // 
+            this.moveMetroPanel2.Controls.Add(this.SelfProjectLeft);
+            this.moveMetroPanel2.Controls.Add(this.SelfProjectSetDate);
+            this.moveMetroPanel2.Controls.Add(this.SelfProjectRight);
+            this.moveMetroPanel2.Controls.Add(this.SelfProjectEndSet);
+            this.moveMetroPanel2.Controls.Add(this.SelfProjectStartSet);
+            this.moveMetroPanel2.HorizontalScrollbarBarColor = true;
+            this.moveMetroPanel2.HorizontalScrollbarHighlightOnWheel = false;
+            this.moveMetroPanel2.HorizontalScrollbarSize = 10;
+            this.moveMetroPanel2.Location = new System.Drawing.Point(769, 105);
+            this.moveMetroPanel2.Name = "moveMetroPanel2";
+            this.moveMetroPanel2.Size = new System.Drawing.Size(176, 148);
+            this.moveMetroPanel2.TabIndex = 19;
+            this.moveMetroPanel2.VerticalScrollbarBarColor = true;
+            this.moveMetroPanel2.VerticalScrollbarHighlightOnWheel = false;
+            this.moveMetroPanel2.VerticalScrollbarSize = 10;
+            // 
+            // SelfProjectLeft
+            // 
+            this.SelfProjectLeft.ActiveControl = null;
+            this.SelfProjectLeft.Location = new System.Drawing.Point(11, 111);
+            this.SelfProjectLeft.Margin = new System.Windows.Forms.Padding(10);
+            this.SelfProjectLeft.Name = "SelfProjectLeft";
+            this.SelfProjectLeft.Size = new System.Drawing.Size(74, 25);
+            this.SelfProjectLeft.Style = MetroFramework.MetroColorStyle.Silver;
+            this.SelfProjectLeft.TabIndex = 6;
+            this.SelfProjectLeft.Text = "Ранее";
+            this.SelfProjectLeft.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.SelfProjectLeft.UseSelectable = true;
+            // 
+            // SelfProjectSetDate
+            // 
+            this.SelfProjectSetDate.ActiveControl = null;
+            this.SelfProjectSetDate.Location = new System.Drawing.Point(11, 80);
+            this.SelfProjectSetDate.Margin = new System.Windows.Forms.Padding(10);
+            this.SelfProjectSetDate.Name = "SelfProjectSetDate";
+            this.SelfProjectSetDate.Size = new System.Drawing.Size(155, 25);
+            this.SelfProjectSetDate.Style = MetroFramework.MetroColorStyle.Silver;
+            this.SelfProjectSetDate.TabIndex = 5;
+            this.SelfProjectSetDate.Text = "Перейти";
+            this.SelfProjectSetDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.SelfProjectSetDate.UseSelectable = true;
+            // 
+            // SelfProjectRight
+            // 
+            this.SelfProjectRight.ActiveControl = null;
+            this.SelfProjectRight.Location = new System.Drawing.Point(92, 111);
+            this.SelfProjectRight.Margin = new System.Windows.Forms.Padding(10);
+            this.SelfProjectRight.Name = "SelfProjectRight";
+            this.SelfProjectRight.Size = new System.Drawing.Size(74, 25);
+            this.SelfProjectRight.Style = MetroFramework.MetroColorStyle.Silver;
+            this.SelfProjectRight.TabIndex = 7;
+            this.SelfProjectRight.Text = "Позднее";
+            this.SelfProjectRight.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.SelfProjectRight.UseSelectable = true;
+            // 
+            // SelfProjectEndSet
+            // 
+            this.SelfProjectEndSet.Location = new System.Drawing.Point(11, 45);
+            this.SelfProjectEndSet.Margin = new System.Windows.Forms.Padding(10);
+            this.SelfProjectEndSet.MinimumSize = new System.Drawing.Size(0, 29);
+            this.SelfProjectEndSet.Name = "SelfProjectEndSet";
+            this.SelfProjectEndSet.Size = new System.Drawing.Size(155, 29);
+            this.SelfProjectEndSet.TabIndex = 3;
+            // 
+            // SelfProjectStartSet
+            // 
+            this.SelfProjectStartSet.Location = new System.Drawing.Point(11, 10);
+            this.SelfProjectStartSet.Margin = new System.Windows.Forms.Padding(10);
+            this.SelfProjectStartSet.MinimumSize = new System.Drawing.Size(0, 29);
+            this.SelfProjectStartSet.Name = "SelfProjectStartSet";
+            this.SelfProjectStartSet.Size = new System.Drawing.Size(155, 29);
+            this.SelfProjectStartSet.TabIndex = 4;
             // 
             // Main
             // 
@@ -849,13 +845,12 @@ namespace Camozzi.GUI
             this.proj.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.proj)).EndInit();
             this.proj.ResumeLayout(false);
-            this.metroPanel3.ResumeLayout(false);
+            this.ContextNewProj.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.MetroTableProject)).EndInit();
-            this.ContextNewProj.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.MetroChartProject)).EndInit();
             this.ContextProj.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
@@ -871,15 +866,16 @@ namespace Camozzi.GUI
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
             this.splitContainer4.ResumeLayout(false);
             this.allTab.ResumeLayout(false);
+            this.AllRecAndProj.ResumeLayout(false);
+            this.AllProjectTab.ResumeLayout(false);
             this.selfTab.ResumeLayout(false);
             this.SelfRecAndProj.ResumeLayout(false);
             this.SelfProjectTab.ResumeLayout(false);
             this.AddManagerNameCh.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.AllProjectTab.ResumeLayout(false);
-            this.metroPanel2.ResumeLayout(false);
-            this.AllRecAndProj.ResumeLayout(false);
+            this.moveMetroPanel1.ResumeLayout(false);
+            this.moveMetroPanel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -899,7 +895,6 @@ namespace Camozzi.GUI
         private MetroFramework.Controls.MetroContextMenu ContextNewProj;
         private System.Windows.Forms.ToolStripMenuItem addNewProj;
         private System.Windows.Forms.SplitContainer proj;
-        private MetroFramework.Controls.MetroPanel metroPanel3;
         private MetroFramework.Controls.MetroTile SelfProjectLeft;
         private MetroFramework.Controls.MetroTile SelfProjectRight;
         private MetroFramework.Controls.MetroDateTime SelfProjectStartSet;
@@ -935,13 +930,14 @@ namespace Camozzi.GUI
         private System.Windows.Forms.CheckBox HideAllEndProjectCh;
         private System.Windows.Forms.TabControl AllRecAndProj;
         private System.Windows.Forms.TabPage AllProjectTab;
-        private MetroFramework.Controls.MetroPanel metroPanel2;
         private MetroFramework.Controls.MetroTile AllProjectLeft;
         private MetroFramework.Controls.MetroTile AllProjectRight;
         private MetroFramework.Controls.MetroDateTime AllProjectStartTimeSet;
         private MetroFramework.Controls.MetroTile AllProjectSetDate;
         private MetroFramework.Controls.MetroDateTime AllProjectsEndTimeSet;
         private WeekPlanner.CalendarPlanner AllProjectPlan;
+        private MoveMetroPanel moveMetroPanel1;
+        private MoveMetroPanel moveMetroPanel2;
 
     }
 }

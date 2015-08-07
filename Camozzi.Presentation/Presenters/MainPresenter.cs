@@ -1,11 +1,11 @@
-﻿using Camozzi.Model.Repository;
-using Camozzi.Model.Services;
-using Camozzi.Presentation.Injection;
-using Camozzi.Presentation.Views;
-using System;
+﻿using System;
 using System.Linq;
 using System.Timers;
 using Camozzi.Model.DataService;
+using Camozzi.Model.Repository;
+using Camozzi.Model.Services;
+using Camozzi.Presentation.Injection;
+using Camozzi.Presentation.Views;
 using WeekPlanner;
 
 namespace Camozzi.Presentation.Presenters
@@ -49,7 +49,10 @@ namespace Camozzi.Presentation.Presenters
 
         void View_FormClose()
         {
-            //_settings.AllProjectStart = View.
+            _settings.AllProjectStart = View.AllProjectStart;
+            _settings.AllProjectDuration = View.AllProjectDuration;
+            _settings.SelfProjectStart = View.SelfProjectStart;
+            _settings.SelfProjectDuration = View.SelfProjectDuration;
             _settings.AddManagerName = View.AddManagerName;
             _settings.HideEndProject = View.HideEndProject;
             _settings.Save();
@@ -57,16 +60,11 @@ namespace Camozzi.Presentation.Presenters
 
         private void _timer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            _timer.Stop();
+            //_timer.Stop();
             //_users.UpdateContext();
             //_projects.UpdateContext();
-            //if (_mainUser.AccountDto.AllowReclamation)
-            //{
-            //    _reclamations.UpdateContext();
-            //}
-
-            GC.Collect();
-            _timer.Start();
+            //GC.Collect();
+            //_timer.Start();
         }
 
         private void _projects_ProjectUpdated()
@@ -326,10 +324,19 @@ namespace Camozzi.Presentation.Presenters
 
         private void SetSettings()
         {
-            if (_settings.AllProjectDuration != 7 && _settings.AllProjectDuration > 7)
+            try
             {
+                View.AllProjectStart = _settings.AllProjectStart;
                 View.AllProjectDuration = _settings.AllProjectDuration;
+                View.SelfProjectStart = _settings.SelfProjectStart;
+                View.SelfProjectDuration = _settings.SelfProjectDuration;
             }
+            catch (Exception)
+            {
+                
+                //throw;
+            }
+
             View.HideEndProject = _settings.HideEndProject;
             View.AddManagerName = _settings.AddManagerName;
         }

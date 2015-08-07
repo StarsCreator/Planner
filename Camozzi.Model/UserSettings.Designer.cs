@@ -37,6 +37,7 @@ namespace Camozzi.Model {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("08/07/2015 16:57:00")]
         public global::System.DateTime AllProjectsStart {
             get {
                 return ((global::System.DateTime)(this["AllProjectsStart"]));
@@ -60,6 +61,7 @@ namespace Camozzi.Model {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("08/07/2015 16:58:00")]
         public global::System.DateTime SelfProjectsStart {
             get {
                 return ((global::System.DateTime)(this["SelfProjectsStart"]));

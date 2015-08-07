@@ -11,7 +11,7 @@ namespace Camozzi.Model.Repository
 
         public UserRepository()
         {
-            UpdateContext();
+            //UpdateContext();
         }
 
         private List<UserDto> _users = new List<UserDto>();

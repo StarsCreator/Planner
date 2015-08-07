@@ -24,7 +24,6 @@ namespace Camozzi.GUI
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
 
-
                 var controller = new ApplicationController(new InjectAdapter())
                 .RegisterView<ILoginView, Login>()
                 .RegisterView<IMainView, Main>()

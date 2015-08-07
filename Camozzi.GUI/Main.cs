@@ -4,8 +4,6 @@ using System.Windows.Forms;
 using Camozzi.GUI.Properties;
 using Camozzi.Presentation.Views;
 using WeekPlanner;
-using Brush = System.Drawing.Brush;
-using Color = System.Drawing.Color;
 
 namespace Camozzi.GUI
 {
@@ -438,5 +436,6 @@ namespace Camozzi.GUI
         {
             if (FormClose != null) FormClose();
         }
+
     }
 }

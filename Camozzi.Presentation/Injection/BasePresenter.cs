@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Camozzi.Presentation.Injection
+﻿namespace Camozzi.Presentation.Injection
 {
     public abstract class BasePresenter<TView> : IPresenter
         where TView : IView

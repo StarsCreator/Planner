@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Deployment.Application;
 using System.Windows.Forms;
-using MetroFramework.Forms;
 using Camozzi.Presentation.Views;
+using MetroFramework.Forms;
 
 namespace Camozzi.GUI
 {
@@ -20,6 +21,8 @@ namespace Camozzi.GUI
             LogBtn.Click += (sender, args) => Invoke(Ok);
             LogBtn.Focus();
             Focus();
+            //var ver = ApplicationDeployment.CurrentDeployment.CurrentVersion;
+            //Console.WriteLine(@"ClickOnce Publish Version: {0}", ver);
         }
 
         static void Invoke (Action action)

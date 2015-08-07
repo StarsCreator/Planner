@@ -6,13 +6,13 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="AllProjectsStart" Type="System.DateTime" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">08/07/2015 16:57:00</Value>
     </Setting>
     <Setting Name="AllProjectsDuration" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">7</Value>
     </Setting>
     <Setting Name="SelfProjectsStart" Type="System.DateTime" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">08/07/2015 16:58:00</Value>
     </Setting>
     <Setting Name="SelfProjectsDuration" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">7</Value>
